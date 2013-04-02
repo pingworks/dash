@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project name="Dash" default=".help">
+    <!--
+    The build-impl.xml file imported here contains the guts of the build process. It is
+    a great idea to read that file to understand how the process works, but it is best to
+    limit your changes to this file.
+    -->
+    <import file="${basedir}/.sencha/app/build-impl.xml"/>
+
+    <!--
+    The following targets can be provided to inject logic before and/or after key steps
+    of the build process:
+
+        The "init-local" target is used to initialize properties that may be personalized
+        for the local machine.
+
+            <target name="-before-init-local"/>
+            <target name="-after-init-local"/>
+
+        The "clean" target is used to clean build output from the build.dir.
+
+            <target name="-before-clean"/>
+            <target name="-after-clean"/>
+
+        The general "init" target is used to initialize all other properties, including
+        those provided by Sencha Cmd.
+
+            <target name="-before-init"/>
+            <target name="-after-init"/>
+        
+        The "page" target performs the call to Sencha Cmd to build the 'all-classes.js' file.
+
+            <target name="-before-page"/>
+            <target name="-after-page"/>
+
+        The "build" target performs the call to Sencha Cmd to build the application.
+
+            <target name="-before-build"/>
+            <target name="-after-build"/>
+    -->
+    <property name="build.dir" value="${basedir}/build"/>
+
+    <target name="-after-page">
+        <copy todir="${build.dir}/" overwrite="true">
+            <fileset 
+                dir="" 
+                includes="config.js"/>
+        </copy>
+    </target>
+
+    <target name="test">
+        <exec executable="/opt/phantomjs-1.9.0-linux-x86_64/bin/phantomjs" dir="${basedir}">
+            <arg value="test/lib/jasmine/run-jasmine.js"/>
+            <arg value="http://dash/dash/run-tests.html"/>
+        </exec>
+    </target>
+
+    <target name="package" depends="clean,test,production,build">
+        <taskdef name="deb" classname="org.vafer.jdeb.ant.DebAntTask"/>
+        <copy todir="${build.dir}/debian">
+            <fileset dir="debian"/>
+            <filterset begintoken="[[" endtoken="]]">
+                <filter token="version" value="${version}"/>
+                <filter token="name" value="${ant.project.name}"/>
+            </filterset>
+        </copy>
+        <deb destfile="${build.dir}/dash.deb" control="${build.dir}/debian">
+            <data src="${build.dir}" type="directory">
+                <mapper type="perm" prefix="/opt/app/dash"/>
+                <exclude name="**/.svn"/>
+                <exclude name=".sass-cache/**"/>
+                <exclude name="theme-capture.*"/>
+                <exclude name="Dash-*.scss"/>
+                <exclude name="config.rb"/>
+                <exclude name="debian/**"/>
+                <exclude name="resources/Readme.md"/>
+                <exclude name="resources/Dash-example.css"/>
+            </data>
+        </deb>
+    </target>
+</project>
