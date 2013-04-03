@@ -64,7 +64,7 @@
                 <filter token="name" value="${ant.project.name}"/>
             </filterset>
         </copy>
-        <deb destfile="${build.dir}/dash.deb" control="${build.dir}/debian">
+        <deb destfile="${build.dir}/dash-frontend.deb" control="${build.dir}/debian">
             <data src="${build.dir}" type="directory">
                 <mapper type="perm" prefix="/opt/app/dash"/>
                 <exclude name="**/.svn"/>
