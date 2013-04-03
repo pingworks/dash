@@ -1,0 +1,9 @@
+# Reihenfolge der Keys ist wichtig: absteigend nach Wichtigkeit
+# jeder Key besteht aus: <metakey>;<suchtext>;<maxanzahlbundles>
+# maxanzahlbundles == -1 bedeutet: unbegrenzt aufheben
+deployed;prod;-1
+deployed;test;2
+status;third_stage_passed;5
+status;second_stage_passed;5
+status;first_stage_passed;10
+status;first_stage_failed;10
