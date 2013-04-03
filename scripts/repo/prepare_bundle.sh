@@ -28,7 +28,7 @@ dirMustNotExist "${REPOBASE}/${BRANCH}/${BUNDLE}"
 TEMPLATEBRANCH=$BRANCH
 test -d ${TEMPLATE}/${BRANCH} || TEMPLATEBRANCH=trunk
 echo "Creating empty bundle $BUNDLE (using template ${TEMPLATE}/${TEMPLATEBRANCH}) ..."
-rsync -ax --exclude=.svn --exclude=.git $SCRIPTDIR/../${TEMPLATE}/${TEMPLATEBRANCH}/ ${REPOBASE}/${BRANCH}/${BUNDLE}/
+rsync -ax --exclude=.svn --exclude=.git --exclude=.gitignore $SCRIPTDIR/../${TEMPLATE}/${TEMPLATEBRANCH}/ ${REPOBASE}/${BRANCH}/${BUNDLE}/
 setMetadata $BUNDLE bundle $BUNDLE
 setMetadata $BUNDLE timestamp $(date +%F_%T)
 setMetadata $BUNDLE branch $BRANCH
