@@ -19,7 +19,8 @@ if ! echo $RANGE | grep '\.\.' > /dev/null; then
   OPTS="-1"
 fi
 
-cloneRepo $VCSBASE/ $VCSLOCAL
-cd $VCSLOCAL
+#cloneRepo $VCSBASE/ $VCSLOCAL
+#cd $VCSLOCAL
+cd $SCRIPTDIR
 git fetch -q origin
 git log $OPTS $RANGE 
