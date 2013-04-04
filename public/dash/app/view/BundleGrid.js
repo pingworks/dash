@@ -30,12 +30,19 @@ Ext.define("Dash.view.BundleGrid", {
             menuText: 'Bundle',
             dataIndex: 'id',
             renderer: function(value, metadata, record, rowIndex, colIndex, store, view) {
-                return Ext.String.format(Dash.config.bundlegrid.repolink, record.get('branch'), record.get('id'));
+                return ( Dash.config.bundlegrid.repolink && Dash.config.bundlegrid.repolink != '' )
+                    ? Ext.String.format(Dash.config.bundlegrid.repolink, record.get('branch'), record.get('id'))
+                    : record.get('id');
             },
             width: 120
         }, {
             text: 'Revision',
             dataIndex: 'revision',
+            renderer: function(value, metadata, record, rowIndex, colIndex, store, view) {
+                return ( Dash.config.bundlegrid.vcslink && Dash.config.bundlegrid.vcslink != '' )
+                    ? Ext.String.format(Dash.config.bundlegrid.vcslink, record.get('revision'))
+                    : record.get('revision');
+            },
             width: 90
         }, {
             text: 'Erzeugt',
