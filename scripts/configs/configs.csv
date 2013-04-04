@@ -1,2 +1,2 @@
-public/dash/config.js;
-application/configs/application.ini;
+frontend/config.js;
+backend/application/configs/application.ini;
