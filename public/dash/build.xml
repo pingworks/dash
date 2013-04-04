@@ -49,13 +49,15 @@
     </target>
 
     <target name="test">
-        <exec executable="/opt/phantomjs-1.9.0-linux-x86_64/bin/phantomjs" dir="${basedir}">
-            <arg value="test/lib/jasmine/run-jasmine.js"/>
+        <delete dir="${build.dir}/reports"/>
+        <mkdir dir="${build.dir}/reports"/>
+        <exec executable="/opt/phantomjs-1.9.0-linux-x86_64/bin/phantomjs" dir="${basedir}" failonerror="true">
+            <arg value="test/lib/phantomjs-testrunner.js"/>
             <arg value="${basedir}/run-tests.html"/>
         </exec>
     </target>
 
-    <target name="package" depends="clean,test,production,build">
+    <target name="package" depends="clean,production,build,test">
         <taskdef name="deb" classname="org.vafer.jdeb.ant.DebAntTask"/>
         <copy todir="${build.dir}/debian">
             <fileset dir="debian"/>
@@ -73,6 +75,7 @@
                 <exclude name="Dash-*.scss"/>
                 <exclude name="config.rb"/>
                 <exclude name="debian/**"/>
+                <exclude name="reports/**"/>
                 <exclude name="resources/Readme.md"/>
                 <exclude name="resources/Dash-example.css"/>
             </data>
