@@ -2,9 +2,6 @@
     <testsuite name="Application Test Suite">
         <directory>./application</directory>
     </testsuite>
-    <testsuite name="Library Test Suite">
-        <directory>./library</directory>
-    </testsuite>
     
     <filter>
         <!-- If Zend Framework is inside your project's library, uncomment this filter -->
@@ -14,4 +11,7 @@
         </whitelist>
         -->
     </filter>
+    <logging>
+        <log type="junit" target="../build/reports/phpunit.xml" logIncompleteSkipped="false"/>
+    </logging>
 </phpunit>

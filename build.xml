@@ -10,7 +10,16 @@
         <mkdir dir="${build.dir}"/>
     </target>
 
-    <target name="package" depends="clean,build">
+    <target name="test">
+        <delete dir="${build.dir}/reports"/>
+        <mkdir dir="${build.dir}/reports"/>
+        <exec executable="phpunit" dir="${basedir}/tests" failonerror="true">
+            <arg value="--configuration"/>
+            <arg value="phpunit.xml"/>
+        </exec>
+    </target>
+
+    <target name="package" depends="clean,build,test">
         <taskdef name="deb" classname="org.vafer.jdeb.ant.DebAntTask"/>
         <copy todir="${build.dir}/debian">
             <fileset dir="debian"/>
