@@ -32,7 +32,6 @@
             <data src="${basedir}" type="directory">
                 <mapper type="perm" prefix="/opt/dash"/>
                 <include name="application/**"/>
-                <include name="tests/**"/>
                 <include name="public/rest.php"/>
                 <include name="public/.htaccess"/>
                 <exclude name="**/.svn"/>
