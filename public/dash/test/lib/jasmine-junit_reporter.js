@@ -1,3 +1,7 @@
+/*
+ * https://github.com/larrymyers/jasmine-reporters/blob/master/src/jasmine.junit_reporter.js 
+ */
+ 
 (function() {
 
     if (typeof jasmine == 'undefined') {

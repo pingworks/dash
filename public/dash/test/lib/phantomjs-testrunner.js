@@ -1,3 +1,7 @@
+/*
+ * https://github.com/larrymyers/jasmine-reporters/blob/master/test/phantomjs-testrunner.js
+ */
+
 // Verify arguments
 if (phantom.args.length === 0) {
     console.log("Simple JasmineBDD test runner for phantom.js");
