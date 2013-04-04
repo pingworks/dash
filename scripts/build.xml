@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project name="dash-scripts">
+    <property name="build.dir" value="${basedir}/build"/>
+
+    <target name="clean">
+        <delete dir="${build.dir}"/>
+    </target>
+
+    <target name="build">
+        <mkdir dir="${build.dir}"/>
+    </target>
+
+    <target name="package" depends="clean,build">
+        <taskdef name="deb" classname="org.vafer.jdeb.ant.DebAntTask"/>
+        <copy todir="${build.dir}/debian">
+            <fileset dir="debian"/>
+            <filterset begintoken="[[" endtoken="]]">
+                <filter token="version" value="${version}"/>
+                <filter token="name" value="${ant.project.name}"/>
+            </filterset>
+        </copy>
+        <deb destfile="${build.dir}/dash-scripts.deb" control="${build.dir}/debian">
+            <data src="${basedir}" type="directory">
+                <mapper type="perm" prefix="/opt/dash/scripts"/>
+                <exclude name="debian/**"/>
+                <exclude name="**/.svn"/>
+            </data>
+        </deb>
+    </target>
+</project>
