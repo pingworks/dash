@@ -93,7 +93,7 @@ Dash.config = {
                 'icon': 'yellow.png'
             },
             {
-                'id': 'FAILED',
+                'id': 'FAILURE',
                 'name': 'failed',
                 'icon': 'red.png'
             },
