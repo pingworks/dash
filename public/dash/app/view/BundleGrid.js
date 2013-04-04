@@ -32,7 +32,7 @@ Ext.define("Dash.view.BundleGrid", {
             renderer: function(value, metadata, record, rowIndex, colIndex, store, view) {
                 return Ext.String.format(Dash.config.bundlegrid.repolink, record.get('branch'), record.get('id'));
             },
-            width: 90
+            width: 120
         }, {
             text: 'Revision',
             dataIndex: 'revision',
