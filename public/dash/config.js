@@ -32,7 +32,11 @@ Dash.config = {
             change: 'resources/img/icons/change.png',
             deploy: 'resources/img/icons/deploy.png'
         },
-        repolink: '<a href="https://repo/{0}/{1}" target="_blank" style="color: black">{1}</a>'
+        repolink: '<a href="https://repo/{0}/{1}" target="_blank" style="color: black">{1}</a>',
+        sort: {
+            field: 'timestamp',
+            dir: 'DESC'
+        }
     },
     
     branch: {

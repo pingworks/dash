@@ -61,6 +61,7 @@ Ext.application({
         });
     },
     onBranchesLoad: function() {
-        this.getController('Bundle').onLoadBundles('trunk');
+        var branch = this.getBranchesStore().getAt(0).get('id');
+        this.getController('Bundle').onLoadBundles(branch);
     }
 });

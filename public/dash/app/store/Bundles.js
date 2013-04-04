@@ -3,7 +3,7 @@ Ext.define('Dash.store.Bundles', {
     requires: 'Dash.model.Bundle',
     model: 'Dash.model.Bundle',
     sorters: [{
-        property: 'revision',
-        direction: 'DESC'
+        property: Dash.config.bundlegrid.sort.field,
+        direction: Dash.config.bundlegrid.sort.dir
     }]
 });
