@@ -35,6 +35,7 @@ setMetadata $BUNDLE branch $BRANCH
 setMetadata $BUNDLE revision $REV
 setMetadata $BUNDLE buildnr $BUILDNR
 setMetadata $BUNDLE changes "$(bash $SCRIPTDIR/../$VCS/log.sh $REV)"
+setMetadata $BUNDLE committer "$(bash $SCRIPTDIR/../$VCS/committer.sh $REV)"
 echo "done."
 
 IFSOLD=$IFS
