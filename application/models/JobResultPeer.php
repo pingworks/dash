@@ -24,7 +24,6 @@ class Application_Model_JobResultPeer
 			$jobResult = self::getJobResultFromString($string);
 			$jobResult->id = $bundleId;
 			$jobResults[] = $jobResult;
-			
 		}
 		
 		return $jobResults;
