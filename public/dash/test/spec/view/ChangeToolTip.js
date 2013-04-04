@@ -57,7 +57,7 @@ describe("Dash.view.ChangeToolTip -> updateTitleAndTextFromRecords", function() 
 
         expect(view.update).toHaveBeenCalled();
         expect(view.update).toHaveBeenCalledWith(
-            '&lt;a'
+            '&lt;'
             + '<br />'
             + '&lt;'
         );
