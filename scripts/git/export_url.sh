@@ -20,4 +20,4 @@ validateRev $REV
 dirMustExist $(dirname $DIR)
 createDirIfNotExists $DIR
 
-git archive master $URL | tar -x -C $DIR
+git archive $BRANCH $URL | tar -x -C $DIR
