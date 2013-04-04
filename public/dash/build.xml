@@ -66,7 +66,7 @@
         </copy>
         <deb destfile="${build.dir}/dash-frontend.deb" control="${build.dir}/debian">
             <data src="${build.dir}" type="directory">
-                <mapper type="perm" prefix="/opt/app/dash"/>
+                <mapper type="perm" prefix="/opt/dash/frontend/public"/>
                 <exclude name="**/.svn"/>
                 <exclude name=".sass-cache/**"/>
                 <exclude name="theme-capture.*"/>
