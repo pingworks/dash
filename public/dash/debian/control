@@ -3,7 +3,6 @@ Version: [[version]]
 Section: misc
 Priority: optional
 Architecture: all
-Depends: php5, zendframework
 Maintainer: Christoph Lukas <lukas@pingworks.de>
 Description: Dash Frontend
 Distribution: development
