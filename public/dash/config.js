@@ -37,7 +37,8 @@ Dash.config = {
         sort: {
             field: 'timestamp',
             dir: 'DESC'
-        }
+        },
+        reload: 300000 // 5 min
     },
     
     branch: {

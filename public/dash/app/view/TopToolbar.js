@@ -11,6 +11,11 @@ Ext.define("Dash.view.TopToolbar", {
             html: '',
             width: 50
         }, Dash.config.toolbar.links, '->', {
+            icon: 'resources/img/icons/refresh.png',
+            handler: function() {
+                Ext.StoreMgr.get('Bundles').reload();
+            }
+        }, {
             text: 'Branch',
             menu: Ext.create('Dash.view.StoreMenu', {
                 store: Ext.StoreMgr.get('Branches'),

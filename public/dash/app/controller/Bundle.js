@@ -11,6 +11,16 @@ Ext.define('Dash.controller.Bundle', {
                 loadBundles: this.onLoadBundles
             }
         });
+        
+        // reloadTimer
+        var bundlesStore = this.getBundlesStore(); 
+        var reloadTask = Ext.TaskManager.start({
+            run: function() {
+                bundlesStore.reload()
+            },
+            interval: Dash.config.bundlegrid.reload,
+            fireOnStart: false
+        });
     },
     onLoadBundles: function(branch) {
         this.getBundlesStore().load({
