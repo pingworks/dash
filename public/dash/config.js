@@ -18,10 +18,10 @@ Dash.config = {
         }],
         links: [{
             text: 'Jenkins',
-            url: 'https://jenkins/'
+            url: 'https://dash.pingworks.net/jenkins/'
         }, {
             text: 'Repo',
-            url: 'https://repo/'
+            url: 'https://dash.pingworks.net/repo/'
         }]
     },
     
@@ -32,7 +32,7 @@ Dash.config = {
             change: 'resources/img/icons/change.png',
             deploy: 'resources/img/icons/deploy.png'
         },
-        repolink: '<a href="https://repo/{0}/{1}" target="_blank" style="color: black">{1}</a>',
+        repolink: '<a href="https://dash.pingworks.net/repo/{0}/{1}" target="_blank" style="color: black">{1}</a>',
         sort: {
             field: 'timestamp',
             dir: 'DESC'
@@ -108,7 +108,7 @@ Dash.config = {
     jobresult: {
         endpoint: '/jobresult',
         text: '<img src="{6}" alt="{2}">&nbsp;' 
-            + '<a href="https://jenkins/{1}" target="_blank">{0}</a>: Tests: {3}, skipped: {4}, failed: {5}',
+            + '<a href="https://dash.pingworks.net/jenkins/{1}" target="_blank">{0}</a>: Tests: {3}, skipped: {4}, failed: {5}',
         title: '{1} stage Jobs für Bundle {2}',
         stageMap: {
             1: 'First',
