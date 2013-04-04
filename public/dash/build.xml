@@ -51,7 +51,7 @@
     <target name="test">
         <exec executable="/opt/phantomjs-1.9.0-linux-x86_64/bin/phantomjs" dir="${basedir}">
             <arg value="test/lib/jasmine/run-jasmine.js"/>
-            <arg value="http://dash/dash/run-tests.html"/>
+            <arg value="${basedir}/run-tests.html"/>
         </exec>
     </target>
 
