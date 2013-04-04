@@ -2,12 +2,10 @@
 
 class Application_Model_BranchPeer
 {
-	private static $repoDir = '/opt/bundlerepo/';
-
 	public static function getAllBranchIds()
 	{
 		$data = array();
-		foreach (new DirectoryIterator( self::$repoDir ) as $directory)
+		foreach (new DirectoryIterator( Zend_Registry::get("repodir") ) as $directory)
 		{
 			if ( ! $directory->isDot())
 				$data[] = $directory->getBasename();

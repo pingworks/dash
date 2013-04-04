@@ -17,13 +17,14 @@ class ChangeController extends Zend_Rest_Controller
 	
 	public function indexAction() 
 	{
-		if (preg_match("/^[0-9]+\.[0-9]+\.[0-9]+$/", $this->_getParam('bundle')) === 0)
+		$regex =$this->getInvokeArg('bootstrap')->getOption('paramregex');
+		if (preg_match($regex['bundle'], $this->_getParam('bundle')) === 0)
 		{
 			throw new Exception('Ungueltige Bundle Id');
 		}
 		$bundleId = $this->_getParam('bundle');
 		
-		if (preg_match("/^[0-9a-zA-Z-_]+$/", $this->_getParam('branch')) === 0)
+		if (preg_match($regex['branch'], $this->_getParam('branch')) === 0)
 		{
 			throw new Exception('Ungueltiger Branch');
 		}

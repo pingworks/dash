@@ -17,7 +17,8 @@ class BundleController extends Zend_Rest_Controller
 	
 	public function indexAction() 
 	{
-		$branch = (preg_match("/^[a-zA-Z0-9_-]+$/", $this->_getParam('branch')) === 0)
+		$regex =$this->getInvokeArg('bootstrap')->getOption('paramregex');
+		$branch = (preg_match($regex['branch'], $this->_getParam('branch')) === 0)
 			? 'trunk'
 			:  $this->_getParam('branch');
 		

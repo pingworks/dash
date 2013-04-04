@@ -2,8 +2,6 @@
 
 class Application_Model_ChangePeer
 {
-	private static $scriptsDir = '/opt/deploy/';
-
 	public static function getChanges($branch, $bundleId)
 	{
 		$changes = Application_Model_BundlePeer::getChanges($branch, $bundleId);

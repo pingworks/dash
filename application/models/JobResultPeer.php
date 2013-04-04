@@ -2,8 +2,6 @@
 
 class Application_Model_JobResultPeer
 {
-	private static $scriptsDir = '/opt/deploy/';
-	
 	private static function getJobResultFromString($string)
 	{
 		$jobResult = new Application_Model_JobResult();

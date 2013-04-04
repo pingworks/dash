@@ -4,11 +4,9 @@ class Application_Model_BundlePeer
 {
 	private static $stageNameMap = array( '1' => 'first', '2' => 'second', '3' => 'third'); 
 	
-	private static $repoDir = '/opt/bundlerepo/';
-
 	private static function getMetadata($branch, $id, $meta)
 	{
-		$filename = self::$repoDir . $branch . '/' . $id . '/metadata/' . $meta;
+		$filename = Zend_Registry::get("repodir") . '/' . $branch . '/' . $id . '/metadata/' . $meta;
 		if ( ! file_exists( $filename))
 		{
 			return 'Unavailable';
@@ -43,7 +41,7 @@ class Application_Model_BundlePeer
 	private static function getAllBundleIds($branch = 'trunk')
 	{
 		$data = array();
-		foreach (new DirectoryIterator( self::$repoDir . $branch) as $directory)
+		foreach (new DirectoryIterator( Zend_Registry::get("repodir") . '/' . $branch) as $directory)
 		{
 			if ( ! $directory->isDot())
 				$data[] = $directory->getBasename();
