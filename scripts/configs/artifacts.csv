@@ -1,3 +1,4 @@
 frontend/build/dash-frontend.deb;dash-frontend.deb
 backend/build/dash-backend.deb;dash-backend.deb
+backend/build/dash-backend-tests.deb;dash-backend-tests.deb
 scripts/build/dash-scripts.deb;dash-scripts.deb
