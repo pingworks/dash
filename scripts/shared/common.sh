@@ -50,6 +50,15 @@ function validateMetakey() {
   fi
 }
 
+function validateEnv() {
+  local ENV=$1
+  
+  if ! echo $ENV | grep -E "$ENV_PATTERN" >/dev/null; then
+    echo "Illegal ENV: $ENV"
+    exit 1
+  fi
+}
+
 function getBranchNr() {
   local BRANCH=$1
   local IFS=";"
@@ -112,15 +121,13 @@ function getBundleFolder() {
   [ "$BUNDLE_FOLDER" ] && return # avoid re-reading branches.csv
   local BUNDLE=$1
   
-  IFSOLD=$IFS
-  IFS=";"
+  local IFS=";"
   BUNDLE_FOLDER=""
   while read bname bnumber burl; do
   if [ -d "${REPOBASE}/${bname}/$BUNDLE" ]; then
     BUNDLE_FOLDER=${REPOBASE}/${bname}/$BUNDLE
   fi
   done < $SCRIPTDIR/../configs/branches.csv
-  IFS=$IFSOLD
   
   if [ -z "${BUNDLE_FOLDER}" ]; then
     echo "Bundle not found: $BUNDLE"
