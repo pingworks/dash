@@ -19,7 +19,13 @@ class BranchTest extends RestTest
 		$this->assertTrue($result->success);
 		$this->assertType('array', $result->results);
 		$this->assertEquals(2, count($result->results));
-		$this->assertEquals($entry1, $result->results[0]);
-		$this->assertEquals($entry2, $result->results[1]);
+		
+		$idx1 = array_search($entry1, $result->results);
+		$idx2 = array_search($entry2, $result->results);
+		$this->assertNotEquals(false, $idx1);
+		$this->assertNotEquals(false, $idx2);
+		
+		$this->assertEquals($entry1, $result->results[$idx1]);
+		$this->assertEquals($entry2, $result->results[$idx2]);
 	}
 }
