@@ -28,12 +28,20 @@
                 <filter token="name" value="${ant.project.name}"/>
             </filterset>
         </copy>
-        <deb destfile="${build.dir}/dash-backend.deb" control="${build.dir}/debian">
+        <deb destfile="${build.dir}/dash-backend.deb" control="${build.dir}/debian/dash-backend">
             <data src="${basedir}" type="directory">
                 <mapper type="perm" prefix="/opt/dash"/>
                 <include name="application/**"/>
                 <include name="public/rest.php"/>
                 <include name="public/.htaccess"/>
+                <exclude name="**/.svn"/>
+                <exclude name="debian/**"/>
+            </data>
+        </deb>
+        <deb destfile="${build.dir}/dash-backend-tests.deb" control="${build.dir}/debian/dash-backend-tests">
+            <data src="${basedir}" type="directory">
+                <mapper type="perm" prefix="/opt/dash"/>
+                <include name="tests/**"/>
                 <exclude name="**/.svn"/>
                 <exclude name="debian/**"/>
             </data>

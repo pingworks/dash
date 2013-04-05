@@ -19,7 +19,7 @@ class Application_Model_BundlePeerTest extends PHPUnit_Framework_TestCase
 		$this->assertAttributeEquals('88.ab99a3b7.5', 'id', $data);
 		$this->assertAttributeEquals("This, of course, is not the real copy for this advertisement. The real words will be written once...\nThis, of course, is not the real copy for this advertisement. The real words will be written once...", 'changes', $data);
 		$this->assertAttributeEquals("Tim Tester", 'committer', $data);
-		$this->assertAttributeEquals("Unavailable", 'timestamp', $data);
+		$this->assertAttributeEquals("2013-04-04_15:15:15", 'timestamp', $data);
 	}
 	
 	public function testGetBundleForBranchAndIdStageStatus5()
