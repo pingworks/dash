@@ -15,7 +15,16 @@
         <mkdir dir="${build.dir}/reports"/>
         <exec executable="phpunit" dir="${basedir}/tests" failonerror="true">
             <arg value="--configuration"/>
-            <arg value="phpunit.xml"/>
+            <arg value="unittest.xml"/>
+        </exec>
+    </target>
+
+    <target name="integrationtest">
+        <delete dir="${build.dir}/reports"/>
+        <mkdir dir="${build.dir}/reports"/>
+        <exec executable="phpunit" dir="${basedir}/tests" failonerror="true">
+            <arg value="--configuration"/>
+            <arg value="integrationtest.xml"/>
         </exec>
     </target>
 
