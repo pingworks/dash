@@ -19,15 +19,6 @@
         </exec>
     </target>
 
-    <target name="integrationtest">
-        <delete dir="${build.dir}/reports"/>
-        <mkdir dir="${build.dir}/reports"/>
-        <exec executable="phpunit" dir="${basedir}/tests" failonerror="true">
-            <arg value="--configuration"/>
-            <arg value="integrationtest.xml"/>
-        </exec>
-    </target>
-
     <target name="package" depends="clean,build,test">
         <taskdef name="deb" classname="org.vafer.jdeb.ant.DebAntTask"/>
         <copy todir="${build.dir}/debian">
@@ -37,20 +28,12 @@
                 <filter token="name" value="${ant.project.name}"/>
             </filterset>
         </copy>
-        <deb destfile="${build.dir}/dash-backend.deb" control="${build.dir}/debian/dash-backend">
+        <deb destfile="${build.dir}/dash-backend.deb" control="${build.dir}/debian">
             <data src="${basedir}" type="directory">
                 <mapper type="perm" prefix="/opt/dash"/>
                 <include name="application/**"/>
                 <include name="public/rest.php"/>
                 <include name="public/.htaccess"/>
-                <exclude name="**/.svn"/>
-                <exclude name="debian/**"/>
-            </data>
-        </deb>
-        <deb destfile="${build.dir}/dash-backend-tests.deb" control="${build.dir}/debian/dash-backend-tests">
-            <data src="${basedir}" type="directory">
-                <mapper type="perm" prefix="/opt/dash"/>
-                <include name="tests/**"/>
                 <exclude name="**/.svn"/>
                 <exclude name="debian/**"/>
             </data>

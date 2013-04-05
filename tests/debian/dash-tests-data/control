@@ -1,0 +1,8 @@
+Package: [[name]]-data
+Version: [[version]]
+Section: misc
+Priority: optional
+Architecture: all
+Maintainer: Christoph Lukas <lukas@pingworks.de>
+Description: Dash Test data
+Distribution: development

@@ -1,9 +1,9 @@
-Package: [[name]]-tests
+Package: [[name]]-system
 Version: [[version]]
 Section: misc
 Priority: optional
 Architecture: all
 Depends: phpunit
 Maintainer: Christoph Lukas <lukas@pingworks.de>
-Description: Dash Backend Tests
+Description: Dash System Tests
 Distribution: development

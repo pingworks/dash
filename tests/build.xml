@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project name="dash-tests" default=".help">
+    <property name="build.dir" value="${basedir}/build"/>
+
+    <target name="clean">
+        <delete dir="${build.dir}"/>
+    </target>
+
+    <target name="build">
+        <mkdir dir="${build.dir}"/>
+    </target>
+
+    <target name="backendtest">
+        <delete dir="${build.dir}/reports"/>
+        <mkdir dir="${build.dir}/reports"/>
+        <exec executable="phpunit" dir="${basedir}/backend" failonerror="true">
+            <arg value="--configuration"/>
+            <arg value="backend.xml"/>
+        </exec>
+    </target>
+
+    <target name="systemtest">
+        <delete dir="${build.dir}/reports"/>
+        <mkdir dir="${build.dir}/reports"/>
+        <exec executable="phpunit" dir="${basedir}/system" failonerror="true">
+            <arg value="--configuration"/>
+            <arg value="system.xml"/>
+        </exec>
+    </target>
+
+    <target name="package" depends="clean,build">
+        <taskdef name="deb" classname="org.vafer.jdeb.ant.DebAntTask"/>
+        <copy todir="${build.dir}/debian">
+            <fileset dir="debian"/>
+            <filterset begintoken="[[" endtoken="]]">
+                <filter token="version" value="${version}"/>
+                <filter token="name" value="${ant.project.name}"/>
+            </filterset>
+        </copy>
+        <deb destfile="${build.dir}/dash-tests-backend.deb" control="${build.dir}/debian/dash-tests-backend">
+            <data src="${basedir}" type="directory">
+                <mapper type="perm" prefix="/opt/dash/tests"/>
+                <include name="backend/**"/>
+                <exclude name="**/.svn"/>
+                <exclude name="debian/**"/>
+            </data>
+        </deb>
+        <deb destfile="${build.dir}/dash-tests-system.deb" control="${build.dir}/debian/dash-tests-system">
+            <data src="${basedir}" type="directory">
+                <mapper type="perm" prefix="/opt/dash/tests"/>
+                <include name="system/**"/>
+                <exclude name="**/.svn"/>
+                <exclude name="debian/**"/>
+            </data>
+        </deb>
+        <deb destfile="${build.dir}/dash-tests-data.deb" control="${build.dir}/debian/dash-tests-data">
+            <data src="${basedir}" type="directory">
+                <mapper type="perm" prefix="/opt/dash/tests"/>
+                <include name="data/**"/>
+                <exclude name="**/.svn"/>
+                <exclude name="debian/**"/>
+            </data>
+        </deb>
+    </target>
+</project>
