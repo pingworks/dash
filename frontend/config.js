@@ -3,6 +3,7 @@ var Dash = {};
 Dash.config = {
     toolbar: {
         left: [{
+            id: 'Logo',
             xtype: 'component',
             width: 48,
             height: 38,
@@ -12,14 +13,17 @@ Dash.config = {
             html: '&nbsp;',
             width: 10
         }, {
+            id: 'Title',
             xtype: 'component',
             html: 'Dashboard',
             style: 'font-size: 32px'
         }],
         links: [{
+            id: 'JenkinsButton',
             text: 'Jenkins',
             url: 'https://dash.pingworks.net/jenkins/'
         }, {
+            id: 'RepoButton',
             text: 'Repo',
             url: 'https://dash.pingworks.net/repo/'
         }]

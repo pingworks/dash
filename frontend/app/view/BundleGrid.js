@@ -5,6 +5,8 @@ Ext.define("Dash.view.BundleGrid", {
     store: 'Bundles',
     width: '100%',
     
+    id: 'BundleGrid',
+    
     stageStatusIconRenderer: function(value, metadata, record, rowIndex, colIndex, store, view) {
         var icon = Dash.app.getController('Bundle').getStageStatusIcon(record, colIndex - 2);
         var iconUrl = (icon) ? Ext.String.format(Dash.config.stagestatus.iconpath, icon) : Ext.BLANK_IMAGE_URL;
