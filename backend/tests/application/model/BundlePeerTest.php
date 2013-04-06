@@ -22,6 +22,13 @@ class Application_Model_BundlePeerTest extends PHPUnit_Framework_TestCase
 		$this->assertAttributeEquals("2013-04-04_15:15:15", 'timestamp', $data);
 	}
 	
+	public function testGetBundleForBranchAndIdIgnoreFile()
+	{
+		$data = Application_Model_BundlePeer::getBundleForBranchAndId('trunk', 'testfile');
+		
+		$this->assertNull($data);
+	}
+	
 	public function testGetBundleForBranchAndIdStageStatus5()
 	{
 		$data = Application_Model_BundlePeer::getBundleForBranchAndId('branchA', '88.ab99a3b7.5');
@@ -86,6 +93,14 @@ class Application_Model_BundlePeerTest extends PHPUnit_Framework_TestCase
 		{
 			$this->assertType('Application_Model_Bundle', $data[$i]);
 		}
+	}
+	
+	public function testGetBundlesIgnoreFiles()
+	{
+		$data = Application_Model_BundlePeer::getBundles('trunk');
+		
+		$this->assertType('array', $data);
+		$this->assertEquals(0, count($data));
 	}
 	
 	public function testGetChanges()

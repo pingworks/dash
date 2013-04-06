@@ -14,8 +14,9 @@ class Application_Model_BranchPeerTest extends PHPUnit_Framework_TestCase
 		$data = Application_Model_BranchPeer::getAllBranchIds();
 		$this->assertType('array', $data);
 		$this->assertEquals(2, count($data));
-		$this->assertTrue(array_search('trunk', $data) !== false);
-		$this->assertTrue(array_search('branchA', $data) !== false);
+		$this->assertContains('trunk', $data);
+		$this->assertContains('branchA', $data);
+		$this->assertNotContains('testfile', $data);
 	}
 
 	public function testGetAllBranchs()

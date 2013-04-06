@@ -43,7 +43,7 @@ class Application_Model_BundlePeer
 		$data = array();
 		foreach (new DirectoryIterator( Zend_Registry::get("repodir") . '/' . $branch) as $directory)
 		{
-			if ( ! $directory->isDot())
+			if ( ! $directory->isDot() && $directory->isDir())
 				$data[] = $directory->getBasename();
 		}
 		return $data;
@@ -51,6 +51,11 @@ class Application_Model_BundlePeer
 	
 	public static function getBundleForBranchAndId($branch = 'trunk', $id)
 	{
+		$bundleDir = Zend_Registry::get("repodir") . '/' . $branch . '/' . $id;
+		if ( ! is_dir($bundleDir))
+		{
+			return null;
+		}
 		$bundle = new Application_Model_Bundle();
 		$bundle->id = $id;
 		$bundle->branch = self::getMetadata($branch, $id, 'branch');

@@ -7,7 +7,7 @@ class Application_Model_BranchPeer
 		$data = array();
 		foreach (new DirectoryIterator( Zend_Registry::get("repodir") ) as $directory)
 		{
-			if ( ! $directory->isDot())
+			if ( ! $directory->isDot() && $directory->isDir())
 				$data[] = $directory->getBasename();
 		}
 		return $data;
