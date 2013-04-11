@@ -13,7 +13,8 @@ Ext.define("Dash.view.JobResultToolTip", {
                     Ext.String.htmlEncode(jobResult.get('total')), 
                     Ext.String.htmlEncode(jobResult.get('skipped')), 
                     Ext.String.htmlEncode(jobResult.get('failed')),
-                    Ext.String.format(Dash.config.jobstatus.iconpath, jobResult.getJobStatus().get('icon'))
+                    Ext.String.format(Dash.config.jobstatus.iconpath, jobResult.getJobStatus().get('icon')),
+                    jobResult.getJobStatus().get('cls')
                 )
             );
         });
