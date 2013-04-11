@@ -4,7 +4,8 @@ Ext.define('Dash.model.JobStatus', {
     fields: [
         { name: 'id', type: 'string' },
         { name: 'name', type: 'string' },
-        { name: 'icon', type: 'string' }
+        { name: 'icon', type: 'string' },
+        { name: 'cls', type: 'string' }
     ]
 });
 

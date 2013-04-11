@@ -19,14 +19,16 @@ Ext.define("Dash.view.BundleGrid", {
         this.columns[colIndex].items[0].iconCls = iconCls;
     },
     
-    createChangeTooltip: function(target) {
+    createChangeTooltip: function(target, bundle) {
         return Ext.create('Dash.view.ChangeToolTip', {
+            id: 'TTC-' + bundle.get('id').replace(/\./g, '-'),
             target: target
         });
     },
     
-    createJobResultTooltip: function(target) {
+    createJobResultTooltip: function(target, bundle, stage) {
         return Ext.create('Dash.view.JobResultToolTip', {
+            id: 'TTJR-' + bundle.get('id').replace(/\./g, '-') + '-' + stage,
             target: target
         });
     },
@@ -67,7 +69,12 @@ Ext.define("Dash.view.BundleGrid", {
             items: [{
                 handler: function(gridview, rowIndex, colIndex, item, event, record) {
                     that.fireEvent('hideAllTooltips');
-                    that.fireEvent('loadJobResult', record, 1, that.createJobResultTooltip(event.target));
+                    that.fireEvent(
+                        'loadJobResult', 
+                        record, 
+                        1, 
+                        that.createJobResultTooltip(event.target, record, 1)
+                    );
                 }
             }],
             renderer: this.stageStatusIconRenderer,
@@ -82,7 +89,12 @@ Ext.define("Dash.view.BundleGrid", {
             items: [{
                 handler: function(gridview, rowIndex, colIndex, item, event, record) {
                     that.fireEvent('hideAllTooltips');
-                    that.fireEvent('loadJobResult', record, 2, that.createJobResultTooltip(event.target));
+                    that.fireEvent(
+                        'loadJobResult', 
+                        record, 
+                        2, 
+                        that.createJobResultTooltip(event.target, record, 2)
+                    );
                 }
             }],
             renderer: this.stageStatusIconRenderer,
@@ -97,7 +109,12 @@ Ext.define("Dash.view.BundleGrid", {
             items: [{
                 handler: function(gridview, rowIndex, colIndex, item, event, record) {
                     that.fireEvent('hideAllTooltips');
-                    that.fireEvent('loadJobResult', record, 3, that.createJobResultTooltip(event.target));
+                    that.fireEvent(
+                        'loadJobResult', 
+                        record, 
+                        3, 
+                        that.createJobResultTooltip(event.target, record, 3)
+                    );
                 }
             }],
             renderer: this.stageStatusIconRenderer,
@@ -113,7 +130,11 @@ Ext.define("Dash.view.BundleGrid", {
                 icon: Dash.config.bundlegrid.icon.change,
                 handler: function(gridview, rowIndex, colIndex, item, event, record) {
                     that.fireEvent('hideAllTooltips');
-                    that.fireEvent('loadChanges', record, that.createChangeTooltip(event.target));
+                    that.fireEvent(
+                        'loadChanges', 
+                        record, 
+                        that.createChangeTooltip(event.target, record)
+                    );
                 }
             }]
         }, {

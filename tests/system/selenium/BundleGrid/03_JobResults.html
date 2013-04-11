@@ -1,0 +1,345 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://dash-test/" />
+<title>03_JobResults</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">03_JobResults</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>/</td>
+	<td></td>
+</tr>
+<!--Select branchA-->
+<tr>
+	<td>assertElementPresent</td>
+	<td>BranchButton</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>BranchButton</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>BranchButtonMenu</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>branchA</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>branchA</td>
+	<td></td>
+</tr>
+<!--Bundles-->
+<tr>
+	<td>rollup</td>
+	<td>waitForGridCellPresent</td>
+	<td>id=BundleGrid, row=1, col=1</td>
+</tr>
+<tr>
+	<td>rollup</td>
+	<td>assertGridCellText</td>
+	<td>id=BundleGrid, row=1, col=1, value=88.faaeeb60.10</td>
+</tr>
+<!--JobResults-->
+<!--Bundle10:1st-->
+<tr>
+	<td>rollup</td>
+	<td>clickGridCellElement</td>
+	<td>id=BundleGrid, row=1, col=4, elem=img</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>TTJR-88-faaeeb60-10-1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>css=#TTJR-88-faaeeb60-10-1_header</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=#TTJR-88-faaeeb60-10-1_header</td>
+	<td>First stage Jobs für Bundle 88.faaeeb60.10</td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>css=#TTJR-88-faaeeb60-10-1-innerCt &gt; img:nth-child(1).success</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>css=#TTJR-88-faaeeb60-10-1-innerCt &gt; img:nth-child(4).success</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertAttribute</td>
+	<td>css=#TTJR-88-faaeeb60-10-1-innerCt &gt;a:nth-child(2)@href</td>
+	<td>https://dash.pingworks.net/jenkins/job/1st-stage-frontend/100</td>
+</tr>
+<tr>
+	<td>assertAttribute</td>
+	<td>css=#TTJR-88-faaeeb60-10-1-innerCt &gt;a:nth-child(5)@href</td>
+	<td>https://dash.pingworks.net/jenkins/job/1st-stage-backend/100</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=#TTJR-88-faaeeb60-10-1-innerCt</td>
+	<td>1st-stage-frontend: Tests: 100, skipped: 0, failed: 0*</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=#TTJR-88-faaeeb60-10-1-innerCt</td>
+	<td>*1st-stage-backend: Tests: 100, skipped: 0, failed: 2</td>
+</tr>
+<!--Bundle10:2nd-->
+<tr>
+	<td>rollup</td>
+	<td>clickGridCellElement</td>
+	<td>id=BundleGrid, row=1, col=5, elem=img</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>TTJR-88-faaeeb60-10-2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>css=#TTJR-88-faaeeb60-10-2_header</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=#TTJR-88-faaeeb60-10-2_header</td>
+	<td>Second stage Jobs für Bundle 88.faaeeb60.10</td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>css=#TTJR-88-faaeeb60-10-2-innerCt &gt; img:nth-child(1).success</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>css=#TTJR-88-faaeeb60-10-2-innerCt &gt; img:nth-child(4).success</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertAttribute</td>
+	<td>css=#TTJR-88-faaeeb60-10-2-innerCt &gt;a:nth-child(2)@href</td>
+	<td>https://dash.pingworks.net/jenkins/job/2nd-stage-frontend/100</td>
+</tr>
+<tr>
+	<td>assertAttribute</td>
+	<td>css=#TTJR-88-faaeeb60-10-2-innerCt &gt;a:nth-child(5)@href</td>
+	<td>https://dash.pingworks.net/jenkins/job/2nd-stage-backend/100</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=#TTJR-88-faaeeb60-10-2-innerCt</td>
+	<td>2nd-stage-frontend: Tests: 100, skipped: 0, failed: 0*</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=#TTJR-88-faaeeb60-10-2-innerCt</td>
+	<td>*2nd-stage-backend: Tests: 100, skipped: 0, failed: 2</td>
+</tr>
+<!--Bundle10:3rd-->
+<tr>
+	<td>rollup</td>
+	<td>clickGridCellElement</td>
+	<td>id=BundleGrid, row=1, col=6, elem=img</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>TTJR-88-faaeeb60-10-3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>css=#TTJR-88-faaeeb60-10-3_header</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=#TTJR-88-faaeeb60-10-3_header</td>
+	<td>Third stage Jobs für Bundle 88.faaeeb60.10</td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>css=#TTJR-88-faaeeb60-10-3-innerCt &gt; img:nth-child(1).success</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>css=#TTJR-88-faaeeb60-10-3-innerCt &gt; img:nth-child(4).success</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertAttribute</td>
+	<td>css=#TTJR-88-faaeeb60-10-3-innerCt &gt;a:nth-child(2)@href</td>
+	<td>https://dash.pingworks.net/jenkins/job/3rd-stage-frontend/100</td>
+</tr>
+<tr>
+	<td>assertAttribute</td>
+	<td>css=#TTJR-88-faaeeb60-10-3-innerCt &gt;a:nth-child(5)@href</td>
+	<td>https://dash.pingworks.net/jenkins/job/3rd-stage-backend/100</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=#TTJR-88-faaeeb60-10-3-innerCt</td>
+	<td>3rd-stage-frontend: Tests: 100, skipped: 0, failed: 0*</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=#TTJR-88-faaeeb60-10-3-innerCt</td>
+	<td>*3rd-stage-backend: Tests: 100, skipped: 0, failed: 2</td>
+</tr>
+<!--Bundle8:1st-->
+<tr>
+	<td>rollup</td>
+	<td>clickGridCellElement</td>
+	<td>id=BundleGrid, row=3, col=4, elem=img</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>TTJR-88-1aea659e-8-1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>css=#TTJR-88-1aea659e-8-1_header</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=#TTJR-88-1aea659e-8-1_header</td>
+	<td>First stage Jobs für Bundle 88.1aea659e.8</td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>css=#TTJR-88-1aea659e-8-1-innerCt &gt; img:nth-child(1).success</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>css=#TTJR-88-1aea659e-8-1-innerCt &gt; img:nth-child(4).success</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertAttribute</td>
+	<td>css=#TTJR-88-1aea659e-8-1-innerCt &gt;a:nth-child(2)@href</td>
+	<td>https://dash.pingworks.net/jenkins/job/1st-stage-frontend/99</td>
+</tr>
+<tr>
+	<td>assertAttribute</td>
+	<td>css=#TTJR-88-1aea659e-8-1-innerCt &gt;a:nth-child(5)@href</td>
+	<td>https://dash.pingworks.net/jenkins/job/1st-stage-backend/99</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=#TTJR-88-1aea659e-8-1-innerCt</td>
+	<td>1st-stage-frontend: Tests: 99, skipped: 0, failed: 0*</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=#TTJR-88-1aea659e-8-1-innerCt</td>
+	<td>*1st-stage-backend: Tests: 99, skipped: 0, failed: 2</td>
+</tr>
+<!--Bundle8:2nd-->
+<tr>
+	<td>rollup</td>
+	<td>clickGridCellElement</td>
+	<td>id=BundleGrid, row=3, col=5, elem=img</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>TTJR-88-1aea659e-8-2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>css=#TTJR-88-1aea659e-8-2_header</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=#TTJR-88-1aea659e-8-2_header</td>
+	<td>Second stage Jobs für Bundle 88.1aea659e.8</td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>css=#TTJR-88-1aea659e-8-2-innerCt &gt; img:nth-child(1).success</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>css=#TTJR-88-1aea659e-8-2-innerCt &gt; img:nth-child(4).success</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertAttribute</td>
+	<td>css=#TTJR-88-1aea659e-8-2-innerCt &gt;a:nth-child(2)@href</td>
+	<td>https://dash.pingworks.net/jenkins/job/2nd-stage-frontend/99</td>
+</tr>
+<tr>
+	<td>assertAttribute</td>
+	<td>css=#TTJR-88-1aea659e-8-2-innerCt &gt;a:nth-child(5)@href</td>
+	<td>https://dash.pingworks.net/jenkins/job/2nd-stage-backend/99</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=#TTJR-88-1aea659e-8-2-innerCt</td>
+	<td>2nd-stage-frontend: Tests: 99, skipped: 0, failed: 0*</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=#TTJR-88-1aea659e-8-2-innerCt</td>
+	<td>*2nd-stage-backend: Tests: 99, skipped: 0, failed: 2</td>
+</tr>
+<!--Bundle8:3rd-->
+<tr>
+	<td>rollup</td>
+	<td>clickGridCellElement</td>
+	<td>id=BundleGrid, row=3, col=6, elem=img</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>TTJR-88-1aea659e-8-3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>css=#TTJR-88-1aea659e-8-3_header</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=#TTJR-88-1aea659e-8-3_header</td>
+	<td>Third stage Jobs für Bundle 88.1aea659e.8</td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>css=#TTJR-88-1aea659e-8-3-innerCt &gt; img:nth-child(1).unknown</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=#TTJR-88-1aea659e-8-3-innerCt</td>
+	<td>Unavailable: Tests: NaN, skipped: NaN, failed: NaN</td>
+</tr>
+</tbody></table>
+</body>
+</html>

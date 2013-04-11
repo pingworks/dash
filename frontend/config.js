@@ -121,7 +121,7 @@ Dash.config = {
     
     jobresult: {
         endpoint: '/jobresult',
-        text: '<img src="{6}" alt="{2}">&nbsp;' 
+        text: '<img src="{6}" alt="{2}" class="{7}">&nbsp;' 
             + '<a href="https://dash.pingworks.net/jenkins/{1}" target="_blank">{0}</a>: Tests: {3}, skipped: {4}, failed: {5}',
         title: '{1} stage Jobs für Bundle {2}',
         stageMap: {
