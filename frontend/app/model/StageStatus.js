@@ -4,7 +4,8 @@ Ext.define('Dash.model.StageStatus', {
     fields: [
         { name: 'id', type: 'int' },
         { name: 'name', type: 'string' },
-        { name: 'icon', type: 'string' }
+        { name: 'icon', type: 'string' },
+        { name: 'cls', type: 'string' }
     ]
 });
 

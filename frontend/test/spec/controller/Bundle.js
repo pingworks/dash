@@ -39,7 +39,7 @@ describe("Dash.controller.Bundle -> onLoadBundles", function() {
     
 });
 
-describe("Dash.controller.Bundle -> getStageStatusIcon", function() {
+describe("Dash.controller.Bundle -> getStageStatus", function() {
     var ctrl = null;
     var icon = null;
     
@@ -52,31 +52,26 @@ describe("Dash.controller.Bundle -> getStageStatusIcon", function() {
             getStageStatus: function() {}
         }
         stageStatusMock = {
-            get: function() {}
         }
         
     });
     
-    it("should return icon if exists",function(){
+    it("should return stagestatus if exists",function(){
         spyOn(bundleMock, 'getStageStatus').andReturn(stageStatusMock);
-        spyOn(stageStatusMock, 'get').andReturn('thisIsAnIconObject');
 
-        icon = ctrl.getStageStatusIcon(bundleMock, 3);
+        stageStatus = ctrl.getStageStatus(bundleMock, 3);
 
         expect(bundleMock.getStageStatus).toHaveBeenCalled();
-        expect(stageStatusMock.get).toHaveBeenCalledWith('icon');
-        expect(icon).toBe('thisIsAnIconObject');
+        expect(stageStatus).toBe(stageStatusMock);
     });
     
     it("should return null if icon does not exist",function(){
         spyOn(bundleMock, 'getStageStatus').andReturn(undefined);
-        spyOn(stageStatusMock, 'get').andReturn('thisIsAnIconObject');
 
-        icon = ctrl.getStageStatusIcon(bundleMock, 3);
+        stageStatus = ctrl.getStageStatus(bundleMock, 3);
 
         expect(bundleMock.getStageStatus).toHaveBeenCalled();
-        expect(stageStatusMock.get).not.toHaveBeenCalled();
-        expect(icon).toBeNull();
+        expect(stageStatus).toBeUndefined();
     });
     
 });

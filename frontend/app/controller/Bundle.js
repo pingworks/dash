@@ -30,8 +30,7 @@ Ext.define('Dash.controller.Bundle', {
         });
         this.getBundleGrid().setTitle(Ext.String.format(Dash.config.bundlegrid.title, branch));
     },
-    getStageStatusIcon: function(bundle, stage) {
-        var stageStatus = bundle.getStageStatus(stage);
-        return (stageStatus) ? stageStatus.get('icon') : null;
+    getStageStatus: function(bundle, stage) {
+        return bundle.getStageStatus(stage);
     }
 });

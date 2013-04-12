@@ -8,9 +8,15 @@ Ext.define("Dash.view.BundleGrid", {
     id: 'BundleGrid',
     
     stageStatusIconRenderer: function(value, metadata, record, rowIndex, colIndex, store, view) {
-        var icon = Dash.app.getController('Bundle').getStageStatusIcon(record, colIndex - 2);
-        var iconUrl = (icon) ? Ext.String.format(Dash.config.stagestatus.iconpath, icon) : Ext.BLANK_IMAGE_URL;
+        var stageStatus = Dash.app.getController('Bundle').getStageStatus(record, colIndex - 2);
+        var iconUrl = Ext.BLANK_IMAGE_URL;
+        var iconCls = '';
+        if (stageStatus) {
+            iconUrl = Ext.String.format(Dash.config.stagestatus.iconpath, stageStatus.get('icon'));
+            iconCls = stageStatus.get('cls');
+        }
         this.columns[colIndex].items[0].icon = iconUrl;
+        this.columns[colIndex].items[0].iconCls = iconCls;
     },
     
     createChangeTooltip: function(target) {

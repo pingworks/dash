@@ -65,21 +65,25 @@ Dash.config = {
             {
                 'id': 0,
                 'name': 'not running',
+                'cls' : 'unknown',
                 'icon': 'grey.png'
             },
             {
                 'id': 1,
                 'name': 'in progress',
+                'cls' : 'inprogress',
                 'icon': 'green-ani.gif'
             },
             {
                 'id': 2,
                 'name': 'failed',
+                'cls' : 'failed',
                 'icon': 'red.png'
             },
             {
                 'id': 3,
                 'name': 'success',
+                'cls' : 'success',
                 'icon': 'green.png'
             }
         ]
@@ -91,21 +95,25 @@ Dash.config = {
             {
                 'id': '-',
                 'name': 'not running',
+                'cls' : 'unknown',
                 'icon': 'grey.png'
             },
             {
                 'id': 'UNSTABLE',
                 'name': 'unstable',
+                'cls' : 'unstable',
                 'icon': 'yellow.png'
             },
             {
                 'id': 'FAILURE',
                 'name': 'failed',
+                'cls' : 'failed',
                 'icon': 'red.png'
             },
             {
                 'id': 'SUCCESS',
                 'name': 'success',
+                'cls' : 'success',
                 'icon': 'green.png'
             }
         ]
