@@ -24,7 +24,7 @@ Ext.define("Dash.view.BundleGrid", {
     id: 'BundleGrid',
     
     stageStatusIconRenderer: function(value, metadata, record, rowIndex, colIndex, store, view) {
-        var stageStatus = Dash.app.getController('Bundle').getStageStatus(record, colIndex - 2);
+        var stageStatus = Dash.app.getController('Bundle').getStageStatus(record, colIndex - 3);
         var iconUrl = Ext.BLANK_IMAGE_URL;
         var iconCls = '';
         if (stageStatus) {
@@ -52,14 +52,14 @@ Ext.define("Dash.view.BundleGrid", {
     initComponent: function() {
         var that = this;
         this.columns = [{
-            text: 'Bundle',
-            menuText: 'Bundle',
-            dataIndex: 'id',
-            renderer: function(value, metadata, record, rowIndex, colIndex, store, view) {
-                return ( Dash.config.bundlegrid.repolink && Dash.config.bundlegrid.repolink != '' )
-                    ? Ext.String.format(Dash.config.bundlegrid.repolink, record.get('branch'), record.get('id'))
-                    : record.get('id');
-            },
+            text: 'Erzeugt',
+            dataIndex: 'timestamp',
+            type: 'date',
+            renderer: Ext.util.Format.dateRenderer(Dash.config.bundlegrid.dateformat),
+            width: 180
+        }, {
+            text: 'Committer',
+            dataIndex: 'committer',
             width: 120
         }, {
             text: 'Revision',
@@ -71,11 +71,15 @@ Ext.define("Dash.view.BundleGrid", {
             },
             width: 90
         }, {
-            text: 'Erzeugt',
-            dataIndex: 'timestamp',
-            type: 'date',
-            renderer: Ext.util.Format.dateRenderer(Dash.config.bundlegrid.dateformat),
-            width: 180
+            text: 'Bundle',
+            menuText: 'Bundle',
+            dataIndex: 'id',
+            renderer: function(value, metadata, record, rowIndex, colIndex, store, view) {
+                return ( Dash.config.bundlegrid.repolink && Dash.config.bundlegrid.repolink != '' )
+                    ? Ext.String.format(Dash.config.bundlegrid.repolink, record.get('branch'), record.get('id'))
+                    : record.get('id');
+            },
+            width: 120
         }, {
             text: '1st',
             menuText: '1st',
@@ -154,15 +158,12 @@ Ext.define("Dash.view.BundleGrid", {
                 }
             }]
         }, {
-            text: 'Committer',
-            dataIndex: 'committer',
-            width: 120
-        }, {
             text: 'Deployment',
             xtype: 'actioncolumn',
             width: 60,
             flex: 1,
             items: [{
+                disabled: true,
                 icon: Dash.config.bundlegrid.icon.deploy,
                 handler: function(gridview, rowIndex, colIndex, item, event, record) {
                     console.log('Deploy ' + record.get('id'));
