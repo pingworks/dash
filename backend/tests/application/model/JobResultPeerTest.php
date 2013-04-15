@@ -18,13 +18,6 @@
 class Application_Model_JobResultPeerTest extends PHPUnit_Framework_TestCase
 {
 
-	public function setUp()
-	{
-		$this->bootstrap = new Zend_Application(APPLICATION_ENV, APPLICATION_PATH . '/configs/application.ini');
-		Zend_Registry::set("repodir", $this->bootstrap->getOption('repodir'));
-		parent::setUp();
-	}
-
 	public function testGetJobResults()
 	{
 		$data = Application_Model_JobResultPeer::getJobResults('branchA', '88.941106ff.2', 2);

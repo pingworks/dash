@@ -32,3 +32,7 @@ set_include_path(implode(PATH_SEPARATOR, array(
 
 require_once 'Zend/Loader/Autoloader.php';
 Zend_Loader_Autoloader::getInstance();
+
+$bootstrap = new Zend_Application(APPLICATION_ENV, APPLICATION_PATH . '/configs/application.ini');
+Zend_Registry::set("repodir", $bootstrap->getOption('repodir'));
+Zend_Registry::set("defaultbranch", $bootstrap->getOption('defaultbranch'));
