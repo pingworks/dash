@@ -14,29 +14,12 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-Ext.define("Dash.view.ToolTip", {
-    extend: 'Ext.tip.ToolTip',
-    closable: true,
-    autoHide: false,
-    anchor: 'left',
-    maxWidth: 1000,
-    dismissDelay: 1000,
+Ext.define("Dash.view.BottomToolbar", {
+    extend: 'Ext.toolbar.Toolbar',
+    alias: 'widget.bottomtoolbar',
     
-    onLoad: function(records, operation, success) {
-        if (records && records.length > 0 && success) {
-            this.updateTitleAndTextFromRecords(records, operation.params);
-        }
-        else {
-            this.showErrorMsg();
-        }
-    },
-    
-    updateTitleAndTextFromRecords: function() {
-    },
-    
-    showErrorMsg: function() {
-        this.setTitle(Dash.config.error.title);
-        this.update(Dash.config.error.msg);
-        this.show();
-    }
+    items: ['->', {
+	    xtype: 'component',
+	    html: '&copy; 2013 <a style="color: black" target="_blank" href="http://www.pingworks.de">pingworks</a> - Alexander Birk, Christoph Lukas'
+	}]
 });
