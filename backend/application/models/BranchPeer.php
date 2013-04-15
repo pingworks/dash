@@ -21,11 +21,23 @@ class Application_Model_BranchPeer
 	public static function getAllBranchIds()
 	{
 		$data = array();
+		$default = '';
 		foreach (new DirectoryIterator( Zend_Registry::get("repodir") ) as $directory)
 		{
 			if ( ! $directory->isDot() && $directory->isDir())
-				$data[] = $directory->getBasename();
+			{
+				$basename = $directory->getBasename();
+		 		if ($basename === Zend_Registry::get("defaultbranch"))
+		 		{
+		 			$default = $basename;
+		 		} else {
+					$data[] = $basename;
+		 		}
+			}
 		}
+		asort($data);
+		if ($default != '')
+			array_unshift($data, $default);
 		return $data;
 	}
 	
