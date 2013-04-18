@@ -28,13 +28,15 @@ describe("Dash.controller.Bundle -> onLoadBundles", function() {
             load: function() {}
         }
         bundleGridMock = {
-            setTitle: function() {}
+            setTitle: function() {},
+            fireEvent: function() {}
         }
         
         spyOn(ctrl, 'getBundlesStore').andReturn(bundlesStoreMock);
         spyOn(bundlesStoreMock, 'load');
         spyOn(ctrl, 'getBundleGrid').andReturn(bundleGridMock);
         spyOn(bundleGridMock, 'setTitle');
+        spyOn(bundleGridMock, 'fireEvent');
 
         ctrl.onLoadBundles('superbranch');
     });
@@ -51,6 +53,11 @@ describe("Dash.controller.Bundle -> onLoadBundles", function() {
     it("should update grid title", function() {
         expect(ctrl.getBundleGrid).toHaveBeenCalled();
         expect(bundleGridMock.setTitle).toHaveBeenCalledWith(Ext.String.format(Dash.config.bundlegrid.title, 'superbranch'));
+    });
+    
+    it("should hide all tooltips on reload",function(){
+        expect(ctrl.getBundleGrid).toHaveBeenCalled();
+        expect(bundleGridMock.fireEvent).toHaveBeenCalledWith('hideAllTooltips');
     });
     
 });
