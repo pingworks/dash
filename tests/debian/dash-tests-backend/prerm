@@ -1,0 +1,8 @@
+#!/bin/sh -e
+
+if [ "$1" != upgrade ]
+then
+    rm -f [[pkg.prefix]]/tests/backend/[[pkg.configdir]]
+fi
+
+exit 0

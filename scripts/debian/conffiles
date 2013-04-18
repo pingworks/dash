@@ -1,0 +1,8 @@
+/etc/[[name]]/artifacts.csv
+/etc/[[name]]/bundles.csv
+/etc/[[name]]/branches.csv
+/etc/[[name]]/configs.csv
+/etc/[[name]]/metakeys.csv
+/etc/[[name]]/repo-cleanup.csv
+/etc/[[name]]/repo.conf
+/etc/[[name]]/vcs.conf

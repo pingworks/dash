@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project name="dash" default="build">
+    <property name="build.dir" value="${basedir}/build"/>
+    <property name="package.prefix" value="/opt/dash"/>
+    <property name="cmd.dir" value="/opt/Sencha/Cmd/3.1.0.256"/>
+
+    <target name="package">
+        <subant target="package" >
+            <fileset dir="." includes="*/build.xml"/>
+            <propertyset>
+                <propertyref prefix="toplevel"/>
+            </propertyset>
+        </subant>
+    </target>
+</project>

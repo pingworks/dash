@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <project name="dash-backend" default=".help">
     <property name="build.dir" value="${basedir}/build"/>
+    <property name="pkg.configdir" value="application/configs"/>
+    <property name="pkg.configfile" value="application.ini"/>
+    <property name="pkg.prefix" value="/opt/dash"/>
 
     <target name="clean">
         <delete dir="${build.dir}"/>
@@ -26,16 +29,24 @@
             <filterset begintoken="[[" endtoken="]]">
                 <filter token="version" value="${version}"/>
                 <filter token="name" value="${ant.project.name}"/>
+                <filter token="pkg.configdir" value="${pkg.configdir}"/>
+                <filter token="pkg.configfile" value="${pkg.configfile}"/>
+                <filter token="pkg.prefix" value="${pkg.prefix}"/>
             </filterset>
         </copy>
         <deb destfile="${build.dir}/dash-backend.deb" control="${build.dir}/debian">
             <data src="${basedir}" type="directory">
-                <mapper type="perm" prefix="/opt/dash"/>
+                <mapper type="perm" prefix="${pkg.prefix}"/>
                 <include name="application/**"/>
                 <include name="public/rest.php"/>
                 <include name="public/.htaccess"/>
                 <exclude name="**/.svn"/>
+                <exclude name="**/.gitignore"/>
                 <exclude name="debian/**"/>
+                <exclude name="${pkg.configdir}/**"/>
+            </data>
+            <data src="${basedir}/${pkg.configdir}" type="directory">
+                <mapper type="perm" prefix="/etc/${ant.project.name}"/>
             </data>
         </deb>
     </target>

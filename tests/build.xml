@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <project name="dash-tests" default=".help">
     <property name="build.dir" value="${basedir}/build"/>
+    <property name="pkg.configdir" value="configs"/>
+    <property name="pkg.configfile" value="application.ini"/>
+    <property name="pkg.prefix" value="/opt/dash"/>
 
     <target name="clean">
         <delete dir="${build.dir}"/>
@@ -35,6 +38,9 @@
             <filterset begintoken="[[" endtoken="]]">
                 <filter token="version" value="${version}"/>
                 <filter token="name" value="${ant.project.name}"/>
+                <filter token="pkg.configdir" value="${pkg.configdir}"/>
+                <filter token="pkg.configfile" value="${pkg.configfile}"/>
+                <filter token="pkg.prefix" value="${pkg.prefix}"/>
             </filterset>
         </copy>
         <deb destfile="${build.dir}/dash-tests-backend.deb" control="${build.dir}/debian/dash-tests-backend">
@@ -42,7 +48,12 @@
                 <mapper type="perm" prefix="/opt/dash/tests"/>
                 <include name="backend/**"/>
                 <exclude name="**/.svn"/>
+                <exclude name="**/.gitignore"/>
                 <exclude name="debian/**"/>
+                <exclude name="backend/${pkg.configdir}/**"/>
+            </data>
+            <data src="${basedir}/backend/${pkg.configdir}" type="directory">
+                <mapper type="perm" prefix="/etc/${ant.project.name}-backend"/>
             </data>
         </deb>
         <deb destfile="${build.dir}/dash-tests-system.deb" control="${build.dir}/debian/dash-tests-system">
@@ -50,7 +61,12 @@
                 <mapper type="perm" prefix="/opt/dash/tests"/>
                 <include name="system/**"/>
                 <exclude name="**/.svn"/>
+                <exclude name="**/.gitignore"/>
                 <exclude name="debian/**"/>
+                <exclude name="system/${pkg.configdir}/**"/>
+            </data>
+            <data src="${basedir}/system/${pkg.configdir}" type="directory">
+                <mapper type="perm" prefix="/etc/${ant.project.name}-system"/>
             </data>
         </deb>
         <deb destfile="${build.dir}/dash-tests-data.deb" control="${build.dir}/debian/dash-tests-data">
@@ -58,6 +74,7 @@
                 <mapper type="perm" prefix="/opt/dash/tests"/>
                 <include name="data/**"/>
                 <exclude name="**/.svn"/>
+                <exclude name="**/.gitignore"/>
                 <exclude name="debian/**"/>
             </data>
         </deb>

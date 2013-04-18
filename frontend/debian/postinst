@@ -1,0 +1,12 @@
+#!/bin/sh -e
+
+if [ "$1" = configure ]
+then
+    lnk=[[pkg.prefix]]/[[pkg.configdir]]/[[pkg.configfile]]
+    dst=/etc/[[name]]/[[pkg.configfile]]
+    if [ ! -L $lnk ] && [ -f $dst ]; then
+        ln -s $dst $lnk 
+    fi
+fi
+
+exit 0

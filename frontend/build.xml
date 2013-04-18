@@ -39,6 +39,9 @@
             <target name="-after-build"/>
     -->
     <property name="build.dir" value="${basedir}/build"/>
+    <property name="pkg.configdir" value="public"/>
+    <property name="pkg.configfile" value="config.js"/>
+    <property name="pkg.prefix" value="/opt/dash"/>
 
     <target name="-after-page">
         <copy todir="${build.dir}/" overwrite="true">
@@ -64,12 +67,16 @@
             <filterset begintoken="[[" endtoken="]]">
                 <filter token="version" value="${version}"/>
                 <filter token="name" value="${ant.project.name}"/>
+                <filter token="pkg.configdir" value="${pkg.configdir}"/>
+                <filter token="pkg.configfile" value="${pkg.configfile}"/>
+                <filter token="pkg.prefix" value="${pkg.prefix}"/>
             </filterset>
         </copy>
         <deb destfile="${build.dir}/dash-frontend.deb" control="${build.dir}/debian">
             <data src="${build.dir}" type="directory">
                 <mapper type="perm" prefix="/opt/dash/public"/>
                 <exclude name="**/.svn"/>
+                <exclude name="**/.gitignore"/>
                 <exclude name=".sass-cache/**"/>
                 <exclude name="theme-capture.*"/>
                 <exclude name="Dash-*.scss"/>
@@ -78,6 +85,10 @@
                 <exclude name="reports/**"/>
                 <exclude name="resources/Readme.md"/>
                 <exclude name="resources/Dash-example.css"/>
+                <exclude name="${pkg.configfile}"/>
+            </data>
+            <data src="${build.dir}/${pkg.configfile}" type="file">
+                <mapper type="perm" prefix="/etc/${ant.project.name}"/>
             </data>
         </deb>
     </target>
