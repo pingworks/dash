@@ -29,22 +29,27 @@ Ext.define('Dash.controller.Bundle', {
         });
         
         // reloadTimer
-        var bundlesStore = this.getBundlesStore(); 
+        var ctrl = this;
         var reloadTask = Ext.TaskManager.start({
             run: function() {
-                bundlesStore.reload()
+                ctrl.onLoadBundles()
             },
             interval: Dash.config.bundlegrid.reload,
             fireOnStart: false
         });
     },
     onLoadBundles: function(branch) {
-        this.getBundlesStore().load({
-            params: {
-                branch: branch
-            }
-        });
+        if (branch) {
+	        this.getBundlesStore().load({
+	            params: {
+	                branch: branch
+	            }
+	        });
+        } else {
+            this.getBundlesStore().reload();
+        }
         this.getBundleGrid().setTitle(Ext.String.format(Dash.config.bundlegrid.title, branch));
+        this.getBundleGrid().fireEvent('hideAllTooltips');
     },
     getStageStatus: function(bundle, stage) {
         return bundle.getStageStatus(stage);

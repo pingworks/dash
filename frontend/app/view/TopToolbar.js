@@ -30,7 +30,7 @@ Ext.define("Dash.view.TopToolbar", {
             id: 'ReloadButton',
             icon: 'resources/img/icons/refresh.png',
             handler: function() {
-                Ext.StoreMgr.get('Bundles').reload();
+                this.findParentByType('toolbar').fireEvent('loadBundles');
             }
         }, {
             id: 'BranchButton',
