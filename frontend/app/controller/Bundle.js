@@ -45,10 +45,10 @@ Ext.define('Dash.controller.Bundle', {
 	                branch: branch
 	            }
 	        });
+            this.getBundleGrid().setTitle(Ext.String.format(Dash.config.bundlegrid.title, branch));
         } else {
             this.getBundlesStore().reload();
         }
-        this.getBundleGrid().setTitle(Ext.String.format(Dash.config.bundlegrid.title, branch));
         this.getBundleGrid().fireEvent('hideAllTooltips');
     },
     getStageStatus: function(bundle, stage) {

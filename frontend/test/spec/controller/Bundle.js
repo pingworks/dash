@@ -26,6 +26,7 @@ describe("Dash.controller.Bundle -> onLoadBundles", function() {
         
         bundlesStoreMock = {
             load: function() {}
+            reload: function() {}
         }
         bundleGridMock = {
             setTitle: function() {},
@@ -34,14 +35,16 @@ describe("Dash.controller.Bundle -> onLoadBundles", function() {
         
         spyOn(ctrl, 'getBundlesStore').andReturn(bundlesStoreMock);
         spyOn(bundlesStoreMock, 'load');
+        spyOn(bundlesStoreMock, 'reload');
         spyOn(ctrl, 'getBundleGrid').andReturn(bundleGridMock);
         spyOn(bundleGridMock, 'setTitle');
         spyOn(bundleGridMock, 'fireEvent');
 
-        ctrl.onLoadBundles('superbranch');
     });
     
     it("should load bundles",function(){
+        ctrl.onLoadBundles('superbranch');
+        
         expect(ctrl.getBundlesStore).toHaveBeenCalled();
         expect(bundlesStoreMock.load).toHaveBeenCalledWith({
             params: {
@@ -51,11 +54,22 @@ describe("Dash.controller.Bundle -> onLoadBundles", function() {
     });
     
     it("should update grid title", function() {
+        ctrl.onLoadBundles('superbranch');
+        
         expect(ctrl.getBundleGrid).toHaveBeenCalled();
         expect(bundleGridMock.setTitle).toHaveBeenCalledWith(Ext.String.format(Dash.config.bundlegrid.title, 'superbranch'));
     });
     
+    it("should not update grid title on reload", function() {
+        ctrl.onLoadBundles();
+        
+        expect(ctrl.getBundleGrid).toHaveBeenCalled();
+        expect(bundleGridMock.setTitle).not.toHaveBeenCalled();
+    });
+    
     it("should hide all tooltips on reload",function(){
+        ctrl.onLoadBundles('superbranch');
+
         expect(ctrl.getBundleGrid).toHaveBeenCalled();
         expect(bundleGridMock.fireEvent).toHaveBeenCalledWith('hideAllTooltips');
     });
