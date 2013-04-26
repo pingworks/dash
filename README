@@ -1,10 +1,65 @@
-Dash
-----
-Simple Dashboard to visualize Jenkins build pipeline results
+Dash                                 http://dash.pingworks.net
+---------------------------------------------------------------
 
+Dashboard zur Visualisierung von Testergebnissen aus Continuous 
+Delivery Pipelines
+
+Beim Einsatz von Continuous Delivery werden die Software Artefakte
+einer Reihe von automatischen Tests unterzogen, bevor diese zum
+Deployment in Produktion bereit stehen. 
+Die automatisierten Tests werden dabei in mehrstufigen Pipelines 
+organisiert, wobei jede Stufe ähnlich geartete Tests für die 
+verschiedenen Komponenten der Software durchführt. 
+In solchen Pipelines fallen eine Vielzahl von Testergebnissen an,
+über die die Entwickler nur schwer einen Überblick behalten können.
+
+Diese Anwendung soll die anfallenden Testergebnisse aggregieren 
+und visualisieren.
+
+Dazu kommen drei unterschiedliche Komponenten zum Einsatz:
+
+dash-scripts
+------------
+Mit Hilfe dieser Sammlung von einfachen Scripten können in der
+Pipeline neue Software-Bundles angelegt werden sowie Metainformation
+und Testergebnisse zu den einzelnen Bundles gespeichert werden.
+Jedes Software-Bundle besteht dabei aus den eigentlichen Artefakten
+und Metainformationen samt Testergebnissen in einer einfachen Ver-
+zeichnisstruktur:
+
+/data/repo
+        + trunk
+            + 2.1234.23
+                + artifacts
+                    + fobar.jar
+                    + app.rpm
+                + metadata
+                    + bundle (enthält "2.1234.23")
+                    + branch (enthält z.B. "trunk")
+                    + status (enthält z.B. "first_stage_passed",
+                              "second_stage_failed")
+                + bundle
+                    + full_bundle.tar.gz (tar.gz aus einem Subset
+                                          der Artefakte)
+                    + src_bundle.tar.gz
+
+Die Scripte sind Bash-Scripte, für das Auslesen von Infos aus dem 
+VCS stehen Varianten für Subversion und Git zur Verfügung. 
+
+dash-backend
+------------
+Ein in PHP geschriebenes JSON REST API zum Auslesen von Informationen 
+über einzelne Software-Bundles. Die PHP Anwendung nutzt das Zend-
+Framework [1] und liest die oben beschriebenen Metadaten aus dem Repo
+aus und liefert diese als JSON Daten an das Frontend.
+
+dash-frontend
+-------------
+Ein auf dem ExtJS Framework aufbauendes Frontend, das die Metadaten und 
+Testergebnisse der Software-Bundles visualisiert 
+ 
 
 http://dash.pingworks.net | dash@pingworks.de
-
 
 Copyright (C) 2013 Alexander Birk, Christoph Lukas
 
@@ -20,3 +75,7 @@ GNU General Public License for more details.
 
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+
+[1] http://framework.zend.com
+[2] http://sencha.com/products/extjs
