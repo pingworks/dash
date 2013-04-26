@@ -34,18 +34,25 @@
                 <filter token="pkg.prefix" value="${pkg.prefix}"/>
             </filterset>
         </copy>
+        <copy todir="${build.dir}/">
+            <fileset file="public/.htaccess"/>
+        </copy>
+        <move file="${build.dir}/.htaccess" tofile="${build.dir}/htaccess"/>
         <deb destfile="${build.dir}/dash-backend.deb" control="${build.dir}/debian">
             <data src="${basedir}" type="directory">
                 <mapper type="perm" prefix="${pkg.prefix}"/>
                 <include name="application/**"/>
                 <include name="public/rest.php"/>
-                <include name="public/.htaccess"/>
+                <exclude name="public/.htaccess"/>
                 <exclude name="**/.svn"/>
                 <exclude name="**/.gitignore"/>
                 <exclude name="debian/**"/>
                 <exclude name="${pkg.configdir}/**"/>
             </data>
             <data src="${basedir}/${pkg.configdir}" type="directory">
+                <mapper type="perm" prefix="/etc/${ant.project.name}"/>
+            </data>
+            <data src="${build.dir}/htaccess" type="file">
                 <mapper type="perm" prefix="/etc/${ant.project.name}"/>
             </data>
         </deb>

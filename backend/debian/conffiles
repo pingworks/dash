@@ -1,1 +1,2 @@
 /etc/[[name]]/[[pkg.configfile]]
+/etc/[[name]]/htaccess

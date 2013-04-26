@@ -7,6 +7,11 @@ then
     if [ ! -L $lnk ] && [ -d $dst ]; then
         ln -s $dst $lnk 
     fi
+    lnk=[[pkg.prefix]]/public/.htaccess
+    dst=/etc/[[name]]/htaccess
+    if [ ! -L $lnk ] && [ -f $dst ]; then
+        ln -s $dst $lnk 
+    fi
 fi
 
 exit 0
