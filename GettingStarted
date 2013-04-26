@@ -1,0 +1,116 @@
+Um mit der Dashboard Entwicklung zu starten braucht man:
+
+VM
+---
+Eine virtuelle Maschine zur Entwicklung. Unter Linux 
+reicht eine Container Virtualisierung völlig aus, 
+VirtualBox, VMWare oder KVM funktionieren aber genauso.
+
+
+Sourcen
+-------
+Die Sourcen in der VM mit
+
+cd /opt/app
+git clone https://github.com/pingworks/dash.git dash
+
+installiert werden. 
+
+
+Webserver
+---------
+In der VM muss ein Webserver installiert werden:
+
+apt-get install php5 php5-curl
+
+Die Apache Konfiguration könnte so aussehen:
+<VirtualHost *>
+  ServerName dash
+
+  # Dash
+  DocumentRoot /opt/dash/public
+  SetEnv APPLICATION_ENV "production"
+  <Directory /opt/dash/public>
+    AllowOverride All
+    Order allow,deny
+    Allow from all
+  </Directory>
+</VirtualHost>
+
+
+Sencha command
+--------------
+Für das Buildsystem braucht man das Sencha Command Line
+Tool von [1], eine Dokumentation dazu findet sich unter
+[2]. 
+ 
+
+Ant
+---
+Zur lokalen Durchführung eines Builds brauch man außerdem 
+ant:
+
+apt-get install ant
+
+
+Tests
+-----
+Zur Durchführung der Tests braucht man phpunit
+
+apt-get install phpunit
+
+Die Jasmine Tests brauchen phantomjs [3] als headless
+Webkit Engine.
+Die Seleniumtests brauchen zusätzlich eine Framebuffer
+X-Server und einen firefox:
+
+apt-get install xvfb iceweasel
+
+Zum Start des Selenium-Servers in Kombination mit dem 
+Framebuffer X-Server kann man hier [4] Informationen
+finden.
+
+Die Testdaten können über das Paket dash-tests-data 
+installiert werden. Mit einer zweiten Apache Konfiguration
+im APPLICATION_ENV "testing" werden die so installierten
+Testdaten automatisch benutzt:
+<VirtualHost *>
+ ServerName dash-test
+
+  DocumentRoot /opt/dash/public
+
+  SetEnv APPLICATION_ENV "testing"
+
+  <Directory /opt/dash/public>
+    AllowOverride All
+    Order allow,deny
+    Allow from all
+  </Directory>
+
+</VirtualHost>
+
+
+Build
+------
+Ein kompletter Build mit allen Tests Unittests kann im
+Toplevel Directory mit 
+
+ant package
+
+ausgeführt werden.
+Integrationstests können mit
+
+cd tests
+ant backendtest
+
+Systemtests mit
+
+cd tests
+ant systemtest
+
+durchgeführt werden.
+
+[1]: http://www.sencha.com/products/sencha-cmd/download
+[2]: http://docs.sencha.com/extjs/4.2.0/#!/guide/command
+[3]: http://phantomjs.org/
+[4]: https://github.com/generalredneck/headless-selenium
