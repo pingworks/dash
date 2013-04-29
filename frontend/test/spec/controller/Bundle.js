@@ -25,7 +25,7 @@ describe("Dash.controller.Bundle -> onLoadBundles", function() {
         }
         
         bundlesStoreMock = {
-            load: function() {}
+            load: function() {},
             reload: function() {}
         }
         bundleGridMock = {
