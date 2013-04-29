@@ -43,6 +43,12 @@
     <property name="pkg.configfile" value="config.js"/>
     <property name="pkg.prefix" value="/opt/dash"/>
 
+    <taskdef resource="net/sf/antcontrib/antcontrib.properties">
+        <classpath>
+            <pathelement location="/usr/share/java/ant-contrib.jar" />
+        </classpath>
+    </taskdef>
+
     <target name="-after-page">
         <copy todir="${build.dir}/" overwrite="true">
             <fileset 
@@ -62,6 +68,12 @@
 
     <target name="package" depends="clean,production,build,test">
         <taskdef name="deb" classname="org.vafer.jdeb.ant.DebAntTask"/>
+        <if>
+            <not><isset property="version" /></not>
+            <then>
+                <fail>Please supply a version number using -Dversion=1.2.3.4</fail>
+            </then>
+        </if>
         <copy todir="${build.dir}/debian">
             <fileset dir="debian"/>
             <filterset begintoken="[[" endtoken="]]">
@@ -72,7 +84,7 @@
                 <filter token="pkg.prefix" value="${pkg.prefix}"/>
             </filterset>
         </copy>
-        <deb destfile="${build.dir}/dash-frontend.deb" control="${build.dir}/debian">
+        <deb destfile="${build.dir}/dash-frontend_${version}_all.deb" control="${build.dir}/debian">
             <data src="${build.dir}" type="directory">
                 <mapper type="perm" prefix="/opt/dash/public"/>
                 <exclude name="**/.svn"/>

@@ -5,6 +5,12 @@
     <property name="pkg.configfile" value="application.ini"/>
     <property name="pkg.prefix" value="/opt/dash"/>
 
+    <taskdef resource="net/sf/antcontrib/antcontrib.properties">
+        <classpath>
+            <pathelement location="/usr/share/java/ant-contrib.jar" />
+        </classpath>
+    </taskdef>
+
     <target name="clean">
         <delete dir="${build.dir}"/>
     </target>
@@ -33,6 +39,12 @@
 
     <target name="package" depends="clean,build">
         <taskdef name="deb" classname="org.vafer.jdeb.ant.DebAntTask"/>
+        <if>
+            <not><isset property="version" /></not>
+            <then>
+                <fail>Please supply a version number using -Dversion=1.2.3.4</fail>
+            </then>
+        </if>
         <copy todir="${build.dir}/debian">
             <fileset dir="debian"/>
             <filterset begintoken="[[" endtoken="]]">
@@ -43,7 +55,7 @@
                 <filter token="pkg.prefix" value="${pkg.prefix}"/>
             </filterset>
         </copy>
-        <deb destfile="${build.dir}/dash-tests-backend.deb" control="${build.dir}/debian/dash-tests-backend">
+        <deb destfile="${build.dir}/dash-tests-backend_${version}_all.deb" control="${build.dir}/debian/dash-tests-backend">
             <data src="${basedir}" type="directory">
                 <mapper type="perm" prefix="/opt/dash/tests"/>
                 <include name="backend/**"/>
@@ -56,7 +68,7 @@
                 <mapper type="perm" prefix="/etc/${ant.project.name}-backend"/>
             </data>
         </deb>
-        <deb destfile="${build.dir}/dash-tests-system.deb" control="${build.dir}/debian/dash-tests-system">
+        <deb destfile="${build.dir}/dash-tests-system_${version}_all.deb" control="${build.dir}/debian/dash-tests-system">
             <data src="${basedir}" type="directory">
                 <mapper type="perm" prefix="/opt/dash/tests"/>
                 <include name="system/**"/>
@@ -69,7 +81,7 @@
                 <mapper type="perm" prefix="/etc/${ant.project.name}-system"/>
             </data>
         </deb>
-        <deb destfile="${build.dir}/dash-tests-data.deb" control="${build.dir}/debian/dash-tests-data">
+        <deb destfile="${build.dir}/dash-tests-data_${version}_all.deb" control="${build.dir}/debian/dash-tests-data">
             <data src="${basedir}" type="directory">
                 <mapper type="perm" prefix="/opt/dash/tests"/>
                 <include name="data/**"/>

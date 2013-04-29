@@ -4,6 +4,12 @@
     <property name="pkg.configdir" value="application/configs"/>
     <property name="pkg.configfile" value="application.ini"/>
     <property name="pkg.prefix" value="/opt/dash"/>
+    
+    <taskdef resource="net/sf/antcontrib/antcontrib.properties">
+        <classpath>
+            <pathelement location="/usr/share/java/ant-contrib.jar" />
+        </classpath>
+    </taskdef>
 
     <target name="clean">
         <delete dir="${build.dir}"/>
@@ -24,6 +30,12 @@
 
     <target name="package" depends="clean,build,test">
         <taskdef name="deb" classname="org.vafer.jdeb.ant.DebAntTask"/>
+        <if>
+            <not><isset property="version" /></not>
+            <then>
+                <fail>Please supply a version number using -Dversion=1.2.3.4</fail>
+            </then>
+        </if>
         <copy todir="${build.dir}/debian">
             <fileset dir="debian"/>
             <filterset begintoken="[[" endtoken="]]">
@@ -38,7 +50,7 @@
             <fileset file="public/.htaccess"/>
         </copy>
         <move file="${build.dir}/.htaccess" tofile="${build.dir}/htaccess"/>
-        <deb destfile="${build.dir}/dash-backend.deb" control="${build.dir}/debian">
+        <deb destfile="${build.dir}/dash-backend_${version}_all.deb" control="${build.dir}/debian">
             <data src="${basedir}" type="directory">
                 <mapper type="perm" prefix="${pkg.prefix}"/>
                 <include name="application/**"/>

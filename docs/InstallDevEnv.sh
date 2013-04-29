@@ -81,7 +81,7 @@ a2ensite dash-test
 /etc/init.d/apache2 restart
 
 # Sencha Build Tool
-apt-get install -y default-jre ant ruby rubygems
+apt-get install -y default-jre ant ant-contrib ruby rubygems
 cd /tmp/
 wget http://cdn.sencha.com/cmd/3.1.0.256/SenchaCmd-3.1.0.256-linux-x64.run.zip
 unzip SenchaCmd-3.1.0.256-linux-x64.run.zip

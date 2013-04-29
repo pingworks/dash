@@ -1,6 +1,6 @@
-frontend/build/dash-frontend.deb;dash-frontend.deb
-backend/build/dash-backend.deb;dash-backend.deb
-scripts/build/dash-scripts.deb;dash-scripts.deb
-tests/build/dash-tests-data.deb;dash-tests-data.deb
-tests/build/dash-tests-backend.deb;dash-tests-backend.deb
-tests/build/dash-tests-system.deb;dash-tests-system.deb
+frontend/build/dash-frontend_*_all.deb;
+backend/build/dash-backend_*_all.deb;
+scripts/build/dash-scripts_*_all.deb;
+tests/build/dash-tests-data_*_all.deb;
+tests/build/dash-tests-backend_*_all.deb;
+tests/build/dash-tests-system_*_all.deb;

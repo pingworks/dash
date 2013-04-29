@@ -75,7 +75,7 @@ Tool von [1], eine Dokumentation dazu findet sich unter
 Ant
 ---
 Zur lokalen Durchführung eines Builds brauch man außerdem 
-ant, ruby und rubygems oder compass.
+ant, ant-contrib, ruby und rubygems oder compass.
 
 
 Tests
