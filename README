@@ -1,4 +1,6 @@
-Dash                                 http://dash.pingworks.net
+Dash                              http://dash.pingworks.net
+                                  http://www.pingworks.de/dash
+                                  mailto:dash@pingworks.de
 ---------------------------------------------------------------
 
 Dashboard zur Visualisierung von Testergebnissen aus Continuous 
@@ -56,8 +58,13 @@ aus und liefert diese als JSON Daten an das Frontend.
 dash-frontend
 -------------
 Ein auf dem ExtJS Framework aufbauendes Frontend, das die Metadaten und 
-Testergebnisse der Software-Bundles visualisiert 
+Testergebnisse der Software-Bundles visualisiert.
  
+Entwicklungsumgebung
+--------------------
+Die nötigen Schritte zum Aufsetzen einer Entwicklungsumgebung sind in
+GettingStarted.txt und InstallDevEnv.sh im Ordner docs näher beschrieben.
+
 
 http://dash.pingworks.net | dash@pingworks.de
 

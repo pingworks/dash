@@ -6,6 +6,10 @@ Eine virtuelle Maschine zur Entwicklung. Unter Linux
 reicht eine Container Virtualisierung völlig aus, 
 VirtualBox, VMWare oder KVM funktionieren aber genauso.
 
+Für Debian / Ubuntu VMs haben wir die nötigen 
+Installationsbefehle im Script InstallDevEnv.sh
+zusammengestellt.
+
 
 Sourcen
 -------
@@ -19,22 +23,45 @@ installiert werden.
 
 Webserver
 ---------
-In der VM muss ein Webserver installiert werden:
+In der VM muss ein Webserver installiert werden. Dieser
+braucht Unterstützung für Rewriting und PHP.
 
-apt-get install php5 php5-curl
-
-Die Apache Konfiguration könnte so aussehen:
-<VirtualHost *>
-  ServerName dash
+Die Apache Konfiguration könnte für development so 
+aussehen:
+<VirtualHost *:80>
+  ServerName dash-dev
 
   # Dash
+  DocumentRoot /opt/app/dash/frontend
+  SetEnv APPLICATION_ENV "development"
+
+  <Directory /opt/app/dash/frontend>
+    RewriteEngine On
+    RewriteBase /
+    RewriteCond %{REQUEST_FILENAME} -s [OR]
+    RewriteCond %{REQUEST_FILENAME} -l [OR]
+    RewriteCond %{REQUEST_FILENAME} -d
+    RewriteRule ^.*$ - [NC,L]
+    RewriteRule ^.*$ rest.php [NC,L]
+  </Directory>
+    
+  Alias /rest.php /opt/app/dash/backend/public/rest.php
+</VirtualHost>
+
+Für production:
+<VirtualHost *:80>
+ ServerName dash
+
   DocumentRoot /opt/dash/public
+
   SetEnv APPLICATION_ENV "production"
+
   <Directory /opt/dash/public>
     AllowOverride All
     Order allow,deny
     Allow from all
   </Directory>
+
 </VirtualHost>
 
 
@@ -48,23 +75,17 @@ Tool von [1], eine Dokumentation dazu findet sich unter
 Ant
 ---
 Zur lokalen Durchführung eines Builds brauch man außerdem 
-ant:
-
-apt-get install ant
+ant, ruby und rubygems oder compass.
 
 
 Tests
 -----
-Zur Durchführung der Tests braucht man phpunit
-
-apt-get install phpunit
+Zur Durchführung der Tests braucht man phpunit.
 
 Die Jasmine Tests brauchen phantomjs [3] als headless
 Webkit Engine.
 Die Seleniumtests brauchen zusätzlich eine Framebuffer
-X-Server und einen firefox:
-
-apt-get install xvfb iceweasel
+X-Server und einen firefox.
 
 Zum Start des Selenium-Servers in Kombination mit dem 
 Framebuffer X-Server kann man hier [4] Informationen
