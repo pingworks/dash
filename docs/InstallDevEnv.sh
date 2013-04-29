@@ -80,8 +80,10 @@ a2ensite dash
 a2ensite dash-test
 /etc/init.d/apache2 restart
 
-# Sencha Build Tool
+# Build Tools
 apt-get install -y default-jre ant ant-contrib ruby rubygems
+cd /usr/share/ant/lib/
+wget http://repo1.maven.org/maven2/org/vafer/jdeb/1.0.1/jdeb-1.0.1.jar
 cd /tmp/
 wget http://cdn.sencha.com/cmd/3.1.0.256/SenchaCmd-3.1.0.256-linux-x64.run.zip
 unzip SenchaCmd-3.1.0.256-linux-x64.run.zip
@@ -92,7 +94,6 @@ rm SenchaCmd-3.1.0.256-linux-x64.run
 
 # Frontend build
 cd /opt/app/dash/frontend
-ln -s ../backend/public/.htaccess .
 ant build
 
 # Backend
@@ -102,8 +103,8 @@ apt-get install -y zendframework
 
 # Data
 cd /tmp/
-wget https://dash.pingworks.net/repo/master/1.026167c6.77/artifacts/dash-tests-data.deb
-dpkg -i dash-tests-data.deb
+wget https://dash.pingworks.net/repo/master/1.1c12bb9b.105/artifacts/dash-tests-data_1+git.1c12bb9b-105_all.deb
+dpkg -i dash-tests-data_*_all.deb
 
 ################################
 # You should now be able to open
@@ -119,7 +120,7 @@ tar xvfj /tmp/phantomjs-1.9.0-linux-x86_64.tar.bz2
 rm /tmp/phantomjs-1.9.0-linux-x86_64.tar.bz2
 
 # headless-selenium
-apt-get install xvfb iceweasel
+apt-get install -y xvfb iceweasel
 cd /opt
 git clone https://github.com/generalredneck/headless-selenium
 mv headless-selenium/headless-selenium /etc/init.d/
