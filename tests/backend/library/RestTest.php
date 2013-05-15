@@ -17,6 +17,16 @@
  */
 class RestTest extends PHPUnit_Framework_TestCase
 {
+	private function getMemoryFile($data)
+	{
+		$fp = fopen('php://temp/maxmemory:256000', 'w');
+		if (!$fp) {
+			throw new Exception('Could not open temp memory data.');
+		}
+		fwrite($fp, $data);
+		fseek($fp, 0);
+		return $fp;
+	}
 
 	/**
 	 * http://de2.php.net/manual/de/function.curl-exec.php#98628
@@ -39,6 +49,32 @@ class RestTest extends PHPUnit_Framework_TestCase
 	        CURLOPT_POSTFIELDS => http_build_query($post)
 	    );
 	
+	    $ch = curl_init();
+	    curl_setopt_array($ch, ($options + $defaults));
+	    if( ! $result = curl_exec($ch))
+	    {
+	        trigger_error(curl_error($ch));
+	    }
+	    curl_close($ch);
+	    return $result;
+	}
+	
+	protected function putRequest($url, $body = NULL, array $options = array())
+	{
+		
+		$defaults = array(
+	        CURLOPT_PUT => 1,
+	        CURLOPT_HEADER => 0,
+	        CURLOPT_URL => $url,
+	        CURLOPT_FRESH_CONNECT => 1,
+	        CURLOPT_RETURNTRANSFER => 1,
+	        CURLOPT_FORBID_REUSE => 1,
+	        CURLOPT_TIMEOUT => 4,
+	    	CURLOPT_BINARYTRANSFER => 1,
+	    	CURLOPT_INFILE => $this->getMemoryFile($body),
+	    	CURLOPT_INFILESIZE => strlen($body)
+	    );
+	    
 	    $ch = curl_init();
 	    curl_setopt_array($ch, ($options + $defaults));
 	    if( ! $result = curl_exec($ch))

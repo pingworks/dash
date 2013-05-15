@@ -1,0 +1,8 @@
+{
+    "id" : "testenv02",
+    "name" : "Test Env 02",
+    "domainname" : "testenv02.pingworks.net",
+    "locked" : false,
+    "by" : "",
+    "until" : ""
+}

@@ -1,0 +1,9 @@
+{
+    "id" : "testenv04",
+    "name" : "Test Env 04",
+    "domainname" : "testenv04.pingworks.net",
+    "locked" : true,
+    "by" : "cluk", 
+    "until" : "2010-05-24 12:12:12",
+    "bundle" : "1.a914d764.62"
+}

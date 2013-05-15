@@ -35,4 +35,5 @@ Zend_Loader_Autoloader::getInstance();
 
 $bootstrap = new Zend_Application(APPLICATION_ENV, APPLICATION_PATH . '/configs/application.ini');
 Zend_Registry::set("repodir", $bootstrap->getOption('repodir'));
+Zend_Registry::set("datadir", $bootstrap->getOption('datadir'));
 Zend_Registry::set("defaultbranch", $bootstrap->getOption('defaultbranch'));
