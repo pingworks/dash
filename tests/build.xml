@@ -83,8 +83,17 @@
         </deb>
         <deb destfile="${build.dir}/dash-tests-data_${version}_all.deb" control="${build.dir}/debian/dash-tests-data">
             <data src="${basedir}" type="directory">
+                <mapper type="perm" prefix="/opt/dash/tests" user="www-data" group="www-data" />
+                <include name="data/envs/**"/>
+                <exclude name="data/envs/backup/**"/>
+                <exclude name="**/.svn"/>
+                <exclude name="**/.gitignore"/>
+                <exclude name="debian/**"/>
+            </data>
+            <data src="${basedir}" type="directory">
                 <mapper type="perm" prefix="/opt/dash/tests"/>
-                <include name="data/**"/>
+                <include name="data/repo/**"/>
+                <include name="data/envs/backup/**"/>
                 <exclude name="**/.svn"/>
                 <exclude name="**/.gitignore"/>
                 <exclude name="debian/**"/>
