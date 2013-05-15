@@ -58,7 +58,14 @@ Dash.config = {
             field: 'timestamp',
             dir: 'DESC'
         },
-        reload: 300000 // 5 min
+        reload: 300000, // 5 min
+        deployment: {
+            enabled: false,
+            required: {
+                field: 'stage1',
+                value: 3
+            }
+        }
     },
     
     branch: {
@@ -145,6 +152,42 @@ Dash.config = {
             2: 'Second',
             3: 'Third'
         }
+    },
+    
+    environment: {
+        endpoint: '/environment',
+        dateformat: 'Y-m-d H:i:s'
+    },
+    
+    deployment: {
+        url: 'https://dash.pingworks.net/jenkins/job/deployment'
+    },
+    
+    lockduration: {
+        data: [
+            {
+                'id': '1',
+                'name': '1 Stunde'
+            }, {
+                'id': '2',
+                'name': '2 Stunden'
+            }, {
+                'id': '4',
+                'name': '4 Stunden'
+            }, {
+                'id': '8',
+                'name': '8 Stunden'
+            }, {
+                'id': '24',
+                'name': '1 Tag'
+            }, {
+                'id': '48',
+                'name': '2 Tage'
+            }, {
+                'id': '120',
+                'name': '5 Tage'
+            }
+        ] 
     },
     
     error: {

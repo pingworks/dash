@@ -35,6 +35,12 @@ Ext.define("Dash.view.BundleGrid", {
         this.columns[colIndex].items[0].iconCls = iconCls;
     },
     
+    deploymentActionRenderer: function(value, metadata, record, rowIndex, colIndex, store, view) {
+        var ctrl = Dash.app.getController('Deployment');
+        this.columns[colIndex].items[0].iconCls = 
+            ctrl.deploymentAllowed(record) ? '' : 'x-item-disabled';
+    },
+    
     createChangeTooltip: function(target, bundle) {
         return Ext.create('Dash.view.ChangeToolTip', {
             id: 'TTC-' + bundle.get('id').replace(/\./g, '-'),
@@ -163,12 +169,14 @@ Ext.define("Dash.view.BundleGrid", {
             width: 60,
             flex: 1,
             items: [{
-                disabled: true,
+                disabled: !Dash.config.bundlegrid.deployment.enabled,
                 icon: Dash.config.bundlegrid.icon.deploy,
                 handler: function(gridview, rowIndex, colIndex, item, event, record) {
-                    console.log('Deploy ' + record.get('id'));
+                    that.fireEvent('showDeployWindow', record);
                 }
-            }]
+            }],
+            renderer: this.deploymentActionRenderer,
+            scope: this
         }];
         this.callParent(arguments);
     }

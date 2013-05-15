@@ -41,7 +41,9 @@ Ext.application({
         'Change',
         'JobResult',
         'JobStatus',
-        'StageStatus'
+        'StageStatus',
+        'Environment',
+        'LockDuration'
     ],
 
     views: [
@@ -52,6 +54,7 @@ Ext.application({
         'ToolTip',
         'TopToolbar',
         'BottomToolbar',
+        'DeploymentWindow',
         'Viewport'
     ],
 
@@ -61,13 +64,16 @@ Ext.application({
         'Changes',
         'JobResults',
         'JobStatus',
-        'StageStatus'
+        'StageStatus',
+        'Environments',
+        'LockDurations'
     ],
 
     controllers: [
         'Bundle',
         'Change',
-        'JobResult'
+        'JobResult',
+        'Deployment'
     ],
 
     autoCreateViewport: true,
