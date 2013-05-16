@@ -15,7 +15,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 Ext.define('Dash.controller.Change', {
-    extend: 'Ext.app.Controller',
+    extend: 'Dash.controller.Base',
     stores: ['Changes'],
     refs: [{
         selector: 'bundlegrid',
@@ -27,6 +27,7 @@ Ext.define('Dash.controller.Change', {
                 loadChanges: this.onLoadChanges
             }
         });
+        this.callParent(arguments);
     },
     onLoadChanges: function(bundle, tooltip) {
         this.getBundleGrid().on('hideAllTooltips', function() {

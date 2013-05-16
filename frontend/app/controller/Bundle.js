@@ -15,7 +15,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 Ext.define('Dash.controller.Bundle', {
-    extend: 'Ext.app.Controller',
+    extend: 'Dash.controller.Base',
     stores: ['Bundles', 'StageStatus', 'Branches'],
     refs: [{
         selector: 'bundlegrid',
@@ -37,6 +37,7 @@ Ext.define('Dash.controller.Bundle', {
             interval: Dash.config.bundlegrid.reload,
             fireOnStart: false
         });
+        this.callParent(arguments);
     },
     onLoadBundles: function(branch) {
         if (branch) {

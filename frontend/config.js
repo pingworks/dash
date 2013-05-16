@@ -160,7 +160,8 @@ Dash.config = {
     },
     
     deployment: {
-        url: 'https://dash.pingworks.net/jenkins/job/deployment'
+        triggerUrl: 'http://dash.pingworks.net/jenkins/job/Deployment/buildWithParameters?token=foo',
+        showUrl: 'http://dash.pingworks.net/jenkins/job/Deployment/'
     },
     
     lockduration: {

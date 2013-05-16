@@ -15,7 +15,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 Ext.define('Dash.controller.JobResult', {
-    extend: 'Ext.app.Controller',
+    extend: 'Dash.controller.Base',
     stores: ['JobResults'],
     refs: [{
         selector: 'bundlegrid',
@@ -27,6 +27,7 @@ Ext.define('Dash.controller.JobResult', {
                 loadJobResult: this.onLoadJobResult
             }
         });
+        this.callParent(arguments);
     },
     onLoadJobResult: function(bundle, stage, tooltip) {
         this.getBundleGrid().on('hideAllTooltips', function() {

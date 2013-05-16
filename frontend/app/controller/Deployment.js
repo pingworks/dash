@@ -15,7 +15,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 Ext.define('Dash.controller.Deployment', {
-    extend: 'Ext.app.Controller',
+    extend: 'Dash.controller.Base',
     requires: ['Ext.form.field.ComboBox', 'Ext.form.field.Hidden'],
     stores: ['Environments'],
     refs: [{
@@ -36,6 +36,7 @@ Ext.define('Dash.controller.Deployment', {
                 deployment: this.onDeployment
             }
         });
+        this.callParent(arguments);
     },
     deploymentAllowed: function(bundle) {
         if (bundle) {
@@ -53,8 +54,6 @@ Ext.define('Dash.controller.Deployment', {
         }
     },
     onDeployment: function(bundle, values) {
-        console.log(bundle);
-        console.log(values);
         var environment = this.getEnvironmentsStore().findRecord('id', values.environment);
         environment.set('locked', true);
         var now = new Date();
@@ -65,23 +64,38 @@ Ext.define('Dash.controller.Deployment', {
         environment.set('bundle', bundle.get('id'));
         environment.save({
             success: this.onLockSaved,
-            failure: this.onError,
+            failure: this.onDeploymentError,
             scope: this
         });
     },
     onLockSaved: function(environment, operation, success) {
         Ext.Ajax.request({
-            url: Dash.config.deployment.url,
+            url: Dash.config.deployment.triggerUrl,
             params: environment.getData(),
             success: this.onDeploymentTriggered,
             failure: this.onError,
             scope: this
         });
     },
-    onDeploymentTriggered: function() {
+    onDeploymentTriggered: function(response, options) {
         this.getDeploymentWindow().destroy();
+        var window = Ext.create('Ext.window.Window', {
+                html: '<iframe src="' + Dash.config.deployment.showUrl + '" width="800px", height="600px"/>'
+            }).show();
     },
-    onError: function() {
-        console.log('Error');
+    onDeploymentError: function(response, options) {
+        if (response.status == 302) {
+            return this.onDeploymentTriggered(response, options);
+        }
+        return this.onError(response, options);
+    },
+    onError: function(response, options) {
+        console.log(response);
+        console.log(options);
+        var window = this.getDeploymentWindow();
+        if (window){
+            window.destroy();
+        }
+        this.callParent(arguments);
     }
 });
