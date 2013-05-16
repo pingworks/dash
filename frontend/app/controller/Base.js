@@ -28,11 +28,14 @@ Ext.define('Dash.controller.Base', {
     },
     onError: function(response, options) {
         var msg = 'Der Request zum Server ist fehlgeschlagen. <br />HTTP Status: ' + response.status;
-        var data = Ext.JSON.decode(response.responseText);
-        if (data.exception){
+        var data;
+        if (response.responseText != ''){
+            data = Ext.JSON.decode(response.responseText);
+        }
+        if (data && data.exception){
             msg += '<br /><br />Message: ' + data.exception;
         }
-        if (data.trace){
+        if (data && data.trace){
             msg += '<br /><br />Trace:'
             Ext.each(data.trace, function(call){
                 msg += '<br />' + call.file + ':' + call.line;
