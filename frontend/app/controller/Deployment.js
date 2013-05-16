@@ -87,11 +87,12 @@ Ext.define('Dash.controller.Deployment', {
         if (response.status == 302) {
             return this.onDeploymentTriggered(response, options);
         }
+        if (response.status == 0) {
+            return this.onDeploymentTriggered(response, options);
+        }
         return this.onError(response, options);
     },
     onError: function(response, options) {
-        console.log(response);
-        console.log(options);
         var window = this.getDeploymentWindow();
         if (window){
             window.destroy();
