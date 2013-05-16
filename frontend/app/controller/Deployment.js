@@ -64,7 +64,7 @@ Ext.define('Dash.controller.Deployment', {
         environment.set('bundle', bundle.get('id'));
         environment.save({
             success: this.onLockSaved,
-            failure: this.onDeploymentError,
+            failure: this.onError,
             scope: this
         });
     },
@@ -73,7 +73,7 @@ Ext.define('Dash.controller.Deployment', {
             url: Dash.config.deployment.triggerUrl,
             params: environment.getData(),
             success: this.onDeploymentTriggered,
-            failure: this.onError,
+            failure: this.onDeploymentError,
             scope: this
         });
     },
