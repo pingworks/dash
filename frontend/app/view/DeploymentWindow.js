@@ -17,18 +17,18 @@
 Ext.define("Dash.view.DeploymentWindow", {
     extend: 'Ext.window.Window',
     alias: 'widget.deploymentwindow',
-    requires: 'Ext.form.Panel',
+    requires: ['Ext.form.Panel','Ext.form.Checkbox'],
     
     id: 'DeploymentWindow',
     title: 'Deployment',
-    height: 200,
     width: 600,
     items: [{
         xtype: 'form',
         border: false,
         padding: 10,
         defaults: {
-            width: 500
+            width: 550,
+            labelWidth: 150
         },
         items: [{
 	        xtype: 'combobox',
@@ -43,7 +43,19 @@ Ext.define("Dash.view.DeploymentWindow", {
 	        allowBlank: false,
             validator: function(value) {
                 var record = this.getStore().findRecord('label', value);
-                return ! (record && record.get('locked'));
+                var overwriteField = this.findParentByType('form').getForm().findField('overwrite');
+                return (!record || !record.get('locked') || overwriteField.getValue());
+            }
+        }, {
+            xtype: 'checkbox',
+            name: 'overwrite',
+            fieldLabel: 'Lock überschreiben',
+            inputValue: 'overwrite',
+            listeners: {
+                'change' : function(){
+                    var environmentField = this.findParentByType('form').getForm().findField('environment');
+                    environmentField.validate();
+                }
             }
 	    }, {
 	        xtype: 'textfield',

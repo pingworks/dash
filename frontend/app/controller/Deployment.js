@@ -80,6 +80,7 @@ Ext.define('Dash.controller.Deployment', {
     onDeploymentTriggered: function(response, options) {
         this.getDeploymentWindow().destroy();
         var window = Ext.create('Ext.window.Window', {
+                id: 'DeploymentResultWindow',
                 html: '<iframe src="' + Dash.config.deployment.showUrl + '" width="800px", height="600px"/>'
             }).show();
     },
