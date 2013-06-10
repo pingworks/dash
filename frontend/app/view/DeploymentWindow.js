@@ -32,6 +32,7 @@ Ext.define("Dash.view.DeploymentWindow", {
         },
         items: [{
 	        xtype: 'combobox',
+            id: 'EnvironmentCombo',
             name: 'environment',
 	        fieldLabel: 'Environment',
 	        store: 'Environments',
@@ -45,9 +46,13 @@ Ext.define("Dash.view.DeploymentWindow", {
                 var record = this.getStore().findRecord('label', value);
                 var overwriteField = this.findParentByType('form').getForm().findField('overwrite');
                 return (!record || !record.get('locked') || overwriteField.getValue());
+            },
+            listConfig: {
+                id: 'EnvList'
             }
         }, {
             xtype: 'checkbox',
+            id: 'LockOverwrite',
             name: 'overwrite',
             fieldLabel: 'Lock überschreiben',
             inputValue: 'overwrite',
@@ -59,12 +64,14 @@ Ext.define("Dash.view.DeploymentWindow", {
             }
 	    }, {
 	        xtype: 'textfield',
+            id: 'Name',
             name: 'name',
             maxLength: 10,
 	        fieldLabel: 'Name',
             allowBlank: false
 	    }, {
 	        xtype: 'combobox',
+            id: 'Lock',
             name: 'lock',
 	        fieldLabel: 'Nutzungsdauer',
 	        store: 'LockDurations',
@@ -73,16 +80,21 @@ Ext.define("Dash.view.DeploymentWindow", {
 	        valueField: 'id',
 	        border: false,
 	        forceSelection: true,
-            allowBlank: false
+            allowBlank: false,
+            listConfig: {
+                id: 'LockList'
+            }
 	    }],
         bbar: ['->', {
             xtype: 'button',
+            id: 'Cancel',
             text: 'Abbrechen',
             handler: function(button, event){
                 button.findParentByType('window').destroy();
             }
         }, {
             xtype: 'button',
+            id: 'Deploy',
             text: 'Deploy',
             handler: function(button, event){
                 var form = button.findParentByType('form');

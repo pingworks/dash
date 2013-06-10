@@ -259,7 +259,7 @@ rm.addRollupRule({
     , getExpandedCommands: function(args) {
         var commands = [];
         commands.push({
-            command: 'assertNotElementPresent'
+            command: 'assertElementNotPresent'
             , target: 'css=#' + args.id + ' .x-grid-row:nth-child(' + args.row + ') > td:nth-child(' + args.col + ') > .x-grid-cell-inner > ' + args.elem
         });
         return commands;

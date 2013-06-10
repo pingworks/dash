@@ -44,16 +44,20 @@ Ext.define('Dash.controller.Deployment', {
 	        return ( Dash.config.bundlegrid.deployment.enabled 
 	            && Dash.config.bundlegrid.deployment.required.value == requiredFieldValue);
         }
+        return false;
     },
     onShowDeployWindow: function(bundle) {
         if (bundle && this.deploymentAllowed(bundle)) {
             this.getEnvironmentsStore().reload();
-            window = Ext.create('Dash.view.DeploymentWindow', {
+            var window = Ext.create('Dash.view.DeploymentWindow', {
                 bundle: bundle
             }).show();
         }
     },
     onDeployment: function(bundle, values) {
+        if (!bundle || !values || !values.environment) {
+            return false;
+        }
         var environment = this.getEnvironmentsStore().findRecord('id', values.environment);
         environment.set('locked', true);
         var now = new Date();
