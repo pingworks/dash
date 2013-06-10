@@ -25,6 +25,7 @@ class Application_Model_Environment
 	public $by;
 	public $until;
 	public $bundle;
+	public $urls;
 	
 	public function getFilename()
 	{
@@ -41,6 +42,7 @@ class Application_Model_Environment
 		$this->id = $environmentFromJson->id;
 		$this->name = $environmentFromJson->name;
 		$this->domainname = $environmentFromJson->domainname;
+		$this->urls = (property_exists($environmentFromJson, 'urls')) ? $environmentFromJson->urls : '';
 		$this->locked = (property_exists($environmentFromJson, 'locked')) ? $environmentFromJson->locked : 'false';
 		$this->by = (property_exists($environmentFromJson, 'by')) ? $environmentFromJson->by : '';
 		$this->until = (property_exists($environmentFromJson, 'until')) ? $environmentFromJson->until : '';
@@ -62,6 +64,7 @@ class Application_Model_Environment
 		$this->id = $clone->id;
 		$this->name = $clone->name;
 		$this->domainname = $clone->domainname;
+		$this->urls = $clone->urls;
 	}
 	
 	public function save()

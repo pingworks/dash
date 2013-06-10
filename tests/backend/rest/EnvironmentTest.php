@@ -32,11 +32,13 @@ class EnvironemtTest extends RestTest
 	{
 		parent::setUp();
 		foreach (new DirectoryIterator( Zend_Registry::get("datadir").'/backup' ) as $file)
+		{
 			if ( ! $file->isDot() && $file->isFile() && preg_match('/.json$/', $file->getFilename()) === 1)
 			{
 				copy($file->getPathname(), Zend_Registry::get("datadir") . '/' . $file->getFilename());
 				chmod(Zend_Registry::get("datadir") . '/' . $file->getFilename(), '0438');
 			}
+		}
 		
 		$this->expected01 = new stdClass();
 		$this->expected01->id = 'testenv01';
@@ -46,7 +48,14 @@ class EnvironemtTest extends RestTest
 		$this->expected01->by = 'cluk';
 		$this->expected01->until = '2020-05-24 12:12:12';
 		$this->expected01->bundle = '1.a914d764.62'; 
-
+		$url1 = new stdClass();
+		$url1->name = "Env 01 - App1";
+		$url1->url = "http://dash01.pingworks.net/app1"; 
+		$url2 = new stdClass();
+		$url2->name = "Env 01 - App2";
+		$url2->url = "http://dash01.pingworks.net/app2"; 
+		$this->expected01->urls = array($url1, $url2);
+				
 		$this->expected02 = new stdClass();
 		$this->expected02->id = 'testenv02';
 		$this->expected02->name = 'Test Env 02';
@@ -54,7 +63,8 @@ class EnvironemtTest extends RestTest
 		$this->expected02->locked = false;
 		$this->expected02->by = '';
 		$this->expected02->until = '';
-		$this->expected02->bundle = ''; 
+		$this->expected02->bundle = '';
+		$this->expected02->urls = ''; 
 		
 		$this->expected03 = new stdClass();
 		$this->expected03->id = 'testenv03';
@@ -64,6 +74,7 @@ class EnvironemtTest extends RestTest
 		$this->expected03->by = '';
 		$this->expected03->until = '';
 		$this->expected03->bundle = ''; 
+		$this->expected03->urls = '';
 		
 		$this->expected04 = new stdClass();
 		$this->expected04->id = 'testenv04';
@@ -72,7 +83,14 @@ class EnvironemtTest extends RestTest
 		$this->expected04->locked = false;
 		$this->expected04->by = '';
 		$this->expected04->until = '';
-		$this->expected04->bundle = '1.a914d764.62'; 
+		$this->expected04->bundle = '1.a914d764.62';
+		$url1 = new stdClass();
+		$url1->name = "Env 04 - App1";
+		$url1->url = "http://dash04.pingworks.net/app1"; 
+		$url2 = new stdClass();
+		$url2->name = "Env 04 - App2";
+		$url2->url = "http://dash04.pingworks.net/app2"; 
+		$this->expected04->urls = array($url1, $url2);
 	}
 	
 	public function testEnvironmentIndex()

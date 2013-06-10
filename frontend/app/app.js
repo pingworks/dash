@@ -55,6 +55,8 @@ Ext.application({
         'TopToolbar',
         'BottomToolbar',
         'DeploymentWindow',
+        'EnvironmentsWindow',
+        'EnvironmentGrid',
         'Viewport'
     ],
 
@@ -73,7 +75,8 @@ Ext.application({
         'Bundle',
         'Change',
         'JobResult',
-        'Deployment'
+        'Deployment',
+        'Environment'
     ],
 
     autoCreateViewport: true,

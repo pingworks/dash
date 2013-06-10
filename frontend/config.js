@@ -42,6 +42,12 @@ Dash.config = {
             id: 'RepoButton',
             text: 'Repo',
             url: 'https://dash.pingworks.net/repo/'
+        }, {
+            id: 'EnvButton',
+            text: 'Environments',
+            handler: function() {
+                this.findParentByType('toolbar').fireEvent('showEnvironmentsWindow');
+            }
         }]
     },
     
@@ -60,12 +66,17 @@ Dash.config = {
         },
         reload: 300000, // 5 min
         deployment: {
-            enabled: false,
+            enabled: true,
             required: {
                 field: 'stage1',
                 value: 3
             }
         }
+    },
+    
+    environmentgrid: {
+        dateformat: 'd.m.Y H:i:s',
+        envlink: '<a href="{0}" target="_blank" style="color: black">{1}</a>'
     },
     
     branch: {

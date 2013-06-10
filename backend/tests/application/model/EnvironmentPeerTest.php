@@ -36,7 +36,14 @@ class Application_Model_EnvironmentPeerTest extends PHPUnit_Framework_TestCase
 		$this->expected01->by = 'cluk';
 		$this->expected01->until = '2020-05-24 12:12:12';
 		$this->expected01->bundle = '1.a914d764.62'; 
-
+		$url1 = new stdClass();
+		$url1->name = "Env 01 - App1";
+		$url1->url = "http://dash01.pingworks.net/app1";
+		$url2 = new stdClass();
+		$url2->name = "Env 01 - App2";
+		$url2->url = "http://dash01.pingworks.net/app2";
+		$this->expected01->urls = array($url1, $url2);
+		
 		$this->expected02 = new Application_Model_Environment();
 		$this->expected02->id = 'testenv02';
 		$this->expected02->name = 'Test Env 02';
@@ -63,6 +70,13 @@ class Application_Model_EnvironmentPeerTest extends PHPUnit_Framework_TestCase
 		$this->expected04->by = '';
 		$this->expected04->until = '';
 		$this->expected04->bundle = '1.a914d764.62'; 
+		$url1 = new stdClass();
+		$url1->name = "Env 04 - App1";
+		$url1->url = "http://dash04.pingworks.net/app1"; 
+		$url2 = new stdClass();
+		$url2->name = "Env 04 - App2";
+		$url2->url = "http://dash04.pingworks.net/app2"; 
+		$this->expected04->urls = array($url1, $url2);
 	}
 
 	public function testGetEnvironmentFromJsonFile()

@@ -43,7 +43,8 @@ Ext.define('Dash.model.Environment', {
                 return record.get('name') + label;
             }
         },
-        { name: 'bundle', type: 'string' }
+        { name: 'bundle', type: 'string' },
+        { name: 'urls', type: 'auto' }
     ],
     proxy: {
         type: 'rest',
