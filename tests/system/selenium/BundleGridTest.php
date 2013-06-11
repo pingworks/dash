@@ -46,7 +46,11 @@ class BundleGridTest extends PHPUnit_Extensions_SeleniumTestCase
 			if ( ! $file->isDot() && $file->isFile() && preg_match('/.json$/', $file->getFilename()) === 1)
 			{
 				copy($file->getPathname(), Zend_Registry::get("datadir") . '/' . $file->getFilename());
-				chmod(Zend_Registry::get("datadir") . '/' . $file->getFilename(), '0438');
+							try
+				{
+					chmod(Zend_Registry::get("datadir") . '/' . $file->getFilename(), '0438');
+				} catch (Exception $e) {
+				}
 			}
 		}
 		
