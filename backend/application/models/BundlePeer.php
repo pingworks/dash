@@ -59,7 +59,7 @@ class Application_Model_BundlePeer
 		$data = array();
 		foreach (new DirectoryIterator( Zend_Registry::get("repodir") . '/' . $branch) as $directory)
 		{
-			if ( ! $directory->isDot() && $directory->isDir())
+			if ( ! $directory->isDot() && $directory->isDir() && ! $directory->isLink())
 				$data[] = $directory->getBasename();
 		}
 		return $data;
