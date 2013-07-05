@@ -78,7 +78,7 @@ Ext.define("Dash.view.EnvironmentGrid", {
             dataIndex: 'urls',
             type: 'string',
             renderer: this.urlRenderer,
-            width: 180
+            flex: 1
         }];
         this.callParent(arguments);
     }
