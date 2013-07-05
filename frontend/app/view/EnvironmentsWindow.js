@@ -23,10 +23,12 @@ Ext.define("Dash.view.EnvironmentsWindow", {
     title: 'Environments',
     width: 1000,
     height: 600,
+    layout: 'fit',
     items: [{
         xtype: 'panel',
         border: false,
         padding: 10,
+        layout: 'fit',
         items: [{
             xtype: 'environmentgrid'
         }]
