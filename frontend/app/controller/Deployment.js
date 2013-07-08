@@ -79,7 +79,9 @@ Ext.define('Dash.controller.Deployment', {
             url: Dash.config.deployment.triggerUrl,
             params: {
             	environment: environment.get('id'),
-            	content: environment.get('content')
+            	content: environment.get('content'),
+                bundle: environment.get('bundle'),
+                user: environment.get('by')
             },
             success: this.onDeploymentTriggered,
             failure: this.onDeploymentError,
