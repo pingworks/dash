@@ -27,7 +27,7 @@ class Application_Model_ContentPeer
 		$keys = array();
 		foreach (new DirectoryIterator( Zend_Registry::get("contentdir")) as $directory)
 		{
-			if ( ! $directory->isDot() && $directory->isDir() && ! $directory->isLink())
+			if ( ! $directory->isDot() && $directory->isDir() )
 			{
 				$entries[$directory->getBasename()] = self::getContentForVersion($directory->getBasename());
 				$keys[] = $directory->getBasename();
