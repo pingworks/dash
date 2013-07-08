@@ -55,7 +55,8 @@ class EnvironemtTest extends RestTest
 		$url2->name = "Env 01 - App2";
 		$url2->url = "http://dash01.pingworks.net/app2"; 
 		$this->expected01->urls = array($url1, $url2);
-				
+		$this->expected01->content = '';
+		
 		$this->expected02 = new stdClass();
 		$this->expected02->id = 'testenv02';
 		$this->expected02->name = 'Test Env 02';
@@ -65,6 +66,7 @@ class EnvironemtTest extends RestTest
 		$this->expected02->until = '';
 		$this->expected02->bundle = '';
 		$this->expected02->urls = ''; 
+		$this->expected02->content = '';
 		
 		$this->expected03 = new stdClass();
 		$this->expected03->id = 'testenv03';
@@ -75,6 +77,7 @@ class EnvironemtTest extends RestTest
 		$this->expected03->until = '';
 		$this->expected03->bundle = ''; 
 		$this->expected03->urls = '';
+		$this->expected03->content = '';
 		
 		$this->expected04 = new stdClass();
 		$this->expected04->id = 'testenv04';
@@ -91,6 +94,7 @@ class EnvironemtTest extends RestTest
 		$url2->name = "Env 04 - App2";
 		$url2->url = "http://dash04.pingworks.net/app2"; 
 		$this->expected04->urls = array($url1, $url2);
+		$this->expected04->content = '';
 	}
 	
 	public function testEnvironmentIndex()
