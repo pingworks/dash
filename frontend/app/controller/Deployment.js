@@ -17,7 +17,7 @@
 Ext.define('Dash.controller.Deployment', {
     extend: 'Dash.controller.Base',
     requires: ['Ext.form.field.ComboBox', 'Ext.form.field.Hidden'],
-    stores: ['Environments'],
+    stores: ['Environments', 'Contents'],
     refs: [{
         selector: 'bundlegrid',
         ref: 'bundleGrid'
@@ -48,7 +48,8 @@ Ext.define('Dash.controller.Deployment', {
     },
     onShowDeployWindow: function(bundle) {
         if (bundle && this.deploymentAllowed(bundle)) {
-            this.getEnvironmentsStore().reload();
+        	this.getEnvironmentsStore().reload();
+        	this.getContentsStore().reload();
             var window = Ext.create('Dash.view.DeploymentWindow', {
                 bundle: bundle
             }).show();
@@ -66,6 +67,7 @@ Ext.define('Dash.controller.Deployment', {
         environment.set('until', Ext.util.Format.date(lockUntil, dateFormat));
         environment.set('by', values.name);
         environment.set('bundle', bundle.get('id'));
+        environment.set('content', values.content);
         environment.save({
             success: this.onLockSaved,
             failure: this.onError,
@@ -75,7 +77,10 @@ Ext.define('Dash.controller.Deployment', {
     onLockSaved: function(environment, operation, success) {
         Ext.Ajax.request({
             url: Dash.config.deployment.triggerUrl,
-            params: environment.getData(),
+            params: {
+            	environment: environment.get('id'),
+            	content: environment.get('content')
+            },
             success: this.onDeploymentTriggered,
             failure: this.onDeploymentError,
             scope: this

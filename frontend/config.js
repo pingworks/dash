@@ -93,6 +93,10 @@ Dash.config = {
         title: 'Änderungen in Bundle {0}' 
     },
     
+    content: {
+        endpoint: '/content',
+    },
+    
     stagestatus: {
         iconpath: 'resources/img/icons/status/{0}',
         data: [
@@ -172,7 +176,14 @@ Dash.config = {
     
     deployment: {
         triggerUrl: '/jenkins/job/Deployment/buildWithParameters?token=Omi7foh4gu7d',
-        showUrl: '/jenkins/job/Deployment/'
+        showUrl: '/jenkins/job/Deployment/',
+        features: {
+        	content: {
+        		enabled: false,
+        		label: 'Content',
+        		emptyText: 'no deployment this time'
+        	} 
+        }
     },
     
     lockduration: {

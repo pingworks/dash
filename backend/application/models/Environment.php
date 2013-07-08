@@ -26,6 +26,7 @@ class Application_Model_Environment
 	public $until;
 	public $bundle;
 	public $urls;
+	public $content;
 	
 	public function getFilename()
 	{
@@ -47,6 +48,7 @@ class Application_Model_Environment
 		$this->by = (property_exists($environmentFromJson, 'by')) ? $environmentFromJson->by : '';
 		$this->until = (property_exists($environmentFromJson, 'until')) ? $environmentFromJson->until : '';
 		$this->bundle = (property_exists($environmentFromJson, 'bundle')) ? $environmentFromJson->bundle : '';
+		$this->content = (property_exists($environmentFromJson, 'content')) ? $environmentFromJson->content : '';
 	}
 	
 	public function reload()

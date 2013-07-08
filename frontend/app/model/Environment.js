@@ -44,7 +44,8 @@ Ext.define('Dash.model.Environment', {
             }
         },
         { name: 'bundle', type: 'string' },
-        { name: 'urls', type: 'auto' }
+        { name: 'urls', type: 'auto' },
+        { name: 'content', type: 'string'}
     ],
     proxy: {
         type: 'rest',

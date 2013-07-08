@@ -62,7 +62,21 @@ Ext.define("Dash.view.DeploymentWindow", {
                     environmentField.validate();
                 }
             }
-	    }, {
+        }, {
+        	xtype: 'combobox',
+            id: 'ContentCombo',
+            name: 'content',
+	        fieldLabel: Dash.config.deployment.features.content.label,
+	        store: 'Contents',
+	        queryMode: 'local',
+	        displayField: 'version',
+	        valueField: 'id',
+	        border: false,
+	        forceSelection: true,
+	        allowBlank: false,
+	        hidden: ! Dash.config.deployment.features.content.enabled,
+	        emptyText: Dash.config.deployment.features.content.emptyText
+        }, {
 	        xtype: 'textfield',
             id: 'Name',
             name: 'name',

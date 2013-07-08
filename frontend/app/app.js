@@ -38,6 +38,7 @@ Ext.application({
     models:[
         'Branch',
         'Bundle',
+        'Content',
         'Change',
         'JobResult',
         'JobStatus',
@@ -63,6 +64,7 @@ Ext.application({
     stores: [
         'Branches',
         'Bundles',
+        'Contents',
         'Changes',
         'JobResults',
         'JobStatus',
