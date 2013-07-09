@@ -50,7 +50,8 @@ Ext.define("Dash.view.EnvironmentGrid", {
             text: 'Domainname',
             dataIndex: 'domainname',
             type: 'string',
-            width: 180
+            width: 180,
+            hidden: true
         }, {
             text: 'belegt',
             dataIndex: 'locked',
