@@ -73,7 +73,7 @@ Ext.define("Dash.view.DeploymentWindow", {
 	        valueField: 'id',
 	        border: false,
 	        forceSelection: true,
-	        allowBlank: false,
+	        allowBlank: true,
 	        hidden: ! Dash.config.deployment.features.content.enabled,
 	        emptyText: Dash.config.deployment.features.content.emptyText
         }, {
