@@ -94,7 +94,7 @@ Dash.config = {
     },
     
     content: {
-        endpoint: '/content',
+        endpoint: '/content'
     },
     
     stagestatus: {
