@@ -94,6 +94,7 @@
                 <mapper type="perm" prefix="/opt/dash/tests"/>
                 <include name="data/repo/**"/>
                 <include name="data/envs/backup/**"/>
+                <include name="data/content/**"/>
                 <exclude name="**/.svn"/>
                 <exclude name="**/.gitignore"/>
                 <exclude name="debian/**"/>
