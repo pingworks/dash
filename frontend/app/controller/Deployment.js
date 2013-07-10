@@ -48,7 +48,12 @@ Ext.define('Dash.controller.Deployment', {
     },
     onShowDeployWindow: function(bundle) {
         if (bundle && this.deploymentAllowed(bundle)) {
+            Ext.WindowManager.each(function(win){
+                win.destroy();
+            });
         	this.getEnvironmentsStore().reload();
+            this.getEnvironmentsStore().clearFilter(true);
+            this.getEnvironmentsStore().filter('deployable', true);
         	this.getContentsStore().reload();
             var window = Ext.create('Dash.view.DeploymentWindow', {
                 bundle: bundle

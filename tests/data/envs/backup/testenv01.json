@@ -2,6 +2,7 @@
     "id" : "testenv01",
     "name" : "Test Env 01",
     "domainname" : "testenv01.pingworks.net",
+    "deployable" : true,
     "locked" : true,
     "by" : "cluk", 
     "until" : "2020-05-24 12:12:12",

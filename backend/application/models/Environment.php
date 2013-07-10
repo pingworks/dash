@@ -21,6 +21,7 @@ class Application_Model_Environment
 	public $id;
 	public $name;
 	public $domainname;
+	public $deployable; 
 	public $locked;
 	public $by;
 	public $until;
@@ -43,6 +44,7 @@ class Application_Model_Environment
 		$this->id = $environmentFromJson->id;
 		$this->name = $environmentFromJson->name;
 		$this->domainname = $environmentFromJson->domainname;
+		$this->deployable = (property_exists($environmentFromJson, 'deployable')) ? $environmentFromJson->deployable : '';
 		$this->urls = (property_exists($environmentFromJson, 'urls')) ? $environmentFromJson->urls : '';
 		$this->locked = (property_exists($environmentFromJson, 'locked')) ? $environmentFromJson->locked : 'false';
 		$this->by = (property_exists($environmentFromJson, 'by')) ? $environmentFromJson->by : '';
@@ -66,6 +68,7 @@ class Application_Model_Environment
 		$this->id = $clone->id;
 		$this->name = $clone->name;
 		$this->domainname = $clone->domainname;
+		$this->deployable = $clone->deployable;
 		$this->urls = $clone->urls;
 	}
 	

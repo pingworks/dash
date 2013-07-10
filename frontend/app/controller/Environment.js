@@ -31,7 +31,11 @@ Ext.define('Dash.controller.Environment', {
         this.callParent(arguments);
     },
     onShowEnvironmentsWindow: function() {
+        Ext.WindowManager.each(function(win){
+            win.destroy();
+        });
         this.getEnvironmentsStore().reload();
+        this.getEnvironmentsStore().clearFilter(true);
         window = Ext.create('Dash.view.EnvironmentsWindow').show();
     },
     onError: function(response, options) {

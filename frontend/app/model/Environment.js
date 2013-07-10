@@ -21,6 +21,7 @@ Ext.define('Dash.model.Environment', {
         { name: 'id', type: 'string' },
         { name: 'name', type: 'string' },
         { name: 'domainname', type: 'string' },
+        { name: 'deployable', type: 'boolean' },
         { name: 'locked', type: 'boolean' },
         { name: 'by', type: 'string' },
         { 

@@ -85,8 +85,13 @@ describe("Dash.controller.Deployment -> onShowDeployWindow", function() {
 
         envStoreMock = {
             load: function() {},
-            reload: function() {}
+            reload: function() {},
+            filter: function() {},
+            clearFilter: function() {}
         }
+        spyOn(envStoreMock, 'reload').andReturn(true);
+        spyOn(envStoreMock, 'filter').andReturn(true);
+        spyOn(envStoreMock, 'clearFilter').andReturn(true);
 
         spyOn(ctrl, 'getEnvironmentsStore').andReturn(envStoreMock);
         
@@ -114,6 +119,9 @@ describe("Dash.controller.Deployment -> onShowDeployWindow", function() {
     
     it("should show deployment window",function(){
         ctrl.onShowDeployWindow(bundleMock);
+        expect(envStoreMock.reload).toHaveBeenCalled();
+        expect(envStoreMock.clearFilter).toHaveBeenCalled();
+        expect(envStoreMock.filter).toHaveBeenCalled();
         expect(Ext.create).toHaveBeenCalledWith('Dash.view.DeploymentWindow', { bundle: bundleMock });
         expect(windowMock.show).toHaveBeenCalled();
     });

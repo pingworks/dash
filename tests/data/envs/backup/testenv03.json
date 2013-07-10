@@ -2,6 +2,7 @@
     "id" : "testenv03",
     "name" : "Test Env 03",
     "domainname" : "testenv03.pingworks.net",
+    "deployable" : true,
     "locked" : false,
     "by" : "",
     "until" : ""
