@@ -66,6 +66,16 @@ class EnvironmentController extends Zend_Rest_Controller
 		$id = $this->_getParam('id');
 		
 		$environment = Application_Model_EnvironmentPeer::getEnvironmentFromJsonFile('php://input');
+		$envConfig = $this->getInvokeArg('bootstrap')->getOption('environment'); 
+		if (is_array($envConfig) && array_key_exists('addUsernameFromEnv', $envConfig)) 
+		{
+			if ($envConfig['addUsernameFromEnv'] != '' && getenv($envConfig['addUsernameFromEnv']) != '')
+			{
+				if ($environment->by != getenv($envConfig['addUsernameFromEnv'])) {
+					$environment->by .= ' ('.getenv($envConfig['addUsernameFromEnv']).')';
+				}
+			}
+		}
 		$environment->save();
 		
 		$data = $this->getEmptyResult();
