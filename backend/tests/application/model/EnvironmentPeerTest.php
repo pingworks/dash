@@ -32,6 +32,7 @@ class Application_Model_EnvironmentPeerTest extends PHPUnit_Framework_TestCase
 		$this->expected01->id = 'testenv01';
 		$this->expected01->name = 'Test Env 01';
 		$this->expected01->domainname = 'testenv01.pingworks.net';
+		$this->expected01->deployable = true;
 		$this->expected01->locked = true;
 		$this->expected01->by = 'cluk';
 		$this->expected01->until = '2020-05-24 12:12:12';
@@ -48,6 +49,7 @@ class Application_Model_EnvironmentPeerTest extends PHPUnit_Framework_TestCase
 		$this->expected02->id = 'testenv02';
 		$this->expected02->name = 'Test Env 02';
 		$this->expected02->domainname = 'testenv02.pingworks.net';
+		$this->expected02->deployable = true;
 		$this->expected02->locked = false;
 		$this->expected02->by = '';
 		$this->expected02->until = '';
@@ -57,6 +59,7 @@ class Application_Model_EnvironmentPeerTest extends PHPUnit_Framework_TestCase
 		$this->expected03->id = 'testenv03';
 		$this->expected03->name = 'Test Env 03';
 		$this->expected03->domainname = 'testenv03.pingworks.net';
+		$this->expected03->deployable = true;
 		$this->expected03->locked = false;
 		$this->expected03->by = '';
 		$this->expected03->until = '';
@@ -66,6 +69,7 @@ class Application_Model_EnvironmentPeerTest extends PHPUnit_Framework_TestCase
 		$this->expected04->id = 'testenv04';
 		$this->expected04->name = 'Test Env 04';
 		$this->expected04->domainname = 'testenv04.pingworks.net';
+		$this->expected04->deployable = false;
 		$this->expected04->locked = false;
 		$this->expected04->by = '';
 		$this->expected04->until = '';
