@@ -32,6 +32,11 @@ Ext.define('Dash.controller.Deployment', {
             }
         });
         this.control({
+            'toptoolbar': {
+                hideDeployWindow: this.onHideDeployWindow
+            }
+        });
+        this.control({
             'deploymentwindow': {
                 deployment: this.onDeployment
             }
@@ -48,9 +53,6 @@ Ext.define('Dash.controller.Deployment', {
     },
     onShowDeployWindow: function(bundle) {
         if (bundle && this.deploymentAllowed(bundle)) {
-            Ext.WindowManager.each(function(win){
-                win.destroy();
-            });
         	this.getEnvironmentsStore().reload();
             this.getEnvironmentsStore().clearFilter(true);
             this.getEnvironmentsStore().filter('deployable', true);
@@ -59,6 +61,10 @@ Ext.define('Dash.controller.Deployment', {
                 bundle: bundle
             }).show();
         }
+    },
+    onHideDeployWindow: function() {
+        var win = this.getDeploymentWindow()
+        win && win.destroy();
     },
     onDeployment: function(bundle, values) {
         if (!bundle || !values || !values.environment) {
@@ -110,10 +116,7 @@ Ext.define('Dash.controller.Deployment', {
         return this.onError(response, options);
     },
     onError: function(response, options) {
-        var window = this.getDeploymentWindow();
-        if (window){
-            window.destroy();
-        }
+        this.onHideDeployWindow();
         this.callParent(arguments);
     }
 });

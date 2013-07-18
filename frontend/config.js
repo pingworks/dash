@@ -46,6 +46,7 @@ Dash.config = {
             id: 'EnvButton',
             text: 'Environments',
             handler: function() {
+                this.findParentByType('toolbar').fireEvent('hideDeployWindow');
                 this.findParentByType('toolbar').fireEvent('showEnvironmentsWindow');
             }
         }]

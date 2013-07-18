@@ -28,21 +28,24 @@ Ext.define('Dash.controller.Environment', {
                 showEnvironmentsWindow: this.onShowEnvironmentsWindow
             }
         });
+        this.control({
+            'bundlegrid': {
+                hideEnvironmentsWindow: this.onHideEnvironmentsWindow
+            }
+        });
         this.callParent(arguments);
     },
     onShowEnvironmentsWindow: function() {
-        Ext.WindowManager.each(function(win){
-            win.destroy();
-        });
         this.getEnvironmentsStore().reload();
         this.getEnvironmentsStore().clearFilter(true);
         window = Ext.create('Dash.view.EnvironmentsWindow').show();
     },
+    onHideEnvironmentsWindow: function() {
+        var win = this.getEnvironmentsWindow()
+        win && win.destroy();
+    },
     onError: function(response, options) {
-        var window = this.getDeploymentWindow();
-        if (window){
-            window.destroy();
-        }
+        this.onHideEnvironmentsWindow();
         this.callParent(arguments);
     }
 });

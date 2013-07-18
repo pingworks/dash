@@ -172,6 +172,7 @@ Ext.define("Dash.view.BundleGrid", {
                 disabled: !Dash.config.bundlegrid.deployment.enabled,
                 icon: Dash.config.bundlegrid.icon.deploy,
                 handler: function(gridview, rowIndex, colIndex, item, event, record) {
+                    that.fireEvent('hideEnvironmentsWindow');
                     that.fireEvent('showDeployWindow', record);
                 }
             }],
