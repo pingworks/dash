@@ -63,6 +63,13 @@ Ext.define("Dash.view.DeploymentWindow", {
                 }
             }
         }, {
+            xtype: 'checkbox',
+            id: 'DBReset',
+            name: 'dbreset',
+            fieldLabel: Dash.config.deployment.features.dbreset.label,
+            inputValue: true,
+            hidden: ! Dash.config.deployment.features.dbreset.enabled
+        }, {
         	xtype: 'combobox',
             id: 'ContentCombo',
             name: 'content',

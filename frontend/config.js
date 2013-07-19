@@ -183,7 +183,11 @@ Dash.config = {
         		enabled: false,
         		label: 'Content',
         		emptyText: 'no deployment this time'
-        	} 
+            },
+            dbreset: {
+                enabled: false,
+                label: 'Database Reset'
+            } 
         }
     },
     

@@ -78,7 +78,10 @@ Ext.define('Dash.controller.Deployment', {
         environment.set('until', Ext.util.Format.date(lockUntil, dateFormat));
         environment.set('by', values.name);
         environment.set('bundle', bundle.get('id'));
-        environment.set('content', values.content);
+        environment.set('dbreset', values.dbreset);
+        if (values.content != '') {
+            environment.set('content', values.content);
+        }
         environment.save({
             success: this.onLockSaved,
             failure: this.onError,
@@ -91,6 +94,7 @@ Ext.define('Dash.controller.Deployment', {
             params: {
             	environment: environment.get('id'),
             	content: environment.get('content'),
+                dbreset: environment.get('dbreset'),
                 bundle: environment.get('bundle'),
                 user: environment.get('by')
             },
