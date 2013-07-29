@@ -79,9 +79,7 @@ Ext.define('Dash.controller.Deployment', {
         environment.set('by', values.name);
         environment.set('bundle', bundle.get('id'));
         environment.set('dbreset', values.dbreset);
-        if (values.content != '') {
-            environment.set('content', values.content);
-        }
+        environment.set('content', values.content);
         environment.save({
             success: this.onLockSaved,
             failure: this.onError,

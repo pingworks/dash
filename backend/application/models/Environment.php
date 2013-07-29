@@ -70,6 +70,9 @@ class Application_Model_Environment
 		$this->domainname = $clone->domainname;
 		$this->deployable = $clone->deployable;
 		$this->urls = $clone->urls;
+		# Do not overwrite content with empty value
+		if ($this->content == '')
+			$this->content = $clone->content;
 	}
 	
 	public function save()
