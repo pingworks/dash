@@ -66,6 +66,7 @@ class EnvironmentController extends Zend_Rest_Controller
 		$id = $this->_getParam('id');
 		
 		$environment = Application_Model_EnvironmentPeer::getEnvironmentFromJsonFile('php://input');
+		$content = $environment->content;
 		$envConfig = $this->getInvokeArg('bootstrap')->getOption('environment'); 
 		if (is_array($envConfig) && array_key_exists('addUsernameFromEnv', $envConfig)) 
 		{
@@ -79,7 +80,9 @@ class EnvironmentController extends Zend_Rest_Controller
 		$environment->save();
 		
 		$data = $this->getEmptyResult();
-		$data['results'] = Application_Model_EnvironmentPeer::getEnvironment($id);
+		$environment = Application_Model_EnvironmentPeer::getEnvironment($id);
+		$environment->content = $content;
+		$data['results'] = $environment;
 		$this->getResponse()->setBody(json_encode($data));
 		$this->getResponse()->setHttpResponseCode(200);
 	}
