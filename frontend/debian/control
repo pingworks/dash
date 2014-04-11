@@ -3,7 +3,7 @@ Version: [[version]]
 Section: misc
 Priority: optional
 Architecture: all
-Source: https://dash.pingworks.net/git
+Source: [[name]]
 Homepage: https://dash.pingworks.net
 Vcs-Browser: https://dash.pingworks.net/git
 Vcs-Git: https://dash.pingworks.net/git/repo/dash.git 
