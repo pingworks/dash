@@ -74,13 +74,7 @@ class Application_Model_BundlePeer
 		}
 		$bundle = new Application_Model_Bundle();
 		$bundle->id = $id;
-
 		$bundle->branch = self::getMetadata($branch, $id, 'branch');
-		$bundle->branch_id = self::getMetadata($branch, $id, 'branch_id');
-		if ($bundle->branch_id === 'Unavailable') {
-			$bundle->branch_id = $bundle->branch;
-		}
-
 		$bundle->revision = self::getMetadata($branch, $id, 'revision');
 		$bundle->timestamp = self::getMetadata($branch, $id, 'timestamp');
 		$bundle->committer = self::getMetadata($branch, $id, 'committer');

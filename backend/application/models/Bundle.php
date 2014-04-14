@@ -20,7 +20,6 @@ class Application_Model_Bundle
 {
 	public $id;
 	public $branch;
-	public $branch_id;
 	public $revision;
 	public $stage1;
 	public $stage2;
