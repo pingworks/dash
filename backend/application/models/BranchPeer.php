@@ -40,6 +40,23 @@ class Application_Model_BranchPeer
 		return $data;
 	}
 	
+	/* FIXME: add support for branch specific metadata */
+	private static function findBranchNameInBundleMetadata($branchDir, $fallbackName)
+	{
+		foreach (new DirectoryIterator($branchDir) as $directory)
+		{
+		    if (! $directory->isDot() && $directory->isDir())
+		    {
+				$filename = $directory->getFilename() ."/metadata/branch_name";
+				if (file_exists($filename))
+				{
+					return trim(file_get_contents($filename));
+				}
+			}
+		}
+		return $fallbackName;
+	}
+	
 	public static function getAllBranchs()
 	{
 		$branches = array();
@@ -47,7 +64,7 @@ class Application_Model_BranchPeer
 		{
 			$branch = new Application_Model_Branch();
 			$branch->id = $id;
-			$branch->name = $id;
+			$branch->name = findBranchNameInBundleMetadata(Zend_Registry::get("repodir") .'/'. $id, $id);
 			$branch->url = ($id == 'trunk') ? $id : 'branches/' . $id;
 			$branches[] = $branch;
 		}
