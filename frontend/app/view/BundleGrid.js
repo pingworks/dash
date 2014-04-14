@@ -81,8 +81,10 @@ Ext.define("Dash.view.BundleGrid", {
             menuText: 'Bundle',
             dataIndex: 'id',
             renderer: function(value, metadata, record, rowIndex, colIndex, store, view) {
+                branchestore = Ext.StoreMgr.get('Branches');
+                branch = branchstore.getById(record.get('branch')).name;
                 return ( Dash.config.bundlegrid.repolink && Dash.config.bundlegrid.repolink != '' )
-                    ? Ext.String.format(Dash.config.bundlegrid.repolink, record.get('branch'), record.get('id'))
+                    ? Ext.String.format(Dash.config.bundlegrid.repolink, branch, record.get('id'))
                     : record.get('id');
             },
             width: 120

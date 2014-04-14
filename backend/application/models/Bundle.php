@@ -19,6 +19,7 @@
 class Application_Model_Bundle
 {
 	public $id;
+	/* branch ID, e.g feature_j_123 */
 	public $branch;
 	public $revision;
 	public $stage1;
