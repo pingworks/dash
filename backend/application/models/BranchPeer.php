@@ -64,7 +64,7 @@ class Application_Model_BranchPeer
 		{
 			$branch = new Application_Model_Branch();
 			$branch->id = $id;
-			$branch->name = findBranchNameInBundleMetadata(Zend_Registry::get("repodir") .'/'. $id, $id);
+			$branch->name = self::findBranchNameInBundleMetadata(Zend_Registry::get("repodir") .'/'. $id, $id);
 			$branch->url = ($id == 'trunk') ? $id : 'branches/' . $id;
 			$branches[] = $branch;
 		}
