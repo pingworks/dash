@@ -48,7 +48,7 @@ class Application_Model_BranchPeer
 		{
 		    if (! $directory->isDot() && $directory->isDir())
 		    {
-				$filename = $directory->getFilename() ."/metadata/branch_name";
+				$filename = $directory->getPathname() ."/metadata/branch_name";
 				if (file_exists($filename))
 				{
 					return trim(file_get_contents($filename));
