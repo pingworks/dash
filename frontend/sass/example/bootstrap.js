@@ -11,178 +11,152 @@ Ext.Loader.addClassPathMappings({
   "Dash": "../../app"
 });
 Ext.ClassManager.addNameAlternateMappings({
-  "ExtThemeNeptune.menu.Menu": [],
-  "Ext.ux.BoxReorderer": [],
   "ExtThemeNeptune.container.ButtonGroup": [],
-  "Ext.ux.grid.filter.Filter": [],
   "Dash.view.JobResultToolTip": [],
-  "Ext.ux.GroupTabRenderer": [],
-  "Ext.ux.ajax.DataSimlet": [],
   "Ext.ux.grid.TransformGrid": [],
-  "Ext.ux.FieldReplicator": [],
-  "Dash.model.Change": [],
+  "Ext.ux.ajax.DataSimlet": [],
   "ExtThemeNeptune.toolbar.Paging": [],
-  "ExtThemeNeptune.panel.Panel": [],
-  "Ext.ux.grid.filter.ListFilter": [],
-  "Dash.controller.JobResult": [],
-  "Ext.ux.ajax.XmlSimlet": [],
+  "Dash.view.EnvironmentsWindow": [],
+  "Dash.view.EnvironmentGrid": [],
   "Ext.ux.event.Driver": [],
-  "Dash.view.StoreMenu": [],
-  "Dash.view.TopToolbar": [],
-  "Ext.ux.dd.PanelFieldDragZone": [],
+  "Ext.ux.ajax.XmlSimlet": [],
   "Ext.ux.DataView.DragSelector": [],
-  "ExtThemeNeptune.toolbar.Toolbar": [],
-  "ExtThemeNeptune.tab.Tab": [],
-  "Dash.model.StageStatus": [],
   "Ext.ux.grid.menu.ListMenu": [],
-  "Ext.ux.GMapPanel": [],
-  "Dash.store.Bundles": [],
-  "Dash.view.Viewport": [],
+  "Dash.model.StageStatus": [],
   "Ext.ux.form.MultiSelect": [
     "Ext.ux.Multiselect"
   ],
-  "Ext.ux.DataView.LabelEditor": [],
-  "Ext.ux.GroupTabPanel": [],
-  "Ext.ux.grid.filter.StringFilter": [],
-  "Ext.ux.statusbar.ValidationStatus": [],
-  "Ext.ux.layout.Center": [],
-  "Dash.view.ChangeToolTip": [],
   "Ext.ux.PreviewPlugin": [],
-  "Ext.ux.DataView.Animated": [],
-  "ExtThemeNeptune.resizer.Splitter": [],
-  "Dash.store.JobStatus": [],
+  "Dash.model.LockDuration": [],
   "Ext.ux.ajax.SimXhr": [],
   "Ext.ux.event.RecorderManager": [],
-  "Dash.view.ToolTip": [],
   "Ext.ux.ProgressBarPager": [],
   "Ext.ux.CellDragDrop": [],
   "Dash.model.JobStatus": [],
   "Dash.view.BundleGrid": [],
-  "Dash.store.Branches": [],
-  "Ext.ux.statusbar.StatusBar": [
-    "Ext.ux.StatusBar"
-  ],
   "Ext.ux.ajax.Simlet": [],
   "Ext.ux.SlidingPager": [],
   "Ext.ux.TabReorderer": [],
   "Dash.view.BottomToolbar": [],
   "Ext.ux.grid.filter.NumericFilter": [],
-  "ExtThemeNeptune.layout.component.Dock": [],
   "ExtThemeNeptune.panel.Table": [],
-  "Ext.ux.grid.menu.RangeMenu": [],
-  "Ext.ux.RowExpander": [],
+  "Dash.store.Environments": [],
   "Ext.ux.event.Recorder": [],
-  "Dash.model.Bundle": [],
-  "Ext.ux.event.Player": [],
   "Dash.store.JobResults": [],
-  "ExtThemeNeptune.panel.Tool": [],
   "Ext.ux.ajax.SimManager": [],
   "Ext.ux.grid.filter.BooleanFilter": [],
-  "Ext.ux.ToolbarDroppable": [],
   "Dash.store.Changes": [],
-  "Ext.ux.event.Maker": [],
+  "Dash.controller.Deployment": [],
   "Dash.model.Branch": [],
   "Ext.ux.TabScrollerMenu": [],
   "ExtThemeNeptune.menu.Separator": [],
   "Ext.ux.IFrame": [],
+  "Ext.ux.form.SearchField": [],
+  "Dash.controller.Change": [],
+  "Ext.ux.dd.CellFieldDropZone": [],
+  "Ext.ux.LiveSearchGridPanel": [],
+  "Ext.ux.grid.filter.DateFilter": [],
+  "Ext.ux.TreePicker": [],
+  "Dash.model.JobResult": [],
+  "ExtThemeNeptune.grid.RowEditor": [],
+  "ExtThemeNeptune.picker.Month": [],
+  "Dash.controller.Environment": [],
+  "Ext.ux.data.PagingMemoryProxy": [
+    "Ext.data.PagingMemoryProxy"
+  ],
+  "Ext.ux.BoxReorderer": [],
+  "ExtThemeNeptune.menu.Menu": [],
+  "Ext.ux.grid.filter.Filter": [],
+  "Ext.ux.GroupTabRenderer": [],
+  "Ext.ux.FieldReplicator": [],
+  "Dash.model.Change": [],
+  "Ext.ux.grid.filter.ListFilter": [],
+  "ExtThemeNeptune.panel.Panel": [],
+  "Dash.controller.JobResult": [],
+  "Dash.view.StoreMenu": [],
+  "Dash.store.Contents": [],
+  "Ext.ux.dd.PanelFieldDragZone": [],
+  "Dash.view.TopToolbar": [],
+  "ExtThemeNeptune.toolbar.Toolbar": [],
+  "ExtThemeNeptune.tab.Tab": [],
+  "Ext.ux.GMapPanel": [],
+  "Dash.store.Bundles": [],
+  "Dash.view.Viewport": [],
+  "Ext.ux.GroupTabPanel": [],
+  "Ext.ux.DataView.LabelEditor": [],
+  "Dash.store.LockDurations": [],
+  "Ext.ux.grid.filter.StringFilter": [],
+  "Ext.ux.statusbar.ValidationStatus": [],
+  "Ext.ux.layout.Center": [],
+  "Dash.view.ChangeToolTip": [],
+  "Ext.ux.DataView.Animated": [],
+  "ExtThemeNeptune.resizer.Splitter": [],
+  "Dash.store.JobStatus": [],
+  "Dash.view.ToolTip": [],
+  "Dash.controller.Base": [],
+  "Ext.ux.statusbar.StatusBar": [
+    "Ext.ux.StatusBar"
+  ],
+  "Dash.store.Branches": [],
+  "Dash.view.DeploymentWindow": [],
+  "ExtThemeNeptune.layout.component.Dock": [],
+  "Ext.ux.grid.menu.RangeMenu": [],
+  "Ext.ux.RowExpander": [],
+  "Ext.ux.event.Player": [],
+  "Dash.model.Bundle": [],
+  "Dash.model.Content": [],
+  "ExtThemeNeptune.panel.Tool": [],
+  "Ext.ux.ToolbarDroppable": [],
+  "Ext.ux.event.Maker": [],
   "Ext.ux.DataView.Draggable": [],
   "Ext.ux.TabCloseMenu": [],
-  "Dash.controller.Change": [],
-  "Ext.ux.form.SearchField": [],
-  "Ext.ux.dd.CellFieldDropZone": [],
   "Dash.controller.Bundle": [],
-  "Ext.ux.LiveSearchGridPanel": [],
   "Ext.ux.DataTip": [],
-  "Ext.ux.grid.filter.DateFilter": [],
   "Ext.ux.grid.filter.DateTimeFilter": [],
-  "Ext.ux.TreePicker": [],
   "Ext.ux.form.ItemSelector": [
     "Ext.ux.ItemSelector"
   ],
   "Dash.store.StageStatus": [],
   "Ext.ux.ajax.JsonSimlet": [],
-  "Dash.model.JobResult": [],
-  "ExtThemeNeptune.form.field.HtmlEditor": [],
   "Ext.ux.Spotlight": [],
-  "ExtThemeNeptune.picker.Month": [],
-  "ExtThemeNeptune.grid.RowEditor": [],
+  "ExtThemeNeptune.form.field.HtmlEditor": [],
   "Ext.ux.grid.FiltersFeature": [],
-  "ExtThemeNeptune.Component": [],
-  "Ext.ux.data.PagingMemoryProxy": [
-    "Ext.data.PagingMemoryProxy"
-  ]
+  "Dash.model.Environment": [],
+  "ExtThemeNeptune.Component": []
 });
 Ext.ClassManager.addNameAliasMappings({
-  "ExtThemeNeptune.menu.Menu": [],
-  "Ext.ux.BoxReorderer": [],
   "ExtThemeNeptune.container.ButtonGroup": [],
-  "Ext.ux.grid.filter.Filter": [],
   "Dash.view.JobResultToolTip": [
     "widget.jobresulttooltip"
   ],
-  "Ext.ux.GroupTabRenderer": [
-    "plugin.grouptabrenderer"
-  ],
-  "Ext.ux.ajax.DataSimlet": [],
   "Ext.ux.grid.TransformGrid": [],
-  "Ext.ux.FieldReplicator": [],
-  "Dash.model.Change": [],
+  "Ext.ux.ajax.DataSimlet": [],
   "ExtThemeNeptune.toolbar.Paging": [],
-  "ExtThemeNeptune.panel.Panel": [],
-  "Ext.ux.grid.filter.ListFilter": [
-    "gridfilter.list"
+  "Dash.view.EnvironmentsWindow": [
+    "widget.environmentswindow"
   ],
-  "Dash.controller.JobResult": [],
+  "Dash.view.EnvironmentGrid": [
+    "widget.environmentgrid"
+  ],
+  "Ext.ux.event.Driver": [],
   "Ext.ux.ajax.XmlSimlet": [
     "simlet.xml"
   ],
-  "Ext.ux.event.Driver": [],
-  "Dash.view.StoreMenu": [
-    "widget.storemenu"
-  ],
-  "Dash.view.TopToolbar": [
-    "widget.toptoolbar"
-  ],
-  "Ext.ux.dd.PanelFieldDragZone": [],
   "Ext.ux.DataView.DragSelector": [],
-  "ExtThemeNeptune.toolbar.Toolbar": [],
-  "ExtThemeNeptune.tab.Tab": [],
-  "Dash.model.StageStatus": [],
   "Ext.ux.grid.menu.ListMenu": [],
-  "Ext.ux.GMapPanel": [
-    "widget.gmappanel"
-  ],
-  "Dash.store.Bundles": [],
-  "Dash.view.Viewport": [],
+  "Dash.model.StageStatus": [],
   "Ext.ux.form.MultiSelect": [
     "widget.multiselect",
     "widget.multiselectfield"
   ],
-  "Ext.ux.DataView.LabelEditor": [],
-  "Ext.ux.GroupTabPanel": [
-    "widget.grouptabpanel"
-  ],
-  "Ext.ux.grid.filter.StringFilter": [
-    "gridfilter.string"
-  ],
-  "Ext.ux.statusbar.ValidationStatus": [],
-  "Ext.ux.layout.Center": [
-    "layout.ux.center"
-  ],
-  "Dash.view.ChangeToolTip": [
-    "widget.changetooltip"
-  ],
   "Ext.ux.PreviewPlugin": [
     "plugin.preview"
   ],
-  "Ext.ux.DataView.Animated": [],
-  "ExtThemeNeptune.resizer.Splitter": [],
-  "Dash.store.JobStatus": [],
+  "Dash.model.LockDuration": [],
   "Ext.ux.ajax.SimXhr": [],
   "Ext.ux.event.RecorderManager": [
     "widget.eventrecordermanager"
   ],
-  "Dash.view.ToolTip": [],
   "Ext.ux.ProgressBarPager": [],
   "Ext.ux.CellDragDrop": [
     "plugin.celldragdrop"
@@ -190,10 +164,6 @@ Ext.ClassManager.addNameAliasMappings({
   "Dash.model.JobStatus": [],
   "Dash.view.BundleGrid": [
     "widget.bundlegrid"
-  ],
-  "Dash.store.Branches": [],
-  "Ext.ux.statusbar.StatusBar": [
-    "widget.statusbar"
   ],
   "Ext.ux.ajax.Simlet": [
     "simlet.basic"
@@ -206,22 +176,16 @@ Ext.ClassManager.addNameAliasMappings({
   "Ext.ux.grid.filter.NumericFilter": [
     "gridfilter.numeric"
   ],
-  "ExtThemeNeptune.layout.component.Dock": [],
   "ExtThemeNeptune.panel.Table": [],
-  "Ext.ux.grid.menu.RangeMenu": [],
-  "Ext.ux.RowExpander": [],
+  "Dash.store.Environments": [],
   "Ext.ux.event.Recorder": [],
-  "Dash.model.Bundle": [],
-  "Ext.ux.event.Player": [],
   "Dash.store.JobResults": [],
-  "ExtThemeNeptune.panel.Tool": [],
   "Ext.ux.ajax.SimManager": [],
   "Ext.ux.grid.filter.BooleanFilter": [
     "gridfilter.boolean"
   ],
-  "Ext.ux.ToolbarDroppable": [],
   "Dash.store.Changes": [],
-  "Ext.ux.event.Maker": [],
+  "Dash.controller.Deployment": [],
   "Dash.model.Branch": [],
   "Ext.ux.TabScrollerMenu": [
     "plugin.tabscrollermenu"
@@ -230,28 +194,99 @@ Ext.ClassManager.addNameAliasMappings({
   "Ext.ux.IFrame": [
     "widget.uxiframe"
   ],
+  "Ext.ux.form.SearchField": [
+    "widget.searchfield"
+  ],
+  "Dash.controller.Change": [],
+  "Ext.ux.dd.CellFieldDropZone": [],
+  "Ext.ux.LiveSearchGridPanel": [],
+  "Ext.ux.grid.filter.DateFilter": [
+    "gridfilter.date"
+  ],
+  "Ext.ux.TreePicker": [
+    "widget.treepicker"
+  ],
+  "Dash.model.JobResult": [],
+  "ExtThemeNeptune.grid.RowEditor": [],
+  "ExtThemeNeptune.picker.Month": [],
+  "Dash.controller.Environment": [],
+  "Ext.ux.data.PagingMemoryProxy": [
+    "proxy.pagingmemory"
+  ],
+  "Ext.ux.BoxReorderer": [],
+  "ExtThemeNeptune.menu.Menu": [],
+  "Ext.ux.grid.filter.Filter": [],
+  "Ext.ux.GroupTabRenderer": [
+    "plugin.grouptabrenderer"
+  ],
+  "Ext.ux.FieldReplicator": [],
+  "Dash.model.Change": [],
+  "Ext.ux.grid.filter.ListFilter": [
+    "gridfilter.list"
+  ],
+  "ExtThemeNeptune.panel.Panel": [],
+  "Dash.controller.JobResult": [],
+  "Dash.view.StoreMenu": [
+    "widget.storemenu"
+  ],
+  "Dash.store.Contents": [],
+  "Ext.ux.dd.PanelFieldDragZone": [],
+  "Dash.view.TopToolbar": [
+    "widget.toptoolbar"
+  ],
+  "ExtThemeNeptune.toolbar.Toolbar": [],
+  "ExtThemeNeptune.tab.Tab": [],
+  "Ext.ux.GMapPanel": [
+    "widget.gmappanel"
+  ],
+  "Dash.store.Bundles": [],
+  "Dash.view.Viewport": [],
+  "Ext.ux.GroupTabPanel": [
+    "widget.grouptabpanel"
+  ],
+  "Ext.ux.DataView.LabelEditor": [],
+  "Dash.store.LockDurations": [],
+  "Ext.ux.grid.filter.StringFilter": [
+    "gridfilter.string"
+  ],
+  "Ext.ux.statusbar.ValidationStatus": [],
+  "Ext.ux.layout.Center": [
+    "layout.ux.center"
+  ],
+  "Dash.view.ChangeToolTip": [
+    "widget.changetooltip"
+  ],
+  "Ext.ux.DataView.Animated": [],
+  "ExtThemeNeptune.resizer.Splitter": [],
+  "Dash.store.JobStatus": [],
+  "Dash.view.ToolTip": [],
+  "Dash.controller.Base": [],
+  "Ext.ux.statusbar.StatusBar": [
+    "widget.statusbar"
+  ],
+  "Dash.store.Branches": [],
+  "Dash.view.DeploymentWindow": [
+    "widget.deploymentwindow"
+  ],
+  "ExtThemeNeptune.layout.component.Dock": [],
+  "Ext.ux.grid.menu.RangeMenu": [],
+  "Ext.ux.RowExpander": [],
+  "Ext.ux.event.Player": [],
+  "Dash.model.Bundle": [],
+  "Dash.model.Content": [],
+  "ExtThemeNeptune.panel.Tool": [],
+  "Ext.ux.ToolbarDroppable": [],
+  "Ext.ux.event.Maker": [],
   "Ext.ux.DataView.Draggable": [],
   "Ext.ux.TabCloseMenu": [
     "plugin.tabclosemenu"
   ],
-  "Dash.controller.Change": [],
-  "Ext.ux.form.SearchField": [
-    "widget.searchfield"
-  ],
-  "Ext.ux.dd.CellFieldDropZone": [],
   "Dash.controller.Bundle": [],
-  "Ext.ux.LiveSearchGridPanel": [],
   "Ext.ux.DataTip": [
     "plugin.datatip"
   ],
-  "Ext.ux.grid.filter.DateFilter": [
-    "gridfilter.date"
-  ],
   "Ext.ux.grid.filter.DateTimeFilter": [
     "gridfilter.datetime"
-  ],
-  "Ext.ux.TreePicker": [
-    "widget.treepicker"
   ],
   "Ext.ux.form.ItemSelector": [
     "widget.itemselector",
@@ -261,18 +296,13 @@ Ext.ClassManager.addNameAliasMappings({
   "Ext.ux.ajax.JsonSimlet": [
     "simlet.json"
   ],
-  "Dash.model.JobResult": [],
-  "ExtThemeNeptune.form.field.HtmlEditor": [],
   "Ext.ux.Spotlight": [],
-  "ExtThemeNeptune.picker.Month": [],
-  "ExtThemeNeptune.grid.RowEditor": [],
+  "ExtThemeNeptune.form.field.HtmlEditor": [],
   "Ext.ux.grid.FiltersFeature": [
     "feature.filters"
   ],
-  "ExtThemeNeptune.Component": [],
-  "Ext.ux.data.PagingMemoryProxy": [
-    "proxy.pagingmemory"
-  ]
+  "Dash.model.Environment": [],
+  "ExtThemeNeptune.Component": []
 });
 Ext.Loader.loadScript("../../packages/ext-theme-neptune/overrides/Component.js");
 Ext.Loader.loadScript("../../packages/ext-theme-neptune/overrides/container/ButtonGroup.js");

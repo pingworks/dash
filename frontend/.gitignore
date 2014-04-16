@@ -1,3 +1,4 @@
 /build
 /sencha-compile-temp-dir
 /.htaccess
+/.sencha_backup

@@ -29,7 +29,7 @@
         "viewFileName": "Main",
         "appControllers": "",
         "appViews": "",
-        "uniqueId": "9b02883d-a7bb-42c7-85e3-e39eee53cf29",
+        "uniqueId": "cf69963d-e56b-4cea-82e2-2f618e60f325",
         "appName": "Dash",
         "controllerName": "Main",
         "viewName": "Main",
@@ -45,11 +45,11 @@
       "version": "ca9cfeb9d3913435880b586ce4603fc886054b52",
       "parameters": {
         "appName": "Dash",
-        "frameworkPath": "ext",
-        "appModels": "Branch,Bundle,Change,JobResult,JobStatus,StageStatus",
-        "appControllers": "Bundle,Change,JobResult",
-        "appStores": "Branches,Bundles,Changes,JobResults,JobStatus,StageStatus",
-        "appViews": "BundleGrid,ChangeToolTip,JobResultToolTip,StoreMenu,ToolTip,TopToolbar,Viewport"
+        "frameworkPath": "../../../../home/cluk/ext-4.2.1.883",
+        "appModels": "Branch,Bundle,Change,Content,Environment,JobResult,JobStatus,LockDuration,StageStatus",
+        "appControllers": "Base,Bundle,Change,Deployment,Environment,JobResult",
+        "appStores": "Branches,Bundles,Changes,Contents,Environments,JobResults,JobStatus,LockDurations,StageStatus",
+        "appViews": "BottomToolbar,BundleGrid,ChangeToolTip,DeploymentWindow,EnvironmentGrid,EnvironmentsWindow,JobResultToolTip,StoreMenu,ToolTip,TopToolbar,Viewport"
       }
     },
     ".sencha/app/build.properties": {
@@ -64,7 +64,7 @@
         "viewFileName": "Main",
         "appControllers": "",
         "appViews": "",
-        "uniqueId": "9b02883d-a7bb-42c7-85e3-e39eee53cf29",
+        "uniqueId": "cf69963d-e56b-4cea-82e2-2f618e60f325",
         "appName": "Dash",
         "controllerName": "Main",
         "viewName": "Main",
@@ -87,7 +87,7 @@
         "viewFileName": "Main",
         "appControllers": "",
         "appViews": "",
-        "uniqueId": "9b02883d-a7bb-42c7-85e3-e39eee53cf29",
+        "uniqueId": "cf69963d-e56b-4cea-82e2-2f618e60f325",
         "appName": "Dash",
         "controllerName": "Main",
         "viewName": "Main",

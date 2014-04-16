@@ -38,47 +38,48 @@ Ext.application({
     models:[
         'Branch',
         'Bundle',
-        'Content',
         'Change',
+        'Content',
+        'Environment',
         'JobResult',
         'JobStatus',
-        'StageStatus',
-        'Environment',
-        'LockDuration'
+        'LockDuration',
+        'StageStatus'
     ],
 
     views: [
+        'BottomToolbar',
         'BundleGrid',
         'ChangeToolTip',
+        'DeploymentWindow',
+        'EnvironmentGrid',
+        'EnvironmentsWindow',
         'JobResultToolTip',
         'StoreMenu',
         'ToolTip',
         'TopToolbar',
-        'BottomToolbar',
-        'DeploymentWindow',
-        'EnvironmentsWindow',
-        'EnvironmentGrid',
         'Viewport'
     ],
 
     stores: [
         'Branches',
         'Bundles',
-        'Contents',
         'Changes',
+        'Contents',
+        'Environments',
         'JobResults',
         'JobStatus',
-        'StageStatus',
-        'Environments',
-        'LockDurations'
+        'LockDurations',
+        'StageStatus'
     ],
 
     controllers: [
+        'Base',
         'Bundle',
         'Change',
-        'JobResult',
         'Deployment',
-        'Environment'
+        'Environment',
+        'JobResult'
     ],
 
     autoCreateViewport: true,
