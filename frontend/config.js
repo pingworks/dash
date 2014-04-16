@@ -60,7 +60,8 @@ Dash.config = {
             deploy: 'resources/img/icons/deploy.png'
         },
         repolink: '<a href="https://dash.pingworks.net/repo/{0}/{1}" target="_blank" style="color: black">{1}</a>',
-        vcslink: '<a href="https://dash.pingworks.net/git/?p=dash.git;a=commit;h={0}" target="_blank" style="color: black">{0}</a>',
+        vcslink: '<a href="https://dash.pingworks.net/git/?p=dash.git;a=commit;h={1}" target="_blank" style="color: black">{1}</a>',
+        vcsrepolink: '<a href="https://dash.pingworks.net/git/?p={0}.git" target="_blank" style="color: black">{0}</a>',
         sort: {
             field: 'timestamp',
             dir: 'DESC'

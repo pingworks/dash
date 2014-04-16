@@ -21,6 +21,7 @@ Ext.define('Dash.model.Bundle', {
         { name: 'id', type: 'string' },
         { name: 'branch', type: 'string' },
         { name: 'revision', type: 'string' },
+        { name: 'repository', type: 'string' },
         { name: 'stage1', type: 'int' },
         { name: 'stage2', type: 'int' },
         { name: 'stage3', type: 'int' },

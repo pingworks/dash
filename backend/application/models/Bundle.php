@@ -21,6 +21,7 @@ class Application_Model_Bundle
 	public $id;
 	public $branch;
 	public $revision;
+	public $repository;
 	public $stage1;
 	public $stage2;
 	public $stage3;

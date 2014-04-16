@@ -76,6 +76,7 @@ class Application_Model_BundlePeer
 		$bundle->id = $id;
 		$bundle->branch = self::getMetadata($branch, $id, 'branch');
 		$bundle->revision = self::getMetadata($branch, $id, 'revision');
+		$bundle->repository = self::getMetadata($branch, $id, 'repository');
 		$bundle->timestamp = self::getMetadata($branch, $id, 'timestamp');
 		$bundle->committer = self::getMetadata($branch, $id, 'committer');
 		$bundle->stage1 = self::getStageStatus($branch, $id, 1);

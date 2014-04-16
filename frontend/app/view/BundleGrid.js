@@ -24,7 +24,7 @@ Ext.define("Dash.view.BundleGrid", {
     id: 'BundleGrid',
     
     stageStatusIconRenderer: function(value, metadata, record, rowIndex, colIndex, store, view) {
-        var stageStatus = Dash.app.getController('Bundle').getStageStatus(record, colIndex - 3);
+        var stageStatus = Dash.app.getController('Bundle').getStageStatus(record, colIndex - 4);
         var iconUrl = Ext.BLANK_IMAGE_URL;
         var iconCls = '';
         if (stageStatus) {
@@ -71,9 +71,18 @@ Ext.define("Dash.view.BundleGrid", {
             text: 'Revision',
             dataIndex: 'revision',
             renderer: function(value, metadata, record, rowIndex, colIndex, store, view) {
-                return ( Dash.config.bundlegrid.vcslink && Dash.config.bundlegrid.vcslink != '' )
-                    ? Ext.String.format(Dash.config.bundlegrid.vcslink, record.get('revision'))
+                return ( Dash.config.bundlegrid.vcslink && Dash.config.bundlegrid.vcslink != ''  && record.get('revision') != 'Unavailable')
+                    ? Ext.String.format(Dash.config.bundlegrid.vcslink, record.get('repository'), record.get('revision'))
                     : record.get('revision');
+            },
+            width: 90
+        }, {
+            text: 'Repository',
+            dataIndex: 'repository',
+            renderer: function(value, metadata, record, rowIndex, colIndex, store, view) {
+                return ( Dash.config.bundlegrid.vcsrepolink && Dash.config.bundlegrid.vcsrepolink != '' && record.get('repository') != 'Unavailable')
+                    ? Ext.String.format(Dash.config.bundlegrid.vcsrepolink, record.get('repository'), record.get('revision'))
+                    : record.get('repository');
             },
             width: 90
         }, {
