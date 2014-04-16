@@ -73,6 +73,42 @@ Dash.config = {
                 field: 'stage1',
                 value: 3
             }
+        },
+        colwidth: {
+            timestamp: 180,
+            committer: 120,
+            revision: 90,
+            repository: 90,
+            bundle: 120,
+            stage1: 40,
+            stage2: 40,
+            stage3: 40,
+            changes: 120,
+            deployment: 60
+        },
+        label: {
+            timestamp: 'Created',
+            committer: 'Committer',
+            revision: 'CommitId',
+            repository: 'VCS',
+            bundle: 'Bundle',
+            stage1: '1st',
+            stage2: '2nd',
+            stage3: '3rd',
+            changes: 'Changes',
+            deployment: 'Deployment'
+        },
+        hidden: {
+            timestamp: false,
+            committer: false,
+            revision: false,
+            repository: false,
+            bundle: false,
+            stage1: false,
+            stage2: false,
+            stage3: false,
+            changes: false,
+            deployment: false
         }
     },
     

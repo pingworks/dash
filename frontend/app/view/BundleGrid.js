@@ -58,35 +58,39 @@ Ext.define("Dash.view.BundleGrid", {
     initComponent: function() {
         var that = this;
         this.columns = [{
-            text: 'Erzeugt',
+            text: Dash.config.bundlegrid.label.timestamp,
             dataIndex: 'timestamp',
             type: 'date',
             renderer: Ext.util.Format.dateRenderer(Dash.config.bundlegrid.dateformat),
-            width: 180
+            width: Dash.config.bundlegrid.colwidth.timestamp,
+            hidden: Dash.config.bundlegrid.hidden.timestamp
         }, {
-            text: 'Committer',
+            text: Dash.config.bundlegrid.label.committer,
             dataIndex: 'committer',
-            width: 120
+            width: Dash.config.bundlegrid.colwidth.committer,
+            hidden: Dash.config.bundlegrid.hidden.committer
         }, {
-            text: 'Revision',
+            text: Dash.config.bundlegrid.label.revision,
             dataIndex: 'revision',
             renderer: function(value, metadata, record, rowIndex, colIndex, store, view) {
                 return ( Dash.config.bundlegrid.vcslink && Dash.config.bundlegrid.vcslink != ''  && record.get('revision') != 'Unavailable')
                     ? Ext.String.format(Dash.config.bundlegrid.vcslink, record.get('repository'), record.get('revision'))
                     : record.get('revision');
             },
-            width: 90
+            width: Dash.config.bundlegrid.colwidth.revision,
+            hidden: Dash.config.bundlegrid.hidden.revision
         }, {
-            text: 'Repository',
+            text: Dash.config.bundlegrid.label.repository,
             dataIndex: 'repository',
             renderer: function(value, metadata, record, rowIndex, colIndex, store, view) {
                 return ( Dash.config.bundlegrid.vcsrepolink && Dash.config.bundlegrid.vcsrepolink != '' && record.get('repository') != 'Unavailable')
                     ? Ext.String.format(Dash.config.bundlegrid.vcsrepolink, record.get('repository'), record.get('revision'))
                     : record.get('repository');
             },
-            width: 90
+            width: Dash.config.bundlegrid.colwidth.repository,
+            hidden: Dash.config.bundlegrid.hidden.repository
         }, {
-            text: 'Bundle',
+            text: Dash.config.bundlegrid.label.bundle,
             menuText: 'Bundle',
             dataIndex: 'id',
             renderer: function(value, metadata, record, rowIndex, colIndex, store, view) {
@@ -94,9 +98,10 @@ Ext.define("Dash.view.BundleGrid", {
                     ? Ext.String.format(Dash.config.bundlegrid.repolink, record.get('branch'), record.get('id'))
                     : record.get('id');
             },
-            width: 120
+            width: Dash.config.bundlegrid.colwidth.bundle,
+            hidden: Dash.config.bundlegrid.hidden.bundle
         }, {
-            text: '1st',
+            text: Dash.config.bundlegrid.label.stage1,
             menuText: '1st',
             dataIndex: 'stage1',
             align: 'center',
@@ -114,9 +119,10 @@ Ext.define("Dash.view.BundleGrid", {
             }],
             renderer: this.stageStatusIconRenderer,
             scope: this,
-            width: 40
+            width: Dash.config.bundlegrid.colwidth.stage1,
+            hidden: Dash.config.bundlegrid.hidden.stage1
         }, {
-            text: '2nd',
+            text: Dash.config.bundlegrid.label.stage2,
             menuText: '2nd',
             dataIndex: 'stage2',
             align: 'center',
@@ -134,9 +140,10 @@ Ext.define("Dash.view.BundleGrid", {
             }],
             renderer: this.stageStatusIconRenderer,
             scope: this,
-            width: 40
+            width: Dash.config.bundlegrid.colwidth.stage2,
+            hidden: Dash.config.bundlegrid.hidden.stage2
         }, {
-            text: '3rd',
+            text: Dash.config.bundlegrid.label.stage3,
             menuText: '3rd',
             dataIndex: 'stage3',
             align: 'center',
@@ -154,13 +161,15 @@ Ext.define("Dash.view.BundleGrid", {
             }],
             renderer: this.stageStatusIconRenderer,
             scope: this,
-            width: 40
+            width: Dash.config.bundlegrid.colwidth.stage3,
+            hidden: Dash.config.bundlegrid.hidden.stage3
         }, {
-            text: 'Änderungen',
+            text: Dash.config.bundlegrid.label.changes,
             menuText: 'Änderungen',
             align: 'center',
             xtype: 'actioncolumn',
-            width: 120,
+            width: Dash.config.bundlegrid.colwidth.changes,
+            hidden: Dash.config.bundlegrid.hidden.changes,
             items: [{
                 icon: Dash.config.bundlegrid.icon.change,
                 handler: function(gridview, rowIndex, colIndex, item, event, record) {
@@ -173,9 +182,10 @@ Ext.define("Dash.view.BundleGrid", {
                 }
             }]
         }, {
-            text: 'Deployment',
+            text: Dash.config.bundlegrid.label.deployment,
             xtype: 'actioncolumn',
-            width: 60,
+            width: Dash.config.bundlegrid.colwidth.deployment,
+            hidden: Dash.config.bundlegrid.hidden.deployment,
             flex: 1,
             items: [{
                 disabled: !Dash.config.bundlegrid.deployment.enabled,
