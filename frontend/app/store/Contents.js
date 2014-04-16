@@ -17,5 +17,5 @@
 Ext.define('Dash.store.Contents', {
     extend: 'Ext.data.Store',
     requires: 'Dash.model.Content',
-    model: 'Dash.model.Content',
+    model: 'Dash.model.Content'
 });
