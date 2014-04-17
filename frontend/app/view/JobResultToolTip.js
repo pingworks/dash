@@ -40,7 +40,7 @@ Ext.define("Dash.view.JobResultToolTip", {
             params.bundle
         );
         this.setTitle(title);
-        this.update(msgs.join('<br />'));
+        this.update(msgs.join(''));
         this.show();
     }
 });

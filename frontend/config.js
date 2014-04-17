@@ -53,7 +53,7 @@ Dash.config = {
     },
     
     bundlegrid: {
-        title: 'Bundles im Branch: {0}',
+        title: 'Bundles in Branch: {0}',
         dateformat: 'd.m.Y H:i:s',
         icon: {
             change: 'resources/img/icons/change.png',
@@ -128,7 +128,7 @@ Dash.config = {
     
     change: {
         endpoint: '/change',
-        title: 'Änderungen in Bundle {0}' 
+        title: 'Changes in Bundle {0}' 
     },
     
     content: {
@@ -197,9 +197,9 @@ Dash.config = {
     
     jobresult: {
         endpoint: '/jobresult',
-        text: '<img src="{6}" alt="{2}" class="{7}">&nbsp;' 
-            + '<a href="https://dash.pingworks.net/jenkins/{1}" target="_blank">{0}</a>: Tests: {3}, skipped: {4}, failed: {5}',
-        title: '{1} stage Jobs für Bundle {2}',
+        text: '<div style="white-space: nowrap;"><img src="{6}" alt="{2}" class="{7}">&nbsp;' 
+            + '<a href="https://dash.pingworks.net/jenkins/{1}" target="_blank">{0}</a>: Tests: {3}, skipped: {4}, failed: {5}</div>',
+        title: '{1} stage Jobs for Bundle {2}',
         stageMap: {
             1: 'First',
             2: 'Second',
@@ -232,32 +232,32 @@ Dash.config = {
         data: [
             {
                 'id': '1',
-                'name': '1 Stunde'
+                'name': '1 hour'
             }, {
                 'id': '2',
-                'name': '2 Stunden'
+                'name': '2 hours'
             }, {
                 'id': '4',
-                'name': '4 Stunden'
+                'name': '4 hours'
             }, {
                 'id': '8',
-                'name': '8 Stunden'
+                'name': '8 hours'
             }, {
                 'id': '24',
-                'name': '1 Tag'
+                'name': '1 day'
             }, {
                 'id': '48',
-                'name': '2 Tage'
+                'name': '2 days'
             }, {
                 'id': '120',
-                'name': '5 Tage'
+                'name': '5 days'
             }
         ] 
     },
     
     error: {
-        title: 'Fehler',
-        msg: 'Die Daten konnten nicht geladen werden.'
+        title: 'Error',
+        msg: 'Unable to read data from server.'
     }
     
 }

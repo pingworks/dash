@@ -22,7 +22,7 @@ Ext.define("Dash.view.ChangeToolTip", {
         var msg = '';
         Ext.each(records, function(record) {
             html = Ext.String.htmlEncode(record.get('msg'))
-            msg += html.split('\n').join('<br />');
+            msg += html.split(' ').join('&nbsp;').split('\n').join('<br />');
         });
         var title = Ext.String.format(Dash.config.change.title, params.bundle);
         this.setTitle(title);
