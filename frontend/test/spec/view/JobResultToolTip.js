@@ -95,7 +95,6 @@ describe("Dash.view.JobResultToolTip -> updateTitleAndTextFromRecords", function
         expect(view.update).toHaveBeenCalled();
         expect(view.update).toHaveBeenCalledWith(
             '&lt;&lt;&lt;&lt;&lt;&lt;path<'
-            + '<br />'
             + '&lt;&lt;&lt;&lt;&lt;&lt;path<'
         );
     });
