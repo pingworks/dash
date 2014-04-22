@@ -27,6 +27,10 @@ class Application_Model_BranchPeer
 			if ( ! $directory->isDot() && $directory->isDir())
 			{
 				$basename = $directory->getBasename();
+				/* Skip ALL folder, for internal use only */
+				if ($basename == "ALL") {
+					continue;
+				}
 		 		if ($basename === Zend_Registry::get("defaultbranch"))
 		 		{
 		 			$default = $basename;
