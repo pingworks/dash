@@ -37,13 +37,13 @@ Ext.define("Dash.view.BundleGrid", {
     
     deploymentActionRenderer: function(value, metadata, record, rowIndex, colIndex, store, view) {
         var ctrl = Dash.app.getController('Deployment');
-        this.columns[colIndex].items[0].iconCls = 
+        this.columns[this.colIndexDeployment].items[0].iconCls = 
             ctrl.deploymentAllowed(record) ? '' : 'x-item-disabled';
     },
     
     triggerJenkinsJobActionRenderer: function(value, metadata, record, rowIndex, colIndex, store, view) {
         var ctrl = Dash.app.getController('TriggerJenkinsJob');
-        this.columns[colIndex].items[0].iconCls = 
+        this.columns[this.colIndexTriggerJenkinsJob].items[0].iconCls = 
             ctrl.triggerJenkinsJobAllowed(record) ? '' : 'x-item-disabled';
     },
     
@@ -188,6 +188,7 @@ Ext.define("Dash.view.BundleGrid", {
                 }
             }]
         }, {
+            id: 'ColumnDeployment',
             text: Dash.config.bundlegrid.label.deployment,
             xtype: 'actioncolumn',
             width: Dash.config.bundlegrid.colwidth.deployment,
@@ -205,6 +206,7 @@ Ext.define("Dash.view.BundleGrid", {
             renderer: this.deploymentActionRenderer,
             scope: this
         }, {
+            id: 'ColumnTriggerJenkinsJob',
             text: Dash.config.bundlegrid.label.triggerJenkinsJob,
             xtype: 'actioncolumn',
             width: Dash.config.bundlegrid.colwidth.triggerJenkinsJob,
@@ -222,6 +224,17 @@ Ext.define("Dash.view.BundleGrid", {
             renderer: this.triggerJenkinsJobActionRenderer,
             scope: this
         }];
+        
+        Ext.Array.forEach(this.columns, function(column, index) {
+            if (column.id == 'ColumnDeployment')
+               this.colIndexDeployment = index; 
+        }, this);
+
+        Ext.Array.forEach(this.columns, function(column, index) {
+            if (column.id == 'ColumnTriggerJenkinsJob')
+               this.colIndexTriggerJenkinsJob = index; 
+        }, this);
+
         this.callParent(arguments);
     }
 });
