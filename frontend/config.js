@@ -246,7 +246,11 @@ Dash.config = {
             cancel: 'Cancel',
             run: 'Run'
         },
-        text: 'Do you really want to start this Jenkins Job?'
+        text: 'Do you really want to start this Jenkins Job?',
+        param: {
+            name: 'bundle',
+            value: 'https://dash.pingworks.net/repo/{0}/{1}'
+        }
     },
     
     lockduration: {
