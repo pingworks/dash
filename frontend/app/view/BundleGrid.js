@@ -219,7 +219,7 @@ Ext.define("Dash.view.BundleGrid", {
                     that.fireEvent('showTriggerJenkinsJobWindow', record);
                 }
             }],
-            renderer: this.deploymentActionRenderer,
+            renderer: this.triggerJenkinsJobActionRenderer,
             scope: this
         }];
         this.callParent(arguments);
