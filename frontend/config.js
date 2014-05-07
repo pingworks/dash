@@ -74,6 +74,13 @@ Dash.config = {
                 value: 3
             }
         },
+        triggerJenkinsJob: {
+            enabled: true,
+            required: {
+                field: 'stage1',
+                value: 3
+            }
+        },
         colwidth: {
             timestamp: 180,
             committer: 120,
@@ -84,7 +91,8 @@ Dash.config = {
             stage2: 40,
             stage3: 40,
             changes: 120,
-            deployment: 60
+            deployment: 60,
+            triggerJenkinsJob: 60
         },
         label: {
             timestamp: 'Created',
@@ -96,7 +104,8 @@ Dash.config = {
             stage2: '2nd',
             stage3: '3rd',
             changes: 'Changes',
-            deployment: 'Deployment'
+            deployment: 'Deployment',
+            triggerJenkinsJob: 'TriggerJenkinsJob'
         },
         hidden: {
             timestamp: false,
@@ -108,7 +117,8 @@ Dash.config = {
             stage2: false,
             stage3: false,
             changes: false,
-            deployment: false
+            deployment: false,
+            triggerJenkinsJob: false
         }
     },
     
@@ -226,6 +236,17 @@ Dash.config = {
                 label: 'Database Reset'
             } 
         }
+    },
+    
+    triggerJenkinsJob: {
+        triggerUrl: '/jenkins/job/Deployment/buildWithParameters?token=Omi7foh4gu7d',
+        showUrl: '/jenkins/job/Deployment/',
+        title: 'Start Jenkins Job',
+        label: {
+            cancel: 'Cancel',
+            run: 'Run'
+        },
+        text: 'Do you really want to start this Jenkins Job?'
     },
     
     lockduration: {

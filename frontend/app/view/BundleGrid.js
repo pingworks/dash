@@ -41,6 +41,12 @@ Ext.define("Dash.view.BundleGrid", {
             ctrl.deploymentAllowed(record) ? '' : 'x-item-disabled';
     },
     
+    triggerJenkinsJobActionRenderer: function(value, metadata, record, rowIndex, colIndex, store, view) {
+        var ctrl = Dash.app.getController('TriggerJenkinsJob');
+        this.columns[colIndex].items[0].iconCls = 
+            ctrl.triggerJenkinsJobAllowed(record) ? '' : 'x-item-disabled';
+    },
+    
     createChangeTooltip: function(target, bundle) {
         return Ext.create('Dash.view.ChangeToolTip', {
             id: 'TTC-' + bundle.get('id').replace(/\./g, '-'),
@@ -192,7 +198,25 @@ Ext.define("Dash.view.BundleGrid", {
                 icon: Dash.config.bundlegrid.icon.deploy,
                 handler: function(gridview, rowIndex, colIndex, item, event, record) {
                     that.fireEvent('hideEnvironmentsWindow');
+                    that.fireEvent('hideTriggerJenkinsJobWindow');
                     that.fireEvent('showDeployWindow', record);
+                }
+            }],
+            renderer: this.deploymentActionRenderer,
+            scope: this
+        }, {
+            text: Dash.config.bundlegrid.label.triggerJenkinsJob,
+            xtype: 'actioncolumn',
+            width: Dash.config.bundlegrid.colwidth.triggerJenkinsJob,
+            hidden: Dash.config.bundlegrid.hidden.triggerJenkinsJob,
+            flex: 1,
+            items: [{
+                disabled: !Dash.config.bundlegrid.triggerJenkinsJob.enabled,
+                icon: Dash.config.bundlegrid.icon.deploy,
+                handler: function(gridview, rowIndex, colIndex, item, event, record) {
+                    that.fireEvent('hideEnvironmentsWindow');
+                    that.fireEvent('hideDeployWindow');
+                    that.fireEvent('showTriggerJenkinsJobWindow', record);
                 }
             }],
             renderer: this.deploymentActionRenderer,

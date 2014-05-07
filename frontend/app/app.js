@@ -52,6 +52,7 @@ Ext.application({
         'BundleGrid',
         'ChangeToolTip',
         'DeploymentWindow',
+        'TriggerJenkinsJobWindow',
         'EnvironmentGrid',
         'EnvironmentsWindow',
         'JobResultToolTip',
@@ -79,6 +80,7 @@ Ext.application({
         'Change',
         'Deployment',
         'Environment',
+        'TriggerJenkinsJob',
         'JobResult'
     ],
 
