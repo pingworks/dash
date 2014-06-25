@@ -251,16 +251,21 @@ Dash.config = {
             type: 'checkbox',
             label: 'Module 1',
             name: 'module1',
-            value: '1'
+            value: 'module1'
         }, {
             type: 'checkbox',
             label: 'Module 2',
             name: 'module2',
-            value: '1'
+            value: 'module2'
         }],
-        param: {
-            name: 'bundle',
-            value: 'https://dash.pingworks.net/repo/{0}/{1}'
+        params: {
+            bundle: {
+                name: 'bundle',
+                value: 'https://dash.pingworks.net/repo/{0}/{1}'
+            },
+            formValues: {
+                name: 'formValues'
+            }
         }
     },
     

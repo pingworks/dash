@@ -62,13 +62,17 @@ Ext.define('Dash.controller.TriggerJenkinsJob', {
         var win = this.getTriggerJenkinsJobWindow()
         win && win.destroy();
     },
-    onTriggerJenkinsJob: function(bundle, values) {
-        if (!bundle || !values ) {
+    onTriggerJenkinsJob: function(bundle, formValues) {
+        if (!bundle || !formValues ) {
             return false;
         }
-        var params = values;
-        params[Dash.config.triggerJenkinsJob.param.name] = 
-            Ext.String.format(Dash.config.triggerJenkinsJob.param.value, bundle.get('branch'), bundle.get('id'));
+        var values = Object.keys(formValues).map(function (key) {
+            return formValues[key];
+        });
+        var params = formValues;
+        params[Dash.config.triggerJenkinsJob.params.bundle.name] = 
+            Ext.String.format(Dash.config.triggerJenkinsJob.params.bundle.value, bundle.get('branch'), bundle.get('id'));
+        params[Dash.config.triggerJenkinsJob.params.formValues.name] = values.join(';'); 
         Ext.Ajax.request({
             url: Dash.config.triggerJenkinsJob.triggerUrl,
             params: params,
