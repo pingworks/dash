@@ -31,8 +31,8 @@ Ext.define("Dash.view.TriggerJenkinsJobWindow", {
             labelWidth: 150
         },
         items: [{
-            xtype: 'panel',
-            html: Dash.config.triggerJenkinsJob.text
+            xtype: 'form',
+            items: []
         }],
         bbar: ['->', {
             xtype: 'button',
@@ -53,5 +53,22 @@ Ext.define("Dash.view.TriggerJenkinsJobWindow", {
                 }
             }
         }]
-    }]
+    }],
+    
+    initComponent: function() {
+        var that = this;
+        that.items[0].items = [{
+            xtype: 'panel',
+            html: Dash.config.triggerJenkinsJob.text
+        }];
+        Ext.each(Dash.config.triggerJenkinsJob.inputFields, function(fieldConfig) {
+            that.items[0].items.push({
+                xtype: fieldConfig.type,
+                boxLabel: fieldConfig.label,
+                name: fieldConfig.name,
+                inputValue: fieldConfig.value
+            });
+        });
+        this.callParent(arguments);
+    }
 });

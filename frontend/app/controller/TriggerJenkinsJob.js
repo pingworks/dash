@@ -66,9 +66,9 @@ Ext.define('Dash.controller.TriggerJenkinsJob', {
         if (!bundle || !values ) {
             return false;
         }
-        var params = {};
+        var params = values;
         params[Dash.config.triggerJenkinsJob.param.name] = 
-            Ext.String.format(Dash.config.triggerJenkinsJob.param.value, bundle.get('branch'), bundle.get('id')); 
+            Ext.String.format(Dash.config.triggerJenkinsJob.param.value, bundle.get('branch'), bundle.get('id'));
         Ext.Ajax.request({
             url: Dash.config.triggerJenkinsJob.triggerUrl,
             params: params,
