@@ -28,6 +28,7 @@ class Application_Model_Bundle
 	public $timestamp;
 	public $committer;
 	private $changes;
+	public $payload;
 	
 	public function getChanges()
 	{

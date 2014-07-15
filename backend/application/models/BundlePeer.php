@@ -112,9 +112,10 @@ class Application_Model_BundlePeer
 		$bundle->stage2 = self::getStageStatus($branch, $id, 2);
 		$bundle->stage3 = self::getStageStatus($branch, $id, 3);
 		$bundle->setChanges(self::getMetadata($branch, $id, 'changes'));
+		$bundle->payload = array();
 		foreach(self::getAllMetaKeys($branch, $id) as $key)
 		{
-			$bundle->$key = self::getMetadata($branch, $id, $key);
+			$bundle->payload[$key] = self::getMetadata($branch, $id, $key);
 		}
 		return $bundle;
 	}
