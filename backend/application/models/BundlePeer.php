@@ -18,7 +18,36 @@
 
 class Application_Model_BundlePeer
 {
-	private static $stageNameMap = array( '1' => 'first', '2' => 'second', '3' => 'third'); 
+	private static $stageNameMap = array( '1' => 'first', '2' => 'second', '3' => 'third');
+
+	private static function getAllMetaKeys($branch, $id)
+	{
+		$metaKeys = array();
+		foreach (new DirectoryIterator( Zend_Registry::get("repodir") . '/' . $branch . '/' . $id . '/metadata/' ) as $keyFile)
+		{
+			if ( ! $keyFile->isDot() && $keyFile->isFile())
+			{
+				$basename = $keyFile->getBasename();
+				if (! in_array($basename, array(
+						'branch', 
+						'revision', 
+						'repository', 
+						'timestamp', 
+						'committer', 
+						'changes', 
+						'status',
+						'buildnr',
+						'bundle', 
+						'first_stage_results', 
+						'second_stage_results', 
+						'third_stage_results')))
+				{
+					$metaKeys[] = $basename;
+				}
+			}
+		}
+		return $metaKeys;
+	}
 	
 	private static function getMetadata($branch, $id, $meta)
 	{
@@ -83,6 +112,10 @@ class Application_Model_BundlePeer
 		$bundle->stage2 = self::getStageStatus($branch, $id, 2);
 		$bundle->stage3 = self::getStageStatus($branch, $id, 3);
 		$bundle->setChanges(self::getMetadata($branch, $id, 'changes'));
+		foreach(self::getAllMetaKeys($branch, $id) as $key)
+		{
+			$bundle->$key = self::getMetadata($branch, $id, $key);
+		}
 		return $bundle;
 	}
 	
