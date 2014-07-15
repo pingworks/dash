@@ -249,12 +249,14 @@ Dash.config = {
         text: 'Do you really want to start this Jenkins Job?',
         inputFields: [{
             type: 'checkbox',
-            label: 'Module 1',
+            label: 'Module 1: {1}',
+            labelBundleKey: 'foo',
             name: 'module1',
             value: 'module1'
         }, {
             type: 'checkbox',
-            label: 'Module 2',
+            label: 'Module 2: {1}',
+            labelBundleKey: 'bar',
             name: 'module2',
             value: 'module2'
         }],

@@ -62,9 +62,10 @@ Ext.define("Dash.view.TriggerJenkinsJobWindow", {
             html: Dash.config.triggerJenkinsJob.text
         }];
         Ext.each(Dash.config.triggerJenkinsJob.inputFields, function(fieldConfig) {
+            boxLabel = Ext.String.format(fieldConfig.label, that.bundle.get(fieldConfig.labelBundleKey), that.bundle.get('payload')[fieldConfig.labelBundleKey]);
             that.items[0].items.push({
                 xtype: fieldConfig.type,
-                boxLabel: fieldConfig.label,
+                boxLabel: boxLabel,
                 name: fieldConfig.name,
                 inputValue: fieldConfig.value
             });

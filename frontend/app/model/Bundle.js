@@ -26,7 +26,8 @@ Ext.define('Dash.model.Bundle', {
         { name: 'stage2', type: 'int' },
         { name: 'stage3', type: 'int' },
         { name: 'timestamp', type: 'date', convert: function(value, record) { return Ext.Date.parse(value, Dash.config.bundle.dateformat)}},
-        { name: 'committer', type: 'string' }
+        { name: 'committer', type: 'string' },
+        { name: 'payload', type: 'array' }
     ],
     proxy: {
         type: 'rest',
