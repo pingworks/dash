@@ -56,7 +56,8 @@ Ext.define('Dash.controller.Deployment', {
         	this.getEnvironmentsStore().reload();
             this.getEnvironmentsStore().clearFilter(true);
             this.getEnvironmentsStore().filter('deployable', true);
-        	this.getContentsStore().reload();
+            if (Dash.config.deployment.features.content && Dash.config.deployment.features.content.enabled)
+            	this.getContentsStore().reload();
             var window = Ext.create('Dash.view.DeploymentWindow', {
                 bundle: bundle
             }).show();
