@@ -263,7 +263,7 @@ Dash.config = {
         params: {
             bundle: {
                 name: 'bundle',
-                value: 'https://dash.pingworks.net/repo/{0}/{1}'
+                value: '{1}'
             },
             formValues: {
                 name: 'formValues'
