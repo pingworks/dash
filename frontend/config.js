@@ -111,14 +111,14 @@ Dash.config = {
             timestamp: false,
             committer: false,
             revision: false,
-            repository: false,
+            repository: true,
             bundle: false,
             stage1: false,
             stage2: false,
             stage3: false,
             changes: false,
             deployment: false,
-            triggerJenkinsJob: false
+            triggerJenkinsJob: true
         }
     },
     
