@@ -78,7 +78,8 @@ Ext.define("Dash.view.EnvironmentGrid", {
             text: Dash.config.deployment.features.content.label,
             dataIndex: 'content',
             type: 'string',
-            width: 120
+            width: 120,
+            hidden: true
         }, {
             text: 'URLs',
             dataIndex: 'urls',

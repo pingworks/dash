@@ -21,7 +21,7 @@ Ext.define("Dash.view.EnvironmentsWindow", {
     
     id: 'EnvironmentsWindow',
     title: 'Environments',
-    width: 1000,
+    width: 800,
     height: 600,
     layout: 'fit',
     items: [{
