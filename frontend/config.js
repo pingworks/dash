@@ -31,7 +31,7 @@ Dash.config = {
         }, {
             id: 'Title',
             xtype: 'component',
-            html: 'AGILE BODENSEE',
+            html: 'Dashboard',
             style: 'font-size: 32px'
         }],
         links: [{
