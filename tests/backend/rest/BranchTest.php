@@ -33,7 +33,7 @@ class BranchTest extends RestTest
 		$entry2->url = 'branches/branchA';
 		
 		$this->assertTrue($result->success);
-		$this->assertInternalType('array', $result->results);
+		$this->assertType('array', $result->results);
 		$this->assertEquals(2, count($result->results));
 		
 		$idx1 = array_search($entry1, $result->results);
