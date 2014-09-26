@@ -104,8 +104,8 @@ Dash.config = {
             stage2: '2nd',
             stage3: '3rd',
             changes: 'Changes',
-            deployment: 'Deployment',
-            triggerJenkinsJob: 'TriggerJenkinsJob'
+            deployment: 'Deploy Test',
+            triggerJenkinsJob: 'Deploy Prod'
         },
         hidden: {
             timestamp: false,
@@ -118,7 +118,7 @@ Dash.config = {
             stage3: false,
             changes: false,
             deployment: false,
-            triggerJenkinsJob: true
+            triggerJenkinsJob: false
         }
     },
     
@@ -239,15 +239,15 @@ Dash.config = {
     },
     
     triggerJenkinsJob: {
-        triggerUrl: '/jenkins/job/Deployment/buildWithParameters?token=Omi7foh4gu7d',
-        showUrl: '/jenkins/job/Deployment/',
-        title: 'Start Jenkins Job',
+        triggerUrl: '/jenkins/job/DeploymentProd/buildWithParameters?token=Omi7foh4gu7d',
+        showUrl: '/jenkins/job/DeploymentProd/',
+        title: 'Deployment to production',
         label: {
             cancel: 'Cancel',
-            run: 'Run'
+            run: 'Go go go !!'
         },
-        text: 'Do you really want to start this Jenkins Job?',
-        inputFields: [{
+        text: 'Do you really want to deploy to production?',
+        inputFields: [/*{
             type: 'checkbox',
             label: 'Module 1: {1}',
             labelBundleKey: 'foo',
@@ -259,7 +259,7 @@ Dash.config = {
             labelBundleKey: 'bar',
             name: 'module2',
             value: 'module2'
-        }],
+        }*/],
         params: {
             bundle: {
                 name: 'bundle',
