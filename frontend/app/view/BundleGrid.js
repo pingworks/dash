@@ -24,15 +24,21 @@ Ext.define("Dash.view.BundleGrid", {
     id: 'BundleGrid',
     
     stageStatusIconRenderer: function(value, metadata, record, rowIndex, colIndex, store, view) {
-        var stageStatus = Dash.app.getController('Bundle').getStageStatus(record, colIndex - 4);
+        // work around extjs bug: colIndex is wrong when some cols are hidden
+    	var offset = 0;
+        for (var i=0;i<colIndex;i++) {
+        	if (!this.columns[i].isVisible())
+        		offset++;
+        }
+        var stageStatus = Dash.app.getController('Bundle').getStageStatus(record, colIndex - 4 + offset);
         var iconUrl = Ext.BLANK_IMAGE_URL;
         var iconCls = '';
         if (stageStatus) {
             iconUrl = Ext.String.format(Dash.config.stagestatus.iconpath, stageStatus.get('icon'));
             iconCls = stageStatus.get('cls');
         }
-        this.columns[colIndex].items[0].icon = iconUrl;
-        this.columns[colIndex].items[0].iconCls = iconCls;
+        this.columns[colIndex + offset].items[0].icon = iconUrl;
+        this.columns[colIndex + offset].items[0].iconCls = iconCls;
     },
     
     deploymentActionRenderer: function(value, metadata, record, rowIndex, colIndex, store, view) {
