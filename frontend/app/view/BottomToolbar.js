@@ -21,6 +21,6 @@ Ext.define("Dash.view.BottomToolbar", {
     items: ['->', {
         id: 'Copyright',
 	    xtype: 'component',
-	    html: '&copy; 2013 <a style="color: black" target="_blank" href="http://www.pingworks.de">pingworks</a> - Alexander Birk, Christoph Lukas'
+	    html: '&copy; 2014 <a style="color: black" target="_blank" href="http://www.pingworks.de">pingworks</a> - Alexander Birk, Christoph Lukas'
 	}]
 });
