@@ -10,7 +10,6 @@ Für Debian / Ubuntu VMs haben wir die nötigen
 Installationsbefehle im Script InstallDevEnv.sh
 zusammengestellt.
 
-
 Sourcen
 -------
 Die Sourcen in der VM mit
