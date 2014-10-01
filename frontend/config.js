@@ -31,7 +31,7 @@ Dash.config = {
         }, {
             id: 'Title',
             xtype: 'component',
-            html: 'Dashboard',
+            html: 'Abkon 2014',
             style: 'font-size: 32px'
         }],
         links: [{
