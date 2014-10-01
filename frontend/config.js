@@ -1,6 +1,6 @@
 /*
  * Copyright (C) 2013 pingworks - Alexander Birk und Christoph Lukas
- * 
+ *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
@@ -10,7 +10,7 @@
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
@@ -31,7 +31,7 @@ Dash.config = {
         }, {
             id: 'Title',
             xtype: 'component',
-            html: 'Dashboard',
+            html: 'Abkon 2014',
             style: 'font-size: 32px'
         }],
         links: [{
@@ -51,7 +51,7 @@ Dash.config = {
             }
         }]
     },
-    
+
     bundlegrid: {
         title: 'Bundles in Branch: {0}',
         dateformat: 'd.m.Y H:i:s',
@@ -121,30 +121,30 @@ Dash.config = {
             triggerJenkinsJob: false
         }
     },
-    
+
     environmentgrid: {
         dateformat: 'd.m.Y H:i:s',
         envlink: '<a href="{0}" target="_blank" style="color: black">{1}</a>'
     },
-    
+
     branch: {
         endpoint: '/branch'
     },
-    
+
     bundle: {
         endpoint: '/bundle',
         dateformat: 'Y-m-d_H:i:s'
     },
-    
+
     change: {
         endpoint: '/change',
-        title: 'Changes in Bundle {0}' 
+        title: 'Changes in Bundle {0}'
     },
-    
+
     content: {
         endpoint: '/content'
     },
-    
+
     stagestatus: {
         iconpath: 'resources/img/icons/status/{0}',
         data: [
@@ -204,10 +204,10 @@ Dash.config = {
             }
         ]
     },
-    
+
     jobresult: {
         endpoint: '/jobresult',
-        text: '<div style="white-space: nowrap;"><img src="{6}" alt="{2}" class="{7}">&nbsp;' 
+        text: '<div style="white-space: nowrap;"><img src="{6}" alt="{2}" class="{7}">&nbsp;'
             + '<a href="https://dash.pingworks.net/jenkins/{1}" target="_blank">{0}</a>: Tests: {3}, skipped: {4}, failed: {5}</div>',
         title: '{1} stage Jobs for Bundle {2}',
         stageMap: {
@@ -216,12 +216,12 @@ Dash.config = {
             3: 'Third'
         }
     },
-    
+
     environment: {
         endpoint: '/environment',
         dateformat: 'Y-m-d H:i:s'
     },
-    
+
     deployment: {
         triggerUrl: '/jenkins/job/Deployment/buildWithParameters?token=Omi7foh4gu7d',
         showUrl: '/jenkins/job/Deployment/',
@@ -234,10 +234,10 @@ Dash.config = {
             dbreset: {
                 enabled: false,
                 label: 'Database Reset'
-            } 
+            }
         }
     },
-    
+
     triggerJenkinsJob: {
         triggerUrl: '/jenkins/job/DeploymentProd/buildWithParameters?token=Omi7foh4gu7d',
         showUrl: '/jenkins/job/DeploymentProd/',
@@ -270,7 +270,7 @@ Dash.config = {
             }
         }
     },
-    
+
     lockduration: {
         data: [
             {
@@ -295,12 +295,12 @@ Dash.config = {
                 'id': '120',
                 'name': '5 days'
             }
-        ] 
+        ]
     },
-    
+
     error: {
         title: 'Error',
         msg: 'Unable to read data from server.'
     }
-    
+
 }
