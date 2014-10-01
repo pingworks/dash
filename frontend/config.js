@@ -31,7 +31,7 @@ Dash.config = {
         }, {
             id: 'Title',
             xtype: 'component',
-            html: 'Dashboard1',
+            html: 'Dashboard2',
             style: 'font-size: 32px'
         }],
         links: [{
