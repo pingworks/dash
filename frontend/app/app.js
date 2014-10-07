@@ -37,54 +37,52 @@ Ext.application({
     models:[
         'Branch',
         'Bundle',
-        'Change',
         'Content',
-        'Environment',
+        'Change',
         'JobResult',
         'JobStatus',
-        'LockDuration',
-        'StageStatus'
+        'StageStatus',
+        'Environment',
+        'LockDuration'
     ],
 
     views: [
-        'BottomToolbar',
         'BundleGrid',
         'ChangeToolTip',
-        'DeploymentWindow',
-        'TriggerJenkinsJobWindow',
-        'EnvironmentGrid',
-        'EnvironmentsWindow',
         'JobResultToolTip',
-        'StoreMenu',
         'ToolTip',
         'TopToolbar',
+        'BottomToolbar',
+        'DeploymentWindow',
+        'TriggerJenkinsJobWindow',
+        'EnvironmentsWindow',
+        'EnvironmentGrid',
         'Viewport'
     ],
 
     stores: [
         'Branches',
         'Bundles',
-        'Changes',
         'Contents',
-        'Environments',
+        'Changes',
         'JobResults',
         'JobStatus',
-        'LockDurations',
-        'StageStatus'
+        'StageStatus',
+        'Environments',
+        'LockDurations'
     ],
 
     controllers: [
-        'Base',
         'Bundle',
         'Change',
+        'JobResult',
         'Deployment',
         'Environment',
-        'TriggerJenkinsJob',
-        'JobResult'
+        'TriggerJenkinsJob'
     ],
 
     autoCreateViewport: true,
-    
+
     launch: function() {
         this.getBranchesStore().load({
             callback: this.onBranchesLoad,
