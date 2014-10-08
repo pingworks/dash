@@ -57,6 +57,7 @@ Ext.application({
         'DeploymentWindow',
         'TriggerJenkinsJobWindow',
         'EnvironmentsWindow',
+        'LockExtensionWindow',
         'EnvironmentGrid',
         'CommentWindow',
         'Viewport'
@@ -82,7 +83,8 @@ Ext.application({
         'Comment',
         'Deployment',
         'Environment',
-        'TriggerJenkinsJob'
+        'TriggerJenkinsJob',
+        'LockExtension'
     ],
 
     autoCreateViewport: true,
