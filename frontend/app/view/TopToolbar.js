@@ -29,7 +29,8 @@ Ext.define("Dash.view.TopToolbar", {
             id: 'ReloadButton',
             icon: 'resources/img/icons/refresh.png',
             handler: function() {
-                this.findParentByType('toolbar').fireEvent('loadBundles');
+				this.findParentByType('toolbar').fireEvent('loadBranches');
+				this.findParentByType('toolbar').fireEvent('loadBundles');
             }
         }, {
 			xtype: 'combo',

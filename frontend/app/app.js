@@ -74,6 +74,7 @@ Ext.application({
 
     controllers: [
         'Bundle',
+		'Branch',
         'Change',
         'JobResult',
         'Deployment',
@@ -83,7 +84,7 @@ Ext.application({
     autoCreateViewport: true,
 
     launch: function() {
-        this.getBranchesStore().load({
+        this.getBranchController().onLoadBranches({
             callback: this.onBranchesLoad,
             scope: this
         });
