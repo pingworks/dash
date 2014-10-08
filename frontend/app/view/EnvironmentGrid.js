@@ -1,6 +1,6 @@
 /*
  * Copyright (C) 2013 pingworks - Alexander Birk und Christoph Lukas
- * 
+ *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
@@ -10,19 +10,19 @@
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 Ext.define("Dash.view.EnvironmentGrid", {
     extend: 'Ext.grid.Panel',
     alias: 'widget.environmentgrid',
-    requires: [],
+    requires: ['Ext.grid.column.Action'],
     store: 'Environments',
     width: '100%',
-    
+
     id: 'EnvironmentGrid',
-    
+
     urlRenderer: function(value, metadata, record, rowIndex, colIndex, store, view) {
         var newValue='';
         if (Ext.isArray(value)) {
@@ -32,7 +32,7 @@ Ext.define("Dash.view.EnvironmentGrid", {
         }
         return newValue;
     },
-    
+
     initComponent: function() {
         var that = this;
         this.columns = [{
@@ -70,6 +70,21 @@ Ext.define("Dash.view.EnvironmentGrid", {
             renderer: Ext.util.Format.dateRenderer(Dash.config.environmentgrid.dateformat),
             width: 150
         }, {
+			text: '',
+			xtype: 'actioncolumn',
+			width: 60,
+			items: [{
+				icon: Dash.config.bundlegrid.icon.deploy,
+				isDisabled: function (gridview, rowIndex, colIndex, item, record) {
+					return !record.get('locked');
+				},
+				handler: function(gridview, rowIndex, colIndex, item, event, record) {
+					that.fireEvent('showLockExtensionWindow', record);
+				}
+			}],
+			renderer: this.deploymentActionRenderer,
+			scope: this
+		}, {
             text: 'deployed',
             dataIndex: 'bundle',
             type: 'string',
