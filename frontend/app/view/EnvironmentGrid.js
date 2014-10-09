@@ -74,7 +74,7 @@ Ext.define("Dash.view.EnvironmentGrid", {
 			xtype: 'actioncolumn',
 			width: 60,
 			items: [{
-				icon: Dash.config.bundlegrid.icon.deploy,
+				icon: Dash.config.bundlegrid.icon.lockExtension,
 				isDisabled: function (gridview, rowIndex, colIndex, item, record) {
 					return !record.get('locked');
 				},

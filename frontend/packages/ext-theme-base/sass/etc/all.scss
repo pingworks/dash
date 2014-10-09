@@ -6,3 +6,7 @@
 @import 'compass';
 @import 'functions';
 @import 'mixins';
+
+.x-action-col-cell {
+	vertical-align: middle;
+}

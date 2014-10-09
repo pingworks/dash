@@ -1,6 +1,6 @@
 /*
  * Copyright (C) 2013 pingworks - Alexander Birk und Christoph Lukas
- * 
+ *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
@@ -10,7 +10,7 @@
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
@@ -51,13 +51,14 @@ Dash.config = {
             }
         }]
     },
-    
+
     bundlegrid: {
         title: 'Bundles im Branch: {0}',
         dateformat: 'd.m.Y H:i:s',
         icon: {
             change: 'resources/img/icons/change.png',
-            deploy: 'resources/img/icons/deploy.png'
+            deploy: 'resources/img/icons/deploy.png',
+			lockExtension: 'resources/img/icons/lockExtension.png'
         },
         repolink: '<a href="https://dash.pingworks.net/repo/{0}/{1}" target="_blank" style="color: black">{1}</a>',
         vcslink: '<a href="https://dash.pingworks.net/git/?p=dash.git;a=commit;h={0}" target="_blank" style="color: black">{0}</a>',
@@ -74,30 +75,30 @@ Dash.config = {
             }
         }
     },
-    
+
     environmentgrid: {
         dateformat: 'd.m.Y H:i:s',
         envlink: '<a href="{0}" target="_blank" style="color: black">{1}</a>'
     },
-    
+
     branch: {
         endpoint: '/branch'
     },
-    
+
     bundle: {
         endpoint: '/bundle',
         dateformat: 'Y-m-d_H:i:s'
     },
-    
+
     change: {
         endpoint: '/change',
-        title: 'Änderungen in Bundle {0}' 
+        title: 'Änderungen in Bundle {0}'
     },
-    
+
     content: {
         endpoint: '/content'
     },
-    
+
     stagestatus: {
         iconpath: 'resources/img/icons/status/{0}',
         data: [
@@ -157,10 +158,10 @@ Dash.config = {
             }
         ]
     },
-    
+
     jobresult: {
         endpoint: '/jobresult',
-        text: '<img src="{6}" alt="{2}" class="{7}">&nbsp;' 
+        text: '<img src="{6}" alt="{2}" class="{7}">&nbsp;'
             + '<a href="https://dash.pingworks.net/jenkins/{1}" target="_blank">{0}</a>: Tests: {3}, skipped: {4}, failed: {5}',
         title: '{1} stage Jobs für Bundle {2}',
         stageMap: {
@@ -169,12 +170,12 @@ Dash.config = {
             3: 'Third'
         }
     },
-    
+
     environment: {
         endpoint: '/environment',
         dateformat: 'Y-m-d H:i:s'
     },
-    
+
     deployment: {
         triggerUrl: '/jenkins/job/Deployment/buildWithParameters?token=Omi7foh4gu7d',
         showUrl: '/jenkins/job/Deployment/',
@@ -187,10 +188,10 @@ Dash.config = {
             dbreset: {
                 enabled: false,
                 label: 'Database Reset'
-            } 
+            }
         }
     },
-    
+
     lockduration: {
         data: [
             {
@@ -215,12 +216,12 @@ Dash.config = {
                 'id': '120',
                 'name': '5 Tage'
             }
-        ] 
+        ]
     },
-    
+
     error: {
         title: 'Fehler',
         msg: 'Die Daten konnten nicht geladen werden.'
     }
-    
+
 }
