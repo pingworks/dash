@@ -2,3 +2,7 @@ $ext-version: '4.2.1.883' !default;  // Updated automatically by the build scrip
 @import 'compass';
 @import 'functions';
 @import 'mixins';
+
+.x-action-col-cell {
+	vertical-align: middle;
+}

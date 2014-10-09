@@ -67,7 +67,8 @@ Dash.config = {
         icon: {
             change: 'resources/img/icons/change.png',
             deploy: 'resources/img/icons/deploy.png',
-            comment: 'resources/img/icons/comment.png'
+            comment: 'resources/img/icons/comment.png',
+            lockExtension: 'resources/img/icons/lockExtension.png'
         },
         repolink: '<a href="https://dash.pingworks.net/repo/{0}/{1}" target="_blank" style="color: black">{1}</a>',
         vcslink: '<a href="https://dash.pingworks.net/git/?p=dash.git;a=commit;h={1}" target="_blank" style="color: black">{1}</a>',
