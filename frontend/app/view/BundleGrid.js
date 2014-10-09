@@ -1,6 +1,6 @@
 /*
  * Copyright (C) 2013 pingworks - Alexander Birk und Christoph Lukas
- * 
+ *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
@@ -10,7 +10,7 @@
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
@@ -20,9 +20,9 @@ Ext.define("Dash.view.BundleGrid", {
     requires: 'Ext.grid.column.Action',
     store: 'Bundles',
     width: '100%',
-    
+
     id: 'BundleGrid',
-    
+
     stageStatusIconRenderer: function(value, metadata, record, rowIndex, colIndex, store, view) {
         var stageStatus = Dash.app.getController('Bundle').getStageStatus(record, colIndex - 3);
         var iconUrl = Ext.BLANK_IMAGE_URL;
@@ -34,27 +34,27 @@ Ext.define("Dash.view.BundleGrid", {
         this.columns[colIndex].items[0].icon = iconUrl;
         this.columns[colIndex].items[0].iconCls = iconCls;
     },
-    
+
     deploymentActionRenderer: function(value, metadata, record, rowIndex, colIndex, store, view) {
         var ctrl = Dash.app.getController('Deployment');
-        this.columns[colIndex].items[0].iconCls = 
+        this.columns[colIndex].items[0].iconCls =
             ctrl.deploymentAllowed(record) ? '' : 'x-item-disabled';
     },
-    
+
     createChangeTooltip: function(target, bundle) {
         return Ext.create('Dash.view.ChangeToolTip', {
             id: 'TTC-' + bundle.get('id').replace(/\./g, '-'),
             target: target
         });
     },
-    
+
     createJobResultTooltip: function(target, bundle, stage) {
         return Ext.create('Dash.view.JobResultToolTip', {
             id: 'TTJR-' + bundle.get('id').replace(/\./g, '-') + '-' + stage,
             target: target
         });
     },
-    
+
     initComponent: function() {
         var that = this;
         this.columns = [{
@@ -96,9 +96,9 @@ Ext.define("Dash.view.BundleGrid", {
                 handler: function(gridview, rowIndex, colIndex, item, event, record) {
                     that.fireEvent('hideAllTooltips');
                     that.fireEvent(
-                        'loadJobResult', 
-                        record, 
-                        1, 
+                        'loadJobResult',
+                        record,
+                        1,
                         that.createJobResultTooltip(event.target, record, 1)
                     );
                 }
@@ -116,9 +116,9 @@ Ext.define("Dash.view.BundleGrid", {
                 handler: function(gridview, rowIndex, colIndex, item, event, record) {
                     that.fireEvent('hideAllTooltips');
                     that.fireEvent(
-                        'loadJobResult', 
-                        record, 
-                        2, 
+                        'loadJobResult',
+                        record,
+                        2,
                         that.createJobResultTooltip(event.target, record, 2)
                     );
                 }
@@ -136,9 +136,9 @@ Ext.define("Dash.view.BundleGrid", {
                 handler: function(gridview, rowIndex, colIndex, item, event, record) {
                     that.fireEvent('hideAllTooltips');
                     that.fireEvent(
-                        'loadJobResult', 
-                        record, 
-                        3, 
+                        'loadJobResult',
+                        record,
+                        3,
                         that.createJobResultTooltip(event.target, record, 3)
                     );
                 }
@@ -147,6 +147,32 @@ Ext.define("Dash.view.BundleGrid", {
             scope: this,
             width: 40
         }, {
+			text: 'Build',
+			menuText: 'Build',
+			align: 'center',
+			xtype: 'actioncolumn',
+			width: 120,
+			items: [{
+				margin: 10,
+				icon: Dash.config.bundlegrid.icon.stopBuild,
+				isDisabled: function (gridview, rowIndex, colIndex, item, record) {
+					return !record.isBuildRunning();
+				},
+				handler: function(gridview, rowIndex, colIndex, item, event, record) {
+					that.fireEvent('stopBuild', record);
+				}
+			}, {
+				margin: 10,
+				icon: Dash.config.bundlegrid.icon.showBuild,
+				isDisabled: function (gridview, rowIndex, colIndex, item, record) {
+					return !Ext.isDefined(record.getLatestBuildUrl());
+				},
+				handler: function(gridview, rowIndex, colIndex, item, event, record) {
+					that.fireEvent('showBuild', record);
+				}
+			}],
+			scope: this
+		}, {
             text: 'Änderungen',
             menuText: 'Änderungen',
             align: 'center',
@@ -157,8 +183,8 @@ Ext.define("Dash.view.BundleGrid", {
                 handler: function(gridview, rowIndex, colIndex, item, event, record) {
                     that.fireEvent('hideAllTooltips');
                     that.fireEvent(
-                        'loadChanges', 
-                        record, 
+                        'loadChanges',
+                        record,
                         that.createChangeTooltip(event.target, record)
                     );
                 }
