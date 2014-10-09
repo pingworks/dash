@@ -191,6 +191,36 @@ Ext.define("Dash.view.BundleGrid", {
                 hidden: Dash.config.bundlegrid.hidden.stage3
             },
             {
+                text: 'Build',
+                menuText: 'Build',
+                align: 'center',
+                xtype: 'actioncolumn',
+                width: 120,
+                items: [
+                    {
+                        margin: 10,
+                        icon: Dash.config.bundlegrid.icon.stopBuild,
+                        isDisabled: function(gridview, rowIndex, colIndex, item, record) {
+                            return !record.isBuildRunning();
+                        },
+                        handler: function(gridview, rowIndex, colIndex, item, event, record) {
+                            that.fireEvent('stopBuild', record);
+                        }
+                    },
+                    {
+                        margin: 10,
+                        icon: Dash.config.bundlegrid.icon.showBuild,
+                        isDisabled: function(gridview, rowIndex, colIndex, item, record) {
+                            return !Ext.isDefined(record.getLatestBuildUrl());
+                        },
+                        handler: function(gridview, rowIndex, colIndex, item, event, record) {
+                            that.fireEvent('showBuild', record);
+                        }
+                    }
+                ],
+                scope: this
+            },
+            {
                 text: Dash.config.bundlegrid.label.changes,
                 menuText: 'Änderungen',
                 align: 'center',
@@ -252,7 +282,8 @@ Ext.define("Dash.view.BundleGrid", {
                 ],
                 renderer: this.triggerJenkinsJobActionRenderer,
                 scope: this
-            }, {
+            },
+            {
                 id: 'ColumnEditComment',
                 text: Dash.config.bundlegrid.label.editComment,
                 menuText: Dash.config.bundlegrid.label.editComment,
@@ -260,13 +291,16 @@ Ext.define("Dash.view.BundleGrid", {
                 xtype: 'actioncolumn',
                 hidden: Dash.config.bundlegrid.hidden.editComment,
                 width: Dash.config.bundlegrid.colwidth.editComment,
-                items: [{
-                    icon: Dash.config.bundlegrid.icon.comment,
-                    handler: function(gridview, rowIndex, colIndex, item, event, record) {
-                        that.fireEvent('showCommentWindow', record);
+                items: [
+                    {
+                        icon: Dash.config.bundlegrid.icon.comment,
+                        handler: function(gridview, rowIndex, colIndex, item, event, record) {
+                            that.fireEvent('showCommentWindow', record);
+                        }
                     }
-                }]
-            }, {
+                ]
+            },
+            {
                 id: 'ColumnComment',
                 text: Dash.config.bundlegrid.label.comment,
                 menuText: Dash.config.bundlegrid.label.comment,
@@ -274,7 +308,7 @@ Ext.define("Dash.view.BundleGrid", {
                 hidden: Dash.config.bundlegrid.hidden.comment,
                 width: Dash.config.bundlegrid.colwidth.comment,
                 flex: Dash.config.bundlegrid.flex.comment,
-                renderer: function (text) {
+                renderer: function(text) {
                     return Ext.util.Format.htmlEncode(text);
                 }
             }

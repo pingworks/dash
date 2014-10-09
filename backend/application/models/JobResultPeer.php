@@ -20,7 +20,7 @@ class Application_Model_JobResultPeer
     private static function getJobResultFromString($string)
     {
         $jobResult = new Application_Model_JobResult();
-        $fields = split(';', $string);
+        $fields = explode(';', $string);
         $jobResult->name = (array_key_exists(0, $fields)) ? $fields[0] : 'Unavailable';
         $jobResult->url = (array_key_exists(1, $fields)) ? $fields[1] : '';
         $jobResult->status = (array_key_exists(2, $fields)) ? $fields[2] : 'Unavailable';
@@ -33,7 +33,7 @@ class Application_Model_JobResultPeer
     public static function getJobResults($branch, $bundleId, $stage)
     {
         $jobResultFileContent = Application_Model_BundlePeer::getJobResults($branch, $bundleId, $stage);
-        $jobResultStrings = split("\n", $jobResultFileContent);
+        $jobResultStrings = explode("\n", $jobResultFileContent);
         $jobResults = array();
         foreach ($jobResultStrings as $string) {
             $jobResult = self::getJobResultFromString($string);

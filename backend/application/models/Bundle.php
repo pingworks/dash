@@ -29,6 +29,7 @@ class Application_Model_Bundle
     public $timestamp;
     public $committer;
 	public $comment;
+    public $buildUrls;
     private $changes;
     public $payload;
 

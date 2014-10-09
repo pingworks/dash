@@ -84,7 +84,8 @@ Ext.application({
         'Deployment',
         'Environment',
         'TriggerJenkinsJob',
-        'LockExtension'
+        'LockExtension',
+        'Build'
     ],
 
     autoCreateViewport: true,

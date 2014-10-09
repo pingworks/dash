@@ -137,6 +137,8 @@ class Application_Model_BundlePeer
         $bundle->stage2 = self::getStageStatus($branch, $id, 2);
         $bundle->stage3 = self::getStageStatus($branch, $id, 3);
         $bundle->setChanges(self::getMetadata($branch, $id, 'changes'));
+        $buildUrls = self::getMetadata($branch, $id, 'buildurl', '');
+        $bundle->buildUrls = ($buildUrls) ? explode("\n", $buildUrls) : array();
         $bundle->payload = array();
         foreach (self::getAllMetaKeys($branch, $id) as $key) {
             $bundle->payload[$key] = self::getMetadata($branch, $id, $key);

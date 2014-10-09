@@ -28,9 +28,10 @@ Ext.define('Dash.model.Bundle', {
         { name: 'timestamp', type: 'date', convert: function(value, record) {
             return Ext.Date.parse(value, Dash.config.bundle.dateformat)
         }},
+        { name: 'buildUrls', type: 'auto' },
         { name: 'committer', type: 'string' },
         { name: 'payload', type: 'array' },
-		{ name: 'comment', type: 'string' }
+        { name: 'comment', type: 'string' }
     ],
     proxy: {
         type: 'rest',
@@ -40,8 +41,32 @@ Ext.define('Dash.model.Bundle', {
             root: 'results'
         }
     },
+    getLatestBuildUrl: function() {
+        var buildUrls = this.get('buildUrls');
+        var lastIndex = buildUrls.length - 1;
+        if (lastIndex < 0) {
+            return undefined;
+        } else {
+            return buildUrls[lastIndex];
+        }
+    },
+    isBuildRunning: function() {
+        var buildUrls = this.get('buildUrls');
+        var isBuilding = false;
+        for (var stage = 1; stage <= 3 && !isBuilding; stage++) {
+            var stageStatus = this.getStage(stage);
+            if (stageStatus == 1) {
+                isBuilding = true;
+            }
+        }
+        return Ext.isDefined(buildUrls) && isBuilding;
+    },
+    getStage: function(stage) {
+        return this.get('stage' + stage);
+    },
     getStageStatus: function(stage) {
-        return Ext.StoreMgr.get('StageStatus').getById(this.get('stage' + stage));
+        var stageStatus = this.getStage(stage);
+        return Ext.StoreMgr.get('StageStatus').getById(stageStatus);
     },
     getBranch: function() {
         return Ext.StoreMgr.get('Branches').getById(this.get('branch'));
