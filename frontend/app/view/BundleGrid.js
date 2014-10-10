@@ -17,7 +17,7 @@
 Ext.define("Dash.view.BundleGrid", {
     extend: 'Ext.grid.Panel',
     alias: 'widget.bundlegrid',
-    requires: 'Ext.grid.column.Action',
+    requires: ['Ext.grid.column.Action', 'Ext.window.MessageBox'],
     store: 'Bundles',
     width: '100%',
 
@@ -38,7 +38,7 @@ Ext.define("Dash.view.BundleGrid", {
     deploymentActionRenderer: function(value, metadata, record, rowIndex, colIndex, store, view) {
         var ctrl = Dash.app.getController('Deployment');
         this.columns[colIndex].items[0].iconCls =
-            ctrl.deploymentAllowed(record) ? '' : 'x-item-disabled';
+            ctrl.deploymentAllowed(record) ? '' : this.disabledCls;
     },
 
     createChangeTooltip: function(target, bundle) {
@@ -154,15 +154,43 @@ Ext.define("Dash.view.BundleGrid", {
 			width: 120,
 			items: [{
 				margin: 10,
+				tooltip: "Build neustarten",
+				icon: Dash.config.bundlegrid.icon.restartBuild,
+				isDisabled: function (gridview, rowIndex, colIndex, item, record) {
+					return record.isBuildRunning();
+				},
+				handler: function(gridview, rowIndex, colIndex, item, event, record) {
+                    Ext.MessageBox.confirm(
+                        'Build neustarten',
+                        'Wollen Sie diesen Build wirklich neustarten?\nDer Build wird eventuell später gestartet und erscheint erst dann auf dem Dashboard.',
+                        function (btn) {
+                            if (btn == 'yes') {
+                                that.fireEvent('restartBuild', record);
+                            }
+                        }
+                    );
+				}
+			}, {
+				margin: 10,
+				tooltip: "Build stoppen",
 				icon: Dash.config.bundlegrid.icon.stopBuild,
 				isDisabled: function (gridview, rowIndex, colIndex, item, record) {
 					return !record.isBuildRunning();
 				},
 				handler: function(gridview, rowIndex, colIndex, item, event, record) {
-					that.fireEvent('stopBuild', record);
+                    Ext.MessageBox.confirm(
+                        'Build stoppen',
+                        'Wollen Sie diesen Build wirklich stoppen?',
+                        function (btn) {
+                            if (btn == 'yes') {
+                                that.fireEvent('stopBuild', record);
+                            }
+                        }
+                    );
 				}
 			}, {
 				margin: 10,
+				tooltip: "Build anzeigen",
 				icon: Dash.config.bundlegrid.icon.showBuild,
 				isDisabled: function (gridview, rowIndex, colIndex, item, record) {
 					return !Ext.isDefined(record.getLatestBuildUrl());
@@ -174,7 +202,7 @@ Ext.define("Dash.view.BundleGrid", {
 			scope: this
 		}, {
             text: 'Änderungen',
-            menuText: 'Änderungen',
+			menuText: 'Änderungen',
             align: 'center',
             xtype: 'actioncolumn',
             width: 120,

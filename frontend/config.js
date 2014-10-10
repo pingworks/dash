@@ -58,6 +58,7 @@ Dash.config = {
         icon: {
             change: 'resources/img/icons/change.png',
             deploy: 'resources/img/icons/deploy.png',
+			restartBuild: 'resources/img/icons/restartBuild.png',
             stopBuild: 'resources/img/icons/stopBuild.png',
             showBuild: 'resources/img/icons/showBuild.png'
         },
@@ -177,10 +178,14 @@ Dash.config = {
         dateformat: 'Y-m-d H:i:s'
     },
 
+	build: {
+		triggerRestartUrl: '/jenkins/job/Deployment/buildWithParameters?token=Aezei3oph9xu',
+		triggerStopUrlPathSuffix: 'stop'
+	},
+
     deployment: {
         triggerUrl: '/jenkins/job/Deployment/buildWithParameters?token=Omi7foh4gu7d',
         showUrl: '/jenkins/job/Deployment/',
-		stopBuildUrlPath: 'stop',
         features: {
         	content: {
         		enabled: false,
