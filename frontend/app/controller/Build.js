@@ -22,44 +22,54 @@ Ext.define('Dash.controller.Build', {
     init: function() {
         this.control({
 			'bundlegrid': {
+				restartBuild: this.onRestartBuild,
 				stopBuild: this.onStopBuild,
 				showBuild: this.onShowBuild
-            },
+            }
 		});
         this.callParent(arguments);
     },
+	onRestartBuild: function(bundle) {
+		if (!bundle.isBuildRunning()) {
+			Ext.Ajax.request({
+				url: Dash.config.build.triggerRestartUrl,
+				params: {
+					BRANCH: bundle.getBranch().get('name'),
+					COMMITID: bundle.get('revision')
+				},
+                failure: this.onError,
+				scope: this
+			});
+		}
+	},
 	onStopBuild: function(bundle) {
 		if (bundle.isBuildRunning()) {
 			var stopUrl = bundle.getLatestBuildUrl();
 			if (!stopUrl.match('/$')) {
 				stopUrl += '/';
 			}
-			stopUrl += Dash.config.deployment.stopBuildUrlPath
+			stopUrl += Dash.config.build.triggerStopUrlPathSuffix
 			Ext.Ajax.request({
 				url: stopUrl,
 				bundle: bundle,
 				method: 'POST',
 				success: this.onStopBuildTriggered,
-				failure: this.onStopBuildError,
+				failure: this.onError,
 				scope: this
 			});
 		}
     },
 	onShowBuild: function (bundle) {
 		var buildUrl = bundle.getLatestBuildUrl();
-		var window = Ext.create('Ext.window.Window', {
-			id: 'StopBuildWindow',
-			html: '<iframe src="' + buildUrl + '" width="800px", height="600px"/>'
-		});
-		window.show();
+        if (buildUrl) {
+            var window = Ext.create('Ext.window.Window', {
+                id: 'StopBuildWindow',
+                html: '<iframe src="' + buildUrl + '" width="800px", height="600px"/>'
+            });
+            window.show();
+        }
 	},
 	onStopBuildTriggered: function(response, options) {
 		this.onShowBuild(options.bundle);
-	},
-	onStopBuildError: function(response, options) {
-		if (response.status == 302 || response.status == 0) {
-			return this.onStopBuildTriggered(response, options);
-		}
-		return this.onError(response, options);
 	}
 });

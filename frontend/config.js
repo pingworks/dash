@@ -69,6 +69,7 @@ Dash.config = {
             deploy: 'resources/img/icons/deploy.png',
             comment: 'resources/img/icons/comment.png',
             lockExtension: 'resources/img/icons/lockExtension.png',
+            restartBuild: 'resources/img/icons/restartBuild.png',
             stopBuild: 'resources/img/icons/stopBuild.png',
             showBuild: 'resources/img/icons/showBuild.png'
         },
@@ -251,6 +252,10 @@ Dash.config = {
     },
 
     deployment: {
+        build: {
+            triggerRestartUrl: '/jenkins/job/Deployment/buildWithParameters?token=Aezei3oph9xu',
+            triggerStopUrlPathSuffix: 'stop'
+        },
         triggerUrl: '/jenkins/job/Deployment/buildWithParameters?token=Omi7foh4gu7d',
         showUrl: '/jenkins/job/Deployment/',
         features: {
