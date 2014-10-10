@@ -36,6 +36,9 @@ Ext.define('Dash.model.Bundle', {
             root: 'results'
         }
     },
+    hasBuild: function () {
+        return Ext.isDefined(this.get('buildUrls'));
+    },
 	getLatestBuildUrl: function () {
 		var buildUrls = this.get('buildUrls');
 		var lastIndex = buildUrls.length-1;
@@ -46,15 +49,16 @@ Ext.define('Dash.model.Bundle', {
 		}
 	},
 	isBuildRunning: function () {
-		var buildUrls = this.get('buildUrls');
-		var isBuilding = false;
-		for (var stage = 1; stage <= 3 && !isBuilding; stage++) {
-			var stageStatus = this.getStage(stage);
-			if (stageStatus == 1) {
-				isBuilding = true;
-			}
-		}
-		return Ext.isDefined(buildUrls) && isBuilding;
+        var isBuilding = false;
+        if (this.hasBuild()) {
+            for (var stage = 1; stage <= 3 && !isBuilding; stage++) {
+                var stageStatus = this.getStage(stage);
+                if (stageStatus == 1) {
+                    isBuilding = true;
+                }
+            }
+        }
+		return isBuilding;
 	},
 	getStage: function (stage) {
 		return this.get('stage' + stage);
