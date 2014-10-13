@@ -17,7 +17,7 @@
 Ext.define("Dash.view.LockExtensionWindow", {
     extend: 'Ext.window.Window',
     alias: 'widget.lockextensionwindow',
-    requires: ['Ext.form.Panel'],
+    requires: ['Ext.String', 'Ext.form.Panel'],
 
     id: 'LockExtensionWindow',
     title: 'Nutzungsdauer verlängern',
@@ -75,7 +75,9 @@ Ext.define("Dash.view.LockExtensionWindow", {
     }],
 	listeners: {
 		show: function (window) {
-			var data = window.environment.getData();
+            var environment = window.environment;
+            window.setTitle(Ext.String.format("Nutzungsdauer für Maschine '{0}' mit Bundle '{1}' verlängern", environment.get('name'), environment.get('bundle')));
+			var data = environment.getData();
 			window.down('form').getForm().setValues(data);
 		}
 	}
