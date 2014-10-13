@@ -17,7 +17,7 @@
 Ext.define("Dash.view.BundleGrid", {
     extend: 'Ext.grid.Panel',
     alias: 'widget.bundlegrid',
-    requires: ['Ext.grid.column.Action', 'Ext.window.MessageBox'],
+    requires: ['Ext.String', 'Ext.grid.column.Action', 'Ext.window.MessageBox'],
     store: 'Bundles',
     width: '100%',
 
@@ -162,7 +162,7 @@ Ext.define("Dash.view.BundleGrid", {
 				handler: function(gridview, rowIndex, colIndex, item, event, record) {
                     Ext.MessageBox.confirm(
                         'Build neustarten',
-                        'Wollen Sie diesen Build wirklich neustarten?\nDer Build wird eventuell später gestartet und erscheint erst dann auf dem Dashboard.',
+                        Ext.String.format("Wollen Sie den Build für Revision '{0}' im Branch '{1}' wirklich neustarten?\nDer Build wird eventuell später gestartet und erscheint erst dann auf dem Dashboard.", record.get('revision'), record.get('branch')),
                         function (btn) {
                             if (btn == 'yes') {
                                 that.fireEvent('restartBuild', record);
@@ -180,7 +180,7 @@ Ext.define("Dash.view.BundleGrid", {
 				handler: function(gridview, rowIndex, colIndex, item, event, record) {
                     Ext.MessageBox.confirm(
                         'Build stoppen',
-                        'Wollen Sie diesen Build wirklich stoppen?',
+                        Ext.String.format("Wollen Sie den Build für Revision '{0}' im Branch '{1}' wirklich stoppen?", record.get('revision'), record.get('branch')),
                         function (btn) {
                             if (btn == 'yes') {
                                 that.fireEvent('stopBuild', record);
