@@ -91,7 +91,10 @@ Ext.application({
         });
     },
     onBranchesLoad: function() {
-        var branch = this.getBranchesStore().getAt(0).get('id');
-        this.getController('Bundle').onLoadBundles(branch);
+        var branchToLoad = window.location.hash.substring(1);
+        if (!branchToLoad) {
+            branchToLoad = this.getBranchesStore().getAt(0).get('id');
+        }
+        this.getController('Bundle').onLoadBundles(branchToLoad);
     }
 });
