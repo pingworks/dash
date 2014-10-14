@@ -49,6 +49,7 @@ Ext.define("Dash.view.TopToolbar", {
 			listeners: {
 				select: function(combo, records, eOpts) {
 					var selectedBranchId = records[0].get('id');
+                    window.location.hash = '#' + selectedBranchId;
 					this.findParentByType('toolbar').fireEvent('loadBundles', selectedBranchId);
 				}
 			}
