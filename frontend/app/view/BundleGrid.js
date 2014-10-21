@@ -17,7 +17,7 @@
 Ext.define("Dash.view.BundleGrid", {
     extend: 'Ext.grid.Panel',
     alias: 'widget.bundlegrid',
-    requires: ['Ext.String', 'Ext.grid.column.Action', 'Ext.window.MessageBox'],
+    requires: ['Ext.grid.column.Action', 'Ext.window.MessageBox'],
     store: 'Bundles',
     width: '100%',
 
