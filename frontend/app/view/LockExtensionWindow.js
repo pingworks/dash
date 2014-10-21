@@ -17,7 +17,7 @@
 Ext.define("Dash.view.LockExtensionWindow", {
     extend: 'Ext.window.Window',
     alias: 'widget.lockextensionwindow',
-    requires: ['Ext.String', 'Ext.form.Panel'],
+    requires: ['Ext.form.Panel'],
 
     id: 'LockExtensionWindow',
     title: 'Nutzungsdauer verlängern',
