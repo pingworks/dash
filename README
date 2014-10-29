@@ -3,19 +3,19 @@
                                   mailto:dash@pingworks.de
 ---------------------------------------------------------------
 
-Dashboard zur Visualisierung von Testergebnissen aus Continuous 
+Dashboard zur Visualisierung von Testergebnissen aus Continuous
 Delivery Pipelines
 
 Beim Einsatz von Continuous Delivery werden die Software Artefakte
 einer Reihe von automatischen Tests unterzogen, bevor diese zum
-Deployment in Produktion bereit stehen. 
-Die automatisierten Tests werden dabei in mehrstufigen Pipelines 
-organisiert, wobei jede Stufe ähnlich geartete Tests für die 
-verschiedenen Komponenten der Software durchführt. 
+Deployment in Produktion bereit stehen.
+Die automatisierten Tests werden dabei in mehrstufigen Pipelines
+organisiert, wobei jede Stufe ähnlich geartete Tests für die
+verschiedenen Komponenten der Software durchführt.
 In solchen Pipelines fallen eine Vielzahl von Testergebnissen an,
 über die die Entwickler nur schwer einen Überblick behalten können.
 
-Diese Anwendung soll die anfallenden Testergebnisse aggregieren 
+Diese Anwendung soll die anfallenden Testergebnisse aggregieren
 und visualisieren.
 
 Dazu kommen drei unterschiedliche Komponenten zum Einsatz:
@@ -45,21 +45,21 @@ zeichnisstruktur:
                                           der Artefakte)
                     + src_bundle.tar.gz
 
-Die Scripte sind Bash-Scripte, für das Auslesen von Infos aus dem 
-VCS stehen Varianten für Subversion und Git zur Verfügung. 
+Die Scripte sind Bash-Scripte, für das Auslesen von Infos aus dem
+SCM stehen Varianten für Subversion und Git zur Verfügung. 
 
 dash-backend
 ------------
-Ein in PHP geschriebenes JSON REST API zum Auslesen von Informationen 
+Ein in PHP geschriebenes JSON REST API zum Auslesen von Informationen
 über einzelne Software-Bundles. Die PHP Anwendung nutzt das Zend-
 Framework [1] und liest die oben beschriebenen Metadaten aus dem Repo
 aus und liefert diese als JSON Daten an das Frontend.
 
 dash-frontend
 -------------
-Ein auf dem ExtJS Framework aufbauendes Frontend, das die Metadaten und 
+Ein auf dem ExtJS Framework aufbauendes Frontend, das die Metadaten und
 Testergebnisse der Software-Bundles visualisiert.
- 
+
 Entwicklungsumgebung
 --------------------
 Die nötigen Schritte zum Aufsetzen einer Entwicklungsumgebung sind in
@@ -90,7 +90,7 @@ Jasmine included in frontend/test/lib/jasmine-1.3.1:
 Copyright (c) 2008-2011 Pivotal Labs and Licenced
 MIT License, see: frontend/test/lib7jasmine-1.3.1/MIT.LICENSE
 
-Phantomjs Testrunner and Jasmine JUnit Reporter included in 
+Phantomjs Testrunner and Jasmine JUnit Reporter included in
 frontend/test/lib:
 Copyright (c) 2010 Larry Myers
 MIT License, see:
