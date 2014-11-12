@@ -19,9 +19,9 @@ Ext.define("Dash.view.BundleGrid", {
     requires: 'Ext.grid.column.Action',
     store: 'Bundles',
     width: '100%',
-    
+
     id: 'BundleGrid',
-    
+
     stageStatusIconRenderer: function(value, metadata, record, rowIndex, colIndex, store, view) {
         // work around extjs bug: colIndex is wrong when some cols are hidden
     	var offset = 0;
@@ -39,33 +39,33 @@ Ext.define("Dash.view.BundleGrid", {
         this.columns[colIndex + offset].items[0].icon = iconUrl;
         this.columns[colIndex + offset].items[0].iconCls = iconCls;
     },
-    
+
     deploymentActionRenderer: function(value, metadata, record, rowIndex, colIndex, store, view) {
         var ctrl = Dash.app.getController('Deployment');
-        this.columns[this.colIndexDeployment].items[0].iconCls = 
+        this.columns[this.colIndexDeployment].items[0].iconCls =
             ctrl.deploymentAllowed(record) ? '' : 'x-item-disabled';
     },
-    
+
     triggerJenkinsJobActionRenderer: function(value, metadata, record, rowIndex, colIndex, store, view) {
         var ctrl = Dash.app.getController('TriggerJenkinsJob');
-        this.columns[this.colIndexTriggerJenkinsJob].items[0].iconCls = 
+        this.columns[this.colIndexTriggerJenkinsJob].items[0].iconCls =
             ctrl.triggerJenkinsJobAllowed(record) ? '' : 'x-item-disabled';
     },
-    
+
     createChangeTooltip: function(target, bundle) {
         return Ext.create('Dash.view.ChangeToolTip', {
             id: 'TTC-' + bundle.get('id').replace(/\./g, '-'),
             target: target
         });
     },
-    
+
     createJobResultTooltip: function(target, bundle, stage) {
         return Ext.create('Dash.view.JobResultToolTip', {
             id: 'TTJR-' + bundle.get('id').replace(/\./g, '-') + '-' + stage,
             target: target
         });
     },
-    
+
     initComponent: function() {
         var that = this;
         this.columns = [{
@@ -83,6 +83,7 @@ Ext.define("Dash.view.BundleGrid", {
         }, {
             text: Dash.config.bundlegrid.label.revision,
             dataIndex: 'revision',
+            tdCls: 'bundle-revision-column',
             renderer: function(value, metadata, record, rowIndex, colIndex, store, view) {
                 return ( Dash.config.bundlegrid.vcslink && Dash.config.bundlegrid.vcslink != ''  && record.get('revision') != 'Unavailable')
                     ? Ext.String.format(Dash.config.bundlegrid.vcslink, record.get('repository'), record.get('revision'))
@@ -121,9 +122,9 @@ Ext.define("Dash.view.BundleGrid", {
                 handler: function(gridview, rowIndex, colIndex, item, event, record) {
                     that.fireEvent('hideAllTooltips');
                     that.fireEvent(
-                        'loadJobResult', 
-                        record, 
-                        1, 
+                        'loadJobResult',
+                        record,
+                        1,
                         that.createJobResultTooltip(event.target, record, 1)
                     );
                 }
@@ -142,9 +143,9 @@ Ext.define("Dash.view.BundleGrid", {
                 handler: function(gridview, rowIndex, colIndex, item, event, record) {
                     that.fireEvent('hideAllTooltips');
                     that.fireEvent(
-                        'loadJobResult', 
-                        record, 
-                        2, 
+                        'loadJobResult',
+                        record,
+                        2,
                         that.createJobResultTooltip(event.target, record, 2)
                     );
                 }
@@ -163,9 +164,9 @@ Ext.define("Dash.view.BundleGrid", {
                 handler: function(gridview, rowIndex, colIndex, item, event, record) {
                     that.fireEvent('hideAllTooltips');
                     that.fireEvent(
-                        'loadJobResult', 
-                        record, 
-                        3, 
+                        'loadJobResult',
+                        record,
+                        3,
                         that.createJobResultTooltip(event.target, record, 3)
                     );
                 }
@@ -186,8 +187,8 @@ Ext.define("Dash.view.BundleGrid", {
                 handler: function(gridview, rowIndex, colIndex, item, event, record) {
                     that.fireEvent('hideAllTooltips');
                     that.fireEvent(
-                        'loadChanges', 
-                        record, 
+                        'loadChanges',
+                        record,
                         that.createChangeTooltip(event.target, record)
                     );
                 }
@@ -229,15 +230,15 @@ Ext.define("Dash.view.BundleGrid", {
             renderer: this.triggerJenkinsJobActionRenderer,
             scope: this
         }];
-        
+
         Ext.Array.forEach(this.columns, function(column, index) {
             if (column.id == 'ColumnDeployment')
-               this.colIndexDeployment = index; 
+               this.colIndexDeployment = index;
         }, this);
 
         Ext.Array.forEach(this.columns, function(column, index) {
             if (column.id == 'ColumnTriggerJenkinsJob')
-               this.colIndexTriggerJenkinsJob = index; 
+               this.colIndexTriggerJenkinsJob = index;
         }, this);
 
         this.callParent(arguments);
