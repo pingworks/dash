@@ -57,7 +57,10 @@ Dash.config = {
         dateformat: 'd.m.Y H:i:s',
         icon: {
             change: 'resources/img/icons/change.png',
-            deploy: 'resources/img/icons/deploy.png'
+            deploy: 'resources/img/icons/deploy.png',
+			restartBuild: 'resources/img/icons/restartBuild.png',
+            stopBuild: 'resources/img/icons/stopBuild.png',
+            showBuild: 'resources/img/icons/showBuild.png'
         },
         repolink: '<a href="https://dash.pingworks.net/repo/{0}/{1}" target="_blank" style="color: black">{1}</a>',
         vcslink: '<a href="https://dash.pingworks.net/git/?p=dash.git;a=commit;h={1}" target="_blank" style="color: black">{1}</a>',
@@ -90,6 +93,7 @@ Dash.config = {
             stage1: 40,
             stage2: 40,
             stage3: 40,
+            build: 120,
             changes: 120,
             deployment: 60,
             triggerJenkinsJob: 60
@@ -103,6 +107,7 @@ Dash.config = {
             stage1: '1st',
             stage2: '2nd',
             stage3: '3rd',
+            build: 'Build',
             changes: 'Changes',
             deployment: 'Deploy Test',
             triggerJenkinsJob: 'Deploy Prod'
@@ -116,6 +121,7 @@ Dash.config = {
             stage1: false,
             stage2: false,
             stage3: false,
+            build: false,
             changes: false,
             deployment: false,
             triggerJenkinsJob: false
@@ -221,6 +227,11 @@ Dash.config = {
         endpoint: '/environment',
         dateformat: 'Y-m-d H:i:s'
     },
+
+	build: {
+		triggerRestartUrl: '/jenkins/job/Deployment/buildWithParameters?token=ZZZZZZZZ',
+		triggerStopUrlPathSuffix: 'stop'
+	},
 
     deployment: {
         triggerUrl: '/jenkins/job/Deployment/buildWithParameters?token=Omi7foh4gu7d',
