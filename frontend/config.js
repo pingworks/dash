@@ -1,6 +1,7 @@
 /*
  * Copyright 2013 pingworks - Alexander Birk und Christoph Lukas
- * 
+ * Copyright 2014 //SEIBERT/MEDIA - Lars-Erik Kimmel
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -52,6 +53,7 @@ Dash.config = {
                 id: 'EnvButton',
                 text: 'Environments',
                 handler: function() {
+                    this.findParentByType('toolbar').fireEvent('hideCommentWindow');
                     this.findParentByType('toolbar').fireEvent('hideDeployWindow');
                     this.findParentByType('toolbar').fireEvent('showEnvironmentsWindow');
                 }
@@ -64,7 +66,8 @@ Dash.config = {
         dateformat: 'd.m.Y H:i:s',
         icon: {
             change: 'resources/img/icons/change.png',
-            deploy: 'resources/img/icons/deploy.png'
+            deploy: 'resources/img/icons/deploy.png',
+            comment: 'resources/img/icons/comment.png'
         },
         repolink: '<a href="https://dash.pingworks.net/repo/{0}/{1}" target="_blank" style="color: black">{1}</a>',
         vcslink: '<a href="https://dash.pingworks.net/git/?p=dash.git;a=commit;h={1}" target="_blank" style="color: black">{1}</a>',
@@ -99,7 +102,9 @@ Dash.config = {
             stage3: 40,
             changes: 120,
             deployment: 60,
-            triggerJenkinsJob: 60
+            triggerJenkinsJob: 60,
+            editComment: 60,
+            comment: 60
         },
         label: {
             timestamp: 'Created',
@@ -112,7 +117,9 @@ Dash.config = {
             stage3: '3rd',
             changes: 'Changes',
             deployment: 'Deploy Test',
-            triggerJenkinsJob: 'Deploy Prod'
+            triggerJenkinsJob: 'Deploy Prod',
+            editComment: 'Edit Comment',
+            comment: 'Comment'
         },
         hidden: {
             timestamp: false,
@@ -125,7 +132,14 @@ Dash.config = {
             stage3: false,
             changes: false,
             deployment: false,
-            triggerJenkinsJob: false
+            triggerJenkinsJob: false,
+            editComment: false,
+            comment: false
+        },
+        flex: {
+            deployment: 0,
+            triggerJenkinsJob: 0,
+            comment: 1
         }
     },
 
@@ -141,6 +155,10 @@ Dash.config = {
     bundle: {
         endpoint: '/bundle',
         dateformat: 'Y-m-d_H:i:s'
+    },
+
+    comment: {
+        endpoint: '/comment'
     },
 
     change: {

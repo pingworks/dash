@@ -1,6 +1,7 @@
 /*
  * Copyright 2013 pingworks - Alexander Birk und Christoph Lukas
- * 
+ * Copyright 2014 //SEIBERT/MEDIA - Lars-Erik Kimmel
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -15,16 +16,16 @@
  */
 
 /*
- This file is generated and updated by Sencha Cmd. You can edit this file as
- needed for your application, but these edits will have to be merged by
- Sencha Cmd when it performs code generation tasks such as generating new
- models, controllers or views and when running "sencha app upgrade".
+    This file is generated and updated by Sencha Cmd. You can edit this file as
+    needed for your application, but these edits will have to be merged by
+    Sencha Cmd when it performs code generation tasks such as generating new
+    models, controllers or views and when running "sencha app upgrade".
 
- Ideally changes to this file would be limited and most work would be done
- in other places (such as Controllers). If Sencha Cmd cannot merge your
- changes and its generated code, it will produce a "merge conflict" that you
- will need to resolve manually.
- */
+    Ideally changes to this file would be limited and most work would be done
+    in other places (such as Controllers). If Sencha Cmd cannot merge your
+    changes and its generated code, it will produce a "merge conflict" that you
+    will need to resolve manually.
+*/
 
 // DO NOT DELETE - this directive is required for Sencha Cmd packages to work.
 //@require @packageOverrides
@@ -57,6 +58,7 @@ Ext.application({
         'TriggerJenkinsJobWindow',
         'EnvironmentsWindow',
         'EnvironmentGrid',
+        'CommentWindow',
         'Viewport'
     ],
 
@@ -77,6 +79,7 @@ Ext.application({
         'Branch',
         'Change',
         'JobResult',
+        'Comment',
         'Deployment',
         'Environment',
         'TriggerJenkinsJob'

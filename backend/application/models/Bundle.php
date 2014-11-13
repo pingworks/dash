@@ -1,7 +1,8 @@
 <?php
 /*
  * Copyright 2013 pingworks - Alexander Birk und Christoph Lukas
- * 
+ * Copyright 2014 //SEIBERT/MEDIA - Lars-Erik Kimmel
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -27,6 +28,7 @@ class Application_Model_Bundle
     public $stage3;
     public $timestamp;
     public $committer;
+	public $comment;
     private $changes;
     public $payload;
 

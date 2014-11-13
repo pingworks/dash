@@ -1,6 +1,7 @@
 /*
  * Copyright 2013 pingworks - Alexander Birk und Christoph Lukas
- * 
+ * Copyright 2014 //SEIBERT/MEDIA - Lars-Erik Kimmel
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -25,6 +26,9 @@ Ext.define('Dash.controller.Bundle', {
     init: function() {
         this.control({
             'toptoolbar': {
+                loadBundles: this.onLoadBundles
+            },
+            'commentwindow': {
                 loadBundles: this.onLoadBundles
             }
         });
