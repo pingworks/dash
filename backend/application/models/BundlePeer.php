@@ -1,7 +1,7 @@
 <?php
 /*
  * Copyright (C) 2013 pingworks - Alexander Birk und Christoph Lukas
- * 
+ *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
@@ -11,36 +11,38 @@
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
 class Application_Model_BundlePeer
 {
-	private static $stageNameMap = array( '1' => 'first', '2' => 'second', '3' => 'third');
+	private static $stageNameMap = array('1' => 'first', '2' => 'second', '3' => 'third');
 
 	private static function getAllMetaKeys($branch, $id)
 	{
 		$metaKeys = array();
-		foreach (new DirectoryIterator( Zend_Registry::get("repodir") . '/' . $branch . '/' . $id . '/metadata/' ) as $keyFile)
+		foreach (new DirectoryIterator(Zend_Registry::get("repodir") . '/' . $branch . '/' . $id . '/metadata/') as $keyFile)
 		{
-			if ( ! $keyFile->isDot() && $keyFile->isFile())
+			if (!$keyFile->isDot() && $keyFile->isFile())
 			{
 				$basename = $keyFile->getBasename();
-				if (! in_array($basename, array(
-						'branch', 
-						'revision', 
-						'repository', 
-						'timestamp', 
-						'committer', 
-						'changes', 
-						'status',
-						'buildnr',
-						'bundle', 
-						'first_stage_results', 
-						'second_stage_results', 
-						'third_stage_results')))
+				if (!in_array($basename, array(
+					'branch',
+					'revision',
+					'repository',
+					'timestamp',
+					'committer',
+					'changes',
+					'status',
+					'buildnr',
+					'buildurl',
+					'bundle',
+					'first_stage_results',
+					'second_stage_results',
+					'third_stage_results'))
+				)
 				{
 					$metaKeys[] = $basename;
 				}
@@ -48,33 +50,39 @@ class Application_Model_BundlePeer
 		}
 		return $metaKeys;
 	}
-	
-	private static function getMetadata($branch, $id, $meta)
+
+	private static function getMetadata($branch, $id, $meta, $default = false)
 	{
 		$filename = Zend_Registry::get("repodir") . '/' . $branch . '/' . $id . '/metadata/' . $meta;
-		if ( ! file_exists( $filename))
+		if (!file_exists($filename))
 		{
-			return 'Unavailable';
+			if (false === $default)
+			{
+				return 'Unavailable';
+			} else
+			{
+				return $default;
+			}
 		}
 		return trim(file_get_contents($filename));
 	}
-	
+
 	public static function getChanges($branch, $id)
 	{
 		return self::getMetadata($branch, $id, 'changes');
 	}
-	
+
 	public static function getJobResults($branch, $id, $stage)
 	{
-		if (! array_key_exists($stage, self::$stageNameMap))
+		if (!array_key_exists($stage, self::$stageNameMap))
 			throw new Exception('Ungueltiger Stage Key: ' . $stage);
 		return self::getMetadata($branch, $id, self::$stageNameMap[$stage] . '_stage_results');
 	}
-	
+
 	private static function getStageStatus($branch, $id, $stage)
 	{
 		$status = self::getMetadata($branch, $id, 'status');
-		if (strstr($status, self::$stageNameMap[$stage] . '_stage_passed')) 
+		if (strstr($status, self::$stageNameMap[$stage] . '_stage_passed'))
 			return 3;
 		if (strstr($status, self::$stageNameMap[$stage] . '_stage_failed'))
 			return 2;
@@ -82,22 +90,22 @@ class Application_Model_BundlePeer
 			return 1;
 		return 0;
 	}
-	
+
 	private static function getAllBundleIds($branch = 'trunk')
 	{
 		$data = array();
-		foreach (new DirectoryIterator( Zend_Registry::get("repodir") . '/' . $branch) as $directory)
+		foreach (new DirectoryIterator(Zend_Registry::get("repodir") . '/' . $branch) as $directory)
 		{
-			if ( ! $directory->isDot() && $directory->isDir() && ! $directory->isLink())
+			if (!$directory->isDot() && $directory->isDir() && !$directory->isLink())
 				$data[] = $directory->getBasename();
 		}
 		return $data;
 	}
-	
+
 	public static function getBundleForBranchAndId($branch = 'trunk', $id)
 	{
 		$bundleDir = Zend_Registry::get("repodir") . '/' . $branch . '/' . $id;
-		if ( ! is_dir($bundleDir))
+		if (!is_dir($bundleDir))
 		{
 			return null;
 		}
@@ -113,13 +121,15 @@ class Application_Model_BundlePeer
 		$bundle->stage3 = self::getStageStatus($branch, $id, 3);
 		$bundle->setChanges(self::getMetadata($branch, $id, 'changes'));
 		$bundle->payload = array();
-		foreach(self::getAllMetaKeys($branch, $id) as $key)
+		foreach (self::getAllMetaKeys($branch, $id) as $key)
 		{
 			$bundle->payload[$key] = self::getMetadata($branch, $id, $key);
 		}
+		$buildUrls = self::getMetadata($branch, $id, 'buildurl', '');
+		$bundle->buildUrls = ($buildUrls) ? explode("\n", $buildUrls) : array();
 		return $bundle;
 	}
-	
+
 	public static function getBundles($branch = 'trunk')
 	{
 		$bundles = array();
@@ -129,6 +139,6 @@ class Application_Model_BundlePeer
 		}
 		return $bundles;
 	}
-	
+
 }
 
