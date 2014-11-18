@@ -2,14 +2,13 @@ Um mit der Dashboard Entwicklung zu starten braucht man:
 
 VM
 ---
-Eine virtuelle Maschine zur Entwicklung. Unter Linux 
-reicht eine Container Virtualisierung völlig aus, 
+Eine virtuelle Maschine zur Entwicklung. Unter Linux
+reicht eine Container Virtualisierung völlig aus,
 VirtualBox, VMWare oder KVM funktionieren aber genauso.
 
-Für Debian / Ubuntu VMs haben wir die nötigen 
+Für Debian / Ubuntu VMs haben wir die nötigen
 Installationsbefehle im Script InstallDevEnv.sh
 zusammengestellt.
-
 
 Sourcen
 -------
@@ -18,7 +17,7 @@ Die Sourcen in der VM mit
 cd /opt/app
 git clone https://github.com/pingworks/dash.git dash
 
-installiert werden. 
+installiert werden.
 
 
 Webserver
@@ -26,7 +25,7 @@ Webserver
 In der VM muss ein Webserver installiert werden. Dieser
 braucht Unterstützung für Rewriting und PHP.
 
-Die Apache Konfiguration könnte für development so 
+Die Apache Konfiguration könnte für development so
 aussehen:
 <VirtualHost *:80>
   ServerName dash-dev
@@ -44,7 +43,7 @@ aussehen:
     RewriteRule ^.*$ - [NC,L]
     RewriteRule ^.*$ rest.php [NC,L]
   </Directory>
-    
+
   Alias /rest.php /opt/app/dash/backend/public/rest.php
 </VirtualHost>
 
@@ -69,12 +68,12 @@ Sencha command
 --------------
 Für das Buildsystem braucht man das Sencha Command Line
 Tool von [1], eine Dokumentation dazu findet sich unter
-[2]. 
- 
+[2].
+
 
 Ant
 ---
-Zur lokalen Durchführung eines Builds brauch man außerdem 
+Zur lokalen Durchführung eines Builds brauch man außerdem
 ant, ant-contrib, ruby und rubygems oder compass.
 
 
@@ -87,11 +86,11 @@ Webkit Engine.
 Die Seleniumtests brauchen zusätzlich eine Framebuffer
 X-Server und einen firefox.
 
-Zum Start des Selenium-Servers in Kombination mit dem 
+Zum Start des Selenium-Servers in Kombination mit dem
 Framebuffer X-Server kann man hier [4] Informationen
 finden.
 
-Die Testdaten können über das Paket dash-tests-data 
+Die Testdaten können über das Paket dash-tests-data
 installiert werden. Mit einer zweiten Apache Konfiguration
 im APPLICATION_ENV "testing" werden die so installierten
 Testdaten automatisch benutzt:
@@ -114,7 +113,7 @@ Testdaten automatisch benutzt:
 Build
 ------
 Ein kompletter Build mit allen Tests Unittests kann im
-Toplevel Directory mit 
+Toplevel Directory mit
 
 ant package
 
