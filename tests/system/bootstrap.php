@@ -35,3 +35,6 @@ Zend_Loader_Autoloader::getInstance();
 
 $bootstrap = new Zend_Application(APPLICATION_ENV, APPLICATION_PATH . '/configs/application.ini');
 Zend_Registry::set("datadir", $bootstrap->getOption('datadir'));
+
+require_once 'PHPUnit/Extensions/SeleniumTestSuite.php';
+require_once 'PHPUnit/Util/Test.php';
