@@ -108,7 +108,7 @@ class EnvironemtTest extends RestTest
 		$result = json_decode($response);
 		
 		$this->assertTrue($result->success);
-		$this->assertType('array', $result->results);
+		$this->assertInternalType('array', $result->results);
 		$this->assertEquals(4, count($result->results));
 		
 		$this->assertEquals(array(
@@ -125,7 +125,7 @@ class EnvironemtTest extends RestTest
 		$result = json_decode($response);
 		
 		$this->assertTrue($result->success);
-		$this->assertType('stdClass', $result->results);
+		$this->assertInstanceOf('stdClass', $result->results);
 		
 		$this->assertEquals($this->expected01, $result->results);
 	}
@@ -137,7 +137,7 @@ class EnvironemtTest extends RestTest
 		$result = json_decode($response);
 		
 		$this->assertTrue($result->success);
-		$this->assertType('stdClass', $result->results);
+		$this->assertInstanceOf('stdClass', $result->results);
 		
 		$this->assertEquals($this->expected04, $result->results);
 	}
@@ -154,14 +154,14 @@ class EnvironemtTest extends RestTest
 		$result = json_decode($response);
 		
 		$this->assertTrue($result->success);
-		$this->assertType('stdClass', $result->results);
+		$this->assertInstanceOf('stdClass', $result->results);
 		$this->assertEquals($data, $result->results);
 		
 		$response = $this->getRequest($this->bootstrap->getOption('url') . '/environment/testenv02');
 		$result = json_decode($response);
 		
 		$this->assertTrue($result->success);
-		$this->assertType('stdClass', $result->results);
+		$this->assertInstanceOf('stdClass', $result->results);
 		$this->assertEquals($data, $result->results);
 		
 	}

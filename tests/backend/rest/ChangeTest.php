@@ -36,7 +36,7 @@ class ChangeTest extends RestTest
 		$entry1->ctime = '';
 		
 		$this->assertTrue($result->success);
-		$this->assertType('array', $result->results);
+		$this->assertInternalType('array', $result->results);
 		$this->assertEquals(1, count($result->results));
 		$this->assertEquals($entry1, $result->results[0]);
 	}
@@ -57,7 +57,7 @@ class ChangeTest extends RestTest
 		$entry1->ctime = '';
 		
 		$this->assertTrue($result->success);
-		$this->assertType('array', $result->results);
+		$this->assertInternalType('array', $result->results);
 		$this->assertEquals(1, count($result->results));
 		$this->assertEquals($entry1, $result->results[0]);
 	}
@@ -78,7 +78,7 @@ class ChangeTest extends RestTest
 		$entry1->ctime = '';
 		
 		$this->assertTrue($result->success);
-		$this->assertType('array', $result->results);
+		$this->assertInternalType('array', $result->results);
 		$this->assertEquals(1, count($result->results));
 		$this->assertEquals($entry1, $result->results[0]);
 	}
