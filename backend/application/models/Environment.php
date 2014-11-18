@@ -32,7 +32,7 @@ class Application_Model_Environment
 	public function getFilename()
 	{
 		if (! $this->id)
-			throw new Exception('Can not generate filename without id property.');
+			throw new InvalidArgumentException('Can not generate filename without id property.');
 		return Application_Model_EnvironmentPeer::generateFilenameForEnvId($this->id);
 	}
 	
@@ -40,7 +40,7 @@ class Application_Model_Environment
 	{
 		$environmentFromJson = json_decode($json);
 		if (! $environmentFromJson instanceof stdClass)
-			throw new Exception('Could not decode json string.');
+			throw new InvalidArgumentException('Could not decode json string.');
 		$this->id = $environmentFromJson->id;
 		$this->name = $environmentFromJson->name;
 		$this->domainname = $environmentFromJson->domainname;
@@ -57,7 +57,7 @@ class Application_Model_Environment
 	{
 		$filename = $this->getFilename();
 		if (! file_exists($filename) || ! is_readable($filename))
-			throw new Exception('File does not exist or is not readable');
+			throw new InvalidArgumentException('File does not exist or is not readable');
 		$this->fromJson(file_get_contents($filename));
 	}
 	

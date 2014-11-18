@@ -21,10 +21,10 @@ class Application_Model_JobResultPeerTest extends PHPUnit_Framework_TestCase
 	public function testGetJobResults()
 	{
 		$data = Application_Model_JobResultPeer::getJobResults('branchA', '88.941106ff.2', 2);
-		$this->assertType('array', $data);
+		$this->assertInternalType('array', $data);
 		$this->assertEquals(2, count($data));
 
-		$this->assertType('Application_Model_JobResult', $data[0]);
+		$this->assertInstanceOf('Application_Model_JobResult', $data[0]);
 		$this->assertAttributeEquals('foo', 'name', $data[0]);
 		$this->assertAttributeEquals('bar', 'url', $data[0]);
 		$this->assertAttributeEquals('SUCCESS', 'status', $data[0]);
@@ -32,7 +32,7 @@ class Application_Model_JobResultPeerTest extends PHPUnit_Framework_TestCase
 		$this->assertAttributeEquals(0, 'skipped', $data[0]);
 		$this->assertAttributeEquals(0, 'failed', $data[0]);
 
-		$this->assertType('Application_Model_JobResult', $data[1]);
+		$this->assertInstanceOf('Application_Model_JobResult', $data[1]);
 		$this->assertAttributeEquals('test', 'name', $data[1]);
 		$this->assertAttributeEquals('url', 'url', $data[1]);
 		$this->assertAttributeEquals('FAILURE', 'status', $data[1]);

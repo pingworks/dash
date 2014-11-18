@@ -158,7 +158,7 @@ class Application_Model_EnvironmentTest extends PHPUnit_Framework_TestCase
 	public function testFromJson_InvalidJson()
 	{
 		$env = new Application_Model_Environment();
-		$this->setExpectedException('Exception');
+		$this->setExpectedException('InvalidArgumentException');
 		$env->fromJson('{ "id": "id", "name":"name", "domainname":"f.q.d.n" ');
 	}
 	
@@ -182,7 +182,7 @@ class Application_Model_EnvironmentTest extends PHPUnit_Framework_TestCase
 		$env = new Application_Model_Environment();
 		$env->id = 'testenv18';
 		
-		$this->setExpectedException('Exception');
+		$this->setExpectedException('InvalidArgumentException');
 		$env->reload();
 	}
 	

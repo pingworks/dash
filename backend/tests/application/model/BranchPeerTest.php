@@ -21,7 +21,7 @@ class Application_Model_BranchPeerTest extends PHPUnit_Framework_TestCase
 	public function testGetAllBranchIds()
 	{
 		$data = Application_Model_BranchPeer::getAllBranchIds();
-		$this->assertType('array', $data);
+		$this->assertInternalType('array', $data);
 		$this->assertEquals(2, count($data));
 		$this->assertContains('trunk', $data);
 		$this->assertContains('branchA', $data);
@@ -31,11 +31,11 @@ class Application_Model_BranchPeerTest extends PHPUnit_Framework_TestCase
 	public function testGetAllBranchs()
 	{
 		$data = Application_Model_BranchPeer::getAllBranchs();
-		$this->assertType('array', $data);
+		$this->assertInternalType('array', $data);
 		$this->assertEquals(2, count($data));
 		for ($i=0; $i<=1; $i++)
 		{
-			$this->assertType('Application_Model_branch', $data[$i]);
+			$this->assertInstanceOf('Application_Model_branch', $data[$i]);
 			$this->assertEquals($data[$i]->id, $data[$i]->name);
 		}
 	}

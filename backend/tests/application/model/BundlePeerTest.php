@@ -22,7 +22,7 @@ class Application_Model_BundlePeerTest extends PHPUnit_Framework_TestCase
 	{
 		$data = Application_Model_BundlePeer::getBundleForBranchAndId('branchA', '88.ab99a3b7.5');
 		
-		$this->assertType('Application_Model_Bundle', $data);
+		$this->assertInstanceOf('Application_Model_Bundle', $data);
 		$this->assertAttributeEquals('branchA', 'branch', $data);
 		$this->assertAttributeEquals('ab99a3b7', 'revision', $data);
 		$this->assertAttributeEquals('88.ab99a3b7.5', 'id', $data);
@@ -41,7 +41,7 @@ class Application_Model_BundlePeerTest extends PHPUnit_Framework_TestCase
 	public function testGetBundleForBranchAndIdStageStatus5()
 	{
 		$data = Application_Model_BundlePeer::getBundleForBranchAndId('branchA', '88.ab99a3b7.5');
-		$this->assertType('Application_Model_Bundle', $data);
+		$this->assertInstanceOf('Application_Model_Bundle', $data);
 		$this->assertAttributeEquals(1, 'stage1', $data);
 		$this->assertAttributeEquals(0, 'stage2', $data);
 		$this->assertAttributeEquals(0, 'stage3', $data);
@@ -50,7 +50,7 @@ class Application_Model_BundlePeerTest extends PHPUnit_Framework_TestCase
 	public function testGetBundleForBranchAndIdStageStatus6()
 	{
 		$data = Application_Model_BundlePeer::getBundleForBranchAndId('branchA', '88.62035ef5.6');
-		$this->assertType('Application_Model_Bundle', $data);
+		$this->assertInstanceOf('Application_Model_Bundle', $data);
 		$this->assertAttributeEquals(2, 'stage1', $data);
 		$this->assertAttributeEquals(0, 'stage2', $data);
 		$this->assertAttributeEquals(0, 'stage3', $data);
@@ -59,7 +59,7 @@ class Application_Model_BundlePeerTest extends PHPUnit_Framework_TestCase
 	public function testGetBundleForBranchAndIdStageStatus7()
 	{
 		$data = Application_Model_BundlePeer::getBundleForBranchAndId('branchA', '88.9067858f.7');
-		$this->assertType('Application_Model_Bundle', $data);
+		$this->assertInstanceOf('Application_Model_Bundle', $data);
 		$this->assertAttributeEquals(3, 'stage1', $data);
 		$this->assertAttributeEquals(1, 'stage2', $data);
 		$this->assertAttributeEquals(0, 'stage3', $data);
@@ -68,7 +68,7 @@ class Application_Model_BundlePeerTest extends PHPUnit_Framework_TestCase
 	public function testGetBundleForBranchAndIdStageStatus8()
 	{
 		$data = Application_Model_BundlePeer::getBundleForBranchAndId('branchA', '88.1aea659e.8');
-		$this->assertType('Application_Model_Bundle', $data);
+		$this->assertInstanceOf('Application_Model_Bundle', $data);
 		$this->assertAttributeEquals(3, 'stage1', $data);
 		$this->assertAttributeEquals(2, 'stage2', $data);
 		$this->assertAttributeEquals(0, 'stage3', $data);
@@ -77,7 +77,7 @@ class Application_Model_BundlePeerTest extends PHPUnit_Framework_TestCase
 	public function testGetBundleForBranchAndIdStageStatus9()
 	{
 		$data = Application_Model_BundlePeer::getBundleForBranchAndId('branchA', '88.47694b9c.9');
-		$this->assertType('Application_Model_Bundle', $data);
+		$this->assertInstanceOf('Application_Model_Bundle', $data);
 		$this->assertAttributeEquals(3, 'stage1', $data);
 		$this->assertAttributeEquals(3, 'stage2', $data);
 		$this->assertAttributeEquals(1, 'stage3', $data);
@@ -86,7 +86,7 @@ class Application_Model_BundlePeerTest extends PHPUnit_Framework_TestCase
 	public function testGetBundleForBranchAndIdStageStatus10()
 	{
 		$data = Application_Model_BundlePeer::getBundleForBranchAndId('branchA', '88.faaeeb60.10');
-		$this->assertType('Application_Model_Bundle', $data);
+		$this->assertInstanceOf('Application_Model_Bundle', $data);
 		$this->assertAttributeEquals(3, 'stage1', $data);
 		$this->assertAttributeEquals(3, 'stage2', $data);
 		$this->assertAttributeEquals(3, 'stage3', $data);
@@ -96,11 +96,11 @@ class Application_Model_BundlePeerTest extends PHPUnit_Framework_TestCase
 	{
 		$data = Application_Model_BundlePeer::getBundles('branchA');
 		
-		$this->assertType('array', $data);
+		$this->assertInternalType('array', $data);
 		$this->assertEquals(10, count($data));
 		for ($i=0; $i<=9; $i++)
 		{
-			$this->assertType('Application_Model_Bundle', $data[$i]);
+			$this->assertInstanceOf('Application_Model_Bundle', $data[$i]);
 		}
 	}
 	
@@ -108,7 +108,7 @@ class Application_Model_BundlePeerTest extends PHPUnit_Framework_TestCase
 	{
 		$data = Application_Model_BundlePeer::getBundles('trunk');
 		
-		$this->assertType('array', $data);
+		$this->assertInternalType('array', $data);
 		$this->assertEquals(0, count($data));
 	}
 	
