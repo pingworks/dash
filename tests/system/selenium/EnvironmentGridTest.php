@@ -36,7 +36,9 @@ class EnvironmentGridTest extends PHPUnit_Extensions_SeleniumTestCase
  		$browser['host'] = $seleniumConfig['host'];
  		$browser['port'] = (int) $seleniumConfig['port'];
  		$browser['timeout'] = (int) $seleniumConfig['timeout'];
- 		return parent::__construct($name, $data, $dataName, $browser);
+ 		parent::__construct($name, $data, $dataName);
+ 		$this->setupSpecificBrowser($browser);
+ 		return $this;
  	}
 	
 	public function setUp()
