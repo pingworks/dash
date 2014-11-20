@@ -35,7 +35,7 @@ function validateBundle() {
 # 1: BRANCH
 function validateBranch() {
   local BRANCH=$1
-  if ! grep -E "^$BRANCH;" $SCRIPTDIR/../configs/branches.csv >/dev/null; then
+  if ! echo $BRANCH | grep -E "$BRANCH_PATTERN" >/dev/null; then
     echo "Illegal BRANCH: $BRANCH"
     exit 1
   fi
