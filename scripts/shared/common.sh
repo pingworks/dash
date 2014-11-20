@@ -127,11 +127,9 @@ function getBundleFolder() {
   
   local IFS=";"
   BUNDLE_FOLDER=""
-  while read bname bnumber burl; do
-  if [ -d "${REPOBASE}/${bname}/$BUNDLE" ]; then
-    BUNDLE_FOLDER=${REPOBASE}/${bname}/$BUNDLE
+  if [ -d ${REPOBASE}/*/$BUNDLE ]; then
+    BUNDLE_FOLDER=$(ls -d ${REPOBASE}/*/$BUNDLE)
   fi
-  done < $SCRIPTDIR/../configs/branches.csv
   
   if [ -z "${BUNDLE_FOLDER}" ]; then
     echo "Bundle not found: $BUNDLE"
@@ -200,9 +198,6 @@ function addMetadata() {
 
 function writeReadmeHtml() {
   validateBundle $BUNDLE
-  if [ -z "${BRANCH:-}" ] ; then
-    getBranch
-  fi
   getBundleFolder $BUNDLE
 
   (
