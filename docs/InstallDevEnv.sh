@@ -152,3 +152,4 @@ echo "repoDir = /opt/dash/tests/data/repo" >> application/configs/application.in
 # You should now be able to open
 # http://dash-dev/ in your Browser
 ################################
+
