@@ -71,7 +71,11 @@ function getBranchNr() {
   
   if [ -z "$BRANCHNR" ]; then
     echo "No BRANCHNR found for BRANCH: $BRANCH"
-    exit 1
+    if [ ! -z "$BRANCHNR_FALLBACK" ]; then
+      BRANCHNR=$BRANCHNR_FALLBACK
+    else
+      exit 1
+    fi
   fi
 }
 
@@ -85,7 +89,7 @@ function getBranchUrl() {
     fi  
   done < $SCRIPTDIR/../configs/branches.csv
   
-  if [ -z "$BRANCHURL" ]; then
+  if [ -z "$BRANCHURL" -a "$VCS" != "git" ]; then
     echo "No BRANCHURL found for BRANCH: $BRANCH"
     exit 1
   fi
