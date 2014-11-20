@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ##########################################################
-#Installationsscript (tested on Debian Wheezy)
+# Installationsscript (tested on Debian Wheezy)
 ##########################################################
 
 SCMDVERSION=4.0.4.84
@@ -19,7 +19,7 @@ git clone https://github.com/pingworks/dash.git dash
 
 # Data
 cd /tmp/
-wget https://dash.pingworks.net/repo/master/1.1c12bb9b.105/artifacts/dash-tests-data_1+git.1c12bb9b-105_all.deb
+wget https://dash.pingworks.net/repo/master/1.9a440c6.233/artifacts/dash-tests-data_1+git.9a440c6-233_all.deb
 dpkg -i dash-tests-data_*_all.deb
 
 # /etc/hosts
@@ -146,7 +146,7 @@ ant build
 
 # Backend
 cd /opt/app/dash/backend
-echo "repoDir = /opt/dash/tests/data" >> application/configs/application.ini
+echo "repoDir = /opt/dash/tests/data/repo" >> application/configs/application.ini
 
 ################################
 # You should now be able to open
