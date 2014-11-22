@@ -1,7 +1,7 @@
 #
 # Cookbook Name:: chef-dash
-# Recipe:: default
-
+# Recipe:: develop
+#
 # Copyright 2014 pingworks - Alexander Birk und Christoph Lukas
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -16,3 +16,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
+%w(default-jre ant ant-contrib ruby rubygems ruby-compass xvfb iceweasel phpunit phpunit-selenium).each do |p|
+  package p do
+    action :install
+  end
+end
+

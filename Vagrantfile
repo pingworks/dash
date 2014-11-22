@@ -77,6 +77,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     # avoid a warning at "vagrant provision"
     chef.custom_config_path = "./infrastructure/chef-dash/.Vagrantfile.chef"
 
+    # switch on debugging if needed
+    chef.log_level = :debug
+
     chef.json = {
       mysql: {
         server_root_password: 'rootpass',
@@ -86,7 +89,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     }
 
     chef.run_list = [
-        "recipe[chef-dash::default]"
+        "recipe[chef-dash::common]"
     ]
   end
 end
