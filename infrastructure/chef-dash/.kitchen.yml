@@ -3,11 +3,14 @@ driver:
   name: vagrant
 
 provisioner:
-  name: chef_solo
+  name: chef_zero
+  require_chef_omnibus: false
 
 platforms:
-  - name: ubuntu-12.04
-  - name: centos-6.4
+  - name: debian-7.7
+    driver:
+        box: opscode_debian-7.7_chef-11.16.4-1
+        box_url: http://vagrant.pingworks.net/opscode_debian-7.7_chef-11.16.4-1.box
 
 suites:
   - name: default
