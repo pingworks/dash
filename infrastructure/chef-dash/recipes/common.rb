@@ -23,6 +23,7 @@
   end
 end
 
-include_recipe 'apache2::default'
-include_recipe 'php::default'
+#include_recipe 'apache2::default'
+#include_recipe 'php::default'
+
 
