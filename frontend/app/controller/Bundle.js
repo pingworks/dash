@@ -42,10 +42,10 @@ Ext.define('Dash.controller.Bundle', {
         if (branch) {
 	        this.getBundlesStore().load({
 	            params: {
-	                branch: branch
+	                branch: branch.get('id')
 	            }
 	        });
-            this.getBundleGrid().setTitle(Ext.String.format(Dash.config.bundlegrid.title, branch));
+            this.getBundleGrid().setTitle(Ext.String.format(Dash.config.bundlegrid.title, branch.get('name')));
         } else {
             this.getBundlesStore().reload();
         }

@@ -37,62 +37,67 @@ Ext.application({
     models:[
         'Branch',
         'Bundle',
-        'Change',
         'Content',
-        'Environment',
+        'Change',
         'JobResult',
         'JobStatus',
-        'LockDuration',
-        'StageStatus'
+        'StageStatus',
+        'Environment',
+        'LockDuration'
     ],
 
     views: [
-        'BottomToolbar',
         'BundleGrid',
         'ChangeToolTip',
-        'DeploymentWindow',
-        'TriggerJenkinsJobWindow',
-        'EnvironmentGrid',
-        'EnvironmentsWindow',
         'JobResultToolTip',
-        'StoreMenu',
         'ToolTip',
         'TopToolbar',
+        'BottomToolbar',
+        'DeploymentWindow',
+        'TriggerJenkinsJobWindow',
+        'EnvironmentsWindow',
+        'EnvironmentGrid',
         'Viewport'
     ],
 
     stores: [
         'Branches',
         'Bundles',
-        'Changes',
         'Contents',
-        'Environments',
+        'Changes',
         'JobResults',
         'JobStatus',
-        'LockDurations',
-        'StageStatus'
+        'StageStatus',
+        'Environments',
+        'LockDurations'
     ],
 
     controllers: [
-        'Base',
         'Bundle',
+		'Branch',
         'Change',
+        'JobResult',
         'Deployment',
         'Environment',
-        'TriggerJenkinsJob',
-        'JobResult'
+        'TriggerJenkinsJob'
     ],
 
     autoCreateViewport: true,
-    
+
     launch: function() {
-        this.getBranchesStore().load({
+        this.getBranchController().onLoadBranches({
             callback: this.onBranchesLoad,
             scope: this
         });
     },
     onBranchesLoad: function() {
-        var branch = this.getBranchesStore().getAt(0).get('id');
-        this.getController('Bundle').onLoadBundles(branch);
+        var branchIdToLoad = window.location.hash.substring(1);
+        if (!branchIdToLoad) {
+            branchToLoad = this.getBranchesStore().getAt(0);
+        }
+        else {
+            branchToLoad = this.getBranchesStore().findRecord('id',branchIdToLoad);
+        }
+        this.getController('Bundle').onLoadBundles(branchToLoad);
     }
 });

@@ -1,6 +1,7 @@
 bundle;
 timestamp;
 branch;
+branch_name;
 status;
 revision;
 version;

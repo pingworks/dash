@@ -9,8 +9,9 @@ SCRIPTDIR=$(dirname $0)
 BRANCH=$1
 REV=$2
 BUILDNR=$3
+BRANCHNAME=$4
 
-if [ -z "$BRANCH" -o -z "$REV" -o -z "$BUILDNR" ]; then
+if [ -z "$BRANCH" -o -z "$REV" -o -z "$BUILDNR" -o -z "$BRANCHNAME" ]; then
   echo "Usage: $0 <branch> <vcs-revision> <build_id>"
   exit 1
 fi
@@ -32,6 +33,7 @@ rsync -ax --exclude=.svn --exclude=.git --exclude=.gitignore $SCRIPTDIR/../${TEM
 setMetadata $BUNDLE bundle $BUNDLE
 setMetadata $BUNDLE timestamp $(date +%F_%T)
 setMetadata $BUNDLE branch $BRANCH
+setMetadata $BUNDLE branch_name $BRANCHNAME
 setMetadata $BUNDLE revision $REV
 setMetadata $BUNDLE buildnr $BUILDNR
 setMetadata $BUNDLE changes "$(bash $SCRIPTDIR/../$VCS/log.sh $REV)"

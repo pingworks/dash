@@ -16,39 +16,51 @@
 Ext.onReady(function() {
     Ext.application({
 	    name: 'Dash',
-	    models:[
-	        'Branch',
-	        'Bundle',
-	        'Change',
-	        'JobResult',
-	        'JobStatus',
-	        'StageStatus'
-	    ],
-	
-	    views: [
-	        'BundleGrid',
-	        'ChangeToolTip',
-	        'JobResultToolTip',
-	        'StoreMenu',
-	        'ToolTip',
-	        'TopToolbar',
-	        'Viewport'
-	    ],
-	
-	    stores: [
-	        'Branches',
-	        'Bundles',
-	        'Changes',
-	        'JobResults',
-	        'JobStatus',
-	        'StageStatus'
-	    ],
-	
-	    controllers: [
-	        'Bundle',
-	        'Change',
-	        'JobResult'
-	    ],
+        models:[
+            'Branch',
+            'Bundle',
+            'Content',
+            'Change',
+            'JobResult',
+            'JobStatus',
+            'StageStatus',
+            'Environment',
+            'LockDuration'
+        ],
+
+        views: [
+            'BundleGrid',
+            'ChangeToolTip',
+            'JobResultToolTip',
+            'ToolTip',
+            'TopToolbar',
+            'BottomToolbar',
+            'DeploymentWindow',
+            'EnvironmentsWindow',
+            'EnvironmentGrid',
+            'Viewport'
+        ],
+
+        stores: [
+            'Branches',
+            'Bundles',
+            'Contents',
+            'Changes',
+            'JobResults',
+            'JobStatus',
+            'StageStatus',
+            'Environments',
+            'LockDurations'
+        ],
+
+        controllers: [
+            'Bundle',
+            'Branch',
+            'Change',
+            'JobResult',
+            'Deployment',
+            'Environment'
+        ],
 
         launch: function() {
             //include the tests in the test.html head
