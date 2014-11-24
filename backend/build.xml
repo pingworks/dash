@@ -4,10 +4,10 @@
     <property name="pkg.configdir" value="application/configs"/>
     <property name="pkg.configfile" value="application.ini"/>
     <property name="pkg.prefix" value="/opt/dash"/>
-    
+
     <taskdef resource="net/sf/antcontrib/antcontrib.properties">
         <classpath>
-            <pathelement location="/usr/share/java/ant-contrib.jar" />
+            <pathelement location="/usr/share/java/ant-contrib.jar"/>
         </classpath>
     </taskdef>
 
@@ -31,7 +31,9 @@
     <target name="package" depends="clean,build,test">
         <taskdef name="deb" classname="org.vafer.jdeb.ant.DebAntTask"/>
         <if>
-            <not><isset property="version" /></not>
+            <not>
+                <isset property="version"/>
+            </not>
             <then>
                 <fail>Please supply a version number using -Dversion=1.2.3.4</fail>
             </then>

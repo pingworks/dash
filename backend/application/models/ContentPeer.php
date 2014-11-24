@@ -17,58 +17,52 @@
 
 class Application_Model_ContentPeer
 {
-	public static $latestVersion = null;
-	
-	public static function getAllContents()
-	{
-		$data = array();
-		$entries = array();
-		$keys = array();
-		foreach (new DirectoryIterator( Zend_Registry::get("contentdir")) as $directory)
-		{
-			if ( ! $directory->isDot() && $directory->isDir() && ! $directory->isLink())
-			{
-				$entries[$directory->getBasename()] = self::getContentForVersion($directory->getBasename());
-				$keys[] = $directory->getBasename();
-			}
-		}
-		rsort($keys);
-		foreach ($keys as $k)
-		{
-			$data[] = $entries[$k];
-		}
-		return $data;
-	}
-	
-	public static function getContentForVersion($version)
-	{
-		$latestVersion = self::getLatestContentVersion();
-		$version = ($version == 'latest') ? $latestVersion : $version;
-		
-		$cmsContentDir = Zend_Registry::get("contentdir") . '/' . $version;
-		if ( ! is_dir($cmsContentDir))
-		{
-			return null;
-		}
-		$cmsContent = new Application_Model_Content();
-		$cmsContent->id = $version;
-		$cmsContent->version = $version;
-		$cmsContent->isLatest = ($latestVersion == $version) ? true : false;
-		return $cmsContent;
-	}
-	
-	private static function getLatestContentVersion()
-	{
-		if (is_null(self::$latestVersion))
-		{ 
-			$filename = Zend_Registry::get("contentdir") . '/latest';
-			if ( ! file_exists($filename) && ! is_link($filename))
-			{
-				self::$latestVersion = 'Unavailable';
-			}
-			self::$latestVersion = basename(readlink($filename));
-		}
-		return self::$latestVersion;
-	}
+    public static $latestVersion = null;
+
+    public static function getAllContents()
+    {
+        $data = array();
+        $entries = array();
+        $keys = array();
+        foreach (new DirectoryIterator(Zend_Registry::get("contentdir")) as $directory) {
+            if (!$directory->isDot() && $directory->isDir() && !$directory->isLink()) {
+                $entries[$directory->getBasename()] = self::getContentForVersion($directory->getBasename());
+                $keys[] = $directory->getBasename();
+            }
+        }
+        rsort($keys);
+        foreach ($keys as $k) {
+            $data[] = $entries[$k];
+        }
+        return $data;
+    }
+
+    public static function getContentForVersion($version)
+    {
+        $latestVersion = self::getLatestContentVersion();
+        $version = ($version == 'latest') ? $latestVersion : $version;
+
+        $cmsContentDir = Zend_Registry::get("contentdir") . '/' . $version;
+        if (!is_dir($cmsContentDir)) {
+            return null;
+        }
+        $cmsContent = new Application_Model_Content();
+        $cmsContent->id = $version;
+        $cmsContent->version = $version;
+        $cmsContent->isLatest = ($latestVersion == $version) ? true : false;
+        return $cmsContent;
+    }
+
+    private static function getLatestContentVersion()
+    {
+        if (is_null(self::$latestVersion)) {
+            $filename = Zend_Registry::get("contentdir") . '/latest';
+            if (!file_exists($filename) && !is_link($filename)) {
+                self::$latestVersion = 'Unavailable';
+            }
+            self::$latestVersion = basename(readlink($filename));
+        }
+        return self::$latestVersion;
+    }
 }
 

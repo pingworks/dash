@@ -17,7 +17,7 @@
 
 class Application_Model_Branch
 {
-	public $id;
-	public $name;
-	public $url;
+    public $id;
+    public $name;
+    public $url;
 }

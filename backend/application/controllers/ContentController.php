@@ -17,52 +17,56 @@
 
 class ContentController extends Zend_Rest_Controller
 {
-	public function init()
-	{
-		$this->_helper->viewRenderer->setNoRender(true);
-	}
-	
-	private function getEmptyResult()
-	{
-		return array(
-				'success' => true,
-				'results' => array()
-		);
-	}
-	
-	public function indexAction() 
-	{
-		$regex =$this->getInvokeArg('bootstrap')->getOption('paramregex');
-		$data = $this->getEmptyResult();
-		$data['results'] = Application_Model_ContentPeer::getAllContents();
-		$this->getResponse()->setBody(json_encode($data));
-		$this->getResponse()->setHttpResponseCode(200);
-	}
+    public function init()
+    {
+        $this->_helper->viewRenderer->setNoRender(true);
+    }
 
-	public function getAction() 
-	{
-		$regex =$this->getInvokeArg('bootstrap')->getOption('paramregex');
-		//if (preg_match($regex['contentid'], $this->_getParam('id')) === 0)
-		//	throw new Exception('Illegal Content Id.');
-		if (preg_match("^(latest|[0-9]+)$", $this->_getParam('id')) === 0)
-			throw new Exception('Illegal Content Id.');
-		$version = $this->_getParam('id');
-		
-		$data = $this->getEmptyResult();
-		$data['results'] = Application_Model_ContentPeer::getContentForVersion($version);
-		$this->getResponse()->setBody(json_encode($data));
-		$this->getResponse()->setHttpResponseCode(200);
-	}
+    private function getEmptyResult()
+    {
+        return array(
+            'success' => true,
+            'results' => array()
+        );
+    }
 
-	public function headAction() 
-	{}
+    public function indexAction()
+    {
+        $regex = $this->getInvokeArg('bootstrap')->getOption('paramregex');
+        $data = $this->getEmptyResult();
+        $data['results'] = Application_Model_ContentPeer::getAllContents();
+        $this->getResponse()->setBody(json_encode($data));
+        $this->getResponse()->setHttpResponseCode(200);
+    }
 
-	public function postAction() 
-	{}
+    public function getAction()
+    {
+        $regex = $this->getInvokeArg('bootstrap')->getOption('paramregex');
+        //if (preg_match($regex['contentid'], $this->_getParam('id')) === 0)
+        //	throw new Exception('Illegal Content Id.');
+        if (preg_match("^(latest|[0-9]+)$", $this->_getParam('id')) === 0)
+            throw new Exception('Illegal Content Id.');
+        $version = $this->_getParam('id');
 
-	public function putAction() 
-	{}
+        $data = $this->getEmptyResult();
+        $data['results'] = Application_Model_ContentPeer::getContentForVersion($version);
+        $this->getResponse()->setBody(json_encode($data));
+        $this->getResponse()->setHttpResponseCode(200);
+    }
 
-	public function deleteAction() 
-	{}
+    public function headAction()
+    {
+    }
+
+    public function postAction()
+    {
+    }
+
+    public function putAction()
+    {
+    }
+
+    public function deleteAction()
+    {
+    }
 }

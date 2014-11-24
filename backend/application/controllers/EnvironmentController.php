@@ -17,75 +17,76 @@
 
 class EnvironmentController extends Zend_Rest_Controller
 {
-	public function init()
-	{
-		$this->_helper->viewRenderer->setNoRender(true);
-	}
-	
-	private function getEmptyResult()
-	{
-		return array(
-				'success' => true,
-				'results' => array()
-		);
-	}
-	
-	public function indexAction() 
-	{
-		$data = $this->getEmptyResult();
-		$data['results'] = Application_Model_EnvironmentPeer::getAllEnvironments();
-		$this->getResponse()->setBody(json_encode($data));
-		$this->getResponse()->setHttpResponseCode(200);
-	}
+    public function init()
+    {
+        $this->_helper->viewRenderer->setNoRender(true);
+    }
 
-	public function getAction() 
-	{
-		$regex =$this->getInvokeArg('bootstrap')->getOption('paramregex');
-		if (preg_match($regex['envid'], $this->_getParam('id')) === 0)
-			throw new Exception('Illegal Environment Id.');
-		$id = $this->_getParam('id');
-		
-		$data = $this->getEmptyResult();
-		$data['results'] = Application_Model_EnvironmentPeer::getEnvironment($id);
-		$this->getResponse()->setBody(json_encode($data));
-		$this->getResponse()->setHttpResponseCode(200);
-	}
+    private function getEmptyResult()
+    {
+        return array(
+            'success' => true,
+            'results' => array()
+        );
+    }
 
-	public function headAction() 
-	{}
+    public function indexAction()
+    {
+        $data = $this->getEmptyResult();
+        $data['results'] = Application_Model_EnvironmentPeer::getAllEnvironments();
+        $this->getResponse()->setBody(json_encode($data));
+        $this->getResponse()->setHttpResponseCode(200);
+    }
 
-	public function postAction() 
-	{}
+    public function getAction()
+    {
+        $regex = $this->getInvokeArg('bootstrap')->getOption('paramregex');
+        if (preg_match($regex['envid'], $this->_getParam('id')) === 0)
+            throw new Exception('Illegal Environment Id.');
+        $id = $this->_getParam('id');
 
-	public function putAction() 
-	{
-		$regex =$this->getInvokeArg('bootstrap')->getOption('paramregex');
-		if (preg_match($regex['envid'], $this->_getParam('id')) === 0)
-			throw new Exception('Illegal Environment Id.');
-		$id = $this->_getParam('id');
-		
-		$environment = Application_Model_EnvironmentPeer::getEnvironmentFromJsonFile('php://input');
-		$content = $environment->content;
-		$envConfig = $this->getInvokeArg('bootstrap')->getOption('environment'); 
-		if (is_array($envConfig) && array_key_exists('addUsernameFromEnv', $envConfig)) 
-		{
-			if ($envConfig['addUsernameFromEnv'] != '' && getenv($envConfig['addUsernameFromEnv']) != '')
-			{
-				if ($environment->by != getenv($envConfig['addUsernameFromEnv'])) {
-					$environment->by .= ' ('.getenv($envConfig['addUsernameFromEnv']).')';
-				}
-			}
-		}
-		$environment->save();
-		
-		$data = $this->getEmptyResult();
-		$environment = Application_Model_EnvironmentPeer::getEnvironment($id);
-		$environment->content = $content;
-		$data['results'] = $environment;
-		$this->getResponse()->setBody(json_encode($data));
-		$this->getResponse()->setHttpResponseCode(200);
-	}
+        $data = $this->getEmptyResult();
+        $data['results'] = Application_Model_EnvironmentPeer::getEnvironment($id);
+        $this->getResponse()->setBody(json_encode($data));
+        $this->getResponse()->setHttpResponseCode(200);
+    }
 
-	public function deleteAction() 
-	{}
+    public function headAction()
+    {
+    }
+
+    public function postAction()
+    {
+    }
+
+    public function putAction()
+    {
+        $regex = $this->getInvokeArg('bootstrap')->getOption('paramregex');
+        if (preg_match($regex['envid'], $this->_getParam('id')) === 0)
+            throw new Exception('Illegal Environment Id.');
+        $id = $this->_getParam('id');
+
+        $environment = Application_Model_EnvironmentPeer::getEnvironmentFromJsonFile('php://input');
+        $content = $environment->content;
+        $envConfig = $this->getInvokeArg('bootstrap')->getOption('environment');
+        if (is_array($envConfig) && array_key_exists('addUsernameFromEnv', $envConfig)) {
+            if ($envConfig['addUsernameFromEnv'] != '' && getenv($envConfig['addUsernameFromEnv']) != '') {
+                if ($environment->by != getenv($envConfig['addUsernameFromEnv'])) {
+                    $environment->by .= ' (' . getenv($envConfig['addUsernameFromEnv']) . ')';
+                }
+            }
+        }
+        $environment->save();
+
+        $data = $this->getEmptyResult();
+        $environment = Application_Model_EnvironmentPeer::getEnvironment($id);
+        $environment->content = $content;
+        $data['results'] = $environment;
+        $this->getResponse()->setBody(json_encode($data));
+        $this->getResponse()->setHttpResponseCode(200);
+    }
+
+    public function deleteAction()
+    {
+    }
 }

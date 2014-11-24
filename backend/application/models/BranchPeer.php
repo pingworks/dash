@@ -17,63 +17,56 @@
 
 class Application_Model_BranchPeer
 {
-	public static function getAllBranchIds()
-	{
-		$data = array();
-		$default = '';
-		foreach (new DirectoryIterator( Zend_Registry::get("repodir") ) as $directory)
-		{
-			if ( ! $directory->isDot() && $directory->isDir())
-			{
-				$basename = $directory->getBasename();
-				/* Skip ALL folder, for internal use only */
-				if ($basename == "ALL") {
-					continue;
-				}
-		 		if ($basename === Zend_Registry::get("defaultbranch"))
-		 		{
-		 			$default = $basename;
-		 		} else {
-					$data[] = $basename;
-		 		}
-			}
-		}
-		asort($data);
-		if ($default != '')
-			array_unshift($data, $default);
-		return $data;
-	}
-	
-	/* FIXME: add support for branch specific metadata */
-	private static function findBranchNameInBundleMetadata($branchDir, $fallbackName)
-	{
-		foreach (new DirectoryIterator($branchDir) as $directory)
-		{
-		    if (! $directory->isDot() && $directory->isDir())
-		    {
-				$filename = $directory->getPathname() ."/metadata/branch_name";
-				if (file_exists($filename))
-				{
-					return trim(file_get_contents($filename));
-				}
-			}
-		}
-		return $fallbackName;
-	}
-	
-	public static function getAllBranchs()
-	{
-		$branches = array();
-		foreach (self::getAllBranchIds() as $id)
-		{
-			$branch = new Application_Model_Branch();
-			$branch->id = $id;
-			$branch->name = self::findBranchNameInBundleMetadata(Zend_Registry::get("repodir") .'/'. $id, $id);
-			$branch->url = ($id == 'trunk') ? $id : 'branches/' . $id;
-			$branches[] = $branch;
-		}
-		return $branches;
-	}
-	
+    public static function getAllBranchIds()
+    {
+        $data = array();
+        $default = '';
+        foreach (new DirectoryIterator(Zend_Registry::get("repodir")) as $directory) {
+            if (!$directory->isDot() && $directory->isDir()) {
+                $basename = $directory->getBasename();
+                /* Skip ALL folder, for internal use only */
+                if ($basename == "ALL") {
+                    continue;
+                }
+                if ($basename === Zend_Registry::get("defaultbranch")) {
+                    $default = $basename;
+                } else {
+                    $data[] = $basename;
+                }
+            }
+        }
+        asort($data);
+        if ($default != '')
+            array_unshift($data, $default);
+        return $data;
+    }
+
+    /* FIXME: add support for branch specific metadata */
+    private static function findBranchNameInBundleMetadata($branchDir, $fallbackName)
+    {
+        foreach (new DirectoryIterator($branchDir) as $directory) {
+            if (!$directory->isDot() && $directory->isDir()) {
+                $filename = $directory->getPathname() . "/metadata/branch_name";
+                if (file_exists($filename)) {
+                    return trim(file_get_contents($filename));
+                }
+            }
+        }
+        return $fallbackName;
+    }
+
+    public static function getAllBranchs()
+    {
+        $branches = array();
+        foreach (self::getAllBranchIds() as $id) {
+            $branch = new Application_Model_Branch();
+            $branch->id = $id;
+            $branch->name = self::findBranchNameInBundleMetadata(Zend_Registry::get("repodir") . '/' . $id, $id);
+            $branch->url = ($id == 'trunk') ? $id : 'branches/' . $id;
+            $branches[] = $branch;
+        }
+        return $branches;
+    }
+
 }
 

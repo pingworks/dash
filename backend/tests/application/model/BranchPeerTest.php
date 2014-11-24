@@ -17,26 +17,25 @@
 class Application_Model_BranchPeerTest extends PHPUnit_Framework_TestCase
 {
 
-	public function testGetAllBranchIds()
-	{
-		$data = Application_Model_BranchPeer::getAllBranchIds();
-		$this->assertInternalType('array', $data);
-		$this->assertEquals(2, count($data));
-		$this->assertContains('trunk', $data);
-		$this->assertContains('branchA', $data);
-		$this->assertNotContains('testfile', $data);
-	}
+    public function testGetAllBranchIds()
+    {
+        $data = Application_Model_BranchPeer::getAllBranchIds();
+        $this->assertInternalType('array', $data);
+        $this->assertEquals(2, count($data));
+        $this->assertContains('trunk', $data);
+        $this->assertContains('branchA', $data);
+        $this->assertNotContains('testfile', $data);
+    }
 
-	public function testGetAllBranchs()
-	{
-		$data = Application_Model_BranchPeer::getAllBranchs();
-		$this->assertInternalType('array', $data);
-		$this->assertEquals(2, count($data));
-		for ($i=0; $i<=1; $i++)
-		{
-			$this->assertInstanceOf('Application_Model_branch', $data[$i]);
-			$this->assertEquals($data[$i]->id, $data[$i]->name);
-		}
-	}
-	
+    public function testGetAllBranchs()
+    {
+        $data = Application_Model_BranchPeer::getAllBranchs();
+        $this->assertInternalType('array', $data);
+        $this->assertEquals(2, count($data));
+        for ($i = 0; $i <= 1; $i++) {
+            $this->assertInstanceOf('Application_Model_branch', $data[$i]);
+            $this->assertEquals($data[$i]->id, $data[$i]->name);
+        }
+    }
+
 }

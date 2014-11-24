@@ -17,14 +17,14 @@
 class Application_Model_ChangePeerTest extends PHPUnit_Framework_TestCase
 {
 
-	public function testGetChanges()
-	{
-		$data = Application_Model_ChangePeer::getChanges('branchA', '88.ab99a3b7.5');
-		$this->assertInternalType('array', $data);
-		$this->assertEquals(1, count($data));
-		$this->assertInstanceOf('Application_Model_Change', $data[0]);
-		$this->assertAttributeEquals('88.ab99a3b7.5', 'id', $data[0]);
-		$this->assertAttributeEquals("This, of course, is not the real copy for this advertisement. The real words will be written once...\nThis, of course, is not the real copy for this advertisement. The real words will be written once...", 'msg', $data[0]);
-	}
+    public function testGetChanges()
+    {
+        $data = Application_Model_ChangePeer::getChanges('branchA', '88.ab99a3b7.5');
+        $this->assertInternalType('array', $data);
+        $this->assertEquals(1, count($data));
+        $this->assertInstanceOf('Application_Model_Change', $data[0]);
+        $this->assertAttributeEquals('88.ab99a3b7.5', 'id', $data[0]);
+        $this->assertAttributeEquals("This, of course, is not the real copy for this advertisement. The real words will be written once...\nThis, of course, is not the real copy for this advertisement. The real words will be written once...", 'msg', $data[0]);
+    }
 
 }

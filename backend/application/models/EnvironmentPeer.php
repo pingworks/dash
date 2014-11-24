@@ -17,49 +17,46 @@
 
 class Application_Model_EnvironmentPeer
 {
-	public static function generateFilenameForEnvId($string)
-	{
-		return Zend_Registry::get("datadir") . '/' . $string . '.json';
-	}
-	
-	public static function getAllEnvironments()
-	{
-		$environmentIds = array();
-		foreach (new DirectoryIterator( Zend_Registry::get("datadir") ) as $file)
-		{
-			if ( ! $file->isDot() && $file->isFile() && preg_match('/.json$/', $file->getFilename()) === 1)
-			{
-				$environmentIds[] = preg_replace('/.json$/', '', $file->getFilename());
-			}
-		}
-		sort($environmentIds);
-		$sortedEnvironments = array();
-		foreach ($environmentIds as $id) 
-		{
-			$sortedEnvironments[] = self::getEnvironment($id);
-		}
-		return $sortedEnvironments;
-	}
-	
-	public static function getEnvironment($id)
-	{
-		$environment = self::getEnvironmentFromJsonFile(self::generateFilenameForEnvId($id));
-		return $environment;
-	}
-	
-	public static function getEnvironmentFromJsonFile($filename)
-	{
-		$environment = self::getEnvironmentFromJsonString(file_get_contents($filename));
-		return $environment;
-	}
-	
-	public static function getEnvironmentFromJsonString($string)
-	{
-		$environment = new Application_Model_Environment();
-		$environment->fromJson($string);
-		$environment->clearExpiredLock();
-		return $environment;
-	}
-	
+    public static function generateFilenameForEnvId($string)
+    {
+        return Zend_Registry::get("datadir") . '/' . $string . '.json';
+    }
+
+    public static function getAllEnvironments()
+    {
+        $environmentIds = array();
+        foreach (new DirectoryIterator(Zend_Registry::get("datadir")) as $file) {
+            if (!$file->isDot() && $file->isFile() && preg_match('/.json$/', $file->getFilename()) === 1) {
+                $environmentIds[] = preg_replace('/.json$/', '', $file->getFilename());
+            }
+        }
+        sort($environmentIds);
+        $sortedEnvironments = array();
+        foreach ($environmentIds as $id) {
+            $sortedEnvironments[] = self::getEnvironment($id);
+        }
+        return $sortedEnvironments;
+    }
+
+    public static function getEnvironment($id)
+    {
+        $environment = self::getEnvironmentFromJsonFile(self::generateFilenameForEnvId($id));
+        return $environment;
+    }
+
+    public static function getEnvironmentFromJsonFile($filename)
+    {
+        $environment = self::getEnvironmentFromJsonString(file_get_contents($filename));
+        return $environment;
+    }
+
+    public static function getEnvironmentFromJsonString($string)
+    {
+        $environment = new Application_Model_Environment();
+        $environment->fromJson($string);
+        $environment->clearExpiredLock();
+        return $environment;
+    }
+
 }
 

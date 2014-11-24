@@ -1,9 +1,9 @@
 {
-    "id" : "testenv02",
-    "name" : "Test Env 02",
-    "domainname" : "testenv02.pingworks.net",
-    "deployable" : true,
-    "locked" : false,
-    "by" : "",
-    "until" : ""
+    "id": "testenv02",
+    "name": "Test Env 02",
+    "domainname": "testenv02.pingworks.net",
+    "deployable": true,
+    "locked": false,
+    "by": "",
+    "until": ""
 }

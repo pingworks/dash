@@ -17,28 +17,28 @@
 
 class Application_Model_Bundle
 {
-	public $id;
-	/* branch ID, e.g feature_j_123 */
-	public $branch;
-	public $revision;
-	public $repository;
-	public $stage1;
-	public $stage2;
-	public $stage3;
-	public $timestamp;
-	public $committer;
-	private $changes;
-	public $payload;
-	
-	public function getChanges()
-	{
-		return $this->changes;
-	}
-	
-	public function setChanges($changes)
-	{
-		$this->changes = $changes;
-	}
+    public $id;
+    /* branch ID, e.g feature_j_123 */
+    public $branch;
+    public $revision;
+    public $repository;
+    public $stage1;
+    public $stage2;
+    public $stage3;
+    public $timestamp;
+    public $committer;
+    private $changes;
+    public $payload;
+
+    public function getChanges()
+    {
+        return $this->changes;
+    }
+
+    public function setChanges($changes)
+    {
+        $this->changes = $changes;
+    }
 
 }
 

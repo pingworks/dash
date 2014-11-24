@@ -17,19 +17,19 @@
 
 class Application_Model_Content
 {
-	public $id;
-	public $version;
-	public $isLatest;
-	
-	public function getVersion()
-	{
-		return $this->version;
-	}
-	
-	public function isLatest()
-	{
-		return $isLatest;	
-	}
-	
+    public $id;
+    public $version;
+    public $isLatest;
+
+    public function getVersion()
+    {
+        return $this->version;
+    }
+
+    public function isLatest()
+    {
+        return $isLatest;
+    }
+
 }
 
