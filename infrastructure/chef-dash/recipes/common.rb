@@ -26,4 +26,28 @@ end
 #include_recipe 'apache2::default'
 #include_recipe 'php::default'
 
+apt_package 'libapache2-mod-php5'
+apt_package 'php5'
+apt_package 'php5-curl'
+apt_package 'zendframework'
+
+cookbook_file 'dash-prod' do
+  path '/etc/apache2/sites-available/dash-prod'
+end
+
+bash 'enable_apache_site' do
+  code 'a2ensite dash-prod'
+end
+
+bash 'enable_apache_dissite' do
+  code 'a2dissite 000-default'
+end
+
+bash 'enable_apache_enmod' do
+  code 'a2enmod rewrite'
+end
+
+bash 'apache2_restart' do
+  code 'service apache2 restart'
+end
 

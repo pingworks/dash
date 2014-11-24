@@ -6,5 +6,7 @@ description      'Installs/Configures chef-dash'
 long_description 'Installs/Configures chef-dash'
 version          '0.1.0'
 
+supports 'debian'
+
 depends 'apache2'
 depends 'php'
