@@ -17,49 +17,55 @@ Ext.define("Dash.view.TriggerJenkinsJobWindow", {
     extend: 'Ext.window.Window',
     alias: 'widget.triggerjenkinsjobwindow',
     requires: ['Ext.form.Panel'],
-    
+
     id: 'TriggerJenkinsJobWindow',
     title: Dash.config.triggerJenkinsJob.title,
     width: 600,
-    items: [{
-        xtype: 'form',
-        border: false,
-        padding: 10,
-        defaults: {
-            width: 550,
-            labelWidth: 150
-        },
-        items: [{
+    items: [
+        {
             xtype: 'form',
-            items: []
-        }],
-        bbar: ['->', {
-            xtype: 'button',
-            id: 'Cancel',
-            text: Dash.config.triggerJenkinsJob.label.cancel,
-            handler: function(button, event){
-                button.findParentByType('window').destroy();
-            }
-        }, {
-            xtype: 'button',
-            id: 'Run',
-            text: Dash.config.triggerJenkinsJob.label.run,
-            handler: function(button, event){
-                var form = button.findParentByType('form');
-                var window = button.findParentByType('window');
-                if (form.isValid()) {
-                    window.fireEvent('triggerJenkinsJob', window.bundle, form.getValues());
+            border: false,
+            padding: 10,
+            defaults: {
+                width: 550,
+                labelWidth: 150
+            },
+            items: [
+                {
+                    xtype: 'form',
+                    items: []
                 }
-            }
-        }]
-    }],
-    
+            ],
+            bbar: ['->', {
+                xtype: 'button',
+                id: 'Cancel',
+                text: Dash.config.triggerJenkinsJob.label.cancel,
+                handler: function(button, event) {
+                    button.findParentByType('window').destroy();
+                }
+            }, {
+                xtype: 'button',
+                id: 'Run',
+                text: Dash.config.triggerJenkinsJob.label.run,
+                handler: function(button, event) {
+                    var form = button.findParentByType('form');
+                    var window = button.findParentByType('window');
+                    if (form.isValid()) {
+                        window.fireEvent('triggerJenkinsJob', window.bundle, form.getValues());
+                    }
+                }
+            }]
+        }
+    ],
+
     initComponent: function() {
         var that = this;
-        that.items[0].items = [{
-            xtype: 'panel',
-            html: Dash.config.triggerJenkinsJob.text
-        }];
+        that.items[0].items = [
+            {
+                xtype: 'panel',
+                html: Dash.config.triggerJenkinsJob.text
+            }
+        ];
         Ext.each(Dash.config.triggerJenkinsJob.inputFields, function(fieldConfig) {
             boxLabel = Ext.String.format(fieldConfig.label, that.bundle.get(fieldConfig.labelBundleKey), that.bundle.get('payload')[fieldConfig.labelBundleKey]);
             that.items[0].items.push({

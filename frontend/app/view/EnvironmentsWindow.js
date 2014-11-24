@@ -17,19 +17,23 @@ Ext.define("Dash.view.EnvironmentsWindow", {
     extend: 'Ext.window.Window',
     alias: 'widget.environmentswindow',
     requires: ['Ext.form.Panel'],
-    
+
     id: 'EnvironmentsWindow',
     title: 'Environments',
     width: 800,
     height: 600,
     layout: 'fit',
-    items: [{
-        xtype: 'panel',
-        border: false,
-        padding: 10,
-        layout: 'fit',
-        items: [{
-            xtype: 'environmentgrid'
-        }]
-    }]
+    items: [
+        {
+            xtype: 'panel',
+            border: false,
+            padding: 10,
+            layout: 'fit',
+            items: [
+                {
+                    xtype: 'environmentgrid'
+                }
+            ]
+        }
+    ]
 });

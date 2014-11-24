@@ -16,7 +16,7 @@
 Ext.define("Dash.view.ChangeToolTip", {
     extend: 'Dash.view.ToolTip',
     alias: 'widget.changetooltip',
-    
+
     updateTitleAndTextFromRecords: function(records, params) {
         var msg = '';
         Ext.each(records, function(record) {

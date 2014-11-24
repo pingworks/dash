@@ -1,7 +1,7 @@
 /*
  * https://github.com/larrymyers/jasmine-reporters/blob/master/src/jasmine.junit_reporter.js 
  */
- 
+
 (function() {
 
     if (typeof jasmine == 'undefined') {
@@ -9,14 +9,16 @@
     }
 
     function elapsed(startTime, endTime) {
-        return (endTime - startTime)/1000;
+        return (endTime - startTime) / 1000;
     }
 
     function ISODateString(d) {
-        function pad(n) { return n < 10 ? '0'+n : n; }
+        function pad(n) {
+            return n < 10 ? '0' + n : n;
+        }
 
         return d.getFullYear() + '-' +
-            pad(d.getMonth()+1) + '-' +
+            pad(d.getMonth() + 1) + '-' +
             pad(d.getDate()) + 'T' +
             pad(d.getHours()) + ':' +
             pad(d.getMinutes()) + ':' +
@@ -24,7 +26,7 @@
     }
 
     function trim(str) {
-        return str.replace(/^\s+/, "" ).replace(/\s+$/, "" );
+        return str.replace(/^\s+/, "").replace(/\s+$/, "");
     }
 
     function escapeInvalidXmlChars(str) {
@@ -36,17 +38,17 @@
     }
 
     /**
-* Generates JUnit XML for the given spec run.
-* Allows the test results to be used in java based CI
-* systems like CruiseControl and Hudson.
-*
-* @param {string} savePath where to save the files
-* @param {boolean} consolidate whether to save nested describes within the
-* same file as their parent; default: true
-* @param {boolean} useDotNotation whether to separate suite names with
-* dots rather than spaces (ie "Class.init" not
-* "Class init"); default: true
-*/
+     * Generates JUnit XML for the given spec run.
+     * Allows the test results to be used in java based CI
+     * systems like CruiseControl and Hudson.
+     *
+     * @param {string} savePath where to save the files
+     * @param {boolean} consolidate whether to save nested describes within the
+     * same file as their parent; default: true
+     * @param {boolean} useDotNotation whether to separate suite names with
+     * dots rather than spaces (ie "Class.init" not
+     * "Class init"); default: true
+     */
     var JUnitXmlReporter = function(savePath, consolidate, useDotNotation) {
         this.savePath = savePath || '';
         this.consolidate = consolidate === jasmine.undefined ? true : consolidate;

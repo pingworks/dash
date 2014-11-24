@@ -18,27 +18,35 @@ describe("Dash.controller.Bundle -> onLoadBundles", function() {
     var bundlesStoreMock = null;
     var bundleGridMock = null;
     var branchMock = null;
-    
-    beforeEach(function(){
+
+    beforeEach(function() {
         if (!ctrl) {
             ctrl = Ext.create('Dash.controller.Bundle');
         }
-        
+
         bundlesStoreMock = {
-            load: function() {},
-            reload: function() {}
+            load: function() {
+            },
+            reload: function() {
+            }
         }
         bundleGridMock = {
-            setTitle: function() {},
-            fireEvent: function() {}
+            setTitle: function() {
+            },
+            fireEvent: function() {
+            }
         }
         branchMock = {
             get: function(key) {
-                if (key == 'name') {return 'superbranch'}
-                if (key == 'id') {return 'superbranch'}
+                if (key == 'name') {
+                    return 'superbranch'
+                }
+                if (key == 'id') {
+                    return 'superbranch'
+                }
             }
         }
-        
+
         spyOn(ctrl, 'getBundlesStore').andReturn(bundlesStoreMock);
         spyOn(bundlesStoreMock, 'load');
         spyOn(bundlesStoreMock, 'reload');
@@ -47,10 +55,10 @@ describe("Dash.controller.Bundle -> onLoadBundles", function() {
         spyOn(bundleGridMock, 'fireEvent');
 
     });
-    
-    it("should load bundles",function(){
+
+    it("should load bundles", function() {
         ctrl.onLoadBundles(branchMock);
-        
+
         expect(ctrl.getBundlesStore).toHaveBeenCalled();
         expect(bundlesStoreMock.load).toHaveBeenCalledWith({
             params: {
@@ -58,48 +66,49 @@ describe("Dash.controller.Bundle -> onLoadBundles", function() {
             }
         });
     });
-    
+
     it("should update grid title", function() {
         ctrl.onLoadBundles(branchMock);
-        
+
         expect(ctrl.getBundleGrid).toHaveBeenCalled();
         expect(bundleGridMock.setTitle).toHaveBeenCalledWith(Ext.String.format(Dash.config.bundlegrid.title, 'superbranch'));
     });
-    
+
     it("should not update grid title on reload", function() {
         ctrl.onLoadBundles();
-        
+
         expect(ctrl.getBundleGrid).toHaveBeenCalled();
         expect(bundleGridMock.setTitle).not.toHaveBeenCalled();
     });
-    
-    it("should hide all tooltips on reload",function(){
+
+    it("should hide all tooltips on reload", function() {
         ctrl.onLoadBundles(branchMock);
 
         expect(ctrl.getBundleGrid).toHaveBeenCalled();
         expect(bundleGridMock.fireEvent).toHaveBeenCalledWith('hideAllTooltips');
     });
-    
+
 });
 
 describe("Dash.controller.Bundle -> getStageStatus", function() {
     var ctrl = null;
     var icon = null;
-    
-    beforeEach(function(){
+
+    beforeEach(function() {
         if (!ctrl) {
             ctrl = Dash.app.getController('Bundle');
         }
-        
+
         bundleMock = {
-            getStageStatus: function() {}
+            getStageStatus: function() {
+            }
         }
         stageStatusMock = {
         }
-        
+
     });
-    
-    it("should return stagestatus if exists",function(){
+
+    it("should return stagestatus if exists", function() {
         spyOn(bundleMock, 'getStageStatus').andReturn(stageStatusMock);
 
         stageStatus = ctrl.getStageStatus(bundleMock, 3);
@@ -107,8 +116,8 @@ describe("Dash.controller.Bundle -> getStageStatus", function() {
         expect(bundleMock.getStageStatus).toHaveBeenCalled();
         expect(stageStatus).toBe(stageStatusMock);
     });
-    
-    it("should return null if icon does not exist",function(){
+
+    it("should return null if icon does not exist", function() {
         spyOn(bundleMock, 'getStageStatus').andReturn(undefined);
 
         stageStatus = ctrl.getStageStatus(bundleMock, 3);
@@ -116,5 +125,5 @@ describe("Dash.controller.Bundle -> getStageStatus", function() {
         expect(bundleMock.getStageStatus).toHaveBeenCalled();
         expect(stageStatus).toBeUndefined();
     });
-    
+
 });

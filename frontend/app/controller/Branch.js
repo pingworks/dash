@@ -17,10 +17,12 @@
 Ext.define('Dash.controller.Branch', {
     extend: 'Dash.controller.Base',
     stores: ['Branches'],
-    refs: [{
-        selector: 'bundlegrid',
-        ref: 'bundleGrid'
-    }],
+    refs: [
+        {
+            selector: 'bundlegrid',
+            ref: 'bundleGrid'
+        }
+    ],
     init: function() {
         this.control({
             'toptoolbar': {
@@ -35,7 +37,7 @@ Ext.define('Dash.controller.Branch', {
         });
         this.callParent(arguments);
     },
-	onLoadBranches: function(options) {
-		this.getBranchesStore().load(options);
+    onLoadBranches: function(options) {
+        this.getBranchesStore().load(options);
     }
 });

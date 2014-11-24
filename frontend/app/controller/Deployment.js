@@ -17,13 +17,16 @@ Ext.define('Dash.controller.Deployment', {
     extend: 'Dash.controller.Base',
     requires: ['Ext.form.field.ComboBox', 'Ext.form.field.Hidden'],
     stores: ['Environments', 'Contents'],
-    refs: [{
-        selector: 'bundlegrid',
-        ref: 'bundleGrid'
-    }, {
-        selector: 'deploymentwindow',
-        ref: 'deploymentWindow'
-    }],
+    refs: [
+        {
+            selector: 'bundlegrid',
+            ref: 'bundleGrid'
+        },
+        {
+            selector: 'deploymentwindow',
+            ref: 'deploymentWindow'
+        }
+    ],
     init: function() {
         this.control({
             'bundlegrid': {
@@ -44,19 +47,19 @@ Ext.define('Dash.controller.Deployment', {
     },
     deploymentAllowed: function(bundle) {
         if (bundle) {
-	        var requiredFieldValue = bundle.get(Dash.config.bundlegrid.deployment.required.field);
-	        return ( Dash.config.bundlegrid.deployment.enabled 
-	            && Dash.config.bundlegrid.deployment.required.value == requiredFieldValue);
+            var requiredFieldValue = bundle.get(Dash.config.bundlegrid.deployment.required.field);
+            return ( Dash.config.bundlegrid.deployment.enabled
+                && Dash.config.bundlegrid.deployment.required.value == requiredFieldValue);
         }
         return false;
     },
     onShowDeployWindow: function(bundle) {
         if (bundle && this.deploymentAllowed(bundle)) {
-        	this.getEnvironmentsStore().reload();
+            this.getEnvironmentsStore().reload();
             this.getEnvironmentsStore().clearFilter(true);
             this.getEnvironmentsStore().filter('deployable', true);
             if (Dash.config.deployment.features.content && Dash.config.deployment.features.content.enabled)
-            	this.getContentsStore().reload();
+                this.getContentsStore().reload();
             var window = Ext.create('Dash.view.DeploymentWindow', {
                 bundle: bundle
             }).show();
@@ -90,8 +93,8 @@ Ext.define('Dash.controller.Deployment', {
         Ext.Ajax.request({
             url: Dash.config.deployment.triggerUrl,
             params: {
-            	environment: environment.get('id'),
-            	content: environment.get('content'),
+                environment: environment.get('id'),
+                content: environment.get('content'),
                 dbreset: environment.get('dbreset'),
                 bundle: environment.get('bundle'),
                 user: environment.get('by')
@@ -104,9 +107,9 @@ Ext.define('Dash.controller.Deployment', {
     onDeploymentTriggered: function(response, options) {
         this.getDeploymentWindow().destroy();
         var window = Ext.create('Ext.window.Window', {
-                id: 'DeploymentResultWindow',
-                html: '<iframe src="' + Dash.config.deployment.showUrl + '" width="800px", height="600px"/>'
-            }).show();
+            id: 'DeploymentResultWindow',
+            html: '<iframe src="' + Dash.config.deployment.showUrl + '" width="800px", height="600px"/>'
+        }).show();
     },
     onDeploymentError: function(response, options) {
         if (response.status == 302) {

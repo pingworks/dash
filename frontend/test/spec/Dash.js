@@ -21,7 +21,7 @@ describe("Basic Assumptions", function() {
         expect(Ext.getVersion().major).toEqual(4);
     });
 
-    it("has loaded Dash code",function(){
+    it("has loaded Dash code", function() {
         expect(Dash).toBeDefined();
     });
 });

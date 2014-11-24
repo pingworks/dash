@@ -16,113 +16,122 @@
 Ext.define("Dash.view.DeploymentWindow", {
     extend: 'Ext.window.Window',
     alias: 'widget.deploymentwindow',
-    requires: ['Ext.form.Panel','Ext.form.Checkbox'],
-    
+    requires: ['Ext.form.Panel', 'Ext.form.Checkbox'],
+
     id: 'DeploymentWindow',
     title: 'Deployment',
     width: 600,
-    items: [{
-        xtype: 'form',
-        border: false,
-        padding: 10,
-        defaults: {
-            width: 550,
-            labelWidth: 150
-        },
-        items: [{
-	        xtype: 'combobox',
-            id: 'EnvironmentCombo',
-            name: 'environment',
-	        fieldLabel: 'Environment',
-	        store: 'Environments',
-	        queryMode: 'local',
-	        displayField: 'label',
-	        valueField: 'id',
-	        border: false,
-	        forceSelection: true,
-	        allowBlank: false,
-            validator: function(value) {
-                var record = this.getStore().findRecord('label', value);
-                var overwriteField = this.findParentByType('form').getForm().findField('overwrite');
-                return (!record || !record.get('locked') || overwriteField.getValue());
+    items: [
+        {
+            xtype: 'form',
+            border: false,
+            padding: 10,
+            defaults: {
+                width: 550,
+                labelWidth: 150
             },
-            listConfig: {
-                id: 'EnvList'
-            }
-        }, {
-            xtype: 'checkbox',
-            id: 'LockOverwrite',
-            name: 'overwrite',
-            fieldLabel: 'Lock überschreiben',
-            inputValue: 'overwrite',
-            listeners: {
-                'change' : function(){
-                    var environmentField = this.findParentByType('form').getForm().findField('environment');
-                    environmentField.validate();
+            items: [
+                {
+                    xtype: 'combobox',
+                    id: 'EnvironmentCombo',
+                    name: 'environment',
+                    fieldLabel: 'Environment',
+                    store: 'Environments',
+                    queryMode: 'local',
+                    displayField: 'label',
+                    valueField: 'id',
+                    border: false,
+                    forceSelection: true,
+                    allowBlank: false,
+                    validator: function(value) {
+                        var record = this.getStore().findRecord('label', value);
+                        var overwriteField = this.findParentByType('form').getForm().findField('overwrite');
+                        return (!record || !record.get('locked') || overwriteField.getValue());
+                    },
+                    listConfig: {
+                        id: 'EnvList'
+                    }
+                },
+                {
+                    xtype: 'checkbox',
+                    id: 'LockOverwrite',
+                    name: 'overwrite',
+                    fieldLabel: 'Lock überschreiben',
+                    inputValue: 'overwrite',
+                    listeners: {
+                        'change': function() {
+                            var environmentField = this.findParentByType('form').getForm().findField('environment');
+                            environmentField.validate();
+                        }
+                    }
+                },
+                {
+                    xtype: 'checkbox',
+                    id: 'DBReset',
+                    name: 'dbreset',
+                    fieldLabel: Dash.config.deployment.features.dbreset.label,
+                    inputValue: true,
+                    hidden: !Dash.config.deployment.features.dbreset.enabled
+                },
+                {
+                    xtype: 'combobox',
+                    id: 'ContentCombo',
+                    name: 'content',
+                    fieldLabel: Dash.config.deployment.features.content.label,
+                    store: 'Contents',
+                    queryMode: 'local',
+                    displayField: 'version',
+                    valueField: 'id',
+                    border: false,
+                    forceSelection: true,
+                    allowBlank: true,
+                    hidden: !Dash.config.deployment.features.content.enabled,
+                    emptyText: Dash.config.deployment.features.content.emptyText
+                },
+                {
+                    xtype: 'textfield',
+                    id: 'Name',
+                    name: 'name',
+                    maxLength: 10,
+                    fieldLabel: 'Name',
+                    allowBlank: false
+                },
+                {
+                    xtype: 'combobox',
+                    id: 'Lock',
+                    name: 'lock',
+                    fieldLabel: 'Nutzungsdauer',
+                    store: 'LockDurations',
+                    queryMode: 'local',
+                    displayField: 'name',
+                    valueField: 'id',
+                    border: false,
+                    forceSelection: true,
+                    allowBlank: false,
+                    listConfig: {
+                        id: 'LockList'
+                    }
                 }
-            }
-        }, {
-            xtype: 'checkbox',
-            id: 'DBReset',
-            name: 'dbreset',
-            fieldLabel: Dash.config.deployment.features.dbreset.label,
-            inputValue: true,
-            hidden: ! Dash.config.deployment.features.dbreset.enabled
-        }, {
-        	xtype: 'combobox',
-            id: 'ContentCombo',
-            name: 'content',
-	        fieldLabel: Dash.config.deployment.features.content.label,
-	        store: 'Contents',
-	        queryMode: 'local',
-	        displayField: 'version',
-	        valueField: 'id',
-	        border: false,
-	        forceSelection: true,
-	        allowBlank: true,
-	        hidden: ! Dash.config.deployment.features.content.enabled,
-	        emptyText: Dash.config.deployment.features.content.emptyText
-        }, {
-	        xtype: 'textfield',
-            id: 'Name',
-            name: 'name',
-            maxLength: 10,
-	        fieldLabel: 'Name',
-            allowBlank: false
-	    }, {
-	        xtype: 'combobox',
-            id: 'Lock',
-            name: 'lock',
-	        fieldLabel: 'Nutzungsdauer',
-	        store: 'LockDurations',
-	        queryMode: 'local',
-	        displayField: 'name',
-	        valueField: 'id',
-	        border: false,
-	        forceSelection: true,
-            allowBlank: false,
-            listConfig: {
-                id: 'LockList'
-            }
-	    }],
-        bbar: ['->', {
-            xtype: 'button',
-            id: 'Cancel',
-            text: 'Abbrechen',
-            handler: function(button, event){
-                button.findParentByType('window').destroy();
-            }
-        }, {
-            xtype: 'button',
-            id: 'Deploy',
-            text: 'Deploy',
-            handler: function(button, event){
-                var form = button.findParentByType('form');
-                var window = button.findParentByType('window');
-                if (form.isValid()) {
-                    window.fireEvent('deployment', window.bundle, form.getValues());
+            ],
+            bbar: ['->', {
+                xtype: 'button',
+                id: 'Cancel',
+                text: 'Abbrechen',
+                handler: function(button, event) {
+                    button.findParentByType('window').destroy();
                 }
-            }
-        }]
-    }]
+            }, {
+                xtype: 'button',
+                id: 'Deploy',
+                text: 'Deploy',
+                handler: function(button, event) {
+                    var form = button.findParentByType('form');
+                    var window = button.findParentByType('window');
+                    if (form.isValid()) {
+                        window.fireEvent('deployment', window.bundle, form.getValues());
+                    }
+                }
+            }]
+        }
+    ]
 });

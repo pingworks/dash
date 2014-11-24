@@ -16,10 +16,12 @@
 Ext.define('Dash.controller.JobResult', {
     extend: 'Dash.controller.Base',
     stores: ['JobResults'],
-    refs: [{
-        selector: 'bundlegrid',
-        ref: 'bundleGrid'
-    }],
+    refs: [
+        {
+            selector: 'bundlegrid',
+            ref: 'bundleGrid'
+        }
+    ],
     init: function() {
         this.control({
             'bundlegrid': {
@@ -33,13 +35,13 @@ Ext.define('Dash.controller.JobResult', {
             tooltip.destroy();
         });
         this.getJobResultsStore().load({
-            params: { 
+            params: {
                 bundle: bundle.get('id'),
                 branch: bundle.get('branch'),
                 stage: stage
             },
             scope: tooltip,
-            callback: tooltip.onLoad 
+            callback: tooltip.onLoad
         });
     }
 });

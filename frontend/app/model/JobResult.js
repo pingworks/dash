@@ -15,7 +15,7 @@
  */
 Ext.define('Dash.model.JobResult', {
     extend: 'Ext.data.Model',
-    
+
     fields: [
         { name: 'id', type: 'string' },
         { name: 'stage', type: 'string' },

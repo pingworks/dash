@@ -15,18 +15,21 @@
  */
 describe("Dash.view.ToolTip -> onLoad", function() {
     var view = null;
-    
-    beforeEach(function(){
+
+    beforeEach(function() {
         if (!view) {
             view = Ext.create('Dash.view.ToolTip');
         }
-        
+
         spyOn(view, 'updateTitleAndTextFromRecords');
         spyOn(view, 'showErrorMsg');
     });
-    
-    it("should update tooltip",function(){
-        var recordsMock = [{},{}];
+
+    it("should update tooltip", function() {
+        var recordsMock = [
+            {},
+            {}
+        ];
         var operationsMock = {
             params: {
                 p1: 'v1',
@@ -39,13 +42,16 @@ describe("Dash.view.ToolTip -> onLoad", function() {
 
         expect(view.updateTitleAndTextFromRecords).toHaveBeenCalled();
         expect(view.updateTitleAndTextFromRecords).toHaveBeenCalledWith(
-            recordsMock, 
+            recordsMock,
             operationsMock.params
         );
     });
-    
-    it("should detect ajax failure",function(){
-        var recordsMock = [{},{}];
+
+    it("should detect ajax failure", function() {
+        var recordsMock = [
+            {},
+            {}
+        ];
         var operationsMock = {
             params: {
                 p1: 'v1',
@@ -59,8 +65,8 @@ describe("Dash.view.ToolTip -> onLoad", function() {
         expect(view.updateTitleAndTextFromRecords).not.toHaveBeenCalled();
         expect(view.showErrorMsg).toHaveBeenCalled();
     });
-    
-    it("should detect empty records",function(){
+
+    it("should detect empty records", function() {
         var recordsMock = [];
         var operationsMock = {
             params: {
@@ -75,8 +81,8 @@ describe("Dash.view.ToolTip -> onLoad", function() {
         expect(view.updateTitleAndTextFromRecords).not.toHaveBeenCalled();
         expect(view.showErrorMsg).toHaveBeenCalled();
     });
-    
-    it("should detect empty result",function(){
+
+    it("should detect empty result", function() {
         var recordsMock = null;
         var operationsMock = {
             params: {
@@ -91,5 +97,5 @@ describe("Dash.view.ToolTip -> onLoad", function() {
         expect(view.updateTitleAndTextFromRecords).not.toHaveBeenCalled();
         expect(view.showErrorMsg).toHaveBeenCalled();
     });
-    
+
 });

@@ -15,7 +15,7 @@
  */
 Ext.define('Dash.model.Environment', {
     extend: 'Ext.data.Model',
-    
+
     fields: [
         { name: 'id', type: 'string' },
         { name: 'name', type: 'string' },
@@ -23,23 +23,23 @@ Ext.define('Dash.model.Environment', {
         { name: 'deployable', type: 'boolean' },
         { name: 'locked', type: 'boolean' },
         { name: 'by', type: 'string' },
-        { 
-            name: 'until', 
-            type: 'date', 
-            convert: function(value, record) { 
+        {
+            name: 'until',
+            type: 'date',
+            convert: function(value, record) {
                 return Ext.Date.parse(value, Dash.config.environment.dateformat)
             }
         },
-        { 
-            name: 'label', 
-            type: 'string', 
+        {
+            name: 'label',
+            type: 'string',
             convert: function(value, record) {
                 var until = record.get('until');
-                var dateFormat = Dash.config.environment.dateformat; 
-                var label =(record.get('locked')) 
-                    ? ' genutzt von ' + record.get('by') + ' bis ' 
-                        + Ext.util.Format.date(until, dateFormat)
-                    : ''; 
+                var dateFormat = Dash.config.environment.dateformat;
+                var label = (record.get('locked'))
+                    ? ' genutzt von ' + record.get('by') + ' bis '
+                    + Ext.util.Format.date(until, dateFormat)
+                    : '';
                 return record.get('name') + label;
             }
         },

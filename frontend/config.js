@@ -17,38 +17,46 @@ var Dash = {};
 
 Dash.config = {
     toolbar: {
-        left: [{
-            id: 'Logo',
-            xtype: 'component',
-            width: 48,
-            height: 38,
-            html: '<img src="resources/img/icons/Dashboard-green.png" />'
-        }, {
-            xtype: 'component',
-            html: '&nbsp;',
-            width: 10
-        }, {
-            id: 'Title',
-            xtype: 'component',
-            html: 'Dashboard',
-            style: 'font-size: 32px'
-        }],
-        links: [{
-            id: 'JenkinsButton',
-            text: 'Jenkins',
-            url: 'https://dash.pingworks.net/jenkins/'
-        }, {
-            id: 'RepoButton',
-            text: 'Repo',
-            url: 'https://dash.pingworks.net/repo/'
-        }, {
-            id: 'EnvButton',
-            text: 'Environments',
-            handler: function() {
-                this.findParentByType('toolbar').fireEvent('hideDeployWindow');
-                this.findParentByType('toolbar').fireEvent('showEnvironmentsWindow');
+        left: [
+            {
+                id: 'Logo',
+                xtype: 'component',
+                width: 48,
+                height: 38,
+                html: '<img src="resources/img/icons/Dashboard-green.png" />'
+            },
+            {
+                xtype: 'component',
+                html: '&nbsp;',
+                width: 10
+            },
+            {
+                id: 'Title',
+                xtype: 'component',
+                html: 'Dashboard',
+                style: 'font-size: 32px'
             }
-        }]
+        ],
+        links: [
+            {
+                id: 'JenkinsButton',
+                text: 'Jenkins',
+                url: 'https://dash.pingworks.net/jenkins/'
+            },
+            {
+                id: 'RepoButton',
+                text: 'Repo',
+                url: 'https://dash.pingworks.net/repo/'
+            },
+            {
+                id: 'EnvButton',
+                text: 'Environments',
+                handler: function() {
+                    this.findParentByType('toolbar').fireEvent('hideDeployWindow');
+                    this.findParentByType('toolbar').fireEvent('showEnvironmentsWindow');
+                }
+            }
+        ]
     },
 
     bundlegrid: {
@@ -150,25 +158,25 @@ Dash.config = {
             {
                 'id': 0,
                 'name': 'not running',
-                'cls' : 'unknown',
+                'cls': 'unknown',
                 'icon': 'grey.png'
             },
             {
                 'id': 1,
                 'name': 'in progress',
-                'cls' : 'inprogress',
+                'cls': 'inprogress',
                 'icon': 'green-ani.gif'
             },
             {
                 'id': 2,
                 'name': 'failed',
-                'cls' : 'failed',
+                'cls': 'failed',
                 'icon': 'red.png'
             },
             {
                 'id': 3,
                 'name': 'success',
-                'cls' : 'success',
+                'cls': 'success',
                 'icon': 'green.png'
             }
         ]
@@ -180,25 +188,25 @@ Dash.config = {
             {
                 'id': '-',
                 'name': 'not running',
-                'cls' : 'unknown',
+                'cls': 'unknown',
                 'icon': 'grey.png'
             },
             {
                 'id': 'UNSTABLE',
                 'name': 'unstable',
-                'cls' : 'unstable',
+                'cls': 'unstable',
                 'icon': 'yellow.png'
             },
             {
                 'id': 'FAILURE',
                 'name': 'failed',
-                'cls' : 'failed',
+                'cls': 'failed',
                 'icon': 'red.png'
             },
             {
                 'id': 'SUCCESS',
                 'name': 'success',
-                'cls' : 'success',
+                'cls': 'success',
                 'icon': 'green.png'
             }
         ]
@@ -225,10 +233,10 @@ Dash.config = {
         triggerUrl: '/jenkins/job/Deployment/buildWithParameters?token=Omi7foh4gu7d',
         showUrl: '/jenkins/job/Deployment/',
         features: {
-        	content: {
-        		enabled: false,
-        		label: 'Content',
-        		emptyText: 'no deployment this time'
+            content: {
+                enabled: false,
+                label: 'Content',
+                emptyText: 'no deployment this time'
             },
             dbreset: {
                 enabled: false,
@@ -247,18 +255,18 @@ Dash.config = {
         },
         text: 'Do you really want to deploy to production?',
         inputFields: [/*{
-            type: 'checkbox',
-            label: 'Module 1: {1}',
-            labelBundleKey: 'foo',
-            name: 'module1',
-            value: 'module1'
-        }, {
-            type: 'checkbox',
-            label: 'Module 2: {1}',
-            labelBundleKey: 'bar',
-            name: 'module2',
-            value: 'module2'
-        }*/],
+         type: 'checkbox',
+         label: 'Module 1: {1}',
+         labelBundleKey: 'foo',
+         name: 'module1',
+         value: 'module1'
+         }, {
+         type: 'checkbox',
+         label: 'Module 2: {1}',
+         labelBundleKey: 'bar',
+         name: 'module2',
+         value: 'module2'
+         }*/],
         params: {
             bundle: {
                 name: 'bundle',
@@ -275,22 +283,28 @@ Dash.config = {
             {
                 'id': '1',
                 'name': '1 hour'
-            }, {
+            },
+            {
                 'id': '2',
                 'name': '2 hours'
-            }, {
+            },
+            {
                 'id': '4',
                 'name': '4 hours'
-            }, {
+            },
+            {
                 'id': '8',
                 'name': '8 hours'
-            }, {
+            },
+            {
                 'id': '24',
                 'name': '1 day'
-            }, {
+            },
+            {
                 'id': '48',
                 'name': '2 days'
-            }, {
+            },
+            {
                 'id': '120',
                 'name': '5 days'
             }

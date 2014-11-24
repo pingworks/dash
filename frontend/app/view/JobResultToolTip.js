@@ -16,17 +16,17 @@
 Ext.define("Dash.view.JobResultToolTip", {
     extend: 'Dash.view.ToolTip',
     alias: 'widget.jobresulttooltip',
-    
+
     updateTitleAndTextFromRecords: function(records, params) {
         var msgs = [];
         Ext.each(records, function(jobResult) {
             msgs.push(
-                Ext.String.format(Dash.config.jobresult.text, 
-                    Ext.String.htmlEncode(jobResult.get('name')), 
-                    Ext.String.htmlEncode(jobResult.get('url')), 
-                    Ext.String.htmlEncode(jobResult.get('status')), 
-                    Ext.String.htmlEncode(jobResult.get('total')), 
-                    Ext.String.htmlEncode(jobResult.get('skipped')), 
+                Ext.String.format(Dash.config.jobresult.text,
+                    Ext.String.htmlEncode(jobResult.get('name')),
+                    Ext.String.htmlEncode(jobResult.get('url')),
+                    Ext.String.htmlEncode(jobResult.get('status')),
+                    Ext.String.htmlEncode(jobResult.get('total')),
+                    Ext.String.htmlEncode(jobResult.get('skipped')),
                     Ext.String.htmlEncode(jobResult.get('failed')),
                     Ext.String.format(Dash.config.jobstatus.iconpath, jobResult.getJobStatus().get('icon')),
                     jobResult.getJobStatus().get('cls')

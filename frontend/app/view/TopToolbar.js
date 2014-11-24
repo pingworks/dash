@@ -28,30 +28,30 @@ Ext.define("Dash.view.TopToolbar", {
             id: 'ReloadButton',
             icon: 'resources/img/icons/refresh.png',
             handler: function() {
-				this.findParentByType('toolbar').fireEvent('loadBranches');
-				this.findParentByType('toolbar').fireEvent('loadBundles');
+                this.findParentByType('toolbar').fireEvent('loadBranches');
+                this.findParentByType('toolbar').fireEvent('loadBundles');
             }
         }, {
-			xtype: 'combo',
-			id: 'BranchButtonMenu',
-			store: Ext.StoreMgr.get('Branches'),
-			emptyText: 'Branch',
-			valueField: 'id',
-			displayField: 'name',
-			typeAhead: true,
-			typeAheadDelay: 0,
-			autoScroll: true,
-			autoSelect: true,
-			forceSelection: true,
-			minChars: 1,
-			queryMode: 'local',
-			listeners: {
-				select: function(combo, records, eOpts) {
-					var selectedBranch = records[0];
+            xtype: 'combo',
+            id: 'BranchButtonMenu',
+            store: Ext.StoreMgr.get('Branches'),
+            emptyText: 'Branch',
+            valueField: 'id',
+            displayField: 'name',
+            typeAhead: true,
+            typeAheadDelay: 0,
+            autoScroll: true,
+            autoSelect: true,
+            forceSelection: true,
+            minChars: 1,
+            queryMode: 'local',
+            listeners: {
+                select: function(combo, records, eOpts) {
+                    var selectedBranch = records[0];
                     window.location.hash = '#' + selectedBranch.get('id');
-					this.findParentByType('toolbar').fireEvent('loadBundles', selectedBranch);
-				}
-			}
+                    this.findParentByType('toolbar').fireEvent('loadBundles', selectedBranch);
+                }
+            }
         });
 
         this.callParent(arguments);

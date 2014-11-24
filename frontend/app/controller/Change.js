@@ -16,10 +16,12 @@
 Ext.define('Dash.controller.Change', {
     extend: 'Dash.controller.Base',
     stores: ['Changes'],
-    refs: [{
-        selector: 'bundlegrid',
-        ref: 'bundleGrid'
-    }],
+    refs: [
+        {
+            selector: 'bundlegrid',
+            ref: 'bundleGrid'
+        }
+    ],
     init: function() {
         this.control({
             'bundlegrid': {
@@ -31,14 +33,14 @@ Ext.define('Dash.controller.Change', {
     onLoadChanges: function(bundle, tooltip) {
         this.getBundleGrid().on('hideAllTooltips', function() {
             tooltip.destroy();
-        });                    
+        });
         this.getChangesStore().load({
-            params: { 
+            params: {
                 branch: bundle.get('branch'),
                 bundle: bundle.get('id')
             },
             scope: tooltip,
-            callback: tooltip.onLoad 
+            callback: tooltip.onLoad
         });
     }
 });

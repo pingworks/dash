@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-Ext.apply(Dash.config,{
+Ext.apply(Dash.config, {
     jobresult: {
         text: '{0}{1}{2}{3}{4}{5}{6}',
         title: '{0}{1}{2}',

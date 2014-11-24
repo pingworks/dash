@@ -15,34 +15,34 @@
  */
 Ext.define('Dash.controller.Base', {
     extend: 'Ext.app.Controller',
-    init: function(){
-        Ext.each(this.stores, function(storeName){
+    init: function() {
+        Ext.each(this.stores, function(storeName) {
             this.getStore(storeName).getProxy().on({
-	            'exception': {
-	                fn: this.onAjaxError,
-	                scope: this
-	            }
-	        });
+                'exception': {
+                    fn: this.onAjaxError,
+                    scope: this
+                }
+            });
         }, this);
     },
     onError: function(response, options) {
         var msg = 'Der Request zum Server ist fehlgeschlagen. <br />HTTP Status: ' + response.status;
         var data;
-        if (response.responseText != ''){
+        if (response.responseText != '') {
             data = Ext.JSON.decode(response.responseText);
         }
-        if (data && data.exception){
+        if (data && data.exception) {
             msg += '<br /><br />Message: ' + data.exception;
         }
-        if (data && data.trace){
+        if (data && data.trace) {
             msg += '<br /><br />Trace:'
-            Ext.each(data.trace, function(call){
+            Ext.each(data.trace, function(call) {
                 msg += '<br />' + call.file + ':' + call.line;
             }, this);
         }
         Ext.Msg.alert('Fehler', msg);
     },
-    onAjaxError: function(dummy, response, operation, eOpts){
+    onAjaxError: function(dummy, response, operation, eOpts) {
         this.onError(response);
     }
 });

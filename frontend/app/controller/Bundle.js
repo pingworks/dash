@@ -16,17 +16,19 @@
 Ext.define('Dash.controller.Bundle', {
     extend: 'Dash.controller.Base',
     stores: ['Bundles', 'StageStatus', 'Branches'],
-    refs: [{
-        selector: 'bundlegrid',
-        ref: 'bundleGrid'
-    }],
+    refs: [
+        {
+            selector: 'bundlegrid',
+            ref: 'bundleGrid'
+        }
+    ],
     init: function() {
         this.control({
             'toptoolbar': {
                 loadBundles: this.onLoadBundles
             }
         });
-        
+
         // reloadTimer
         var ctrl = this;
         var reloadTask = Ext.TaskManager.start({
@@ -40,11 +42,11 @@ Ext.define('Dash.controller.Bundle', {
     },
     onLoadBundles: function(branch) {
         if (branch) {
-	        this.getBundlesStore().load({
-	            params: {
-	                branch: branch.get('id')
-	            }
-	        });
+            this.getBundlesStore().load({
+                params: {
+                    branch: branch.get('id')
+                }
+            });
             this.getBundleGrid().setTitle(Ext.String.format(Dash.config.bundlegrid.title, branch.get('name')));
         } else {
             this.getBundlesStore().reload();

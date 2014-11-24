@@ -15,7 +15,7 @@
  */
 Ext.define('Dash.view.Viewport', {
     extend: 'Ext.container.Viewport',
-    requires:[
+    requires: [
         'Dash.view.TopToolbar',
         'Dash.view.BundleGrid'
     ],
@@ -27,20 +27,25 @@ Ext.define('Dash.view.Viewport', {
     initComponent: function() {
         this.items = {
             xtype: 'panel',
-            dockedItems: [{
-                dock: 'top',
-                xtype: 'toptoolbar'
-            },{
-                dock: 'bottom',
-                xtype: 'bottomtoolbar'
-            }],
+            dockedItems: [
+                {
+                    dock: 'top',
+                    xtype: 'toptoolbar'
+                },
+                {
+                    dock: 'bottom',
+                    xtype: 'bottomtoolbar'
+                }
+            ],
             layout: {
                 type: 'hbox',
                 align: 'stretch'
             },
-            items: [{
-                xtype: 'bundlegrid'
-            }]
+            items: [
+                {
+                    xtype: 'bundlegrid'
+                }
+            ]
         }
         this.callParent();
     }

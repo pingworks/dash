@@ -15,7 +15,7 @@
  */
 Ext.define('Dash.model.Change', {
     extend: 'Ext.data.Model',
-    
+
     fields: [
         { name: 'id', type: 'string' },
         { name: 'msg', type: 'string' }

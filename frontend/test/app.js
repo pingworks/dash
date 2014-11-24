@@ -15,8 +15,8 @@
  */
 Ext.onReady(function() {
     Ext.application({
-	    name: 'Dash',
-        models:[
+        name: 'Dash',
+        models: [
             'Branch',
             'Bundle',
             'Content',

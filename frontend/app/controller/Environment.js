@@ -17,10 +17,12 @@ Ext.define('Dash.controller.Environment', {
     extend: 'Dash.controller.Base',
     requires: [],
     stores: ['Environments'],
-    refs: [{
-        selector: 'environmentswindow',
-        ref: 'environmentsWindow'
-    }],
+    refs: [
+        {
+            selector: 'environmentswindow',
+            ref: 'environmentsWindow'
+        }
+    ],
     init: function() {
         this.control({
             'toptoolbar': {

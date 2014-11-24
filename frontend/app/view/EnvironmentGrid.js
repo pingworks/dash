@@ -19,11 +19,11 @@ Ext.define("Dash.view.EnvironmentGrid", {
     requires: [],
     store: 'Environments',
     width: '100%',
-    
+
     id: 'EnvironmentGrid',
-    
+
     urlRenderer: function(value, metadata, record, rowIndex, colIndex, store, view) {
-        var newValue='';
+        var newValue = '';
         if (Ext.isArray(value)) {
             Ext.each(value, function(item) {
                 newValue += Ext.String.format(Dash.config.environmentgrid.envlink, item.url, item.name) + '<br />';
@@ -31,61 +31,73 @@ Ext.define("Dash.view.EnvironmentGrid", {
         }
         return newValue;
     },
-    
+
     initComponent: function() {
         var that = this;
-        this.columns = [{
-            text: 'Id',
-            dataIndex: 'id',
-            type: 'string',
-            width: 90,
-            hidden: true
-        }, {
-            text: 'Environment',
-            dataIndex: 'name',
-            type: 'string',
-            width: 150
-        }, {
-            text: 'Domainname',
-            dataIndex: 'domainname',
-            type: 'string',
-            width: 180,
-            hidden: true
-        }, {
-            text: 'belegt',
-            dataIndex: 'locked',
-            type: 'boolean',
-            renderer: function(value) { return (value) ? 'ja' : 'nein'; },
-            width: 60
-        }, {
-            text: 'von',
-            dataIndex: 'by',
-            type: 'string',
-            width: 90
-        }, {
-            text: 'bis',
-            dataIndex: 'until',
-            type: 'date',
-            renderer: Ext.util.Format.dateRenderer(Dash.config.environmentgrid.dateformat),
-            width: 150
-        }, {
-            text: 'deployed',
-            dataIndex: 'bundle',
-            type: 'string',
-            width: 120
-        }, {
-            text: Dash.config.deployment.features.content.label,
-            dataIndex: 'content',
-            type: 'string',
-            width: 120,
-            hidden: true
-        }, {
-            text: 'URLs',
-            dataIndex: 'urls',
-            type: 'string',
-            renderer: this.urlRenderer,
-            flex: 1
-        }];
+        this.columns = [
+            {
+                text: 'Id',
+                dataIndex: 'id',
+                type: 'string',
+                width: 90,
+                hidden: true
+            },
+            {
+                text: 'Environment',
+                dataIndex: 'name',
+                type: 'string',
+                width: 150
+            },
+            {
+                text: 'Domainname',
+                dataIndex: 'domainname',
+                type: 'string',
+                width: 180,
+                hidden: true
+            },
+            {
+                text: 'belegt',
+                dataIndex: 'locked',
+                type: 'boolean',
+                renderer: function(value) {
+                    return (value) ? 'ja' : 'nein';
+                },
+                width: 60
+            },
+            {
+                text: 'von',
+                dataIndex: 'by',
+                type: 'string',
+                width: 90
+            },
+            {
+                text: 'bis',
+                dataIndex: 'until',
+                type: 'date',
+                renderer: Ext.util.Format.dateRenderer(Dash.config.environmentgrid.dateformat),
+                width: 150
+            },
+            {
+                text: 'deployed',
+                dataIndex: 'bundle',
+                type: 'string',
+                width: 120
+            },
+            {
+                text: Dash.config.deployment.features.content.label,
+                dataIndex: 'content',
+                type: 'string',
+                width: 120,
+                hidden: true
+            },
+            {
+                text: 'URLs',
+                dataIndex: 'urls',
+                type: 'string',
+                renderer: this.urlRenderer,
+                flex: 1
+            }
+        ];
         this.callParent(arguments);
     }
 });
