@@ -51,3 +51,19 @@ bash 'apache2_restart' do
   code 'service apache2 restart'
 end
 
+remote_file "/var/tmp/full-bundle_LATEST.tar.gz" do
+  source "https://dash.pingworks.net/repo/master/full-bundle_LATEST.tar.gz"
+  action :create_if_missing
+end
+
+bash 'install_dash' do
+  cwd '/var/tmp'
+  code <<-EOH
+  dpkg -l dash-frontend > /dev/null && exit 0
+  rm -rf bundle
+  mkdir bundle
+  tar xfz full-bundle_LATEST.tar.gz -C bundle
+  dpkg -i bundle/artifacts/dash-backend_*.deb
+  dpkg -i bundle/artifacts/dash-frontend_*.deb
+  EOH
+end
