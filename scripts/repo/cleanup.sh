@@ -37,8 +37,10 @@ function getSortedBundles() {
   
   BUNDLES=$(ls -tc1 ${REPOBASE}/${BRANCH})
   for BUNDLE in $BUNDLES; do
-    TIMESTAMP=$(getMetadata $BUNDLE $SORTKEY); 
-    echo "$TIMESTAMP;$BUNDLE"
+    if [ -d ${REPOBASE}/${BRANCH}/${BUNDLE} ]; then
+      TIMESTAMP=$(getMetadata $BUNDLE $SORTKEY);
+      echo "$TIMESTAMP;$BUNDLE"
+    fi
   done | sort -r | cut -d ';' -f 2
 }
 
