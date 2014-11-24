@@ -47,9 +47,9 @@ Ext.define("Dash.view.TopToolbar", {
 			queryMode: 'local',
 			listeners: {
 				select: function(combo, records, eOpts) {
-					var selectedBranchId = records[0].get('id');
-                    window.location.hash = '#' + selectedBranchId;
-					this.findParentByType('toolbar').fireEvent('loadBundles', selectedBranchId);
+					var selectedBranch = records[0];
+                    window.location.hash = '#' + selectedBranch.get('id');
+					this.findParentByType('toolbar').fireEvent('loadBundles', selectedBranch);
 				}
 			}
         });

@@ -91,9 +91,12 @@ Ext.application({
         });
     },
     onBranchesLoad: function() {
-        var branchToLoad = window.location.hash.substring(1);
-        if (!branchToLoad) {
-            branchToLoad = this.getBranchesStore().getAt(0).get('id');
+        var branchIdToLoad = window.location.hash.substring(1);
+        if (!branchIdToLoad) {
+            branchToLoad = this.getBranchesStore().getAt(0);
+        }
+        else {
+            branchToLoad = this.getBranchesStore().findRecord('id',branchIdToLoad);
         }
         this.getController('Bundle').onLoadBundles(branchToLoad);
     }
