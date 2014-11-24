@@ -16,9 +16,8 @@
 Ext.define("Dash.view.TopToolbar", {
     extend: 'Ext.toolbar.Toolbar',
     alias: 'widget.toptoolbar',
-    requires: 'Dash.view.StoreMenu',
     height: 80,
-    
+
     initComponent: function() {
         this.items = Dash.config.toolbar.left;
         this.items = this.items.concat({
@@ -29,22 +28,32 @@ Ext.define("Dash.view.TopToolbar", {
             id: 'ReloadButton',
             icon: 'resources/img/icons/refresh.png',
             handler: function() {
-                this.findParentByType('toolbar').fireEvent('loadBundles');
+				this.findParentByType('toolbar').fireEvent('loadBranches');
+				this.findParentByType('toolbar').fireEvent('loadBundles');
             }
         }, {
-            id: 'BranchButton',
-            text: 'Branch',
-            menu: Ext.create('Dash.view.StoreMenu', {
-                id: 'BranchButtonMenu',
-                store: Ext.StoreMgr.get('Branches'),
-                itemsHandler: function(item, evt) {
-                    this.findParentByType('toolbar').fireEvent('loadBundles', item.id);
-                },
-                nameField: 'name',
-                autoReload: false
-            })
+			xtype: 'combo',
+			id: 'BranchButtonMenu',
+			store: Ext.StoreMgr.get('Branches'),
+			emptyText: 'Branch',
+			valueField: 'id',
+			displayField: 'name',
+			typeAhead: true,
+			typeAheadDelay: 0,
+			autoScroll: true,
+			autoSelect: true,
+			forceSelection: true,
+			minChars: 1,
+			queryMode: 'local',
+			listeners: {
+				select: function(combo, records, eOpts) {
+					var selectedBranch = records[0];
+                    window.location.hash = '#' + selectedBranch.get('id');
+					this.findParentByType('toolbar').fireEvent('loadBundles', selectedBranch);
+				}
+			}
         });
-        
+
         this.callParent(arguments);
     }
 });
