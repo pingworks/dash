@@ -57,23 +57,23 @@
  */
 class PHPUnit_Util_Test
 {
-    const REGEX_DATA_PROVIDER      = '/@dataProvider\s+([a-zA-Z0-9._:-\\\\x7f-\xff]+)/';
+    const REGEX_DATA_PROVIDER = '/@dataProvider\s+([a-zA-Z0-9._:-\\\\x7f-\xff]+)/';
     const REGEX_EXPECTED_EXCEPTION = '(@expectedException\s+([:.\w\\\\x7f-\xff]+)(?:[\t ]+(\S*))?(?:[\t ]+(\S*))?\s*$)m';
-    const REGEX_REQUIRES           = '/@requires\s+(?P<name>PHP(?:Unit)?)\s+(?P<value>[\d\.]+)[ \t]*\r?$/m';
+    const REGEX_REQUIRES = '/@requires\s+(?P<name>PHP(?:Unit)?)\s+(?P<value>[\d\.]+)[ \t]*\r?$/m';
 
-    const SMALL  = 0;
+    const SMALL = 0;
     const MEDIUM = 1;
-    const LARGE  = 2;
+    const LARGE = 2;
 
     private static $annotationCache = array();
 
     protected static $templateMethods = array(
-      'setUp', 'assertPreConditions', 'assertPostConditions', 'tearDown'
+        'setUp', 'assertPreConditions', 'assertPostConditions', 'tearDown'
     );
 
     /**
      * @param  PHPUnit_Framework_Test $test
-     * @param  boolean                $asString
+     * @param  boolean $asString
      * @return mixed
      */
     public static function describe(PHPUnit_Framework_Test $test, $asString = TRUE)
@@ -87,15 +87,11 @@ class PHPUnit_Util_Test
         } else {
             if ($test instanceof PHPUnit_Framework_TestCase) {
                 return array(
-                  get_class($test), $test->getName()
+                    get_class($test), $test->getName()
                 );
-            }
-
-            else if ($test instanceof PHPUnit_Framework_SelfDescribing) {
+            } else if ($test instanceof PHPUnit_Framework_SelfDescribing) {
                 return array('', $test->toString());
-            }
-
-            else {
+            } else {
                 return array('', get_class($test));
             }
         }
@@ -111,9 +107,9 @@ class PHPUnit_Util_Test
      */
     public static function getRequirements($className, $methodName)
     {
-        $reflector  = new ReflectionMethod($className, $methodName);
+        $reflector = new ReflectionMethod($className, $methodName);
         $docComment = $reflector->getDocComment();
-        $requires   = array();
+        $requires = array();
 
         if ($count = preg_match_all(self::REGEX_REQUIRES, $docComment, $matches)) {
             for ($i = 0; $i < $count; $i++) {
@@ -134,44 +130,38 @@ class PHPUnit_Util_Test
      */
     public static function getExpectedException($className, $methodName)
     {
-        $reflector  = new ReflectionMethod($className, $methodName);
+        $reflector = new ReflectionMethod($className, $methodName);
         $docComment = $reflector->getDocComment();
 
         if (preg_match(self::REGEX_EXPECTED_EXCEPTION, $docComment, $matches)) {
             $annotations = self::parseTestMethodAnnotations(
-              $className, $methodName
+                $className, $methodName
             );
 
-            $class   = $matches[1];
-            $code    = NULL;
+            $class = $matches[1];
+            $code = NULL;
             $message = '';
 
             if (isset($matches[2])) {
                 $message = trim($matches[2]);
-            }
-
-            else if (isset($annotations['method']['expectedExceptionMessage'])) {
+            } else if (isset($annotations['method']['expectedExceptionMessage'])) {
                 $message = $annotations['method']['expectedExceptionMessage'][0];
             }
 
             if (isset($matches[3])) {
                 $code = $matches[3];
-            }
-
-            else if (isset($annotations['method']['expectedExceptionCode'])) {
+            } else if (isset($annotations['method']['expectedExceptionCode'])) {
                 $code = $annotations['method']['expectedExceptionCode'][0];
             }
 
             if (is_numeric($code)) {
                 $code = (int)$code;
-            }
-
-            else if (is_string($code) && defined($code)) {
+            } else if (is_string($code) && defined($code)) {
                 $code = (int)constant($code);
             }
 
             return array(
-              'class' => $class, 'code' => $code, 'message' => $message
+                'class' => $class, 'code' => $code, 'message' => $message
             );
         }
 
@@ -191,14 +181,14 @@ class PHPUnit_Util_Test
      */
     public static function getProvidedData($className, $methodName)
     {
-        $reflector  = new ReflectionMethod($className, $methodName);
+        $reflector = new ReflectionMethod($className, $methodName);
         $docComment = $reflector->getDocComment();
-        $data       = NULL;
+        $data = NULL;
 
         if (preg_match(self::REGEX_DATA_PROVIDER, $docComment, $matches)) {
             $dataProviderMethodNameNamespace = explode('\\', $matches[1]);
-            $leaf                            = explode('::', array_pop($dataProviderMethodNameNamespace));
-            $dataProviderMethodName          = array_pop($leaf);
+            $leaf = explode('::', array_pop($dataProviderMethodNameNamespace));
+            $dataProviderMethodName = array_pop($leaf);
 
             if (!empty($dataProviderMethodNameNamespace)) {
                 $dataProviderMethodNameNamespace = join('\\', $dataProviderMethodNameNamespace) . '\\';
@@ -212,9 +202,9 @@ class PHPUnit_Util_Test
                 $dataProviderClassName = $className;
             }
 
-            $dataProviderClass  = new ReflectionClass($dataProviderClassName);
+            $dataProviderClass = new ReflectionClass($dataProviderClassName);
             $dataProviderMethod = $dataProviderClass->getMethod(
-              $dataProviderMethodName
+                $dataProviderMethodName
             );
 
             if ($dataProviderMethod->isStatic()) {
@@ -234,10 +224,10 @@ class PHPUnit_Util_Test
             foreach ($data as $key => $value) {
                 if (!is_array($value)) {
                     throw new InvalidArgumentException(
-                      sprintf(
-                        'Data set %s is invalid.',
-                        is_int($key) ? '#' . $key : '"' . $key . '"'
-                      )
+                        sprintf(
+                            'Data set %s is invalid.',
+                            is_int($key) ? '#' . $key : '"' . $key . '"'
+                        )
                     );
                 }
             }
@@ -261,18 +251,18 @@ class PHPUnit_Util_Test
         }
 
         if (!empty($methodName) && !isset(self::$annotationCache[$className . '::' . $methodName])) {
-        	try {
-				$method = new ReflectionMethod($className, $methodName);
-				$annotations = self::parseAnnotations($method->getDocComment());
-			} catch (ReflectionException $e) {
-				$annotations = array();
-			}
-			self::$annotationCache[$className . '::' . $methodName] = $annotations;
+            try {
+                $method = new ReflectionMethod($className, $methodName);
+                $annotations = self::parseAnnotations($method->getDocComment());
+            } catch (ReflectionException $e) {
+                $annotations = array();
+            }
+            self::$annotationCache[$className . '::' . $methodName] = $annotations;
         }
 
         return array(
-          'class'  => self::$annotationCache[$className],
-          'method' => !empty($methodName) ? self::$annotationCache[$className . '::' . $methodName] : array()
+            'class' => self::$annotationCache[$className],
+            'method' => !empty($methodName) ? self::$annotationCache[$className . '::' . $methodName] : array()
         );
     }
 
@@ -309,12 +299,12 @@ class PHPUnit_Util_Test
     public static function getBackupSettings($className, $methodName)
     {
         return array(
-          'backupGlobals' => self::getBooleanAnnotationSetting(
-            $className, $methodName, 'backupGlobals'
-          ),
-          'backupStaticAttributes' => self::getBooleanAnnotationSetting(
-            $className, $methodName, 'backupStaticAttributes'
-          )
+            'backupGlobals' => self::getBooleanAnnotationSetting(
+                $className, $methodName, 'backupGlobals'
+            ),
+            'backupStaticAttributes' => self::getBooleanAnnotationSetting(
+                $className, $methodName, 'backupStaticAttributes'
+            )
         );
     }
 
@@ -329,7 +319,7 @@ class PHPUnit_Util_Test
     public static function getDependencies($className, $methodName)
     {
         $annotations = self::parseTestMethodAnnotations(
-          $className, $methodName
+            $className, $methodName
         );
 
         $dependencies = array();
@@ -340,7 +330,7 @@ class PHPUnit_Util_Test
 
         if (isset($annotations['method']['depends'])) {
             $dependencies = array_merge(
-              $dependencies, $annotations['method']['depends']
+                $dependencies, $annotations['method']['depends']
             );
         }
 
@@ -358,7 +348,7 @@ class PHPUnit_Util_Test
     public static function getErrorHandlerSettings($className, $methodName)
     {
         return self::getBooleanAnnotationSetting(
-          $className, $methodName, 'errorHandler'
+            $className, $methodName, 'errorHandler'
         );
     }
 
@@ -373,16 +363,14 @@ class PHPUnit_Util_Test
     public static function getGroups($className, $methodName = '')
     {
         $annotations = self::parseTestMethodAnnotations(
-          $className, $methodName
+            $className, $methodName
         );
 
         $groups = array();
 
         if (isset($annotations['method']['author'])) {
             $groups = $annotations['method']['author'];
-        }
-
-        else if (isset($annotations['class']['author'])) {
+        } else if (isset($annotations['class']['author'])) {
             $groups = $annotations['class']['author'];
         }
 
@@ -405,9 +393,7 @@ class PHPUnit_Util_Test
         foreach (array('small', 'medium', 'large') as $size) {
             if (isset($annotations['method'][$size])) {
                 $groups[] = $size;
-            }
-
-            else if (isset($annotations['class'][$size])) {
+            } else if (isset($annotations['class'][$size])) {
                 $groups[] = $size;
             }
         }
@@ -426,21 +412,18 @@ class PHPUnit_Util_Test
     public static function getSize($className, $methodName)
     {
         $groups = array_flip(self::getGroups($className, $methodName));
-        $size   = self::SMALL;
-        $class  = new ReflectionClass($className);
+        $size = self::SMALL;
+        $class = new ReflectionClass($className);
 
         if ((class_exists('PHPUnit_Extensions_Database_TestCase', FALSE) &&
-             $class->isSubclassOf('PHPUnit_Extensions_Database_TestCase')) ||
+                $class->isSubclassOf('PHPUnit_Extensions_Database_TestCase')) ||
             (class_exists('PHPUnit_Extensions_SeleniumTestCase', FALSE) &&
-             $class->isSubclassOf('PHPUnit_Extensions_SeleniumTestCase'))) {
+                $class->isSubclassOf('PHPUnit_Extensions_SeleniumTestCase'))
+        ) {
             $size = self::LARGE;
-        }
-
-        else if (isset($groups['medium'])) {
+        } else if (isset($groups['medium'])) {
             $size = self::MEDIUM;
-        }
-
-        else if (isset($groups['large'])) {
+        } else if (isset($groups['large'])) {
             $size = self::LARGE;
         }
 
@@ -458,7 +441,7 @@ class PHPUnit_Util_Test
     public static function getTickets($className, $methodName)
     {
         $annotations = self::parseTestMethodAnnotations(
-          $className, $methodName
+            $className, $methodName
         );
 
         $tickets = array();
@@ -485,7 +468,7 @@ class PHPUnit_Util_Test
     public static function getOutputBufferingSettings($className, $methodName)
     {
         return self::getBooleanAnnotationSetting(
-          $className, $methodName, 'outputBuffering'
+            $className, $methodName, 'outputBuffering'
         );
     }
 
@@ -500,11 +483,12 @@ class PHPUnit_Util_Test
     public static function getProcessIsolationSettings($className, $methodName)
     {
         $annotations = self::parseTestMethodAnnotations(
-          $className, $methodName
+            $className, $methodName
         );
 
         if (isset($annotations['class']['runTestsInSeparateProcesses']) ||
-            isset($annotations['method']['runInSeparateProcess'])) {
+            isset($annotations['method']['runInSeparateProcess'])
+        ) {
             return TRUE;
         } else {
             return FALSE;
@@ -522,7 +506,7 @@ class PHPUnit_Util_Test
     public static function getPreserveGlobalStateSettings($className, $methodName)
     {
         return self::getBooleanAnnotationSetting(
-          $className, $methodName, 'preserveGlobalState'
+            $className, $methodName, 'preserveGlobalState'
         );
     }
 
@@ -536,7 +520,7 @@ class PHPUnit_Util_Test
     private static function getBooleanAnnotationSetting($className, $methodName, $settingName)
     {
         $annotations = self::parseTestMethodAnnotations(
-          $className, $methodName
+            $className, $methodName
         );
 
         $result = NULL;
@@ -544,9 +528,7 @@ class PHPUnit_Util_Test
         if (isset($annotations['class'][$settingName])) {
             if ($annotations['class'][$settingName][0] == 'enabled') {
                 $result = TRUE;
-            }
-
-            else if ($annotations['class'][$settingName][0] == 'disabled') {
+            } else if ($annotations['class'][$settingName][0] == 'disabled') {
                 $result = FALSE;
             }
         }
@@ -554,9 +536,7 @@ class PHPUnit_Util_Test
         if (isset($annotations['method'][$settingName])) {
             if ($annotations['method'][$settingName][0] == 'enabled') {
                 $result = TRUE;
-            }
-
-            else if ($annotations['method'][$settingName][0] == 'disabled') {
+            } else if ($annotations['method'][$settingName][0] == 'disabled') {
                 $result = FALSE;
             }
         }

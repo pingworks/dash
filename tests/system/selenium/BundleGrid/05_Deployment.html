@@ -2,179 +2,183 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head profile="http://selenium-ide.openqa.org/profiles/test-case">
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<link rel="selenium.base" href="http://dash-test/" />
-<title>04_Changes</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link rel="selenium.base" href="http://dash-test/"/>
+    <title>04_Changes</title>
 </head>
 <body>
 <table cellpadding="1" cellspacing="1" border="1">
-<thead>
-<tr><td rowspan="1" colspan="3">04_Changes</td></tr>
-</thead><tbody>
-<tr>
-	<td>open</td>
-	<td>/</td>
-	<td></td>
-</tr>
-<!--Select branchA-->
-<tr>
-	<td>assertElementPresent</td>
-	<td>BranchButtonMenu</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>css=#BranchButtonMenu td.x-trigger-cell div</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>css=.x-boundlist:not([style*='display: none']) ul.x-list-plain li.x-boundlist-item</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertElementPresent</td>
-	<td>css=.x-boundlist:not([style*='display: none']) ul.x-list-plain li.x-boundlist-item</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>css=.x-boundlist:not([style*='display: none']) ul.x-list-plain li.x-boundlist-item:nth-child(1)</td>
-	<td>trunk</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>css=.x-boundlist:not([style*='display: none']) ul.x-list-plain li.x-boundlist-item:nth-child(2)</td>
-	<td>branchA</td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>css=.x-boundlist:not([style*='display: none']) ul.x-list-plain li.x-boundlist-item:nth-child(2)</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertLocation</td>
-	<td>http://dash-test/#branchA</td>
-	<td></td>
-</tr>
-<!--Bundles-->
-<tr>
-	<td>rollup</td>
-	<td>waitForGridCellPresent</td>
-	<td>id=BundleGrid, row=1, col=1</td>
-</tr>
-<tr>
-	<td>rollup</td>
-	<td>assertGridCellText</td>
-	<td>id=BundleGrid, row=1, col=4, value=88.faaeeb60.10</td>
-</tr>
-<!--Deployment-->
-<!--Bundle10-->
-<tr>
-	<td>rollup</td>
-	<td>assertGridCellContains</td>
-	<td>id=BundleGrid, row=1, col=9, elem=img</td>
-</tr>
-<tr>
-	<td>rollup</td>
-	<td>assertGridCellNotContains</td>
-	<td>id=BundleGrid, row=1, col=9, elem=img.x-item-disabled</td>
-</tr>
-<tr>
-	<td>rollup</td>
-	<td>clickGridCellElement</td>
-	<td>id=BundleGrid, row=1, col=9, elem=img</td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>css=#DeploymentWindow</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertElementPresent</td>
-	<td>css=#EnvironmentCombo</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertElementPresent</td>
-	<td>css=#Name</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertElementPresent</td>
-	<td>css=#Lock</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>css=#EnvironmentCombo .x-form-arrow-trigger</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForText</td>
-	<td>css=#EnvList li.x-boundlist-item:nth-child(1)</td>
-	<td>Test Env 01 genutzt von cluk bis 2020-05-24 12:12:12</td>
-</tr>
-<tr>
-	<td>waitForText</td>
-	<td>css=#EnvList li.x-boundlist-item:nth-child(2)</td>
-	<td>Test Env 02</td>
-</tr>
-<tr>
-	<td>waitForText</td>
-	<td>css=#EnvList li.x-boundlist-item:nth-child(3)</td>
-	<td>Test Env 03</td>
-</tr>
-<tr>
-	<td>assertElementNotPresent</td>
-	<td>css=#EnvList li.x-boundlist-item:nth-child(4)</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>css=#EnvList li.x-boundlist-item:nth-child(3)</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>name</td>
-	<td>cluk</td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>css=#Lock .x-form-arrow-trigger</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForText</td>
-	<td>css=#LockList li.x-boundlist-item:nth-child(1)</td>
-	<td>1 hour</td>
-</tr>
-<tr>
-	<td>waitForText</td>
-	<td>css=#LockList li.x-boundlist-item:nth-child(2)</td>
-	<td>2 hours</td>
-</tr>
-<tr>
-	<td>waitForText</td>
-	<td>css=#LockList li.x-boundlist-item:nth-child(5)</td>
-	<td>1 day</td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>css=#LockList li.x-boundlist-item:nth-child(3)</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>css=#Deploy</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>css=#DeploymentResultWindow</td>
-	<td></td>
-</tr>
-</tbody></table>
+    <thead>
+    <tr>
+        <td rowspan="1" colspan="3">04_Changes</td>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>open</td>
+        <td>/</td>
+        <td></td>
+    </tr>
+    <!--Select branchA-->
+    <tr>
+        <td>assertElementPresent</td>
+        <td>BranchButtonMenu</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>click</td>
+        <td>css=#BranchButtonMenu td.x-trigger-cell div</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>waitForElementPresent</td>
+        <td>css=.x-boundlist:not([style*='display: none']) ul.x-list-plain li.x-boundlist-item</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>assertElementPresent</td>
+        <td>css=.x-boundlist:not([style*='display: none']) ul.x-list-plain li.x-boundlist-item</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>assertText</td>
+        <td>css=.x-boundlist:not([style*='display: none']) ul.x-list-plain li.x-boundlist-item:nth-child(1)</td>
+        <td>trunk</td>
+    </tr>
+    <tr>
+        <td>assertText</td>
+        <td>css=.x-boundlist:not([style*='display: none']) ul.x-list-plain li.x-boundlist-item:nth-child(2)</td>
+        <td>branchA</td>
+    </tr>
+    <tr>
+        <td>click</td>
+        <td>css=.x-boundlist:not([style*='display: none']) ul.x-list-plain li.x-boundlist-item:nth-child(2)</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>assertLocation</td>
+        <td>http://dash-test/#branchA</td>
+        <td></td>
+    </tr>
+    <!--Bundles-->
+    <tr>
+        <td>rollup</td>
+        <td>waitForGridCellPresent</td>
+        <td>id=BundleGrid, row=1, col=1</td>
+    </tr>
+    <tr>
+        <td>rollup</td>
+        <td>assertGridCellText</td>
+        <td>id=BundleGrid, row=1, col=4, value=88.faaeeb60.10</td>
+    </tr>
+    <!--Deployment-->
+    <!--Bundle10-->
+    <tr>
+        <td>rollup</td>
+        <td>assertGridCellContains</td>
+        <td>id=BundleGrid, row=1, col=9, elem=img</td>
+    </tr>
+    <tr>
+        <td>rollup</td>
+        <td>assertGridCellNotContains</td>
+        <td>id=BundleGrid, row=1, col=9, elem=img.x-item-disabled</td>
+    </tr>
+    <tr>
+        <td>rollup</td>
+        <td>clickGridCellElement</td>
+        <td>id=BundleGrid, row=1, col=9, elem=img</td>
+    </tr>
+    <tr>
+        <td>waitForElementPresent</td>
+        <td>css=#DeploymentWindow</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>assertElementPresent</td>
+        <td>css=#EnvironmentCombo</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>assertElementPresent</td>
+        <td>css=#Name</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>assertElementPresent</td>
+        <td>css=#Lock</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>click</td>
+        <td>css=#EnvironmentCombo .x-form-arrow-trigger</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>waitForText</td>
+        <td>css=#EnvList li.x-boundlist-item:nth-child(1)</td>
+        <td>Test Env 01 genutzt von cluk bis 2020-05-24 12:12:12</td>
+    </tr>
+    <tr>
+        <td>waitForText</td>
+        <td>css=#EnvList li.x-boundlist-item:nth-child(2)</td>
+        <td>Test Env 02</td>
+    </tr>
+    <tr>
+        <td>waitForText</td>
+        <td>css=#EnvList li.x-boundlist-item:nth-child(3)</td>
+        <td>Test Env 03</td>
+    </tr>
+    <tr>
+        <td>assertElementNotPresent</td>
+        <td>css=#EnvList li.x-boundlist-item:nth-child(4)</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>click</td>
+        <td>css=#EnvList li.x-boundlist-item:nth-child(3)</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>type</td>
+        <td>name</td>
+        <td>cluk</td>
+    </tr>
+    <tr>
+        <td>click</td>
+        <td>css=#Lock .x-form-arrow-trigger</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>waitForText</td>
+        <td>css=#LockList li.x-boundlist-item:nth-child(1)</td>
+        <td>1 hour</td>
+    </tr>
+    <tr>
+        <td>waitForText</td>
+        <td>css=#LockList li.x-boundlist-item:nth-child(2)</td>
+        <td>2 hours</td>
+    </tr>
+    <tr>
+        <td>waitForText</td>
+        <td>css=#LockList li.x-boundlist-item:nth-child(5)</td>
+        <td>1 day</td>
+    </tr>
+    <tr>
+        <td>click</td>
+        <td>css=#LockList li.x-boundlist-item:nth-child(3)</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>click</td>
+        <td>css=#Deploy</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>waitForElementPresent</td>
+        <td>css=#DeploymentResultWindow</td>
+        <td></td>
+    </tr>
+    </tbody>
+</table>
 </body>
 </html>

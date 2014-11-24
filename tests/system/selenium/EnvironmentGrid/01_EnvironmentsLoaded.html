@@ -2,154 +2,166 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head profile="http://selenium-ide.openqa.org/profiles/test-case">
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<link rel="selenium.base" href="http://dash-test/" />
-<title>BundlesLoaded</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link rel="selenium.base" href="http://dash-test/"/>
+    <title>BundlesLoaded</title>
 </head>
 <body>
 <table cellpadding="1" cellspacing="1" border="1">
-<thead>
-<tr><td rowspan="1" colspan="3">BundlesLoaded</td></tr>
-</thead><tbody>
-<tr>
-	<td>open</td>
-	<td>/</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>css=#EnvButton</td>
-	<td></td>
-</tr>
-<!--Environments-->
-<!--Env 01-->
-<tr>
-	<td>rollup</td>
-	<td>waitForGridCellPresent</td>
-	<td>id=EnvironmentGrid, row=1, col=1</td>
-</tr>
-<tr>
-	<td>rollup</td>
-	<td>assertGridCellText</td>
-	<td>id=EnvironmentGrid, row=1, col=1, value=Test Env 01</td>
-</tr>
-<tr>
-	<td>rollup</td>
-	<td>assertGridCellText</td>
-	<td>id=EnvironmentGrid, row=1, col=2, value=ja</td>
-</tr>
-<tr>
-	<td>rollup</td>
-	<td>assertGridCellText</td>
-	<td>id=EnvironmentGrid, row=1, col=3, value=cluk</td>
-</tr>
-<tr>
-	<td>rollup</td>
-	<td>assertGridCellText</td>
-	<td>id=EnvironmentGrid, row=1, col=4, value=24.05.2020 12:12:12</td>
-</tr>
-<tr>
-	<td>rollup</td>
-	<td>assertGridCellText</td>
-	<td>id=EnvironmentGrid, row=1, col=5, value=1.a914d764.62</td>
-</tr>
-<tr>
-	<td>rollup</td>
-	<td>assertGridCellText</td>
-	<td>id=EnvironmentGrid, row=1, col=6, value=Env 01 - App1*Env 01 - App2</td>
-</tr>
-<tr>
-	<td>assertAttribute</td>
-	<td>css=#EnvironmentGrid .x-grid-row:nth-child(1) &gt; td:nth-child(6) &gt; .x-grid-cell-inner a:nth-child(1)@href</td>
-	<td>http://dash01.pingworks.net/app1</td>
-</tr>
-<tr>
-	<td>assertAttribute</td>
-	<td>css=#EnvironmentGrid .x-grid-row:nth-child(1) &gt; td:nth-child(6) &gt; .x-grid-cell-inner a:nth-child(3)@href</td>
-	<td>http://dash01.pingworks.net/app2</td>
-</tr>
-<!--Env 02-->
-<tr>
-	<td>rollup</td>
-	<td>waitForGridCellPresent</td>
-	<td>id=EnvironmentGrid, row=2, col=1</td>
-</tr>
-<tr>
-	<td>rollup</td>
-	<td>assertGridCellText</td>
-	<td>id=EnvironmentGrid, row=2, col=1, value=Test Env 02</td>
-</tr>
-<tr>
-	<td>rollup</td>
-	<td>assertGridCellText</td>
-	<td>id=EnvironmentGrid, row=2, col=2, value=nein</td>
-</tr>
-<tr>
-	<td>rollup</td>
-	<td>assertGridCellText</td>
-	<td>id=EnvironmentGrid, row=2, col=3, value=</td>
-</tr>
-<tr>
-	<td>rollup</td>
-	<td>assertGridCellText</td>
-	<td>id=EnvironmentGrid, row=2, col=4, value=</td>
-</tr>
-<tr>
-	<td>rollup</td>
-	<td>assertGridCellText</td>
-	<td>id=EnvironmentGrid, row=2, col=5, value=</td>
-</tr>
-<tr>
-	<td>rollup</td>
-	<td>assertGridCellText</td>
-	<td>id=EnvironmentGrid, row=2, col=6, value=</td>
-</tr>
-<!--Env 04-->
-<tr>
-	<td>rollup</td>
-	<td>waitForGridCellPresent</td>
-	<td>id=EnvironmentGrid, row=4, col=1</td>
-</tr>
-<tr>
-	<td>rollup</td>
-	<td>assertGridCellText</td>
-	<td>id=EnvironmentGrid, row=4, col=1, value=Test Env 04</td>
-</tr>
-<tr>
-	<td>rollup</td>
-	<td>assertGridCellText</td>
-	<td>id=EnvironmentGrid, row=4, col=2, value=nein</td>
-</tr>
-<tr>
-	<td>rollup</td>
-	<td>assertGridCellText</td>
-	<td>id=EnvironmentGrid, row=4, col=3, value=</td>
-</tr>
-<tr>
-	<td>rollup</td>
-	<td>assertGridCellText</td>
-	<td>id=EnvironmentGrid, row=4, col=4, value=</td>
-</tr>
-<tr>
-	<td>rollup</td>
-	<td>assertGridCellText</td>
-	<td>id=EnvironmentGrid, row=4, col=5, value=1.a914d764.62</td>
-</tr>
-<tr>
-	<td>rollup</td>
-	<td>assertGridCellText</td>
-	<td>id=EnvironmentGrid, row=4, col=6, value=Env 04 - App1*Env 04 - App2</td>
-</tr>
-<tr>
-	<td>assertAttribute</td>
-	<td>css=#EnvironmentGrid .x-grid-row:nth-child(4) &gt; td:nth-child(6) &gt; .x-grid-cell-inner a:nth-child(1)@href</td>
-	<td>http://dash04.pingworks.net/app1</td>
-</tr>
-<tr>
-	<td>assertAttribute</td>
-	<td>css=#EnvironmentGrid .x-grid-row:nth-child(4) &gt; td:nth-child(6) &gt; .x-grid-cell-inner a:nth-child(3)@href</td>
-	<td>http://dash04.pingworks.net/app2</td>
-</tr>
-</tbody></table>
+    <thead>
+    <tr>
+        <td rowspan="1" colspan="3">BundlesLoaded</td>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>open</td>
+        <td>/</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>click</td>
+        <td>css=#EnvButton</td>
+        <td></td>
+    </tr>
+    <!--Environments-->
+    <!--Env 01-->
+    <tr>
+        <td>rollup</td>
+        <td>waitForGridCellPresent</td>
+        <td>id=EnvironmentGrid, row=1, col=1</td>
+    </tr>
+    <tr>
+        <td>rollup</td>
+        <td>assertGridCellText</td>
+        <td>id=EnvironmentGrid, row=1, col=1, value=Test Env 01</td>
+    </tr>
+    <tr>
+        <td>rollup</td>
+        <td>assertGridCellText</td>
+        <td>id=EnvironmentGrid, row=1, col=2, value=ja</td>
+    </tr>
+    <tr>
+        <td>rollup</td>
+        <td>assertGridCellText</td>
+        <td>id=EnvironmentGrid, row=1, col=3, value=cluk</td>
+    </tr>
+    <tr>
+        <td>rollup</td>
+        <td>assertGridCellText</td>
+        <td>id=EnvironmentGrid, row=1, col=4, value=24.05.2020 12:12:12</td>
+    </tr>
+    <tr>
+        <td>rollup</td>
+        <td>assertGridCellText</td>
+        <td>id=EnvironmentGrid, row=1, col=5, value=1.a914d764.62</td>
+    </tr>
+    <tr>
+        <td>rollup</td>
+        <td>assertGridCellText</td>
+        <td>id=EnvironmentGrid, row=1, col=6, value=Env 01 - App1*Env 01 - App2</td>
+    </tr>
+    <tr>
+        <td>assertAttribute</td>
+        <td>css=#EnvironmentGrid .x-grid-row:nth-child(1) &gt; td:nth-child(6) &gt; .x-grid-cell-inner
+            a:nth-child(1)@href
+        </td>
+        <td>http://dash01.pingworks.net/app1</td>
+    </tr>
+    <tr>
+        <td>assertAttribute</td>
+        <td>css=#EnvironmentGrid .x-grid-row:nth-child(1) &gt; td:nth-child(6) &gt; .x-grid-cell-inner
+            a:nth-child(3)@href
+        </td>
+        <td>http://dash01.pingworks.net/app2</td>
+    </tr>
+    <!--Env 02-->
+    <tr>
+        <td>rollup</td>
+        <td>waitForGridCellPresent</td>
+        <td>id=EnvironmentGrid, row=2, col=1</td>
+    </tr>
+    <tr>
+        <td>rollup</td>
+        <td>assertGridCellText</td>
+        <td>id=EnvironmentGrid, row=2, col=1, value=Test Env 02</td>
+    </tr>
+    <tr>
+        <td>rollup</td>
+        <td>assertGridCellText</td>
+        <td>id=EnvironmentGrid, row=2, col=2, value=nein</td>
+    </tr>
+    <tr>
+        <td>rollup</td>
+        <td>assertGridCellText</td>
+        <td>id=EnvironmentGrid, row=2, col=3, value=</td>
+    </tr>
+    <tr>
+        <td>rollup</td>
+        <td>assertGridCellText</td>
+        <td>id=EnvironmentGrid, row=2, col=4, value=</td>
+    </tr>
+    <tr>
+        <td>rollup</td>
+        <td>assertGridCellText</td>
+        <td>id=EnvironmentGrid, row=2, col=5, value=</td>
+    </tr>
+    <tr>
+        <td>rollup</td>
+        <td>assertGridCellText</td>
+        <td>id=EnvironmentGrid, row=2, col=6, value=</td>
+    </tr>
+    <!--Env 04-->
+    <tr>
+        <td>rollup</td>
+        <td>waitForGridCellPresent</td>
+        <td>id=EnvironmentGrid, row=4, col=1</td>
+    </tr>
+    <tr>
+        <td>rollup</td>
+        <td>assertGridCellText</td>
+        <td>id=EnvironmentGrid, row=4, col=1, value=Test Env 04</td>
+    </tr>
+    <tr>
+        <td>rollup</td>
+        <td>assertGridCellText</td>
+        <td>id=EnvironmentGrid, row=4, col=2, value=nein</td>
+    </tr>
+    <tr>
+        <td>rollup</td>
+        <td>assertGridCellText</td>
+        <td>id=EnvironmentGrid, row=4, col=3, value=</td>
+    </tr>
+    <tr>
+        <td>rollup</td>
+        <td>assertGridCellText</td>
+        <td>id=EnvironmentGrid, row=4, col=4, value=</td>
+    </tr>
+    <tr>
+        <td>rollup</td>
+        <td>assertGridCellText</td>
+        <td>id=EnvironmentGrid, row=4, col=5, value=1.a914d764.62</td>
+    </tr>
+    <tr>
+        <td>rollup</td>
+        <td>assertGridCellText</td>
+        <td>id=EnvironmentGrid, row=4, col=6, value=Env 04 - App1*Env 04 - App2</td>
+    </tr>
+    <tr>
+        <td>assertAttribute</td>
+        <td>css=#EnvironmentGrid .x-grid-row:nth-child(4) &gt; td:nth-child(6) &gt; .x-grid-cell-inner
+            a:nth-child(1)@href
+        </td>
+        <td>http://dash04.pingworks.net/app1</td>
+    </tr>
+    <tr>
+        <td>assertAttribute</td>
+        <td>css=#EnvironmentGrid .x-grid-row:nth-child(4) &gt; td:nth-child(6) &gt; .x-grid-cell-inner
+            a:nth-child(3)@href
+        </td>
+        <td>http://dash04.pingworks.net/app2</td>
+    </tr>
+    </tbody>
+</table>
 </body>
 </html>

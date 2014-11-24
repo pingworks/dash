@@ -24,28 +24,22 @@ var rm = new RollupManager();
  * waitForGridCellPresent
  */
 rm.addRollupRule({
-    name: 'waitForGridCellPresent'
-    , description: 'Wartet auf das Erscheinen einer Grid-Cell'
-    , args: [
+    name: 'waitForGridCellPresent', description: 'Wartet auf das Erscheinen einer Grid-Cell', args: [
         {
-            name: 'id'
-            , description: 'Id des Elements'
+            name: 'id', description: 'Id des Elements'
         }
-        , {
-            name: 'row'
-            , description: 'Zeilennummer'
+        ,
+        {
+            name: 'row', description: 'Zeilennummer'
         }
-        , {
-            name: 'col'
-            , description: 'Spaltennummer'
+        ,
+        {
+            name: 'col', description: 'Spaltennummer'
         }
-    ]
-    , commandMatchers: []
-    , getExpandedCommands: function(args) {
+    ], commandMatchers: [], getExpandedCommands: function(args) {
         var commands = [];
         commands.push({
-            command: 'waitForElementPresent'
-            , target: 'css=#' + args.id + ' .x-grid-row:nth-child(' + args.row + ') > td:nth-child(' + args.col + ') > .x-grid-cell-inner'
+            command: 'waitForElementPresent', target: 'css=#' + args.id + ' .x-grid-row:nth-child(' + args.row + ') > td:nth-child(' + args.col + ') > .x-grid-cell-inner'
         });
         return commands;
     }
@@ -55,28 +49,22 @@ rm.addRollupRule({
  * assertGridCellNotPresent
  */
 rm.addRollupRule({
-    name: 'assertGridCellNotPresent'
-    , description: 'Prüft ob eine Grid-Cell nicht vorhanden ist'
-    , args: [
+    name: 'assertGridCellNotPresent', description: 'Prüft ob eine Grid-Cell nicht vorhanden ist', args: [
         {
-            name: 'id'
-            , description: 'Id des Elements'
+            name: 'id', description: 'Id des Elements'
         }
-        , {
-            name: 'row'
-            , description: 'Zeilennummer'
+        ,
+        {
+            name: 'row', description: 'Zeilennummer'
         }
-        , {
-            name: 'col'
-            , description: 'Spaltennummer'
+        ,
+        {
+            name: 'col', description: 'Spaltennummer'
         }
-    ]
-    , commandMatchers: []
-    , getExpandedCommands: function(args) {
+    ], commandMatchers: [], getExpandedCommands: function(args) {
         var commands = [];
         commands.push({
-            command: 'assertElementNotPresent'
-            , target: 'css=#' + args.id + ' .x-grid-row:nth-child(' + args.row + ') > td:nth-child(' + args.col + ') > .x-grid-cell-inner'
+            command: 'assertElementNotPresent', target: 'css=#' + args.id + ' .x-grid-row:nth-child(' + args.row + ') > td:nth-child(' + args.col + ') > .x-grid-cell-inner'
         });
         return commands;
     }
@@ -86,33 +74,26 @@ rm.addRollupRule({
  * assertGridCellText
  */
 rm.addRollupRule({
-    name: 'assertGridCellText'
-    , description: 'Prueft ob eine Grid-Cell einen Text enthaelt'
-    , args: [
+    name: 'assertGridCellText', description: 'Prueft ob eine Grid-Cell einen Text enthaelt', args: [
         {
-            name: 'id'
-            , description: 'Id des Elements'
+            name: 'id', description: 'Id des Elements'
         }
-        , {
-            name: 'row'
-            , description: 'Zeilennummer'
+        ,
+        {
+            name: 'row', description: 'Zeilennummer'
         }
-        , {
-            name: 'col'
-            , description: 'Spaltennummer'
+        ,
+        {
+            name: 'col', description: 'Spaltennummer'
         }
-        , {
-            name: 'value'
-            , description: 'Erwarteter Text'
+        ,
+        {
+            name: 'value', description: 'Erwarteter Text'
         }
-    ]
-    , commandMatchers: []
-    , getExpandedCommands: function(args) {
+    ], commandMatchers: [], getExpandedCommands: function(args) {
         var commands = [];
         commands.push({
-            command: 'assertText'
-            , target: 'css=#' + args.id + ' .x-grid-row:nth-child(' + args.row + ') > td:nth-child(' + args.col + ') > .x-grid-cell-inner'
-            , value: args.value
+            command: 'assertText', target: 'css=#' + args.id + ' .x-grid-row:nth-child(' + args.row + ') > td:nth-child(' + args.col + ') > .x-grid-cell-inner', value: args.value
         });
         return commands;
     }
@@ -122,33 +103,26 @@ rm.addRollupRule({
  * assertNotGridCellText
  */
 rm.addRollupRule({
-    name: 'assertNotGridCellText'
-    , description: 'Prueft ob eine Grid-Cell nicht einen Text enthaelt'
-    , args: [
+    name: 'assertNotGridCellText', description: 'Prueft ob eine Grid-Cell nicht einen Text enthaelt', args: [
         {
-            name: 'id'
-            , description: 'Id des Elements'
+            name: 'id', description: 'Id des Elements'
         }
-        , {
-            name: 'row'
-            , description: 'Zeilennummer'
+        ,
+        {
+            name: 'row', description: 'Zeilennummer'
         }
-        , {
-            name: 'col'
-            , description: 'Spaltennummer'
+        ,
+        {
+            name: 'col', description: 'Spaltennummer'
         }
-        , {
-            name: 'value'
-            , description: 'Erwarteter Text'
+        ,
+        {
+            name: 'value', description: 'Erwarteter Text'
         }
-    ]
-    , commandMatchers: []
-    , getExpandedCommands: function(args) {
+    ], commandMatchers: [], getExpandedCommands: function(args) {
         var commands = [];
         commands.push({
-            command: 'assertNotText'
-            , target: 'css=#' + args.id + ' .x-grid-row:nth-child(' + args.row + ') > td:nth-child(' + args.col + ') > .x-grid-cell-inner'
-            , value: args.value
+            command: 'assertNotText', target: 'css=#' + args.id + ' .x-grid-row:nth-child(' + args.row + ') > td:nth-child(' + args.col + ') > .x-grid-cell-inner', value: args.value
         });
         return commands;
     }
@@ -158,38 +132,29 @@ rm.addRollupRule({
  * waitForGridCellText
  */
 rm.addRollupRule({
-    name: 'waitForGridCellText'
-    , description: 'Wartet auf das Erscheinene eines Textes in einer Grid-Cell.'
-    , args: [
+    name: 'waitForGridCellText', description: 'Wartet auf das Erscheinene eines Textes in einer Grid-Cell.', args: [
         {
-            name: 'id'
-            , description: 'Id des Elements'
+            name: 'id', description: 'Id des Elements'
         }
-        , {
-            name: 'row'
-            , description: 'Zeilennummer'
+        ,
+        {
+            name: 'row', description: 'Zeilennummer'
         }
-        , {
-            name: 'col'
-            , description: 'Spaltennummer'
+        ,
+        {
+            name: 'col', description: 'Spaltennummer'
         }
-        , {
-            name: 'value'
-            , description: 'Erwarteter Text'
+        ,
+        {
+            name: 'value', description: 'Erwarteter Text'
         }
-    ]
-    , commandMatchers: []
-    , getExpandedCommands: function(args) {
+    ], commandMatchers: [], getExpandedCommands: function(args) {
         var commands = [];
         commands.push({
-            command: 'rollup'
-            , target: 'waitForGridCellPresent'
-            , value: to_kwargs({ id: args.id, row: args.row, col: args.col })
+            command: 'rollup', target: 'waitForGridCellPresent', value: to_kwargs({ id: args.id, row: args.row, col: args.col })
         });
         commands.push({
-            command: 'waitForText'
-            , target: 'css=#' + args.id + ' .x-grid-row:nth-child(' + args.row + ') > td:nth-child(' + args.col + ') > .x-grid-cell-inner'
-            , value: args.value
+            command: 'waitForText', target: 'css=#' + args.id + ' .x-grid-row:nth-child(' + args.row + ') > td:nth-child(' + args.col + ') > .x-grid-cell-inner', value: args.value
         });
         return commands;
     }
@@ -199,32 +164,26 @@ rm.addRollupRule({
  * assertGridCellContains
  */
 rm.addRollupRule({
-    name: 'assertGridCellContains'
-    , description: 'Prueft ob eine Grid-Cell ein Element enthaelt'
-    , args: [
+    name: 'assertGridCellContains', description: 'Prueft ob eine Grid-Cell ein Element enthaelt', args: [
         {
-            name: 'id'
-            , description: 'Id des Grids'
+            name: 'id', description: 'Id des Grids'
         }
-        , {
-            name: 'row'
-            , description: 'Zeilennummer'
+        ,
+        {
+            name: 'row', description: 'Zeilennummer'
         }
-        , {
-            name: 'col'
-            , description: 'Spaltennummer'
+        ,
+        {
+            name: 'col', description: 'Spaltennummer'
         }
-        , {
-            name: 'elem'
-            , description: 'CSS Selector des Elements'
+        ,
+        {
+            name: 'elem', description: 'CSS Selector des Elements'
         }
-    ]
-    , commandMatchers: []
-    , getExpandedCommands: function(args) {
+    ], commandMatchers: [], getExpandedCommands: function(args) {
         var commands = [];
         commands.push({
-            command: 'assertElementPresent'
-            , target: 'css=#' + args.id + ' .x-grid-row:nth-child(' + args.row + ') > td:nth-child(' + args.col + ') > .x-grid-cell-inner > ' + args.elem
+            command: 'assertElementPresent', target: 'css=#' + args.id + ' .x-grid-row:nth-child(' + args.row + ') > td:nth-child(' + args.col + ') > .x-grid-cell-inner > ' + args.elem
         });
         return commands;
     }
@@ -234,32 +193,26 @@ rm.addRollupRule({
  * assertGridCellNotContains
  */
 rm.addRollupRule({
-    name: 'assertGridCellNotContains'
-    , description: 'Prueft ob eine Grid-Cell ein Element enthaelt'
-    , args: [
+    name: 'assertGridCellNotContains', description: 'Prueft ob eine Grid-Cell ein Element enthaelt', args: [
         {
-            name: 'id'
-            , description: 'Id des Grids'
+            name: 'id', description: 'Id des Grids'
         }
-        , {
-            name: 'row'
-            , description: 'Zeilennummer'
+        ,
+        {
+            name: 'row', description: 'Zeilennummer'
         }
-        , {
-            name: 'col'
-            , description: 'Spaltennummer'
+        ,
+        {
+            name: 'col', description: 'Spaltennummer'
         }
-        , {
-            name: 'elem'
-            , description: 'CSS Selector des Elements'
+        ,
+        {
+            name: 'elem', description: 'CSS Selector des Elements'
         }
-    ]
-    , commandMatchers: []
-    , getExpandedCommands: function(args) {
+    ], commandMatchers: [], getExpandedCommands: function(args) {
         var commands = [];
         commands.push({
-            command: 'assertElementNotPresent'
-            , target: 'css=#' + args.id + ' .x-grid-row:nth-child(' + args.row + ') > td:nth-child(' + args.col + ') > .x-grid-cell-inner > ' + args.elem
+            command: 'assertElementNotPresent', target: 'css=#' + args.id + ' .x-grid-row:nth-child(' + args.row + ') > td:nth-child(' + args.col + ') > .x-grid-cell-inner > ' + args.elem
         });
         return commands;
     }
@@ -269,32 +222,26 @@ rm.addRollupRule({
  * waitForGridCellContains
  */
 rm.addRollupRule({
-    name: 'waitForGridCellContains'
-    , description: 'Prueft ob eine Grid-Cell ein Element enthaelt'
-    , args: [
+    name: 'waitForGridCellContains', description: 'Prueft ob eine Grid-Cell ein Element enthaelt', args: [
         {
-            name: 'id'
-            , description: 'Id des Grids'
+            name: 'id', description: 'Id des Grids'
         }
-        , {
-            name: 'row'
-            , description: 'Zeilennummer'
+        ,
+        {
+            name: 'row', description: 'Zeilennummer'
         }
-        , {
-            name: 'col'
-            , description: 'Spaltennummer'
+        ,
+        {
+            name: 'col', description: 'Spaltennummer'
         }
-        , {
-            name: 'elem'
-            , description: 'CSS Selector des Elements'
+        ,
+        {
+            name: 'elem', description: 'CSS Selector des Elements'
         }
-    ]
-    , commandMatchers: []
-    , getExpandedCommands: function(args) {
+    ], commandMatchers: [], getExpandedCommands: function(args) {
         var commands = [];
         commands.push({
-            command: 'waitForElementPresent'
-            , target: 'css=#' + args.id + ' .x-grid-row:nth-child(' + args.row + ') > td:nth-child(' + args.col + ') > .x-grid-cell-inner > ' + args.elem
+            command: 'waitForElementPresent', target: 'css=#' + args.id + ' .x-grid-row:nth-child(' + args.row + ') > td:nth-child(' + args.col + ') > .x-grid-cell-inner > ' + args.elem
         });
         return commands;
     }
@@ -304,28 +251,22 @@ rm.addRollupRule({
  * clickGridCell
  */
 rm.addRollupRule({
-    name: 'clickGridCell'
-    , description: 'Clickt auf eine Grid-Cell.'
-    , args: [
+    name: 'clickGridCell', description: 'Clickt auf eine Grid-Cell.', args: [
         {
-            name: 'id'
-            , description: 'Id des Elements'
+            name: 'id', description: 'Id des Elements'
         }
-        , {
-            name: 'row'
-            , description: 'Zeilennummer'
+        ,
+        {
+            name: 'row', description: 'Zeilennummer'
         }
-        , {
-            name: 'col'
-            , description: 'Spaltennummer'
+        ,
+        {
+            name: 'col', description: 'Spaltennummer'
         }
-    ]
-    , commandMatchers: []
-    , getExpandedCommands: function(args) {
+    ], commandMatchers: [], getExpandedCommands: function(args) {
         var commands = [];
         commands.push({
-            command: 'clickAt'
-            , target: 'css=#' + args.id + ' .x-grid-row:nth-child(' + args.row + ') > td:nth-child(' + args.col + ') > .x-grid-cell-inner'
+            command: 'clickAt', target: 'css=#' + args.id + ' .x-grid-row:nth-child(' + args.row + ') > td:nth-child(' + args.col + ') > .x-grid-cell-inner'
         });
         return commands;
     }
@@ -335,32 +276,26 @@ rm.addRollupRule({
  * clickGridCellElement
  */
 rm.addRollupRule({
-    name: 'clickGridCellElement'
-    , description: 'Clickt auf ein Element in einer Grid-Cell.'
-    , args: [
+    name: 'clickGridCellElement', description: 'Clickt auf ein Element in einer Grid-Cell.', args: [
         {
-            name: 'id'
-            , description: 'Id des Elements'
+            name: 'id', description: 'Id des Elements'
         }
-        , {
-            name: 'row'
-            , description: 'Zeilennummer'
+        ,
+        {
+            name: 'row', description: 'Zeilennummer'
         }
-        , {
-            name: 'col'
-            , description: 'Spaltennummer'
+        ,
+        {
+            name: 'col', description: 'Spaltennummer'
         }
-        , {
-            name: 'elem'
-            , description: 'CSS Selector des Elements'
+        ,
+        {
+            name: 'elem', description: 'CSS Selector des Elements'
         }
-    ]
-    , commandMatchers: []
-    , getExpandedCommands: function(args) {
+    ], commandMatchers: [], getExpandedCommands: function(args) {
         var commands = [];
         commands.push({
-            command: 'clickAt'
-            , target: 'css=#' + args.id + ' .x-grid-row:nth-child(' + args.row + ') > td:nth-child(' + args.col + ') > .x-grid-cell-inner > ' + args.elem
+            command: 'clickAt', target: 'css=#' + args.id + ' .x-grid-row:nth-child(' + args.row + ') > td:nth-child(' + args.col + ') > .x-grid-cell-inner > ' + args.elem
         });
         return commands;
     }
@@ -370,28 +305,22 @@ rm.addRollupRule({
  * dblClickGridCell
  */
 rm.addRollupRule({
-    name: 'dblClickGridCell'
-    , description: 'Doppelclickt auf eine Grid-Cell.'
-    , args: [
+    name: 'dblClickGridCell', description: 'Doppelclickt auf eine Grid-Cell.', args: [
         {
-            name: 'id'
-            , description: 'Id des Elements'
+            name: 'id', description: 'Id des Elements'
         }
-        , {
-            name: 'row'
-            , description: 'Zeilennummer'
+        ,
+        {
+            name: 'row', description: 'Zeilennummer'
         }
-        , {
-            name: 'col'
-            , description: 'Spaltennummer'
+        ,
+        {
+            name: 'col', description: 'Spaltennummer'
         }
-    ]
-    , commandMatchers: []
-    , getExpandedCommands: function(args) {
+    ], commandMatchers: [], getExpandedCommands: function(args) {
         var commands = [];
         commands.push({
-            command: 'doubleClick'
-            , target: 'css=#' + args.id + ' .x-grid-row:nth-child(' + args.row + ') > td:nth-child(' + args.col + ') > .x-grid-cell-inner'
+            command: 'doubleClick', target: 'css=#' + args.id + ' .x-grid-row:nth-child(' + args.row + ') > td:nth-child(' + args.col + ') > .x-grid-cell-inner'
         });
         return commands;
     }

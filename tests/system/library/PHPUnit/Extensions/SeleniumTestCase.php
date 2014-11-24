@@ -113,7 +113,7 @@
  * @method unknown  dragAndDropToObjectAndWait()
  * @method unknown  dragDrop()
  * @method unknown  dragDropAndWait()
- * @method unknown  echo()
+ * @method unknown  echo ()
  * @method unknown  fireEvent()
  * @method unknown  fireEventAndWait()
  * @method unknown  focus()
@@ -359,9 +359,9 @@ abstract class PHPUnit_Extensions_SeleniumTestCase extends PHPUnit_Framework_Tes
 
     /**
      * @param  string $name
-     * @param  array  $data
+     * @param  array $data
      * @param  string $dataName
-     * @param  array  $browser
+     * @param  array $browser
      * @throws InvalidArgumentException
      */
     public function __construct($name = NULL, array $data = array(), $dataName = '')
@@ -412,7 +412,7 @@ abstract class PHPUnit_Extensions_SeleniumTestCase extends PHPUnit_Framework_Tes
 
         foreach ($this->drivers as $driver) {
             $driver->setCollectCodeCoverageInformation(
-              $this->collectCodeCoverageInformation
+                $this->collectCodeCoverageInformation
             );
         }
 
@@ -420,7 +420,7 @@ abstract class PHPUnit_Extensions_SeleniumTestCase extends PHPUnit_Framework_Tes
 
         if ($this->collectCodeCoverageInformation) {
             $result->getCodeCoverage()->append(
-              $this->getCodeCoverage(), $this
+                $this->getCodeCoverage(), $this
             );
         }
 
@@ -436,7 +436,7 @@ abstract class PHPUnit_Extensions_SeleniumTestCase extends PHPUnit_Framework_Tes
         if (isset($browser['name'])) {
             if (!is_string($browser['name'])) {
                 throw new InvalidArgumentException(
-                  'Array element "name" is no string.'
+                    'Array element "name" is no string.'
                 );
             }
         } else {
@@ -446,7 +446,7 @@ abstract class PHPUnit_Extensions_SeleniumTestCase extends PHPUnit_Framework_Tes
         if (isset($browser['browser'])) {
             if (!is_string($browser['browser'])) {
                 throw new InvalidArgumentException(
-                  'Array element "browser" is no string.'
+                    'Array element "browser" is no string.'
                 );
             }
         } else {
@@ -456,7 +456,7 @@ abstract class PHPUnit_Extensions_SeleniumTestCase extends PHPUnit_Framework_Tes
         if (isset($browser['host'])) {
             if (!is_string($browser['host'])) {
                 throw new InvalidArgumentException(
-                  'Array element "host" is no string.'
+                    'Array element "host" is no string.'
                 );
             }
         } else {
@@ -466,7 +466,7 @@ abstract class PHPUnit_Extensions_SeleniumTestCase extends PHPUnit_Framework_Tes
         if (isset($browser['port'])) {
             if (!is_int($browser['port'])) {
                 throw new InvalidArgumentException(
-                  'Array element "port" is no integer.'
+                    'Array element "port" is no integer.'
                 );
             }
         } else {
@@ -476,7 +476,7 @@ abstract class PHPUnit_Extensions_SeleniumTestCase extends PHPUnit_Framework_Tes
         if (isset($browser['timeout'])) {
             if (!is_int($browser['timeout'])) {
                 throw new InvalidArgumentException(
-                  'Array element "timeout" is no integer.'
+                    'Array element "timeout" is no integer.'
                 );
             }
         } else {
@@ -486,7 +486,7 @@ abstract class PHPUnit_Extensions_SeleniumTestCase extends PHPUnit_Framework_Tes
         if (isset($browser['httpTimeout'])) {
             if (!is_int($browser['httpTimeout'])) {
                 throw new InvalidArgumentException(
-                  'Array element "httpTimeout" is no integer.'
+                    'Array element "httpTimeout" is no integer.'
                 );
             }
         } else {
@@ -575,7 +575,8 @@ abstract class PHPUnit_Extensions_SeleniumTestCase extends PHPUnit_Framework_Tes
     {
         try {
             $this->stop();
-        } catch (RuntimeException $e) { }
+        } catch (RuntimeException $e) {
+        }
     }
 
     /**
@@ -602,13 +603,13 @@ abstract class PHPUnit_Extensions_SeleniumTestCase extends PHPUnit_Framework_Tes
     public function runSelenese($filename)
     {
         $document = PHPUnit_Util_XML::loadFile($filename, TRUE);
-        $xpath    = new DOMXPath($document);
-        $rows     = $xpath->query('body/table/tbody/tr');
+        $xpath = new DOMXPath($document);
+        $rows = $xpath->query('body/table/tbody/tr');
 
         foreach ($rows as $row) {
-            $action    = NULL;
+            $action = NULL;
             $arguments = array();
-            $columns   = $xpath->query('td', $row);
+            $columns = $xpath->query('td', $row);
 
             foreach ($columns as $column) {
                 if ($action === NULL) {
@@ -630,17 +631,17 @@ abstract class PHPUnit_Extensions_SeleniumTestCase extends PHPUnit_Framework_Tes
      * Delegate method calls to the driver.
      *
      * @param  string $command
-     * @param  array  $arguments
+     * @param  array $arguments
      * @return mixed
      */
     public function __call($command, $arguments)
     {
         $result = call_user_func_array(
-          array($this->drivers[0], $command), $arguments
+            array($this->drivers[0], $command), $arguments
         );
 
         $this->verificationErrors = array_merge(
-          $this->verificationErrors, $this->drivers[0]->getVerificationErrors()
+            $this->verificationErrors, $this->drivers[0]->getVerificationErrors()
         );
 
         $this->drivers[0]->clearVerificationErrors();
@@ -755,16 +756,16 @@ abstract class PHPUnit_Extensions_SeleniumTestCase extends PHPUnit_Framework_Tes
     {
         if ($message == '') {
             $message = sprintf(
-              'Label "%s" not selected in "%s".',
-              $option,
-              $selectLocator
+                'Label "%s" not selected in "%s".',
+                $option,
+                $selectLocator
             );
         }
 
         $this->assertEquals(
-          $option,
-          $this->getSelectedLabel($selectLocator),
-          $message
+            $option,
+            $this->getSelectedLabel($selectLocator),
+            $message
         );
     }
 
@@ -779,16 +780,16 @@ abstract class PHPUnit_Extensions_SeleniumTestCase extends PHPUnit_Framework_Tes
     {
         if ($message == '') {
             $message = sprintf(
-              'Label "%s" selected in "%s".',
-              $option,
-              $selectLocator
+                'Label "%s" selected in "%s".',
+                $option,
+                $selectLocator
             );
         }
 
         $this->assertNotEquals(
-          $option,
-          $this->getSelectedLabel($selectLocator),
-          $message
+            $option,
+            $this->getSelectedLabel($selectLocator),
+            $message
         );
     }
 
@@ -803,15 +804,15 @@ abstract class PHPUnit_Extensions_SeleniumTestCase extends PHPUnit_Framework_Tes
     {
         if ($message == '') {
             $message = sprintf(
-              'Value "%s" not selected in "%s".',
-              $value,
-              $selectLocator
+                'Value "%s" not selected in "%s".',
+                $value,
+                $selectLocator
             );
         }
 
         $this->assertEquals(
-          $value, $this->getSelectedValue($selectLocator),
-          $message
+            $value, $this->getSelectedValue($selectLocator),
+            $message
         );
     }
 
@@ -826,16 +827,16 @@ abstract class PHPUnit_Extensions_SeleniumTestCase extends PHPUnit_Framework_Tes
     {
         if ($message == '') {
             $message = sprintf(
-              'Value "%s" selected in "%s".',
-              $value,
-              $selectLocator
+                'Value "%s" selected in "%s".',
+                $value,
+                $selectLocator
             );
         }
 
         $this->assertNotEquals(
-          $value,
-          $this->getSelectedValue($selectLocator),
-          $message
+            $value,
+            $this->getSelectedValue($selectLocator),
+            $message
         );
     }
 
@@ -855,9 +856,9 @@ abstract class PHPUnit_Extensions_SeleniumTestCase extends PHPUnit_Framework_Tes
     {
         if (!empty($this->coverageScriptUrl)) {
             $url = sprintf(
-              '%s?PHPUNIT_SELENIUM_TEST_ID=%s',
-              $this->coverageScriptUrl,
-              $this->testId
+                '%s?PHPUNIT_SELENIUM_TEST_ID=%s',
+                $this->coverageScriptUrl,
+                $this->testId
             );
 
             $buffer = @file_get_contents($url);
@@ -886,10 +887,10 @@ abstract class PHPUnit_Extensions_SeleniumTestCase extends PHPUnit_Framework_Tes
 
         foreach ($coverage as $originalRemotePath => $data) {
             $remotePath = $originalRemotePath;
-            $separator  = $this->findDirectorySeparator($remotePath);
+            $separator = $this->findDirectorySeparator($remotePath);
 
             while (!($localpath = PHPUnit_Util_Filesystem::fileExistsInIncludePath($remotePath)) &&
-                   strpos($remotePath, $separator) !== FALSE) {
+                strpos($remotePath, $separator) !== FALSE) {
                 $remotePath = substr($remotePath, strpos($remotePath, $separator) + 1);
             }
 
@@ -963,8 +964,8 @@ abstract class PHPUnit_Extensions_SeleniumTestCase extends PHPUnit_Framework_Tes
         try {
             $this->restoreSessionStateAfterFailedTest();
 
-            $buffer  = 'Current URL: ' . $this->drivers[0]->getLocation() .
-                       "\n";
+            $buffer = 'Current URL: ' . $this->drivers[0]->getLocation() .
+                "\n";
 
             if ($this->captureScreenshotOnFailure) {
                 $screenshotInfo = $this->takeScreenshot();
@@ -979,7 +980,8 @@ abstract class PHPUnit_Extensions_SeleniumTestCase extends PHPUnit_Framework_Tes
         }
 
         if ($e instanceof PHPUnit_Framework_ExpectationFailedException
-         && is_object($e->getComparisonFailure())) {
+            && is_object($e->getComparisonFailure())
+        ) {
             $message = $e->getComparisonFailure()->toString();
         } else {
             $message = $e->getMessage();
@@ -994,8 +996,9 @@ abstract class PHPUnit_Extensions_SeleniumTestCase extends PHPUnit_Framework_Tes
 
         // yes to stack trace and everything
         if ($e instanceof PHPUnit_Framework_IncompleteTestError
-         || $e instanceof PHPUnit_Framework_SkippedTestError
-         || $e instanceof PHPUnit_Framework_AssertionFailedError) {
+            || $e instanceof PHPUnit_Framework_SkippedTestError
+            || $e instanceof PHPUnit_Framework_AssertionFailedError
+        ) {
             throw $e;
         }
 
@@ -1018,7 +1021,7 @@ abstract class PHPUnit_Extensions_SeleniumTestCase extends PHPUnit_Framework_Tes
     {
         $path = $this->screenshotPath;
 
-        if (!in_array(substr($path, strlen($path) -1, 1), array("/","\\"))) {
+        if (!in_array(substr($path, strlen($path) - 1, 1), array("/", "\\"))) {
             $path .= DIRECTORY_SEPARATOR;
         }
 
@@ -1030,20 +1033,21 @@ abstract class PHPUnit_Extensions_SeleniumTestCase extends PHPUnit_Framework_Tes
      * Return an empty string if the screenshotPath and screenshotUrl
      * properties are empty.
      * Issue #88.
-     * 
+     *
      * @access protected
      * @return string
      */
     protected function takeScreenshot()
     {
         if (!empty($this->screenshotPath) &&
-            !empty($this->screenshotUrl)) {
+            !empty($this->screenshotUrl)
+        ) {
             $filename = $this->getScreenshotPath() . $this->testId . '.png';
 
             $this->drivers[0]->captureEntirePageScreenshot($filename);
 
             return 'Screenshot: ' . $this->screenshotUrl . '/' .
-                   $this->testId . ".png\n";
+            $this->testId . ".png\n";
         } else {
             return '';
         }

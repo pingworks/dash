@@ -2,7 +2,7 @@
     <testsuite name="Application Test Suite">
         <directory>./rest</directory>
     </testsuite>
-    
+
     <filter>
         <!-- If Zend Framework is inside your project's library, uncomment this filter -->
         <!-- 
