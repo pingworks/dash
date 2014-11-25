@@ -17,64 +17,47 @@
 
 class CommentController extends Zend_Rest_Controller
 {
-	public function init()
-	{
-		$this->_helper->viewRenderer->setNoRender(true);
-	}
+    public function init()
+    {
+        $this->_helper->viewRenderer->setNoRender(true);
+    }
 
-	public function indexAction()
-	{
-	}
+    public function indexAction()
+    {
+    }
 
-	public function getAction()
-	{
-	}
+    public function getAction()
+    {
+    }
 
-	public function headAction()
-	{
-	}
+    public function headAction()
+    {
+    }
 
-	public function postAction()
-	{
-		$branch = $this->_getParam('branch');
-		$bundle = $this->_getParam('bundle');
-		$comment = $this->_getParam('comment');
+    public function postAction()
+    {
+        $branch = $this->_getParam('branch');
+        $bundle = $this->_getParam('bundle');
+        $comment = $this->_getParam('comment');
 
-		$regex = $this->getInvokeArg('bootstrap')->getOption('paramregex');
-		if (preg_match($regex['branch'], $branch) === 0)
-		{
-			throw new Exception("No valid branch for editing comment specified: '$branch'");
-		}
-		if (empty($bundle))
-		{
-			throw new Exception("No bundle for editing comment specified");
-		}
-		$branchDir = Zend_Registry::get("repodir") . '/' . $branch;
-		if (!is_dir($branchDir))
-		{
-			throw new Exception("The branch '$branch' does not exist");
-		}
-		$bundleDir = $branchDir . '/' . $bundle;
-		if (!is_dir($bundleDir))
-		{
-			throw new Exception("The bundle '$bundle' does not exist");
-		}
-		$commentFilename = $bundleDir . '/metadata/comment';
-		if (!is_writable($commentFilename))
-		{
-			throw new Exception("Cannot write comment file: '$commentFilename'");
-		}
+        $regex = $this->getInvokeArg('bootstrap')->getOption('paramregex');
+        if (preg_match($regex['branch'], $branch) === 0) {
+            throw new Exception("No valid branch for editing comment specified: '$branch'");
+        }
+        if (empty($bundle)) {
+            throw new Exception("No bundle for editing comment specified");
+        }
+        Application_Model_BundlePeer::setComment($branch, $bundle, $comment);
 
-		file_put_contents($commentFilename, $comment);
-		$this->getResponse()->setBody(json_encode(array('success' => true)));
-		$this->getResponse()->setHttpResponseCode(200);
-	}
+        $this->getResponse()->setBody(json_encode(array('success' => true)));
+        $this->getResponse()->setHttpResponseCode(200);
+    }
 
-	public function putAction()
-	{
-	}
+    public function putAction()
+    {
+    }
 
-	public function deleteAction()
-	{
-	}
+    public function deleteAction()
+    {
+    }
 }
