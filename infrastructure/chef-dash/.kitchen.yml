@@ -11,6 +11,8 @@ platforms:
     driver:
         box: opscode_debian-7.7_chef-11.16.4-1
         box_url: http://vagrant.pingworks.net/opscode_debian-7.7_chef-11.16.4-1.box
+        network:
+        - ["forwarded_port", { guest: 80, host: 8080 }]
 
 suites:
   - name: default
