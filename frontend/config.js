@@ -133,13 +133,13 @@ Dash.config = {
             changes: false,
             deployment: false,
             triggerJenkinsJob: false,
-            editComment: false,
-            comment: false
+            editComment: true,
+            comment: true
         },
         flex: {
-            deployment: 0,
-            triggerJenkinsJob: 0,
-            comment: 1
+            deployment: 1,
+            triggerJenkinsJob: 1,
+            comment: 0
         }
     },
 
