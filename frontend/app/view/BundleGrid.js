@@ -191,11 +191,12 @@ Ext.define("Dash.view.BundleGrid", {
                 hidden: Dash.config.bundlegrid.hidden.stage3
             },
             {
-                text: 'Build',
+                text: Dash.config.bundlegrid.label.build,
                 menuText: 'Build',
                 align: 'center',
                 xtype: 'actioncolumn',
-                width: 120,
+                width: Dash.config.bundlegrid.colwidth.build,
+                hidden: Dash.config.bundlegrid.hidden.build,
                 items: [
                     {
                         margin: 10,
