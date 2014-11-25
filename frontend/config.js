@@ -298,7 +298,7 @@ Dash.config = {
          }*/],
         params: {
             bundle: {
-                name: 'bundle',
+                name: 'branch_bundle',
                 value: '{0}:{1}'
             },
             formValues: {
