@@ -21,3 +21,14 @@ describe file '/etc/apache2/sites-available/dash-prod' do
   its (:content) { should match /SetEnv APPLICATION_ENV "production"/ }
 end
 
+# Smoketest Backend
+describe command "curl 'http://localhost/branch' -H 'X-Requested-With: XMLHttpRequest'" do
+  its(:exit_status) { should eq 0 }
+  its(:stdout) { should match /"success":false/ }
+end
+
+# Smoketest Frontend
+describe command "curl 'http://localhost/config.js'" do
+  its(:exit_status) { should eq 0 }
+  its(:stdout) { should match /Dash\.config = / }
+end
