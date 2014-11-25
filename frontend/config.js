@@ -299,7 +299,7 @@ Dash.config = {
         params: {
             bundle: {
                 name: 'bundle',
-                value: '{1}'
+                value: '{0}:{1}'
             },
             formValues: {
                 name: 'formValues'
