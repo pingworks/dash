@@ -1,6 +1,7 @@
 /*
  * Copyright 2013 pingworks - Alexander Birk und Christoph Lukas
- * 
+ * Copyright 2014 //SEIBERT/MEDIA - Lars-Erik Kimmel
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -28,7 +29,8 @@ Ext.define('Dash.model.Bundle', {
             return Ext.Date.parse(value, Dash.config.bundle.dateformat)
         }},
         { name: 'committer', type: 'string' },
-        { name: 'payload', type: 'array' }
+        { name: 'payload', type: 'array' },
+		{ name: 'comment', type: 'string' }
     ],
     proxy: {
         type: 'rest',

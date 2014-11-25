@@ -1,7 +1,8 @@
 <?php
 /*
  * Copyright 2013 pingworks - Alexander Birk und Christoph Lukas
- * 
+ * Copyright 2014 //SEIBERT/MEDIA - Lars-Erik Kimmel
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -31,6 +32,7 @@ class Application_Model_BundlePeer
                     'repository',
                     'timestamp',
                     'committer',
+                    'comment',
                     'changes',
                     'status',
                     'buildnr',
@@ -46,13 +48,41 @@ class Application_Model_BundlePeer
         return $metaKeys;
     }
 
-    private static function getMetadata($branch, $id, $meta)
+    private static function getMetadata($branch, $id, $meta, $default = false)
     {
         $filename = Zend_Registry::get("repodir") . '/' . $branch . '/' . $id . '/metadata/' . $meta;
         if (!file_exists($filename)) {
-            return 'Unavailable';
+            if (false === $default) {
+                return 'Unavailable';
+            } else {
+                return $default;
+            }
         }
         return trim(file_get_contents($filename));
+    }
+
+    private static function setMetadata($branch, $id, $meta, $value)
+    {
+        $metadataDir = Zend_Registry::get("repodir") . '/' . $branch . '/' . $id . '/metadata';
+        $metadataFilename = $metadataDir . '/' . $meta;
+        if (!is_writable($metadataDir)) {
+            throw new Exception("Cannot write to metadata dir: '$metadataDir'");
+        }
+        if (file_exists($metadataFilename) && !is_writable($metadataFilename)) {
+            throw new Exception("Cannot write to metadata file: '$metadataFilename'");
+        }
+
+        return file_put_contents($metadataFilename, $value);
+    }
+
+    public static function getComment($branch, $id)
+    {
+        return self::getMetadata($branch, $id, 'comment');
+    }
+
+    public static function setComment($branch, $id, $comment)
+    {
+        return self::setMetadata($branch, $id, 'comment', $comment);
     }
 
     public static function getChanges($branch, $id)
@@ -102,6 +132,7 @@ class Application_Model_BundlePeer
         $bundle->repository = self::getMetadata($branch, $id, 'repository');
         $bundle->timestamp = self::getMetadata($branch, $id, 'timestamp');
         $bundle->committer = self::getMetadata($branch, $id, 'committer');
+        $bundle->comment = self::getMetadata($branch, $id, 'comment', '');
         $bundle->stage1 = self::getStageStatus($branch, $id, 1);
         $bundle->stage2 = self::getStageStatus($branch, $id, 2);
         $bundle->stage3 = self::getStageStatus($branch, $id, 3);

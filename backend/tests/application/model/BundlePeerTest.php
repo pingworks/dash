@@ -124,4 +124,14 @@ class Application_Model_BundlePeerTest extends PHPUnit_Framework_TestCase
         $this->assertEquals("foo;bar;SUCCESS;1;0;0\ntest;url;FAILURE;2;4;2", $data);
     }
 
+    public function testSetComment()
+    {
+        $data = Application_Model_BundlePeer::setComment('branchA', '88.941106ff.2', 'Super build!');
+        $this->assertNotEquals('false', $data);
+
+        $data = Application_Model_BundlePeer::getComment('branchA', '88.941106ff.2');
+        $this->assertEquals('Super build!', $data);
+        unlink(Zend_Registry::get("repodir") . '/branchA/88.941106ff.2/metadata/comment');
+    }
+
 }

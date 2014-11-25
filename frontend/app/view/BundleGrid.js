@@ -1,6 +1,7 @@
 /*
  * Copyright 2013 pingworks - Alexander Birk und Christoph Lukas
- * 
+ * Copyright 2014 //SEIBERT/MEDIA - Lars-Erik Kimmel
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -216,7 +217,7 @@ Ext.define("Dash.view.BundleGrid", {
                 xtype: 'actioncolumn',
                 width: Dash.config.bundlegrid.colwidth.deployment,
                 hidden: Dash.config.bundlegrid.hidden.deployment,
-                flex: 1,
+                flex: Dash.config.bundlegrid.flex.deployment,
                 items: [
                     {
                         disabled: !Dash.config.bundlegrid.deployment.enabled,
@@ -237,7 +238,7 @@ Ext.define("Dash.view.BundleGrid", {
                 xtype: 'actioncolumn',
                 width: Dash.config.bundlegrid.colwidth.triggerJenkinsJob,
                 hidden: Dash.config.bundlegrid.hidden.triggerJenkinsJob,
-                flex: 1,
+                flex: Dash.config.bundlegrid.flex.triggerJenkinsJob,
                 items: [
                     {
                         disabled: !Dash.config.bundlegrid.triggerJenkinsJob.enabled,
@@ -251,6 +252,31 @@ Ext.define("Dash.view.BundleGrid", {
                 ],
                 renderer: this.triggerJenkinsJobActionRenderer,
                 scope: this
+            }, {
+                id: 'ColumnEditComment',
+                text: Dash.config.bundlegrid.label.editComment,
+                menuText: Dash.config.bundlegrid.label.editComment,
+                align: 'center',
+                xtype: 'actioncolumn',
+                hidden: Dash.config.bundlegrid.hidden.editComment,
+                width: Dash.config.bundlegrid.colwidth.editComment,
+                items: [{
+                    icon: Dash.config.bundlegrid.icon.comment,
+                    handler: function(gridview, rowIndex, colIndex, item, event, record) {
+                        that.fireEvent('showCommentWindow', record);
+                    }
+                }]
+            }, {
+                id: 'ColumnComment',
+                text: Dash.config.bundlegrid.label.comment,
+                menuText: Dash.config.bundlegrid.label.comment,
+                dataIndex: 'comment',
+                hidden: Dash.config.bundlegrid.hidden.comment,
+                width: Dash.config.bundlegrid.colwidth.comment,
+                flex: Dash.config.bundlegrid.flex.comment,
+                renderer: function (text) {
+                    return Ext.util.Format.htmlEncode(text);
+                }
             }
         ];
 
