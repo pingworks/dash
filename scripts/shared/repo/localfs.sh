@@ -114,7 +114,7 @@ function removeAllArtifacts() {
   rm -rf $BUNDLE_FOLDER/artifacts
 }
 
-copyArtifact() {
+function copyArtifact() {
   local SRC=$1
   local DST=$2
 

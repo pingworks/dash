@@ -22,7 +22,7 @@ echo "Building bundle files.."
 IFS=";"
 while read name filter; do
   echo "  $name"
-  createBundle $name $filter
+  createBundleFile $name $filter
 done < $SCRIPTDIR/../configs/bundles.csv
 IFS=$IFSOLD
 echo "done."
