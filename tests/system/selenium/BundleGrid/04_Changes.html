@@ -15,116 +15,116 @@
     </thead>
     <tbody>
     <tr>
-        <td>open</td>
-        <td>/</td>
-        <td></td>
-    </tr>
-    <!--Select branchA-->
-    <tr>
-        <td>assertElementPresent</td>
-        <td>BranchButtonMenu</td>
-        <td></td>
-    </tr>
-    <tr>
-        <td>click</td>
-        <td>css=#BranchButtonMenu td.x-trigger-cell div</td>
-        <td></td>
-    </tr>
-    <tr>
-        <td>waitForElementPresent</td>
-        <td>css=#BranchList</td>
-        <td></td>
-    </tr>
-    <tr>
-        <td>assertElementPresent</td>
-        <td>css=#BranchList li.x-boundlist-item</td>
-        <td></td>
-    </tr>
-    <tr>
-        <td>assertText</td>
-        <td>css=#BranchList li.x-boundlist-item:nth-child(1)</td>
-        <td>trunk</td>
-    </tr>
-    <tr>
-        <td>assertText</td>
-        <td>css=#BranchList li.x-boundlist-item:nth-child(2)</td>
-        <td>branchA</td>
-    </tr>
-    <tr>
-        <td>click</td>
-        <td>css=#BranchList li.x-boundlist-item:nth-child(2)</td>
-        <td></td>
-    </tr>
-    <tr>
-        <td>assertLocation</td>
-        <td>http://dash-test/#branchA</td>
-        <td></td>
-    </tr>
-    <!--Bundles-->
-    <tr>
-        <td>rollup</td>
-        <td>waitForGridCellPresent</td>
-        <td>id=BundleGrid, row=1, col=1</td>
-    </tr>
-    <tr>
-        <td>rollup</td>
-        <td>assertGridCellText</td>
-        <td>id=BundleGrid, row=1, col=4, value=88.faaeeb60.10</td>
-    </tr>
-    <!--JobResults-->
-    <!--Bundle10-->
-    <tr>
-        <td>rollup</td>
-        <td>clickGridCellElement</td>
-        <td>id=BundleGrid, row=1, col=8, elem=img</td>
-    </tr>
-    <tr>
-        <td>waitForElementPresent</td>
-        <td>TTC-88-faaeeb60-10</td>
-        <td></td>
-    </tr>
-    <tr>
-        <td>assertElementPresent</td>
-        <td>css=#TTC-88-faaeeb60-10_header</td>
-        <td></td>
-    </tr>
-    <tr>
-        <td>assertText</td>
-        <td>css=#TTC-88-faaeeb60-10_header</td>
-        <td>Changes in Bundle 88.faaeeb60.10</td>
-    </tr>
-    <tr>
-        <td>assertText</td>
-        <td>css=#TTC-88-faaeeb60-10-innerCt</td>
-        <td>Mit Blindheit per Definition geschlagen, dennoch nicht unsichtbar, präsentiere ich mich als unbeachtetes und ungeliebtes Stiefkind zeitgenössischer Literatur*</td>
-    </tr>
-    <!--Bundle5-->
-    <tr>
-        <td>rollup</td>
-        <td>clickGridCellElement</td>
-        <td>id=BundleGrid, row=6, col=8, elem=img</td>
-    </tr>
-    <tr>
-        <td>waitForElementPresent</td>
-        <td>TTC-88-ab99a3b7-5</td>
-        <td></td>
-    </tr>
-    <tr>
-        <td>assertElementPresent</td>
-        <td>css=#TTC-88-ab99a3b7-5_header</td>
-        <td></td>
-    </tr>
-    <tr>
-        <td>assertText</td>
-        <td>css=#TTC-88-ab99a3b7-5_header</td>
-        <td>Changes in Bundle 88.ab99a3b7.5</td>
-    </tr>
-    <tr>
-        <td>assertText</td>
-        <td>css=#TTC-88-ab99a3b7-5-innerCt</td>
-        <td>This, of course, is not the real copy for this advertisement. The real words will be written once...*</td>
-    </tr>
-    </tbody>
+	<td>open</td>
+	<td>/</td>
+	<td></td>
+</tr>
+<!--Select branchA-->
+<tr>
+	<td>assertElementPresent</td>
+	<td>BranchButtonMenu</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>css=#BranchButtonMenu td.x-trigger-cell div</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#BranchButtonMenu td.x-trigger-cell div</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>css=#BranchList li.x-boundlist-item</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=#BranchList li.x-boundlist-item:nth-child(1)</td>
+	<td>trunk</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=#BranchList li.x-boundlist-item:nth-child(2)</td>
+	<td>branchA</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=#BranchList li.x-boundlist-item:nth-child(2)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertLocation</td>
+	<td>http://dash-test/#branchA</td>
+	<td></td>
+</tr>
+<!--Bundles-->
+<tr>
+	<td>rollup</td>
+	<td>waitForGridCellPresent</td>
+	<td>id=BundleGrid, row=1, col=1</td>
+</tr>
+<tr>
+	<td>rollup</td>
+	<td>assertGridCellText</td>
+	<td>id=BundleGrid, row=1, col=4, value=88.faaeeb60.10</td>
+</tr>
+<!--JobResults-->
+<!--Bundle10-->
+<tr>
+	<td>rollup</td>
+	<td>clickGridCellElement</td>
+	<td>id=BundleGrid, row=1, col=8, elem=img</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>TTC-88-faaeeb60-10</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>css=#TTC-88-faaeeb60-10_header</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=#TTC-88-faaeeb60-10_header</td>
+	<td>Changes in Bundle 88.faaeeb60.10</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=#TTC-88-faaeeb60-10-innerCt</td>
+	<td>Mit Blindheit per Definition geschlagen, dennoch nicht unsichtbar, präsentiere ich mich als unbeachtetes und ungeliebtes Stiefkind zeitgenössischer Literatur*</td>
+</tr>
+<!--Bundle5-->
+<tr>
+	<td>rollup</td>
+	<td>clickGridCellElement</td>
+	<td>id=BundleGrid, row=6, col=8, elem=img</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>TTC-88-ab99a3b7-5</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>css=#TTC-88-ab99a3b7-5_header</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=#TTC-88-ab99a3b7-5_header</td>
+	<td>Changes in Bundle 88.ab99a3b7.5</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=#TTC-88-ab99a3b7-5-innerCt</td>
+	<td>This, of course, is not the real copy for this advertisement. The real words will be written once...*</td>
+</tr>
+</tbody>
 </table>
 </body>
 </html>
