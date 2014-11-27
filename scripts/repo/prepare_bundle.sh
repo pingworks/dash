@@ -4,7 +4,7 @@ SCRIPTDIR=$(dirname $0)
 . $SCRIPTDIR/../configs/repo.conf
 . $SCRIPTDIR/../configs/vcs.conf
 . $SCRIPTDIR/../shared/common.sh
-. $SCRIPTDIR/../shared/$VCS.sh
+. $SCRIPTDIR/../shared/vcs/$VCS.sh
 
 BRANCH=$1
 REV=$2
@@ -36,8 +36,8 @@ setMetadata $BUNDLE branch $BRANCH
 setMetadata $BUNDLE branch_name $BRANCHNAME
 setMetadata $BUNDLE revision $REV
 setMetadata $BUNDLE buildnr $BUILDNR
-setMetadata $BUNDLE changes "$(bash $SCRIPTDIR/../$VCS/log.sh $REV)"
-setMetadata $BUNDLE committer "$(bash $SCRIPTDIR/../$VCS/committer.sh $REV)"
+setMetadata $BUNDLE changes "$(bash $SCRIPTDIR/../vcs/log.sh $REV)"
+setMetadata $BUNDLE committer "$(bash $SCRIPTDIR/../vcs/committer.sh $REV)"
 echo "done."
 
 IFSOLD=$IFS

@@ -21,3 +21,20 @@ function validateCmd() {
     exit 1
   fi
 }
+
+function getCommitter() {
+  local SRCDIR=$1
+  local RANGE=$2
+
+  svn log -q -r $RANGE $SRCDIR \
+	| grep '^r.*|' \
+	| cut -d '|' -f2 \
+	| sed -e 's/^ *//g' -e 's/ *$//g'
+}
+
+function getLog() {
+  local SRCDIR=$1
+  local RANGE=$2
+
+  svn log -r $RANGE $SRCDIR
+}

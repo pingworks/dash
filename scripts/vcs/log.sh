@@ -5,13 +5,14 @@ SCRIPTDIR=$(dirname $0)
 . $SCRIPTDIR/../shared/common.sh
 . $SCRIPTDIR/../shared/vcs/$VCS.sh
 
-RANGE=$1
+SRCDIR=$1
+RANGE=$2
 
-if [ -z "$RANGE" ]; then
-  echo "Usage: $0 <svn-revision-range>"
+if [ -z "$SRCDIR" -o -z "$RANGE" ]; then
+  echo "Usage: $0 <srcdir> <revision-range>"
   exit 1
 fi
 set -e
 validateRevRange $RANGE
 
-svn log -r $RANGE $VCSREPO/
+getLog $SRCDIR $RANGE

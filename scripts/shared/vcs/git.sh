@@ -6,11 +6,6 @@ function validateRev() {
 }
 
 function validateRevRange() {
-  local RANGE=$1
-  if ! echo $RANGE | grep -E '^[0-9a-f]+(\.\.[0-9a-f]+)?$' >/dev/null; then
-    echo "Illegal Revision Range: $RANGE"
-    exit 1
-  fi
 }
 
 # 1: CMD
@@ -29,4 +24,21 @@ function cloneRepo() {
     createDirIfNotExists $(dirname $LOCAL_REPO)
     git clone --bare $REMOTE_REPO $LOCAL_REPO
   fi
+}
+
+function getCommitter() {
+  local SRCDIR=$1
+  local RANGE=$2
+
+  echo -e "$(getLog $SRCDIR $RANGE)" \
+    | grep '^Author: .*' \
+    | sed -e 's/^Author: *//g' -e 's/ *<.*>$//g'
+}
+
+function getLog() {
+  local SRCDIR=$1
+  local RANGE=$2
+
+  cd $SRCDIR
+  git log $RANGE
 }
