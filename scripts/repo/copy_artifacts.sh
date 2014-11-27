@@ -32,7 +32,7 @@ while read -u 3 src dst; do
     copyArtifact ${SRC_DIR}/$src $dst
     echo -n "."
   fi
-  IFS";"
+  IFS=";"
 done
 exec 3<&-
 echo
