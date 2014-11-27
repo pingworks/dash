@@ -129,7 +129,7 @@ function copyArtifact() {
     echo -e "\nERROR: Artifact not found: ${SRC}"
     exit 1
   else
-    $SSHCMD cp -a ${SRC} ${BUNDLE_FOLDER}/artifacts/${DST}
+    cp -a ${SRC} ${BUNDLE_FOLDER}/artifacts/${DST}
   fi
 }
 
