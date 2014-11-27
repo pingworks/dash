@@ -29,7 +29,7 @@ createDirIfNotExists "${REPOBASE}/${BRANCH}"
 dirMustNotExist "${REPOBASE}/${BRANCH}/${BUNDLE}"
 
 echo "Creating empty bundle $BUNDLE ..."
-createEmptyBundleFromTemplate $TEMPLATE
+createEmptyBundle
 setMetadata $BUNDLE bundle $BUNDLE
 setMetadata $BUNDLE timestamp $(date +%F_%T)
 setMetadata $BUNDLE branch $BRANCH
@@ -45,9 +45,11 @@ echo "done."
 IFSOLD=$IFS
 echo "Exporting configs to bundle $BUNDLE.."
 IFS=";"
-while read url; do
+exec 3< $SCRIPTDIR/../configs/configs.csv
+while read -u 3 url; do
   echo "  $url"
   bash $SCRIPTDIR/../vcs/export_url.sh $BRANCH $url $REV ${REPOBASE}/${BRANCH}/${BUNDLE}/configs
-done < $SCRIPTDIR/../configs/configs.csv
+done
+exec 3<&-
 IFS=$IFSOLD
 echo "done."

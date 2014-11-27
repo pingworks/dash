@@ -1,14 +1,14 @@
 #!/bin/bash
 
+if [ "$REPO" = "localfs" ]; then
+  SSHCMD=""
+fi
+
 function getBundleFolder() {
   [ "$BUNDLE_FOLDER" ] && return # avoid re-reading branches.csv
   local BUNDLE=$1
 
-  local IFS=";"
-  BUNDLE_FOLDER=""
-  if [ -d ${REPOBASE}/*/$BUNDLE ]; then
-    BUNDLE_FOLDER=$(ls -d ${REPOBASE}/*/$BUNDLE)
-  fi
+  BUNDLE_FOLDER=$($SSHCMD find ${REPOBASE} -maxdepth 2 -type d -name ${BUNDLE})
 
   if [ -z "${BUNDLE_FOLDER}" ]; then
     echo "Bundle not found: $BUNDLE"
@@ -18,7 +18,7 @@ function getBundleFolder() {
 
 function dirMustExist() {
   local DIR=$1
-  if [ ! -d "$DIR" ]; then
+  if $SSHCMD [ ! -d "$DIR" ]; then
     echo "Directory does not exist: $DIR"
     exit 1
   fi
@@ -26,15 +26,20 @@ function dirMustExist() {
 
 function dirMustNotExist() {
   local DIR=$1
-  if [ -d "$DIR" ]; then
+  if $SSHCMD [ -d "$DIR" ]; then
     echo "Directory already exists: $DIR"
     exit 1
   fi
 }
 
-function createDirIfNotExists() {
+function createLocalDirIfNotExists() {
   local DIR=$1
   [ -d "$DIR" ] || mkdir -p "$DIR"
+}
+
+function createDirIfNotExists() {
+  local DIR=$1
+  $SSHCMD [ -d "$DIR" ] || $SSHCMD mkdir -p "$DIR"
 }
 
 function getMetadata() {
@@ -44,7 +49,7 @@ function getMetadata() {
   validateMetakey $KEY
 
   getBundleFolder $BUNDLE
-  [ -r $BUNDLE_FOLDER/metadata/$KEY ] && cat $BUNDLE_FOLDER/metadata/$KEY
+  $SSHCMD [ -r $BUNDLE_FOLDER/metadata/$KEY ] && $SSHCMD cat $BUNDLE_FOLDER/metadata/$KEY
 }
 
 function setMetadata() {
@@ -55,9 +60,9 @@ function setMetadata() {
   validateMetakey $KEY
 
   getBundleFolder $BUNDLE
-  echo "$VALUE" > $BUNDLE_FOLDER/metadata/$KEY
+  echo "$VALUE" | $SSHCMD tee $BUNDLE_FOLDER/metadata/$KEY > /dev/null
   if [ $(id -u) = 0 ] ; then
-    chown $REPOUSER $BUNDLE_FOLDER/metadata/$KEY
+    $SSHCMD chown $REPOUSER $BUNDLE_FOLDER/metadata/$KEY
   fi
 }
 
@@ -69,9 +74,9 @@ function addMetadata() {
   validateMetakey $KEY
 
   getBundleFolder $BUNDLE
-  echo "$VALUE" >> $BUNDLE_FOLDER/metadata/$KEY
+  echo "$VALUE" | $SSHCMD tee -a $BUNDLE_FOLDER/metadata/$KEY > /dev/null
   if [ $(id -u) = 0 ] ; then
-    chown $REPOUSER $BUNDLE_FOLDER/metadata/$KEY
+    $SSHCMD chown $REPOUSER $BUNDLE_FOLDER/metadata/$KEY
   fi
 }
 
@@ -81,17 +86,17 @@ function writeReadmeHtml() {
 
   (
     echo "<table border="0">"
-    for key in $(ls $BUNDLE_FOLDER/metadata); do
-      value=$(<$BUNDLE_FOLDER/metadata/$key)
+    for key in $($SSHCMD ls $BUNDLE_FOLDER/metadata); do
+      value=$($SSHCMD cat $BUNDLE_FOLDER/metadata/$key)
       case $value in
-	http*) value="<a href=\"$value\">$value</a>" ;;
+	    http*) value="<a href=\"$value\">$value</a>" ;;
       esac
       echo "<tr><td>$key</td><td>$value</td></tr>"
     done
     echo "</table>"
-  ) > $BUNDLE_FOLDER/README.html
+  ) | $SSHCMD tee $BUNDLE_FOLDER/README.html > /dev/null
   if [ $(id -u) = 0 ] ; then
-    chown $REPOUSER $BUNDLE_FOLDER/README.html
+    $SSHCMD chown $REPOUSER $BUNDLE_FOLDER/README.html
   fi
 }
 
@@ -103,15 +108,14 @@ function createBundleFile() {
   validateBundle $BUNDLE
   getBundleFolder $BUNDLE
 
-  cd $BUNDLE_FOLDER
-  tar cz -f bundles/${name}_${BUNDLE}.tar.gz ${filter}
+  $SSHCMD tar cz -f ${BUNDLE_FOLDER}/bundles/${name}_${BUNDLE}.tar.gz -C ${BUNDLE_FOLDER} ${filter}
 }
 
 function removeAllArtifacts() {
   validateBundle $BUNDLE
   getBundleFolder $BUNDLE
 
-  rm -rf $BUNDLE_FOLDER/artifacts
+  $SSHCMD rm -rf $BUNDLE_FOLDER/artifacts
 }
 
 function copyArtifact() {
@@ -125,7 +129,7 @@ function copyArtifact() {
     echo -e "\nERROR: Artifact not found: ${SRC}"
     exit 1
   else
-    cp -a ${SRC} ${BUNDLE_FOLDER}/artifacts/${DST}
+    $SSHCMD cp -a ${SRC} ${BUNDLE_FOLDER}/artifacts/${DST}
   fi
 }
 
@@ -136,24 +140,23 @@ function getSortedBundles() {
   validateBranch $BRANCH
   validateMetakey $SORTKEY
 
-  BUNDLES=$(ls -tc1 ${REPOBASE}/${BRANCH})
+  BUNDLES=$($SSHCMD ls -tc1 ${REPOBASE}/${BRANCH})
   for BUNDLE in $BUNDLES; do
-    if [ -d ${REPOBASE}/${BRANCH}/${BUNDLE} ]; then
+    if $SSHCMD [ -d ${REPOBASE}/${BRANCH}/${BUNDLE} ]; then
       TIMESTAMP=$(getMetadata $BUNDLE $SORTKEY);
       echo "$TIMESTAMP;$BUNDLE"
     fi
   done | sort -r | cut -d ';' -f 2
 }
 
-function createEmptyBundleFromTemplate() {
-  local TPL=$1
+function createEmptyBundle() {
 
   validateBundle $BUNDLE
-  rsync -ax --exclude=.svn --exclude=.git --exclude=.gitignore $SCRIPTDIR/../${TPL}/ ${REPOBASE}/${BRANCH}/${BUNDLE}/
+  $SSHCMD mkdir -p ${REPOBASE}/${BRANCH}/${BUNDLE}/{artifacts,bundles,metadata,configs}
 }
 
 function deleteBundle() {
   validateBundle $BUNDLE
   getBundleFolder $BUNDLE
-  rm -rf ${BUNDLE_FOLDER}
+  $SSHCMD rm -rf ${BUNDLE_FOLDER}
 }

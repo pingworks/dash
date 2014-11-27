@@ -20,10 +20,12 @@ IFSOLD=$IFS
 
 echo "Building bundle files.."
 IFS=";"
-while read name filter; do
+exec 3< $SCRIPTDIR/../configs/bundles.csv
+while read -u 3 name filter; do
   echo "  $name"
   createBundleFile $name $filter
-done < $SCRIPTDIR/../configs/bundles.csv
+done
+exec 3<&-
 IFS=$IFSOLD
 echo "done."
 

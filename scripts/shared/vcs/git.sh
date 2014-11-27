@@ -56,5 +56,5 @@ function exportURL() {
   local DIR=$3
 
   createDirIfNotExists $DIR
-  git archive $REV $URL | tar -x -C $DIR
+  git archive $REV $URL | $SSHCMD tar -x -C $DIR
 }

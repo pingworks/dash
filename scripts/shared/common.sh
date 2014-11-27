@@ -80,12 +80,14 @@ function validateStatus() {
 function getBranchNr() {
   local BRANCH=$1
   local IFS=";"
-  
-  while read name nr url; do
+
+  exec 3< $SCRIPTDIR/../configs/branches.csv
+  while read -u 3 name nr url; do
     if [ "$name" = "$BRANCH" ]; then
       BRANCHNR=$nr
     fi  
-  done < $SCRIPTDIR/../configs/branches.csv
+  done
+  exec 3<&-
   
   if [ -z "$BRANCHNR" ]; then
     echo "No BRANCHNR found for BRANCH: $BRANCH"
@@ -100,12 +102,14 @@ function getBranchNr() {
 function getBranchUrl() {
   local BRANCH=$1
   local IFS=";"
-  
-  while read name nr url; do
+
+  exec 3< $SCRIPTDIR/../configs/branches.csv
+  while read -r 3 name nr url; do
     if [ "$name" = "$BRANCH" ]; then
       BRANCHURL=$url
     fi  
-  done < $SCRIPTDIR/../configs/branches.csv
+  done
+  exec 3<&-
   
   if [ -z "$BRANCHURL" -a "$VCS" != "git" ]; then
     echo "No BRANCHURL found for BRANCH: $BRANCH"
@@ -117,12 +121,14 @@ function getBranchUrl() {
 function getBranch() {
   local IFS=";"
   BRANCHNR=$(echo "$BUNDLE" | cut -d . -f 1)
-  while read name nr url; do
+  exec 3< $SCRIPTDIR/../configs/branches.csv
+  while read -u 3 name nr url; do
     if [ "$nr" = "$BRANCHNR" ]; then
       BRANCH="$name"
       BRANCHURL="$url"
     fi
-  done < $SCRIPTDIR/../configs/branches.csv
+  done
+  exec 3<&-
 
   if [ -z "$BRANCH" ]; then
     echo "No BRANCH found for BUNDLE: $BUNDLE"

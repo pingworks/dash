@@ -54,6 +54,5 @@ function exportURL() {
   dirMustNotExist $DIR
 
   getBranchUrl $BRANCH
-  echo svn $VCSEXPORTCMD -q $VCSBASE/$BRANCHURL/$URL@$REV $DIR
-  svn $VCSEXPORTCMD -q $VCSBASE/$BRANCHURL/$URL@$REV $DIR
+  $SSHCMD svn $VCSEXPORTCMD -q $VCSBASE/$BRANCHURL/$URL@$REV $DIR
 }

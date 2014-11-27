@@ -24,7 +24,7 @@ set -e
 validateBranch $BRANCH
 validateRev $REV
 validateBuildNr $BUILDNR
-createDirIfNotExists $JENKINS_PROPERTYFILE_DIR
+createLocalDirIfNotExists $JENKINS_PROPERTYFILE_DIR
 
 getBundleName $BRANCH $REV $BUILDNR
 getBranchNr $BRANCH

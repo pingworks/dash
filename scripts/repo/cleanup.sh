@@ -42,7 +42,8 @@ function cleanupBranch() {
   
   local i=0
   IFS=";"
-  while read key value cnt; do
+  exec 3< $SCRIPTDIR/../configs/repo-cleanup.csv
+  while read -u 3 key value cnt; do
     if [ "${key:0:1}" = "#" -o -z "${key}" ]; then
       continue;
     fi
@@ -51,7 +52,8 @@ function cleanupBranch() {
     MAX_STATUS[$i]=${cnt}
     BUNDLE_CNT[$i]=0
     let i=i+1
-  done < $SCRIPTDIR/../configs/repo-cleanup.csv
+  done
+  exec 3<&-
 
   IFS=$(echo -e "\012\015 ")
   # sort bundles by build time
@@ -104,10 +106,12 @@ echo "Cleaning up bundles in branch: "
 if [ -z "$BRANCH" ]; then
   IFSOLD=$IFS
   IFS=";"
-  while read bname bnumber burl; do
+  exec 3< $SCRIPTDIR/../configs/branches.csv
+  while read -u 3 bname bnumber burl; do
     echo -n "  $bname "
     cleanupBranch $bname
-  done < $SCRIPTDIR/../configs/branches.csv
+  done
+  exec 3<&-
   IFS=$IFSOLD
 else
   echo -n "  $BRANCH "

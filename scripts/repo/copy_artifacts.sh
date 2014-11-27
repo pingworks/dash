@@ -26,12 +26,14 @@ IFSOLD=$IFS
 echo "Copying artifacts into bundle.."
 IFS=";"
 echo -n "  "
-while read src dst; do
+exec 3< $SCRIPTDIR/../configs/artifacts.csv
+while read -u 3 src dst; do
   if [ -z "$ARTIFACT" -o "$ARTIFACT" = "$src" -o "$ARTIFACT" = "$(basename $src)" ]; then
     copyArtifact ${SRC_DIR}/$src $dst
     echo -n "."
   fi
-done < $SCRIPTDIR/../configs/artifacts.csv
+done
+exec 3<&-
 echo
 IFS=$IFSOLD
 echo "done."
