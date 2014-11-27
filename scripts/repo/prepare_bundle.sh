@@ -10,9 +10,10 @@ BRANCH=$1
 REV=$2
 BUILDNR=$3
 BRANCHNAME=$4
+SRCDIR=$5
 
 if [ -z "$BRANCH" -o -z "$REV" -o -z "$BUILDNR" -o -z "$BRANCHNAME" ]; then
-  echo "Usage: $0 <branch> <vcs-revision> <build_id>"
+  echo "Usage: $0 <branch> <vcs-revision> <build_nr> <branchname> [<srcdir>]"
   exit 1
 fi
 set -e
@@ -36,8 +37,10 @@ setMetadata $BUNDLE branch $BRANCH
 setMetadata $BUNDLE branch_name $BRANCHNAME
 setMetadata $BUNDLE revision $REV
 setMetadata $BUNDLE buildnr $BUILDNR
-setMetadata $BUNDLE changes "$(bash $SCRIPTDIR/../vcs/log.sh $REV)"
-setMetadata $BUNDLE committer "$(bash $SCRIPTDIR/../vcs/committer.sh $REV)"
+if [ ! -z "$SRCDIR" ]; then
+  setMetadata $BUNDLE changes "$(getLog $SRCDIR $REV)"
+  setMetadata $BUNDLE committer "$(getCommitter $SRCDIR $REV)"
+fi
 echo "done."
 
 IFSOLD=$IFS
