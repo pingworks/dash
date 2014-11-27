@@ -2,8 +2,10 @@
 
 SCRIPTDIR=$(dirname $0)
 . $SCRIPTDIR/../configs/vcs.conf
+. $SCRIPTDIR/../configs/repo.conf
 . $SCRIPTDIR/../shared/common.sh
 . $SCRIPTDIR/../shared/vcs/$VCS.sh
+. $SCRIPTDIR/../shared/repo/${REPO}.sh
 
 BRANCH=$1
 URL=$2

@@ -5,6 +5,7 @@ SCRIPTDIR=$(dirname $0)
 . $SCRIPTDIR/../configs/vcs.conf
 . $SCRIPTDIR/../shared/common.sh
 . $SCRIPTDIR/../shared/vcs/$VCS.sh
+. $SCRIPTDIR/../shared/repo/${REPO}.sh
 
 BRANCH=$1
 REV=$2
@@ -28,7 +29,6 @@ createDirIfNotExists $JENKINS_PROPERTYFILE_DIR
 getBundleName $BRANCH $REV $BUILDNR
 getBranchNr $BRANCH
 getBranchUrl $BRANCH
-bash ${SCRIPTDIR}/../repo/prepare_bundle.sh $BRANCH $REV $BUILDNR $BRANCHNAME $SRCDIR
 
 cat << EOF > $JENKINS_PROPERTYFILE_DIR/${BUNDLE}.properties
 BUILD_DATE=$(date +%Y%m%d)
@@ -44,4 +44,6 @@ EOF
 
 cp $JENKINS_PROPERTYFILE_DIR/${BUNDLE}.properties $JENKINS_PROPERTYFILE_DIR/${BUILDNR}.properties
 
-bash ${SCRIPTDIR}/../repo/add_metadata.sh ${BUNDLE} status first_stage_in_progress
+bash ${SCRIPTDIR}/../repo/prepare_bundle.sh $BRANCH $REV $BUILDNR $BRANCHNAME $SRCDIR
+
+addMetadata ${BUNDLE} status first_stage_in_progress

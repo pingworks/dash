@@ -3,6 +3,7 @@
 SCRIPTDIR=$(dirname $0)
 . $SCRIPTDIR/../configs/repo.conf
 . $SCRIPTDIR/../shared/common.sh
+. $SCRIPTDIR/../shared/repo/${REPO}.sh
 
 BUNDLE=$1
 ARTIFACT=$2
@@ -22,25 +23,13 @@ getBundleFolder $BUNDLE
 IFSOLD=$IFS
 
 
-copyLocalArtifact() {
-  local SRC=$1
-  local DST=$2
-  
-  if [ ! -d ${SRC_DIR} -o ! -r ${SRC_DIR}/${SRC} ]; then
-    echo -e "\nERROR: Artifact not found: ${SRC_DIR}/${SRC}"
-    exit 1
-  else
-    cp -a ${SRC_DIR}/${SRC} ${BUNDLE_FOLDER}/artifacts/${DST}
-    echo -n "."
-  fi
-}
-
 echo "Copying artifacts into bundle.."
 IFS=";"
 echo -n "  "
 while read src dst; do
   if [ -z "$ARTIFACT" -o "$ARTIFACT" = "$src" -o "$ARTIFACT" = "$(basename $src)" ]; then
-    copyLocalArtifact $src $dst
+    copyArtifact ${SRC_DIR}/$src $dst
+    echo -n "."
   fi
 done < $SCRIPTDIR/../configs/artifacts.csv
 echo

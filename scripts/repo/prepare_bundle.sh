@@ -5,6 +5,7 @@ SCRIPTDIR=$(dirname $0)
 . $SCRIPTDIR/../configs/vcs.conf
 . $SCRIPTDIR/../shared/common.sh
 . $SCRIPTDIR/../shared/vcs/$VCS.sh
+. $SCRIPTDIR/../shared/repo/${REPO}.sh
 
 BRANCH=$1
 REV=$2
@@ -27,10 +28,8 @@ validateBundle $BUNDLE
 createDirIfNotExists "${REPOBASE}/${BRANCH}"
 dirMustNotExist "${REPOBASE}/${BRANCH}/${BUNDLE}"
 
-TEMPLATEBRANCH=$BRANCH
-test -d ${TEMPLATE}/${BRANCH} || TEMPLATEBRANCH=trunk
-echo "Creating empty bundle $BUNDLE (using template ${TEMPLATE}/${TEMPLATEBRANCH}) ..."
-rsync -ax --exclude=.svn --exclude=.git --exclude=.gitignore $SCRIPTDIR/../${TEMPLATE}/${TEMPLATEBRANCH}/ ${REPOBASE}/${BRANCH}/${BUNDLE}/
+echo "Creating empty bundle $BUNDLE ..."
+createEmptyBundleFromTemplate $TEMPLATE
 setMetadata $BUNDLE bundle $BUNDLE
 setMetadata $BUNDLE timestamp $(date +%F_%T)
 setMetadata $BUNDLE branch $BRANCH

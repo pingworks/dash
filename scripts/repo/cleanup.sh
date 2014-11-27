@@ -3,6 +3,7 @@
 SCRIPTDIR=$(dirname $0)
 . $SCRIPTDIR/../configs/repo.conf
 . $SCRIPTDIR/../shared/common.sh
+. $SCRIPTDIR/../shared/repo/${REPO}.sh
 
 DRYRUN=0
 VERBOSE=0
@@ -27,22 +28,6 @@ set -e
 if [ ! -z "$BRANCH" ]; then
   validateBranch $BRANCH
 fi
-
-function getSortedBundles() {
-  local BRANCH=$1
-  local SORTKEY=$2
-  
-  validateBranch $BRANCH
-  validateMetakey $SORTKEY
-  
-  BUNDLES=$(ls -tc1 ${REPOBASE}/${BRANCH})
-  for BUNDLE in $BUNDLES; do
-    if [ -d ${REPOBASE}/${BRANCH}/${BUNDLE} ]; then
-      TIMESTAMP=$(getMetadata $BUNDLE $SORTKEY);
-      echo "$TIMESTAMP;$BUNDLE"
-    fi
-  done | sort -r | cut -d ';' -f 2
-}
 
 function cleanupBranch() {
   local BRANCH=$1
@@ -106,10 +91,9 @@ function cleanupBranch() {
   if [ ! -z "$BUNDLES_TO_DELETE" ]; then
     echo -n "    => deleting: "
     for BUNDLE in $BUNDLES_TO_DELETE; do
-      getBundleFolder ${BUNDLE}
       echo -n "$BUNDLE "
       if [ $DRYRUN -eq 0 ]; then
-        rm -rf ${BUNDLE_FOLDER}
+        deleteBundle
       fi
     done
     echo

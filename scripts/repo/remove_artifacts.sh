@@ -3,6 +3,7 @@
 SCRIPTDIR=$(dirname $0)
 . $SCRIPTDIR/../configs/repo.conf
 . $SCRIPTDIR/../shared/common.sh
+. $SCRIPTDIR/../shared/repo/${REPO}.sh
 
 BUNDLE=$1
 
@@ -16,5 +17,5 @@ getBundleFolder $BUNDLE
 dirMustExist ${BUNDLE_FOLDER}/artifacts
 
 echo "Removing artifacts from bundle.."
-rm -f ${BUNDLE_FOLDER}/artifacts/*
+removeAllArtifacts
 echo "done."

@@ -3,6 +3,7 @@
 SCRIPTDIR=$(dirname $0)
 . $SCRIPTDIR/../configs/repo.conf
 . $SCRIPTDIR/../shared/common.sh
+. $SCRIPTDIR/../shared/repo/${REPO}.sh
 
 BUNDLE=$1
 
@@ -21,16 +22,13 @@ echo "Building bundle files.."
 IFS=";"
 while read name filter; do
   echo "  $name"
-  cd $BUNDLE_FOLDER
-  IFS=$IFSOLD
-  tar cz -f bundles/${name}_${BUNDLE}.tar.gz ${filter}
-  IFS=";" 
+  createBundle $name $filter
 done < $SCRIPTDIR/../configs/bundles.csv
 IFS=$IFSOLD
 echo "done."
 
 if [ $ALWAYS_DELETE_ARTIFACTS = 1 ]; then
   echo "Removing artifacts.."
-  rm -rf $BUNDLE_FOLDER/artifacts
-	echo "done."
+  removeAllArtifacts
+  echo "done."
 fi
