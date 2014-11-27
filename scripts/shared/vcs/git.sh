@@ -6,6 +6,7 @@ function validateRev() {
 }
 
 function validateRevRange() {
+  FOO="BAR"
 }
 
 # 1: CMD
