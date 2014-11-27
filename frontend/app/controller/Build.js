@@ -32,7 +32,7 @@ Ext.define('Dash.controller.Build', {
 	onRestartBuild: function(bundle) {
 		if (!bundle.isBuildRunning()) {
 			Ext.Ajax.request({
-				url: Dash.config.build.triggerRestartUrl,
+				url: Dash.config.deployment.build.triggerRestartUrl,
 				params: {
 					BRANCH: bundle.getBranch().get('name'),
 					COMMITID: bundle.get('revision')
@@ -48,7 +48,7 @@ Ext.define('Dash.controller.Build', {
 			if (!stopUrl.match('/$')) {
 				stopUrl += '/';
 			}
-			stopUrl += Dash.config.build.triggerStopUrlPathSuffix
+			stopUrl += Dash.config.deployment.build.triggerStopUrlPathSuffix
 			Ext.Ajax.request({
 				url: stopUrl,
 				bundle: bundle,
