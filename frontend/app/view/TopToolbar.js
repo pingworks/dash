@@ -51,6 +51,9 @@ Ext.define("Dash.view.TopToolbar", {
                     window.location.hash = '#' + selectedBranch.get('id');
                     this.findParentByType('toolbar').fireEvent('loadBundles', selectedBranch);
                 }
+            },
+            listConfig: {
+                id: 'BranchList'
             }
         });
 
