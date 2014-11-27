@@ -254,11 +254,12 @@ Dash.config = {
         dateformat: 'Y-m-d H:i:s'
     },
 
+    build: {
+        triggerRestartUrl: '/jenkins/job/Deployment/buildWithParameters?token=Aezei3oph9xu',
+        triggerStopUrlPathSuffix: 'stop'
+    },
+
     deployment: {
-        build: {
-            triggerRestartUrl: '/jenkins/job/Deployment/buildWithParameters?token=Aezei3oph9xu',
-            triggerStopUrlPathSuffix: 'stop'
-        },
         triggerUrl: '/jenkins/job/Deployment/buildWithParameters?token=Omi7foh4gu7d',
         showUrl: '/jenkins/job/Deployment/',
         features: {
