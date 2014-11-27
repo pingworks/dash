@@ -29,19 +29,25 @@ function cloneRepo() {
 
 function getCommitter() {
   local SRCDIR=$1
-  local RANGE=$2
+  local REV=$2
 
-  echo -e "$(getLog $SRCDIR $RANGE)" \
+  echo -e "$(getLog $SRCDIR $REV)" \
     | grep '^Author: .*' \
     | sed -e 's/^Author: *//g' -e 's/ *<.*>$//g'
 }
 
 function getLog() {
   local SRCDIR=$1
-  local RANGE=$2
+  local REV1=$2
+  local REV2=$3
 
+  if [ -z "$REV2" ]; then
+    REVRANGE="${REV1}^..${REV1}"
+  else
+    REVRANGE="${REV1}..${REV2}"
+  fi
   cd $SRCDIR
-  git log $RANGE
+  git log ${REVRANGE}
 }
 
 function exportURL() {

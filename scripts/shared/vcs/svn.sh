@@ -24,9 +24,9 @@ function validateCmd() {
 
 function getCommitter() {
   local SRCDIR=$1
-  local RANGE=$2
+  local REV=$2
 
-  svn log -q -r $RANGE $SRCDIR \
+  svn log -q -r $REV $SRCDIR \
 	| grep '^r.*|' \
 	| cut -d '|' -f2 \
 	| sed -e 's/^ *//g' -e 's/ *$//g'
@@ -34,9 +34,16 @@ function getCommitter() {
 
 function getLog() {
   local SRCDIR=$1
-  local RANGE=$2
+  local REV1=$2
+  local REV2=$3
 
-  svn log -r $RANGE $SRCDIR
+  if [ -z "$REV2" ]; then
+    REVRANGE="${REV1}"
+  else
+    REVRANGE="${REV1}:${REV2}"
+  fi
+
+  svn log -r $REVRANGE $SRCDIR
 }
 
 function exportURL() {
