@@ -22,16 +22,17 @@ validateBundle $BUNDLE
 getBundleFolder $BUNDLE
 IFSOLD=$IFS
 
-
 echo "Copying artifacts into bundle.."
 IFS=";"
 echo -n "  "
 exec 3< $SCRIPTDIR/../configs/artifacts.csv
 while read -u 3 src dst; do
+  IFS=$IFSOLD
   if [ -z "$ARTIFACT" -o "$ARTIFACT" = "$src" -o "$ARTIFACT" = "$(basename $src)" ]; then
     copyArtifact ${SRC_DIR}/$src $dst
     echo -n "."
   fi
+  IFS";"
 done
 exec 3<&-
 echo

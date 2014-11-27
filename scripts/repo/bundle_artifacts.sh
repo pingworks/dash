@@ -17,13 +17,14 @@ validateBundle $BUNDLE
 getBundleFolder $BUNDLE
 IFSOLD=$IFS
 
-
 echo "Building bundle files.."
 IFS=";"
 exec 3< $SCRIPTDIR/../configs/bundles.csv
 while read -u 3 name filter; do
+  IFSOLD=$IFS
   echo "  $name"
   createBundleFile $name $filter
+  IFS=";"
 done
 exec 3<&-
 IFS=$IFSOLD

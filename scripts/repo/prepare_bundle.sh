@@ -47,8 +47,10 @@ echo "Exporting configs to bundle $BUNDLE.."
 IFS=";"
 exec 3< $SCRIPTDIR/../configs/configs.csv
 while read -u 3 url; do
+  IFSOLD=$IFS
   echo "  $url"
   bash $SCRIPTDIR/../vcs/export_url.sh $BRANCH $url $REV ${REPOBASE}/${BRANCH}/${BUNDLE}/configs
+  IFS=";"
 done
 exec 3<&-
 IFS=$IFSOLD
