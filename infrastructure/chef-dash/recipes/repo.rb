@@ -17,6 +17,19 @@
 # limitations under the License.
 #
 
+apt_package 'apache2'
+
+template "/etc/apache2/conf.d/repo" do
+  source 'confd_repo_alias.erb'
+  owner "root"
+  group "root"
+  mode '644'
+end
+
+bash 'apache2_restart' do
+  code 'service apache2 restart'
+end
+
 user node['chef-dash']['repo']['owner'] do
   comment 'Repo User'
   shell '/bin/bash'

@@ -18,3 +18,9 @@ end
 describe user('repo') do
   it { should have_login_shell '/bin/bash' }
 end
+
+# Smoketest Repo
+describe command "curl 'http://localhost/repo/'" do
+  its(:exit_status) { should eq 0 }
+  its(:stdout) { should match /Index of \/repo/ }
+end

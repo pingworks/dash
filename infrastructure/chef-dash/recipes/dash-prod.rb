@@ -31,7 +31,7 @@ apt_package 'php5'
 apt_package 'php5-curl'
 apt_package 'zendframework'
 
-cookbook_file 'dash-prod' do
+cookbook_file 'a2site_dash-prod' do
   path '/etc/apache2/sites-available/dash-prod'
 end
 
