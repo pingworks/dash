@@ -17,5 +17,6 @@ platforms:
 suites:
   - name: default
     run_list:
-      - recipe[chef-dash::common]
-    attributes:
+      - recipe[chef-dash::dash-prod]
+      - recipe[chef-dash::repo]
+    attributes: {}

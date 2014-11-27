@@ -1,6 +1,6 @@
 require_relative '../spec_helper'
 
-describe process 'apache2'  do
+describe process 'apache2' do
   it { should be_running }
 end
 
@@ -24,7 +24,7 @@ end
 # Smoketest Backend
 describe command "curl 'http://localhost/branch' -H 'X-Requested-With: XMLHttpRequest'" do
   its(:exit_status) { should eq 0 }
-  its(:stdout) { should match /"success":false/ }
+  its(:stdout) { should match /"success":true/ }
 end
 
 # Smoketest Frontend

@@ -1,6 +1,6 @@
 #
 # Cookbook Name:: chef-dash
-# Recipe:: common
+# Recipe:: prod
 #
 # Copyright 2014 pingworks - Alexander Birk und Christoph Lukas
 #
