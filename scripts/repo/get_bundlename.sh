@@ -2,7 +2,9 @@
 
 SCRIPTDIR=$(dirname $0)
 . $SCRIPTDIR/../configs/repo.conf
+. $SCRIPTDIR/../configs/vcs.conf
 . $SCRIPTDIR/../shared/common.sh
+. $SCRIPTDIR/../shared/vcs/$VCS.sh
 . $SCRIPTDIR/../shared/repo/${REPO}.sh
 
 BRANCH=$1
