@@ -43,3 +43,12 @@ function getLog() {
   cd $SRCDIR
   git log $RANGE
 }
+
+function exportURL() {
+  local REV=$1
+  local URL=$2
+  local DIR=$3
+
+  createDirIfNotExists $DIR
+  git archive $REV $URL | tar -x -C $DIR
+}

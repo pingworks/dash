@@ -3,7 +3,7 @@
 SCRIPTDIR=$(dirname $0)
 . $SCRIPTDIR/../configs/vcs.conf
 . $SCRIPTDIR/../shared/common.sh
-. $SCRIPTDIR/../shared/$VCS.sh
+. $SCRIPTDIR/../shared/vcs/$VCS.sh
 
 BRANCH=$1
 URL=$2
@@ -18,6 +18,5 @@ set -e
 validateBranch $BRANCH
 validateRev $REV
 dirMustExist $(dirname $DIR)
-createDirIfNotExists $DIR
 
-git archive $REV $URL | tar -x -C $DIR
+exportURL $REV $URL $DIR

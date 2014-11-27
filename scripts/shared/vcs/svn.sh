@@ -38,3 +38,15 @@ function getLog() {
 
   svn log -r $RANGE $SRCDIR
 }
+
+function exportURL() {
+  local REV=$1
+  local URL=$2
+  local DIR=$3
+
+  dirMustNotExist $DIR
+
+  getBranchUrl $BRANCH
+  echo svn $VCSEXPORTCMD -q $VCSBASE/$BRANCHURL/$URL@$REV $DIR
+  svn $VCSEXPORTCMD -q $VCSBASE/$BRANCHURL/$URL@$REV $DIR
+}
