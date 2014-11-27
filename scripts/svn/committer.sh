@@ -3,7 +3,7 @@
 SCRIPTDIR=$(dirname $0)
 . $SCRIPTDIR/../configs/vcs.conf
 . $SCRIPTDIR/../shared/common.sh
-. $SCRIPTDIR/../shared/$VCS.sh
+. $SCRIPTDIR/../shared/vcs/$VCS.sh
 
 RANGE=$1
 
