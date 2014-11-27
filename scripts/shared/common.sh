@@ -104,7 +104,7 @@ function getBranchUrl() {
   local IFS=";"
 
   exec 3< $SCRIPTDIR/../configs/branches.csv
-  while read -r 3 name nr url; do
+  while read -u 3 name nr url; do
     if [ "$name" = "$BRANCH" ]; then
       BRANCHURL=$url
     fi  
