@@ -14,7 +14,7 @@ BRANCHNAME=$4
 SRCDIR=$5
 
 if [ -z "$BRANCH" -o -z "$REV" -o -z "$BUILDNR" ]; then
-  echo "Usage: $0 <branch> <revision> <buildnr> [<srcdir>]"
+  echo "Usage: $0 <branch> <revision> <buildnr> [<branchname>]"
   exit 1
 fi
 if [ -z "$BRANCHNAME" ]; then
@@ -27,17 +27,13 @@ validateBuildNr $BUILDNR
 createLocalDirIfNotExists $JENKINS_PROPERTYFILE_DIR
 
 getBundleName $BRANCH $REV $BUILDNR
-getBranchNr $BRANCH
-getBranchUrl $BRANCH
 
 cat << EOF > $JENKINS_PROPERTYFILE_DIR/${BUNDLE}.properties
 BUILD_DATE=$(date +%Y%m%d)
 BRANCH=${BRANCH}
-BRANCH_NUM=${BRANCHNR}
-BRANCH_URL=${BRANCHURL}
 BRANCH_NAME=${BRANCHNAME}
 REV=${REV}
 BNUM=${BUILDNR}
-VERSION=${BRANCHNR}+${VCS}${BUILD_DATE}.${REV}-${BUILDNR}
+VERSION=${BUILDNR}+${VCS}${REV}
 BUNDLE=${BUNDLE}
 EOF

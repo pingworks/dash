@@ -198,8 +198,7 @@ function getBundleName() {
   local REV=$2
   local BUILD_ID=$3
   
-  getBranchNr $BRANCH
-  BUNDLE="$BRANCHNR.$REV.$BUILD_ID"
+  BUNDLE="$BUILD_ID.$REV"
 }
 
 function setStageStatus() {
