@@ -41,9 +41,3 @@ BNUM=${BUILDNR}
 VERSION=${BRANCHNR}+${VCS}${BUILD_DATE}.${REV}-${BUILDNR}
 BUNDLE=${BUNDLE}
 EOF
-
-cp $JENKINS_PROPERTYFILE_DIR/${BUNDLE}.properties $JENKINS_PROPERTYFILE_DIR/${BUILDNR}.properties
-
-bash ${SCRIPTDIR}/../repo/prepare_bundle.sh $BRANCH $REV $BUILDNR $BRANCHNAME $SRCDIR
-
-addMetadata ${BUNDLE} status first_stage_in_progress
