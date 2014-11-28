@@ -14,12 +14,12 @@ class Util {
         return resultString
     }
 
-    static boolean writeJobResults(bundle, jobs, workspace, out) {
+    static boolean writeJobResults(bundle, stage, jobs, workspace, out) {
     def success = true
         for ( job in jobs ) {
             def dataString = jobResultData(job, out)
             // write test results to metadata
-            def cmd = "bash ${workspace}/scripts/repo/add_metadata.sh ${bundle} first_stage_results ${dataString}"
+            def cmd = "bash ${workspace}/scripts/repo/add_metadata.sh ${bundle} ${stage}_stage_results ${dataString}"
             out.println "        Cmd: ${cmd}"
             def process = cmd.execute()
             process.waitFor()
