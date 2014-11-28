@@ -1,5 +1,62 @@
 #!/bin/bash
 
+set -E
+trap 'handleError ${?}' ERR
+trap 'handleExit ${?}' EXIT
+
+function errorInfo() {
+  local type="$1"
+  local suffix="$2"
+  local lasterr="$3"
+
+  local script="$0"
+  local file="${BASH_SOURCE[2]}"
+  local funcname="${FUNCNAME[2]}"
+  local lastline="${BASH_LINENO[2]}"
+
+  echo "##################################################"
+  echo "# ${type}: SCRIPT FAILED"
+  echo "##################################################"
+  echo "# Script:    ${script}"
+  echo "# File:      ${file}"
+  echo "# Function:  ${funcname}"
+  echo "# Line:      ${lastline}"
+  echo "# Exit Code: ${lasterr}"
+  echo
+  echo "${suffix}"
+  echo
+}
+
+function handleError() {
+  local lasterr="$1"
+
+  local script="$0"
+  # remove exit handler to avoid double output
+  trap - EXIT
+  if [ $ONLYWARNONERROR -eq 1 ]; then
+    errorInfo "WARNING" "Exiting gracefully." ${lasterr}
+    exit 0
+  else
+    errorInfo "ERROR" "Exiting with 1" ${lasterr}
+    exit 1
+  fi
+}
+
+function handleExit() {
+  local lasterr="$1"
+
+  local script="$0"
+  # if there was no error simply exit
+  [ $lasterr -eq 0 ] && exit 0
+  if [ $ONLYWARNONERROR -eq 1 ]; then
+    errorInfo "WARNING" "Exiting gracefully." ${lasterr}
+    exit 0
+  else
+    errorInfo "ERROR" "Exiting with 1" ${lasterr}
+    exit 1
+  fi
+}
+
 function validateNumber() {
   local LABEL=$1
   local NR=$2
