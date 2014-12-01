@@ -1,5 +1,7 @@
 #!/bin/bash
 
+. $SCRIPTDIR/../config/bundlename.sh
+
 set -E
 trap 'handleError ${?}' ERR
 trap 'handleExit ${?}' EXIT
@@ -191,14 +193,6 @@ function getBranch() {
     echo "No BRANCH found for BUNDLE: $BUNDLE"
     exit 1
   fi
-}
-
-function getBundleName() {
-  local BRANCH=$1
-  local REV=$2
-  local BUILD_ID=$3
-  
-  BUNDLE="$BUILD_ID.$REV"
 }
 
 function setStageStatus() {
