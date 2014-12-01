@@ -195,6 +195,20 @@ function getBranch() {
   fi
 }
 
+function setStageStatusFromResults() {
+  local BUNDLE=$1
+  local STAGE=$2
+
+  validateBundle $BUNDLE
+  validateStage $STAGE
+
+  SUCCESS="passed"
+  if echo "$(getMetadata ${BUNDLE} ${STAGE}_stage_results)" | grep FAILURE > /dev/null; then
+    SUCCESS="failed"
+  fi
+  setStageStatus ${BUNDLE} ${STAGE} ${SUCCESS}
+}
+
 function setStageStatus() {
   local BUNDLE=$1
   local STAGE=$2
