@@ -1,6 +1,6 @@
 #!/bin/bash
 
-. $SCRIPTDIR/../config/bundlename.sh
+. $SCRIPTDIR/../configs/bundlename.sh
 
 set -E
 trap 'handleError ${?}' ERR
