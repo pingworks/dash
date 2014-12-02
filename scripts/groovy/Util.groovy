@@ -24,7 +24,7 @@ class Util {
             def process = cmd.execute()
             process.waitFor()
             if (! "".equals(process.text) || ! "".equals(process.err.text)) {
-                out.println "        Out: ${process.text}"
+                out.println "        Out: ${process.in.text}"
                 out.println "        Err: ${process.err.text}"
             }
             // merge overall success
