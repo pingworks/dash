@@ -39,7 +39,7 @@ class Util {
     }
 
     static boolean writeStageStatus(bundle, stage, status, workspace, out) {
-      def cmd = "bash ${workspace}/scripts/repo/set_stage_status.sh ${bundle} ${stage}_stage_results ${status}"
+      def cmd = "bash ${workspace}/scripts/repo/set_stage_status.sh ${bundle} ${stage} ${status}"
       out.println "        Cmd: ${cmd}"
       def process = cmd.execute()
       process.waitFor()
