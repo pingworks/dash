@@ -1,9 +1,9 @@
 class Util {
-    static String jobResultData(job, out) {
-        def jobName = job.name
-        def jobUrl = job.build.getUrl()
-        def jobResult = job.build.result.toString()
-        def jobResultAction = job.build.testResultAction
+    static String buildResultData(build, out) {
+        def jobName = build.project.name
+        def jobUrl = build.getUrl()
+        def jobResult = build.result.toString()
+        def jobResultAction = build.getTestResultAction()
 
         // collect test results
         def testsTotal = (jobResultAction) ? jobResultAction.getTotalCount() : 0
@@ -14,10 +14,10 @@ class Util {
         return resultString
     }
 
-    static boolean writeJobResults(bundle, stage, jobs, workspace, out) {
+    static boolean writeJobResults(bundle, stage, builds, workspace, out) {
     def success = true
-        for ( job in jobs ) {
-            def dataString = jobResultData(job, out)
+        for ( build in builds ) {
+            def dataString = buildResultData(build, out)
             // write test results to metadata
             def cmd = "bash ${workspace}/scripts/repo/add_metadata.sh ${bundle} ${stage}_stage_results ${dataString}"
             out.println "        Cmd: ${cmd}"
@@ -28,7 +28,7 @@ class Util {
                 out.println "        Err: ${process.err.text}"
             }
             // merge overall success
-            success = (success == true && job.build.result.toString() == "SUCCESS")
+            success = (success == true && build.build.result.toString() == "SUCCESS")
         }
         out.println "    Overall Success: " + success
         return success
