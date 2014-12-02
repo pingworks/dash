@@ -32,7 +32,7 @@ class Util {
                 }
             }
             // merge overall success
-            success = (success == true && build.build.result.toString() == "SUCCESS")
+            success = (success == true && build.result.toString() == "SUCCESS")
         }
         out.println "    Overall Success: " + success
         return success
