@@ -24,8 +24,12 @@ class Util {
             def process = cmd.execute()
             process.waitFor()
             if (! "".equals(process.text) || ! "".equals(process.err.text)) {
-                out.println "        Out: ${process.in.text}"
-                out.println "        Err: ${process.err.text}"
+                try {
+                    out.println "        Out: ${process.in.text}"
+                    out.println "        Err: ${process.err.text}"
+                } catch (IOException e) {
+
+                }
             }
             // merge overall success
             success = (success == true && build.build.result.toString() == "SUCCESS")
