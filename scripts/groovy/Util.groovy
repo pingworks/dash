@@ -1,5 +1,5 @@
 class Util {
-    static String buildResultData(build, out) {
+    static String createBuildResultData(build, out) {
         def jobName = build.project.name
         def jobUrl = build.getUrl()
         def jobResult = build.result.toString()
@@ -14,10 +14,10 @@ class Util {
         return resultString
     }
 
-    static boolean writeJobResults(bundle, stage, builds, workspace, out) {
+    static boolean writeBuildResults(bundle, stage, builds, workspace, out) {
     def success = true
         for ( build in builds ) {
-            def dataString = buildResultData(build, out)
+            def dataString = createBuildResultData(build, out)
             // write test results to metadata
             def cmd = "bash ${workspace}/scripts/repo/add_metadata.sh ${bundle} ${stage}_stage_results ${dataString}"
             out.println "        Cmd: ${cmd}"
@@ -53,9 +53,9 @@ class Util {
       }
     }
 
-    static boolean writeJobResultAndStatus(bundle, stage, builds, workspace, out, failureOnly) {
-      def success = writeJobResults(bundle, stage, builds, workspace, out)
-      def successString = (success) ? "succeeded" : "failed"
+    static boolean writeBuildResultsAndStageStatus(bundle, stage, builds, workspace, out, failureOnly=false) {
+      def success = writeBuildResults(bundle, stage, builds, workspace, out)
+      def successString = (success) ? "passed" : "failed"
       if (!success || !failureOnly) {
         writeStageStatus(bundle, stage, successString, workspace, out)
       }
