@@ -7,7 +7,6 @@ SCRIPTDIR=$(dirname $0)
 
 BUNDLE=$1
 STAGE=$2
-STATUS=$3
 
 if [ -z "$BUNDLE" -o -z "$STAGE" ]; then
   echo "Usage: $0 <bundle> <stage>"
