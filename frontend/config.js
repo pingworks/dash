@@ -42,12 +42,12 @@ Dash.config = {
             {
                 id: 'JenkinsButton',
                 text: 'Jenkins',
-                url: 'https://dash.pingworks.net/jenkins/'
+                url: '/jenkins/'
             },
             {
                 id: 'RepoButton',
                 text: 'Repo',
-                url: 'https://dash.pingworks.net/repo/'
+                url: '/repo/'
             },
             {
                 id: 'EnvButton',
@@ -73,7 +73,7 @@ Dash.config = {
             stopBuild: 'resources/img/icons/stopBuild.png',
             showBuild: 'resources/img/icons/showBuild.png'
         },
-        repolink: '<a href="https://dash.pingworks.net/repo/{0}/{1}" target="_blank" style="color: black">{1}</a>',
+        repolink: '<a href="/repo/{0}/{1}" target="_blank" style="color: black">{1}</a>',
         vcslink: '<a href="https://github.com/pingworks/dash/commit/{1}" target="_blank" style="color: black">{1}</a>',
         vcsrepolink: '<a href="https://github.com/pingworks/dash/" target="_blank" style="color: black">{0}</a>',
         sort: {
@@ -240,7 +240,7 @@ Dash.config = {
     jobresult: {
         endpoint: '/jobresult',
         text: '<div style="white-space: nowrap;"><img src="{6}" alt="{2}" class="{7}">&nbsp;'
-            + '<a href="https://dash.pingworks.net/jenkins/{1}" target="_blank">{0}</a>: Tests: {3}, skipped: {4}, failed: {5}</div>',
+            + '<a href="/jenkins/{1}" target="_blank">{0}</a>: Tests: {3}, skipped: {4}, failed: {5}</div>',
         title: '{1} stage Jobs for Bundle {2}',
         stageMap: {
             1: 'First',
