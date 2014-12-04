@@ -1,4 +1,24 @@
 class Util {
+
+    static String exec(cmd, out = null, exitOnError = true) {
+        def sout = new StringBuffer()
+        def serr = new StringBuffer()
+
+        def proc = cmd.execute()
+        proc.consumeProcessOutput(sout, serr)
+        proc.waitFor()
+        def exitCode = proc.exitValue()
+        if (out != null) {
+            out.println "        Cmd: ${cmd}"
+            out.println "        Out: ${sout}"
+            out.println "        Err: ${serr}"
+            out.println "        EC : ${exitCode}
+        }
+        if (exitCode && exitOnError) {
+            throw new RuntimeException("Script Execution failed. Cmd: ${cmd}, Out: ${sout}, Err: ${serr}, EC: ${exitCode}")
+        }
+    }
+
     static String createBuildResultData(build, out) {
         def jobName = build.project.name
         def jobUrl = build.getUrl()
@@ -20,17 +40,7 @@ class Util {
             def dataString = createBuildResultData(build, out)
             // write test results to metadata
             def cmd = "bash ${workspace}/scripts/repo/add_metadata.sh ${bundle} ${stage}_stage_results ${dataString}"
-            out.println "        Cmd: ${cmd}"
-            def process = cmd.execute()
-            process.waitFor()
-            if (! "".equals(process.text) || ! "".equals(process.err.text)) {
-                try {
-                    out.println "        Out: ${process.in.text}"
-                    out.println "        Err: ${process.err.text}"
-                } catch (IOException e) {
-
-                }
-            }
+            exec(cmd, out)
             // merge overall success
             success = (success == true && build.result.toString() == "SUCCESS")
         }
@@ -40,17 +50,7 @@ class Util {
 
     static boolean writeStageStatus(bundle, stage, status, workspace, out) {
       def cmd = "bash ${workspace}/scripts/repo/set_stage_status.sh ${bundle} ${stage} ${status}"
-      out.println "        Cmd: ${cmd}"
-      def process = cmd.execute()
-      process.waitFor()
-      if (! "".equals(process.text) || ! "".equals(process.err.text)) {
-        try {
-          out.println "        Out: ${process.in.text}"
-          out.println "        Err: ${process.err.text}"
-        } catch (IOException e) {
-
-        }
-      }
+      exec(cmd, out)
     }
 
     static boolean writeBuildResultsAndStageStatus(bundle, stage, builds, workspace, out, failureOnly=false) {
