@@ -12,7 +12,7 @@ class Util {
             out.println "        Cmd: ${cmd}"
             out.println "        Out: ${sout}"
             out.println "        Err: ${serr}"
-            out.println "        EC : ${exitCode}
+            out.println "        EC : ${exitCode}"
         }
         if (exitCode && exitOnError) {
             throw new RuntimeException("Script Execution failed. Cmd: ${cmd}, Out: ${sout}, Err: ${serr}, EC: ${exitCode}")
