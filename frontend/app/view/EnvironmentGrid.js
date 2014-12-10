@@ -83,9 +83,6 @@ Ext.define("Dash.view.EnvironmentGrid", {
                 width: 60,
                 items: [{
                     icon: Dash.config.bundlegrid.icon.lockExtension,
-                    isDisabled: function (gridview, rowIndex, colIndex, item, record) {
-                        return !record.get('locked');
-                    },
                     handler: function(gridview, rowIndex, colIndex, item, event, record) {
                         that.fireEvent('showLockExtensionWindow', record);
                     }
