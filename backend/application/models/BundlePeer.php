@@ -6,9 +6,9 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -28,6 +28,7 @@ class Application_Model_BundlePeer
                 $basename = $keyFile->getBasename();
                 if (!in_array($basename, array(
                     'branch',
+                    'pname',
                     'revision',
                     'repository',
                     'timestamp',
@@ -128,6 +129,7 @@ class Application_Model_BundlePeer
         $bundle = new Application_Model_Bundle();
         $bundle->id = $id;
         $bundle->branch = self::getMetadata($branch, $id, 'branch');
+        $bundle->pname = self::getMetadata($branch, $id, 'pname');
         $bundle->revision = self::getMetadata($branch, $id, 'revision');
         $bundle->repository = self::getMetadata($branch, $id, 'repository');
         $bundle->timestamp = self::getMetadata($branch, $id, 'timestamp');

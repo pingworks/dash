@@ -5,9 +5,9 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -30,7 +30,7 @@ Ext.define("Dash.view.BundleGrid", {
             if (!this.columns[i].isVisible())
                 offset++;
         }
-        var stageStatus = Dash.app.getController('Bundle').getStageStatus(record, colIndex - 4 + offset);
+        var stageStatus = Dash.app.getController('Bundle').getStageStatus(record, colIndex - 5 + offset);
         var iconUrl = Ext.BLANK_IMAGE_URL;
         var iconCls = '';
         if (stageStatus) {
@@ -83,6 +83,12 @@ Ext.define("Dash.view.BundleGrid", {
                 dataIndex: 'committer',
                 width: Dash.config.bundlegrid.colwidth.committer,
                 hidden: Dash.config.bundlegrid.hidden.committer
+            },
+            {
+                text: Dash.config.bundlegrid.label.pname,
+                dataIndex: 'pname',
+                width: Dash.config.bundlegrid.colwidth.pname,
+                hidden: Dash.config.bundlegrid.hidden.pname
             },
             {
                 text: Dash.config.bundlegrid.label.revision,
