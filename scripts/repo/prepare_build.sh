@@ -7,28 +7,31 @@ SCRIPTDIR=$(dirname $0)
 . $SCRIPTDIR/../shared/vcs/$VCS.sh
 . $SCRIPTDIR/../shared/repo/${REPO}.sh
 
-BRANCH=$1
-REV=$2
-BUILDNR=$3
-BRANCHNAME=$4
-SRCDIR=$5
+PNAME=$1
+BRANCH=$2
+REV=$3
+BUILDNR=$4
+BRANCHNAME=$5
+SRCDIR=$6
 
-if [ -z "$BRANCH" -o -z "$REV" -o -z "$BUILDNR" ]; then
-  echo "Usage: $0 <branch> <revision> <buildnr> [<branchname>]"
+if [ -z "$PNAME" -o -z "$BRANCH" -o -z "$REV" -o -z "$BUILDNR" ]; then
+  echo "Usage: $0 <pname> <branch> <revision> <buildnr> [<branchname>]"
   exit 1
 fi
 if [ -z "$BRANCHNAME" ]; then
   BRANCHNAME=$BRANCH
 fi
 set -e
+validatePname $PNAME
 validateBranch $BRANCH
 validateRev $REV
 validateBuildNr $BUILDNR
 createLocalDirIfNotExists $JENKINS_PROPERTYFILE_DIR
 
-getBundleName $BRANCH $REV $BUILDNR
+getBundleName $PNAME $BRANCH $REV $BUILDNR
 
 cat << EOF > $JENKINS_PROPERTYFILE_DIR/${BUNDLE}.properties
+PNAME=${PNAME}
 BUILD_DATE=$(date +%Y%m%d)
 BRANCH=${BRANCH}
 BRANCH_NAME=${BRANCHNAME}

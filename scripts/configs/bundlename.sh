@@ -1,9 +1,10 @@
 #!/bin/bash
 
 function getBundleName() {
-  local BRANCH=$1
-  local REV=$2
-  local BUILD_ID=$3
+  local PNAME=$1
+  local BRANCH=$2
+  local REV=$3
+  local BUILD_ID=$4
 
-  BUNDLE="$BUILD_ID.$REV"
+  BUNDLE="$PNAME.$BUILD_ID.$REV"
 }

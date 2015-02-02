@@ -7,22 +7,24 @@ SCRIPTDIR=$(dirname $0)
 . $SCRIPTDIR/../shared/vcs/$VCS.sh
 . $SCRIPTDIR/../shared/repo/${REPO}.sh
 
-BRANCH=$1
-REV=$2
-BUILDNR=$3
-BRANCHNAME=$4
-SRCDIR=$5
+PNAME=$1
+BRANCH=$2
+REV=$3
+BUILDNR=$4
+BRANCHNAME=$5
+SRCDIR=$6
 
-if [ -z "$BRANCH" -o -z "$REV" -o -z "$BUILDNR" -o -z "$BRANCHNAME" ]; then
-  echo "Usage: $0 <branch> <vcs-revision> <build_nr> <branchname> [<srcdir>]"
+if [ -z "$PNAME" -o -z "$BRANCH" -o -z "$REV" -o -z "$BUILDNR" -o -z "$BRANCHNAME" ]; then
+  echo "Usage: $0 <pname> <branch> <vcs-revision> <build_nr> <branchname> [<srcdir>]"
   exit 1
 fi
 set -e
+validatePname $PNAME
 validateBranch $BRANCH
 validateRev $REV
 validateBuildNr $BUILDNR
 
-getBundleName $BRANCH $REV $BUILDNR
+getBundleName $PNAME $BRANCH $REV $BUILDNR
 validateBundle $BUNDLE
 
 createDirIfNotExists "${REPOBASE}/${BRANCH}"
@@ -30,6 +32,7 @@ dirMustNotExist "${REPOBASE}/${BRANCH}/${BUNDLE}"
 
 echo "Creating empty bundle $BUNDLE ..."
 createEmptyBundle
+setMetadata $BUNDLE pname $PNAME
 setMetadata $BUNDLE bundle $BUNDLE
 setMetadata $BUNDLE timestamp $(date +%F_%T)
 setMetadata $BUNDLE branch $BRANCH

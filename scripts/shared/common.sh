@@ -92,6 +92,15 @@ function validateBundle() {
 }
 
 # 1: BRANCH
+function validatePname() {
+  local PNAME=$1
+  if ! echo $PNAME | grep -E "$PNAME_PATTERN" >/dev/null; then
+    echo "Illegal PNAME: $PNAME"
+    exit 1
+  fi
+}
+
+# 1: BRANCH
 function validateBranch() {
   local BRANCH=$1
   if ! echo $BRANCH | grep -E "$BRANCH_PATTERN" >/dev/null; then
