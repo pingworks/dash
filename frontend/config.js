@@ -34,7 +34,7 @@ Dash.config = {
             {
                 id: 'Title',
                 xtype: 'component',
-                html: 'Dashboard',
+                html: 'Barcamp Gliwice',
                 style: 'font-size: 32px'
             }
         ],
