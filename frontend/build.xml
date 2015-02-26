@@ -7,6 +7,7 @@
     -->
     <import file="${basedir}/.sencha/app/build-impl.xml"/>
 
+
     <!--
     The following targets can be provided to inject logic before and/or after key steps
     of the build process:
@@ -27,7 +28,7 @@
 
             <target name="-before-init"/>
             <target name="-after-init"/>
-        
+
         The "page" target performs the call to Sencha Cmd to build the 'all-classes.js' file.
 
             <target name="-before-page"/>
@@ -51,8 +52,8 @@
 
     <target name="-after-page">
         <copy todir="${build.dir}/" overwrite="true">
-            <fileset 
-                dir="" 
+            <fileset
+                dir=""
                 includes="config.js"/>
         </copy>
     </target>
