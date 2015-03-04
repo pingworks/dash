@@ -6,7 +6,7 @@ class Util {
 
         def proc
         if (workDir != null) {
-          proc = cmd.execute(null, workDir)
+          proc = cmd.execute(null, new File(workDir))
         }
         else {
           proc = cmd.execute()
