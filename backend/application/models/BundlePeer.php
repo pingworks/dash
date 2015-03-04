@@ -148,7 +148,7 @@ class Application_Model_BundlePeer
         return $bundle;
     }
 
-    public static function getBundles($branch = 'trunk')
+    public static function getBundlesForBranch($branch = 'trunk')
     {
         $bundles = array();
         foreach (self::getAllBundleIds($branch) as $id) {
@@ -157,5 +157,19 @@ class Application_Model_BundlePeer
         return $bundles;
     }
 
-}
+    public static function getBundles($branch = 'trunk')
+    {
+      $bundles = array();
+      if ( $branch == 'ALL' ) {
+        $branches = Application_Model_BranchPeer::getAllBranchIds();
+        foreach ($branches as $singleBranch) {
+          $bundles = array_merge($bundles, self::getBundlesForBranch($singleBranch));
+        }
+      }
+      else {
+        $bundles = self::getBundlesForBranch($branch);
+      }
+      return $bundles;
+    }
 
+  }
