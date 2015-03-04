@@ -28,14 +28,16 @@ class Util {
         bundle = exec(cmd, out)
         out.println "Bundle:" + bundle
 
-        def cmd = "bash ${workspace}/scripts/repo/prepare_build.sh ${pname} ${branchId} ${rev} ${bnum} ${branch}"
+        cmd = "bash ${workspace}/scripts/repo/prepare_build.sh ${pname} ${branchId} ${rev} ${bnum} ${branch}"
         exec(cmd, out)
 
-        def cmd = "bash ${workspace}/scripts/repo/prepare_bundle.sh ${pname} ${branchId} ${rev} ${bnum} ${branch} ${srcDir}"
+        cmd = "bash ${workspace}/scripts/repo/prepare_bundle.sh ${pname} ${branchId} ${rev} ${bnum} ${branch} ${srcDir}"
         exec(cmd, out)
 
-        def cmd = "bash ${workspace}/scripts/repo/set_stage_status.sh ${bundle} first in_progress"
+        cmd = "bash ${workspace}/scripts/repo/set_stage_status.sh ${bundle} first in_progress"
         exec(cmd, out)
+
+        return bundle
     }
 
     static String createBuildResultData(build, out) {
