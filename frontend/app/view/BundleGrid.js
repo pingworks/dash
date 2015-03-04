@@ -25,20 +25,21 @@ Ext.define("Dash.view.BundleGrid", {
 
     stageStatusIconRenderer: function(value, metadata, record, rowIndex, colIndex, store, view) {
         // work around extjs bug: colIndex is wrong when some cols are hidden
-        var offset = 0;
+        var baseOffset = 6;
+        var hiddenCols = 0;
         for (var i = 0; i < colIndex; i++) {
             if (!this.columns[i].isVisible())
-                offset++;
+                hiddenCols++;
         }
-        var stageStatus = Dash.app.getController('Bundle').getStageStatus(record, colIndex - 5 + offset);
+        var stageStatus = Dash.app.getController('Bundle').getStageStatus(record, colIndex - baseOffset + hiddenCols);
         var iconUrl = Ext.BLANK_IMAGE_URL;
         var iconCls = '';
         if (stageStatus) {
             iconUrl = Ext.String.format(Dash.config.stagestatus.iconpath, stageStatus.get('icon'));
             iconCls = stageStatus.get('cls');
         }
-        this.columns[colIndex + offset].items[0].icon = iconUrl;
-        this.columns[colIndex + offset].items[0].iconCls = iconCls;
+        this.columns[colIndex + hiddenCols].items[0].icon = iconUrl;
+        this.columns[colIndex + hiddenCols].items[0].iconCls = iconCls;
     },
 
     deploymentActionRenderer: function(value, metadata, record, rowIndex, colIndex, store, view) {
@@ -89,6 +90,12 @@ Ext.define("Dash.view.BundleGrid", {
                 dataIndex: 'pname',
                 width: Dash.config.bundlegrid.colwidth.pname,
                 hidden: Dash.config.bundlegrid.hidden.pname
+            },
+            {
+                text: Dash.config.bundlegrid.label.branch,
+                dataIndex: 'branch',
+                width: Dash.config.bundlegrid.colwidth.branch,
+                hidden: Dash.config.bundlegrid.hidden.branch
             },
             {
                 text: Dash.config.bundlegrid.label.revision,
