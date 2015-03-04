@@ -17,6 +17,25 @@ class Util {
         if (exitCode && exitOnError) {
             throw new RuntimeException("Script Execution failed. Cmd: ${cmd}, Out: ${sout}, Err: ${serr}, EC: ${exitCode}")
         }
+        return sout
+    }
+
+    static String startBuild(pname, branch, rev, bnum, srcDir, out) {
+        out.println "Starting pipeline for pname:" + pname + " branch:" + branch + " rev:" + rev + " bnum:" + bnum
+        branchId = branch.replaceAll(/\//, "__")
+
+        def cmd = "bash ${workspace}/scripts/repo/get_bundlename.sh ${pname} ${branch} ${rev} ${bnum}"
+        bundle = exec(cmd, out)
+        out.println "Bundle:" + bundle
+
+        def cmd = "bash ${workspace}/scripts/repo/prepare_build.sh ${pname} ${branchId} ${rev} ${bnum} ${branch}"
+        exec(cmd, out)
+
+        def cmd = "bash ${workspace}/scripts/repo/prepare_bundle.sh ${pname} ${branchId} ${rev} ${bnum} ${branch} ${srcDir}"
+        exec(cmd, out)
+
+        def cmd = "bash ${workspace}/scripts/repo/set_stage_status.sh ${bundle} first in_progress"
+        exec(cmd, out)
     }
 
     static String createBuildResultData(build, out) {
