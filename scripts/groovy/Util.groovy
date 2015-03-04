@@ -22,7 +22,7 @@ class Util {
 
     static String startBuild(pname, branch, rev, bnum, src_dir, workspace, out) {
         out.println "Starting pipeline for pname:" + pname + " branch:" + branch + " rev:" + rev + " bnum:" + bnum
-        branch_id = branch.replaceAll(/\//, "__")
+        def branch_id = branch.replaceAll(/\//, "__")
 
         def cmd = "bash ${workspace}/scripts/repo/get_bundlename.sh ${pname} ${branch} ${rev} ${bnum}"
         def bundle = exec(cmd, out)
