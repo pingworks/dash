@@ -38,7 +38,7 @@ class Util {
         exec(cmd, out, true, workspace)
 
         cmd = "bash ${workspace}/scripts/repo/prepare_bundle.sh ${pname} ${branch_id} ${rev} ${bnum} ${branch} ${src_dir}"
-        exec(cmd, out)
+        exec(cmd, out, true, workspace)
 
         cmd = "bash ${workspace}/scripts/repo/set_stage_status.sh ${bundle} first in_progress"
         exec(cmd, out)
