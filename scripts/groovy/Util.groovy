@@ -20,18 +20,18 @@ class Util {
         return sout
     }
 
-    static String startBuild(pname, branch, rev, bnum, srcDir, out) {
+    static String startBuild(pname, branch, rev, bnum, src_dir, workspace, out) {
         out.println "Starting pipeline for pname:" + pname + " branch:" + branch + " rev:" + rev + " bnum:" + bnum
-        branchId = branch.replaceAll(/\//, "__")
+        branch_id = branch.replaceAll(/\//, "__")
 
         def cmd = "bash ${workspace}/scripts/repo/get_bundlename.sh ${pname} ${branch} ${rev} ${bnum}"
-        bundle = exec(cmd, out)
+        def bundle = exec(cmd, out)
         out.println "Bundle:" + bundle
 
-        cmd = "bash ${workspace}/scripts/repo/prepare_build.sh ${pname} ${branchId} ${rev} ${bnum} ${branch}"
+        cmd = "bash ${workspace}/scripts/repo/prepare_build.sh ${pname} ${branch_id} ${rev} ${bnum} ${branch}"
         exec(cmd, out)
 
-        cmd = "bash ${workspace}/scripts/repo/prepare_bundle.sh ${pname} ${branchId} ${rev} ${bnum} ${branch} ${srcDir}"
+        cmd = "bash ${workspace}/scripts/repo/prepare_bundle.sh ${pname} ${branch_id} ${rev} ${bnum} ${branch} ${src_dir}"
         exec(cmd, out)
 
         cmd = "bash ${workspace}/scripts/repo/set_stage_status.sh ${bundle} first in_progress"
