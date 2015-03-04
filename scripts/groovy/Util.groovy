@@ -31,7 +31,7 @@ class Util {
         def branch_id = branch.replaceAll(/\//, "__")
 
         def cmd = "bash ${workspace}/scripts/repo/get_bundlename.sh ${pname} ${branch} ${rev} ${bnum}"
-        def bundle = exec(cmd, out)
+        def bundle = exec(cmd, out).trim()
         out.println "Bundle:" + bundle
 
         cmd = "bash ${workspace}/scripts/repo/prepare_build.sh ${pname} ${branch_id} ${rev} ${bnum} ${branch}"
