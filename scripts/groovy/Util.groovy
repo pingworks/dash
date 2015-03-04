@@ -1,10 +1,16 @@
 class Util {
 
-    static String exec(cmd, out = null, exitOnError = true) {
+    static String exec(cmd, out = null, exitOnError = true, workDir = null) {
         def sout = new StringBuffer()
         def serr = new StringBuffer()
 
-        def proc = cmd.execute()
+        def proc
+        if (workDir != null) {
+          proc = cmd.execute(null, workDir)
+        }
+        else {
+          proc = cmd.execute()
+        }
         proc.consumeProcessOutput(sout, serr)
         proc.waitFor()
         def exitCode = proc.exitValue()
@@ -29,7 +35,7 @@ class Util {
         out.println "Bundle:" + bundle
 
         cmd = "bash ${workspace}/scripts/repo/prepare_build.sh ${pname} ${branch_id} ${rev} ${bnum} ${branch}"
-        exec(cmd, out)
+        exec(cmd, out, true, workspace)
 
         cmd = "bash ${workspace}/scripts/repo/prepare_bundle.sh ${pname} ${branch_id} ${rev} ${bnum} ${branch} ${src_dir}"
         exec(cmd, out)
