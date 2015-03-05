@@ -6,6 +6,7 @@
 A simple dashboard application to visualize the test results
 from continuous delivery pipelines.
 
+
 While you are implementing a continuous delivery pipeline for your
 software project you are trying to automate most of the tests to
 have fast and continuous feedback about the quality.
