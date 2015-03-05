@@ -3,10 +3,10 @@ Version: [[version]]
 Section: misc
 Priority: optional
 Architecture: all
-Source: https://dash.pingworks.net/git
+Source: [[name]]-tests-data
 Homepage: https://dash.pingworks.net
 Vcs-Browser: https://dash.pingworks.net/git
-Vcs-Git: https://dash.pingworks.net/git/repo/dash.git 
+Vcs-Git: https://dash.pingworks.net/git/repo/dash.git
 Maintainer: Christoph Lukas <dash@pingworks.de>
 Description: Dash Test data
 Distribution: development
