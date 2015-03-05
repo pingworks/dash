@@ -3,31 +3,31 @@
                                   mailto:dash@pingworks.de
 ---------------------------------------------------------------
 
-Dashboard zur Visualisierung von Testergebnissen aus Continuous
-Delivery Pipelines
+A simple dashboard application to visualize the test results
+from continuous delivery pipelines.
 
-Beim Einsatz von Continuous Delivery werden die Software Artefakte
-einer Reihe von automatischen Tests unterzogen, bevor diese zum
-Deployment in Produktion bereit stehen.
-Die automatisierten Tests werden dabei in mehrstufigen Pipelines
-organisiert, wobei jede Stufe ähnlich geartete Tests für die
-verschiedenen Komponenten der Software durchführt.
-In solchen Pipelines fallen eine Vielzahl von Testergebnissen an,
-über die die Entwickler nur schwer einen Überblick behalten können.
+While you are implementing a continuous delivery pipeline for your
+software project you are trying to automate most of the tests to
+have fast and continuous feedback about the quality.
+The automated tests can be organized in several test stages to
+group similar testtypes.
+As every commit should trigger your continuous delivery pipeline
+this will give you a huge amount of test results which sometimes
+makes it hard to see which commit has broken which test.
 
-Diese Anwendung soll die anfallenden Testergebnisse aggregieren
-und visualisieren.
+Building dashboards is one way to aggregate the data and make it
+easier for the developers to find the regressions they have
+caused with their commit.
 
-Dazu kommen drei unterschiedliche Komponenten zum Einsatz:
+This application is build of three different components:
 
 dash-scripts
 ------------
-Mit Hilfe dieser Sammlung von einfachen Scripten können in der
-Pipeline neue Software-Bundles angelegt werden sowie Metainformation
-und Testergebnisse zu den einzelnen Bundles gespeichert werden.
-Jedes Software-Bundle besteht dabei aus den eigentlichen Artefakten
-und Metainformationen samt Testergebnissen in einer einfachen Ver-
-zeichnisstruktur:
+This is a set of scripts used to bundle the binary artifacts which
+are created in continuous delivery pipeline.  The binary artifacts
+from different modules can be bundled to one consistent archive which
+can additionally hold some useful metainformation.
+Each archive has a simple directory structure inside:
 
 /data/repo
         + trunk
@@ -36,41 +36,42 @@ zeichnisstruktur:
                     + fobar.jar
                     + app.rpm
                 + metadata
-                    + bundle (enthält "2.1234.23")
-                    + branch (enthält z.B. "trunk")
-                    + status (enthält z.B. "first_stage_passed",
+                    + bundle (contains "2.1234.23")
+                    + branch (contains eg. "trunk")
+                    + status (contains eg. "first_stage_passed",
                               "second_stage_failed")
                 + bundle
-                    + full_bundle.tar.gz (tar.gz aus einem Subset
-                                          der Artefakte)
+                    + full_bundle.tar.gz (tar.gz containing a subset
+                                          of artefacts)
                     + src_bundle.tar.gz
 
-Die Scripte sind Bash-Scripte, für das Auslesen von Infos aus dem
-SCM stehen Varianten für Subversion und Git zur Verfügung. 
+The set of bash scripts supports subversion and git.
 
 dash-backend
 ------------
-Ein in PHP geschriebenes JSON REST API zum Auslesen von Informationen
-über einzelne Software-Bundles. Die PHP Anwendung nutzt das Zend-
-Framework [1] und liest die oben beschriebenen Metadaten aus dem Repo
-aus und liefert diese als JSON Daten an das Frontend.
+A simple backend written in PHP which exposes a JSON REST API to deliver
+the metadata from the builds to the frontend.
+The backend application is based on the Zend-Framework [1], reads the metadata
+from above and converts it to the JSON format to be read by the frontend code.
 
 dash-frontend
 -------------
-Ein auf dem ExtJS Framework aufbauendes Frontend, das die Metadaten und
-Testergebnisse der Software-Bundles visualisiert.
+The frontend is creating a visualisation of the testresults for each bundle or
+pipeline run based on the JSON information received from the backend. It is
+using the ExtJS Framework.
 
-Entwicklungsumgebung
---------------------
-Die nötigen Schritte zum Aufsetzen einer Entwicklungsumgebung sind in
-GettingStarted.txt und InstallDevEnv.sh im Ordner docs näher beschrieben.
+Development environment
+-----------------------
+There is some documentation available how to setup a development environment in
+the docs folder, but there also is a separate repository [3] available which
+contains a chef cookbook and a matching Vagrantfile to do it for you.
 
 [1] http://framework.zend.com
 [2] http://sencha.com/products/extjs
+[3] https://github.com/pingworks/chef-dash
 
 
-
-The dashboard code is licensed under the Apache Software License 2.0. 
+The dashboard code is licensed under the Apache Software License 2.0.
 
 Copyright 2013 pingworks - Alexander Birk und Christoph Lukas
 
@@ -87,11 +88,11 @@ See the License for the specific language governing permissions and
 limitations under the License.
 
 
-Sencha ExtJS is distributed under GPL v3, with an Open Source License 
+Sencha ExtJS is distributed under GPL v3, with an Open Source License
 Exception for Applications:
 http://www.sencha.com/legal/open-source-faq/open-source-license-exception-for-applications/
-If you customise or redistribute the dashboard code that uses ExtJS 
-components, then you must comply to their open source licenses - or 
+If you customise or redistribute the dashboard code that uses ExtJS
+components, then you must comply to their open source licenses - or
 buy an appropriate developer license from Sencha.
 
 
@@ -105,4 +106,3 @@ frontend/test/lib:
 Copyright (c) 2010 Larry Myers
 MIT License, see:
 https://github.com/larrymyers/jasmine-reporters/blob/master/LICENSE
-
