@@ -28,6 +28,7 @@ class Application_Model_BundlePeer
                 $basename = $keyFile->getBasename();
                 if (!in_array($basename, array(
                     'branch',
+                    'branch_name',
                     'pname',
                     'revision',
                     'repository',
@@ -129,6 +130,7 @@ class Application_Model_BundlePeer
         $bundle = new Application_Model_Bundle();
         $bundle->id = $id;
         $bundle->branch = self::getMetadata($branch, $id, 'branch');
+        $bundle->branch_name = self::getMetadata($branch, $id, 'branch_name');
         $bundle->pname = self::getMetadata($branch, $id, 'pname');
         $bundle->revision = self::getMetadata($branch, $id, 'revision');
         $bundle->repository = self::getMetadata($branch, $id, 'repository');

@@ -21,6 +21,8 @@ class Application_Model_Bundle
     public $id;
     /* branch ID, e.g feature_j_123 */
     public $branch;
+    /* branch name */
+    public $branch_name;
     public $pname;
     public $revision;
     public $repository;
@@ -29,7 +31,7 @@ class Application_Model_Bundle
     public $stage3;
     public $timestamp;
     public $committer;
-	public $comment;
+    public $comment;
     public $buildUrls;
     private $changes;
     public $payload;
@@ -45,4 +47,3 @@ class Application_Model_Bundle
     }
 
 }
-

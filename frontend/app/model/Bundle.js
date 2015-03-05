@@ -20,6 +20,7 @@ Ext.define('Dash.model.Bundle', {
     fields: [
         { name: 'id', type: 'string' },
         { name: 'branch', type: 'string' },
+        { name: 'branch_name', type: 'string' },
         { name: 'pname', type: 'string' },
         { name: 'revision', type: 'string' },
         { name: 'repository', type: 'string' },
@@ -77,4 +78,3 @@ Ext.define('Dash.model.Bundle', {
         return Ext.StoreMgr.get('Branches').getById(this.get('branch'));
     }
 });
-

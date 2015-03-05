@@ -93,7 +93,7 @@ Ext.define("Dash.view.BundleGrid", {
             },
             {
                 text: Dash.config.bundlegrid.label.branch,
-                dataIndex: 'branch',
+                dataIndex: 'branch_name',
                 width: Dash.config.bundlegrid.colwidth.branch,
                 hidden: Dash.config.bundlegrid.hidden.branch
             },
