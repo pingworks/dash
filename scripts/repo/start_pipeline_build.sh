@@ -46,5 +46,6 @@ if [ ! -z "$SRCDIR" ]; then
   setMetadata $BUNDLE changes "$(getLog $SRCDIR $REV)"
   setMetadata $BUNDLE committer "$(getCommitter $SRCDIR $REV)"
 fi
+setStageStatus $BUNDLE first in_progress
 echo "done."
 
