@@ -4,3 +4,4 @@ scripts/build/dash-scripts_*_all.deb;
 tests/build/dash-tests-data_*_all.deb;
 tests/build/dash-tests-backend_*_all.deb;
 tests/build/dash-tests-system_*_all.deb;
+dashboardintegration/target/dashboardintegration.hpi;
