@@ -16,9 +16,21 @@ SRCDIR=$6
 
 BRANCH=${BRANCHNAME/\//__}
 
-if [ -z "$PID" -o -z "$PNAME" -o -z "$BRANCHNAME" -o -z "$REV" -o -z "$BUILDNR" ]; then
+function usage() {
   echo "Usage: $0 <pid> <pname> <build_nr> <branch> <vcs-revision> [<srcdir>]"
   exit 1
+}
+
+if [ -z "$PID" -o -z "$PNAME" -o -z "$BRANCHNAME" -o -z "$BUILDNR" ]; then
+  usage
+fi
+
+if [ -z "$REV" ]; then
+  if [ ! -z "$SRCDIR" ]; then
+    REV=$(git rev-parse ${BRANCHNAME}^{commit})
+  else
+    usage
+  fi
 fi
 
 set -e
