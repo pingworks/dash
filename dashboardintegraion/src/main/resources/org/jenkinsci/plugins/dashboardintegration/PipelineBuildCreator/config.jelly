@@ -1,0 +1,26 @@
+<?jelly escape-by-default='true'?>
+<j:jelly xmlns:j="jelly:core" xmlns:st="jelly:stapler" xmlns:d="jelly:define" xmlns:l="/lib/layout" xmlns:t="/lib/hudson" xmlns:f="/lib/form">
+  <f:entry title="Pipeline build ID" field="pipelineBuildId">
+    <f:textbox default="$PIPELINE_NAME-$BUILD_NUMBER" />
+  </f:entry>
+  <f:advanced>
+  <f:entry title="Pipeline name" field="pipelineName">
+    <f:textbox default="$PIPELINE_NAME" />
+  </f:entry>
+  <f:entry title="Pipeline build number" field="pipelineBuildNr">
+    <f:textbox default="$BUILD_NUMBER" />
+  </f:entry>
+  <f:entry title="Pipeline branch" field="pipelineBuildBranch">
+    <f:textbox default="$GIT_BRANCH" />
+  </f:entry>
+  <f:entry title="Pipeline commmit ID" field="pipelineBuildCommitId">
+    <f:textbox default="$GIT_COMMIT" />
+  </f:entry>
+  <f:entry title="Source directory" field="srcDir">
+    <f:textbox default="$WORKSPACE" />
+  </f:entry>
+  </f:advanced>
+  <f:entry title="Ignore failures on creating the new pipeline run?" field="ignoreFailures">
+    <f:checkbox default="true" />
+  </f:entry>
+</j:jelly>

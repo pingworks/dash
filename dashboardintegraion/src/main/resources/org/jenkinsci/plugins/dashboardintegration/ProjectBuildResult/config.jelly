@@ -1,0 +1,21 @@
+<?jelly escape-by-default='true'?>
+<j:jelly xmlns:j="jelly:core" xmlns:st="jelly:stapler" xmlns:d="jelly:define" xmlns:l="/lib/layout" xmlns:t="/lib/hudson" xmlns:f="/lib/form">
+  <f:block>
+    <div class="warning" style="padding-top: 20px; padding-bottom: 21px;">Please place this block _after_ publishing junit test results!</div>
+  </f:block>
+  <f:entry title="Pipeline build ID" field="pipelineBuildId">
+    <f:textbox default="$PIPELINE_BUILD_ID" />
+  </f:entry>
+  <f:entry title="Pipeline stage where the build results should be added." field="pipelineStage">
+    <f:select />
+  </f:entry>
+  <f:entry title="Change stage status to failure on build failure?" field="buildSetsStageToFailure">
+    <f:checkbox default="false" />
+  </f:entry>
+  <f:entry title="Change stage status to success on build success?" field="buildSetsStageToSuccess">
+    <f:checkbox default="false" />
+  </f:entry>
+  <f:entry title="Ignore failures on saving dashboard data?" field="ignoreFailures">
+    <f:checkbox default="true" />
+  </f:entry>
+</j:jelly>
