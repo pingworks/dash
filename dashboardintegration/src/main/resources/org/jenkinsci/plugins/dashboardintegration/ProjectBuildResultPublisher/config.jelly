@@ -10,7 +10,7 @@
     <f:select />
   </f:entry>
   <f:entry title="Change stage status to failure on build failure?" field="buildSetsStageToFailure">
-    <f:checkbox default="false" />
+    <f:checkbox default="true" />
   </f:entry>
   <f:entry title="Change stage status to success on build success?" field="buildSetsStageToSuccess">
     <f:checkbox default="false" />
