@@ -89,6 +89,18 @@ public class PipelineBuildCreatorBuilder extends Builder {
         return ignoreFailures;
     }
 
+    public String getIconFileName() {
+        return null;
+    }
+
+    public String getDisplayName() {
+        return null;
+    }
+
+    public String getUrlName() {
+        return null;
+    }
+
     @Override
     public boolean perform(AbstractBuild build, Launcher launcher, BuildListener listener) {
 
@@ -96,14 +108,8 @@ public class PipelineBuildCreatorBuilder extends Builder {
             Result originalResult = build.getResult();
             boolean exitCode = startPipelineBuild(build, launcher, listener);
 
-            List<ParameterValue> params = new ArrayList<ParameterValue>();
-            EnvVars envVars = build.getEnvironment(listener);
-            params.add(new StringParameterValue("PIPELINE_BUILD_ID", envVars.expand(getPipelineBuildId())));
-            params.add(new StringParameterValue("PIPELINE_NAME", envVars.expand(getPipelineName())));
-            params.add(new StringParameterValue("PIPELINE_BUILD_NR", envVars.expand(getPipelineBuildNr())));
-            params.add(new StringParameterValue("PIPELINE_BUILD_BRANCH", envVars.expand(getPipelineBuildBranch())));
-            params.add(new StringParameterValue("PIPELINE_BUILD_COMMIT_ID", envVars.expand(getPipelineBuildCommitId())));
-            build.addAction(new ParametersAction(params));
+            PipelineBuildCreatorEnvContributionAction envContributionAction = new PipelineBuildCreatorEnvContributionAction(this);
+            build.addAction(envContributionAction);
 
             if (isIgnoreFailures()) {
                 build.setResult(originalResult);
