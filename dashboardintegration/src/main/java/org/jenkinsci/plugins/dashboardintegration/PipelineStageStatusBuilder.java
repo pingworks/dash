@@ -2,6 +2,7 @@ package org.jenkinsci.plugins.dashboardintegration;
 
 import java.io.IOException;
 
+import hudson.tasks.Builder;
 import jenkins.model.Jenkins;
 import net.sf.json.JSONObject;
 
@@ -10,15 +11,12 @@ import org.kohsuke.stapler.StaplerRequest;
 
 import hudson.Extension;
 import hudson.Launcher;
-import hudson.Proc;
 import hudson.model.AbstractBuild;
 import hudson.model.AbstractProject;
 import hudson.model.BuildListener;
-import hudson.model.Result;
 import hudson.tasks.BuildStepDescriptor;
 import hudson.tasks.BuildStepMonitor;
 import hudson.tasks.Publisher;
-import hudson.tasks.Recorder;
 import hudson.util.ListBoxModel;
 
 /**
@@ -31,7 +29,7 @@ import hudson.util.ListBoxModel;
  *
  * @author Kohsuke Kawaguchi
  */
-public class PipelineStageFinisher extends Recorder {
+public class PipelineStageStatusBuilder extends Builder {
 
     private final String pipelineBuildId;
 
@@ -43,8 +41,8 @@ public class PipelineStageFinisher extends Recorder {
 
     // Fields in config.jelly must match the parameter names in the "DataBoundConstructor"
     @DataBoundConstructor
-    public PipelineStageFinisher(String pipelineBuildId, String pipelineStage, String pipelineStageStatus,
-                                 boolean ignoreFailures) {
+    public PipelineStageStatusBuilder(String pipelineBuildId, String pipelineStage, String pipelineStageStatus,
+                                      boolean ignoreFailures) {
         this.pipelineBuildId = pipelineBuildId;
         this.pipelineStage = pipelineStage;
         this.pipelineStageStatus = pipelineStageStatus;
@@ -68,49 +66,15 @@ public class PipelineStageFinisher extends Recorder {
     }
 
     @Override
-    public boolean perform(AbstractBuild build, Launcher launcher, BuildListener listener) {
+    public boolean perform(AbstractBuild build, Launcher launcher, BuildListener listener) throws IOException {
 
-        try {
-            Result originalResult = build.getResult();
-            boolean exitCode = setPipelineStageStatus(build, launcher, listener);
-
-            if (isIgnoreFailures()) {
-                build.setResult(originalResult);
-                exitCode = true;
-            }
-            return exitCode;
-        } catch (IOException e) {
-            e.printStackTrace();
-            e.printStackTrace(listener.getLogger());
-            listener.getLogger().println("IOException !");
-            return false;
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-            listener.getLogger().println("InterruptedException!");
-            return false;
-        }
-    }
-
-    private boolean setPipelineStageStatus(AbstractBuild build, Launcher launcher, BuildListener listener) throws IOException, InterruptedException {
-        String[] cmdStrings = new String[]{
-                "/bin/bash",
-                getScriptDir() + "/repo/set_stage_status.sh",
-                getPipelineBuildId(),
-                getPipelineStage(),
-                getPipelineStageStatus()
-        };
-
-        Launcher.ProcStarter ps = launcher.new ProcStarter();
-        ps = ps.cmds(cmdStrings).stdout(listener);
-        ps = ps.pwd(build.getWorkspace()).envs(build.getEnvironment(listener));
-
-        Proc proc = launcher.launch(ps);
-        return (proc.join() == 0);
+        PipelineStageStatusSetter setter = new PipelineStageStatusSetter(build, launcher, listener);
+        return setter.setStageStatus(getPipelineBuildId(), getPipelineStage(), getPipelineStageStatus(), getScriptDir(), isIgnoreFailures());
     }
 
     private String getScriptDir() throws IOException{
-        PipelineBuildCreator.DescriptorImpl descriptor =
-                (PipelineBuildCreator.DescriptorImpl) Jenkins.getInstance().getDescriptor(PipelineBuildCreator.class);
+        PipelineBuildCreatorBuilder.DescriptorImpl descriptor =
+                (PipelineBuildCreatorBuilder.DescriptorImpl) Jenkins.getInstance().getDescriptor(PipelineBuildCreatorBuilder.class);
         return descriptor.getScriptDir();
     }
 
@@ -119,15 +83,15 @@ public class PipelineStageFinisher extends Recorder {
     }
 
     /**
-     * Descriptor for {@link PipelineStageFinisher}. Used as a singleton.
+     * Descriptor for {@link org.jenkinsci.plugins.dashboardintegration.PipelineStageStatusBuilder}. Used as a singleton.
      * The class is marked as public so that it can be accessed from views.
      *
      * <p>
-     * See <tt>src/main/resources/hudson/plugins/hello_world/ProjectBuildResult/*.jelly</tt>
+     * See <tt>src/main/resources/hudson/plugins/hello_world/ProjectBuildResultPublisher/*.jelly</tt>
      * for the actual HTML fragment for the configuration screen.
      */
     @Extension
-    public static final class DescriptorImpl extends BuildStepDescriptor<Publisher> {
+    public static final class DescriptorImpl extends BuildStepDescriptor<Builder> {
         /**
          * In order to load the persisted global configuration, you have to
          * call load() in the constructor.
@@ -155,19 +119,11 @@ public class PipelineStageFinisher extends Recorder {
         }
 
         public ListBoxModel doFillPipelineStageItems() {
-            ListBoxModel items = new ListBoxModel();
-            items.add("First Stage", "first");
-            items.add("Second Stage", "second");
-            items.add("Third Stage", "third");
-            return items;
+            return PipelineStageStatusSetterDescriptor.doFillPipelineStageItems();
         }
 
         public ListBoxModel doFillPipelineStageStatusItems() {
-            ListBoxModel items = new ListBoxModel();
-            items.add("Success", "passed");
-            items.add("Failed", "failed");
-            items.add("In progress", "in_progress");
-            return items;
+            return PipelineStageStatusSetterDescriptor.doFillPipelineStageStatusItems();
         }
     }
 }

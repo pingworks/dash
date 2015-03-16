@@ -30,7 +30,7 @@ import hudson.util.FormValidation;
  *
  * @author Kohsuke Kawaguchi
  */
-public class PipelineBuildCreator extends Builder {
+public class PipelineBuildCreatorBuilder extends Builder {
 
     private final String pipelineBuildId;
 
@@ -48,10 +48,10 @@ public class PipelineBuildCreator extends Builder {
 
     // Fields in config.jelly must match the parameter names in the "DataBoundConstructor"
     @DataBoundConstructor
-    public PipelineBuildCreator(String pipelineBuildId, String pipelineName, String pipelineBuildNr,
-                                String pipelineBuildBranch,
-                                String pipelineBuildCommitId,
-                                String srcDir, boolean ignoreFailures) {
+    public PipelineBuildCreatorBuilder(String pipelineBuildId, String pipelineName, String pipelineBuildNr,
+                                       String pipelineBuildBranch,
+                                       String pipelineBuildCommitId,
+                                       String srcDir, boolean ignoreFailures) {
         this.pipelineBuildId = pipelineBuildId;
         this.pipelineName = pipelineName;
         this.pipelineBuildNr = pipelineBuildNr;
@@ -151,11 +151,11 @@ public class PipelineBuildCreator extends Builder {
     }
 
     /**
-     * Descriptor for {@link PipelineBuildCreator}. Used as a singleton.
+     * Descriptor for {@link PipelineBuildCreatorBuilder}. Used as a singleton.
      * The class is marked as public so that it can be accessed from views.
      *
      * <p>
-     * See <tt>src/main/resources/hudson/plugins/hello_world/ProjectBuildResult/*.jelly</tt>
+     * See <tt>src/main/resources/hudson/plugins/hello_world/ProjectBuildResultPublisher/*.jelly</tt>
      * for the actual HTML fragment for the configuration screen.
      */
     @Extension

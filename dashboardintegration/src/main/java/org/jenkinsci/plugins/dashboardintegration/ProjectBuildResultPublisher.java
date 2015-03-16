@@ -29,7 +29,7 @@ import hudson.tasks.Publisher;
  *
  * @author Kohsuke Kawaguchi
  */
-public class ProjectBuildResult extends Recorder {
+public class ProjectBuildResultPublisher extends Publisher {
 
     private final String pipelineBuildId;
 
@@ -43,8 +43,8 @@ public class ProjectBuildResult extends Recorder {
 
     // Fields in config.jelly must match the parameter names in the "DataBoundConstructor"
     @DataBoundConstructor
-    public ProjectBuildResult(String pipelineBuildId, String pipelineStage,
-                              boolean buildSetsStageToFailure, boolean buildSetsStageToSuccess, boolean ignoreFailures) {
+    public ProjectBuildResultPublisher(String pipelineBuildId, String pipelineStage,
+                                       boolean buildSetsStageToFailure, boolean buildSetsStageToSuccess, boolean ignoreFailures) {
         this.pipelineBuildId = pipelineBuildId;
         this.pipelineStage = pipelineStage;
         this.buildSetsStageToFailure = buildSetsStageToFailure;
@@ -158,8 +158,8 @@ public class ProjectBuildResult extends Recorder {
     }
 
     private String getScriptDir() throws IOException{
-        PipelineBuildCreator.DescriptorImpl descriptor =
-                (PipelineBuildCreator.DescriptorImpl) Jenkins.getInstance().getDescriptor(PipelineBuildCreator.class);
+        PipelineBuildCreatorBuilder.DescriptorImpl descriptor =
+                (PipelineBuildCreatorBuilder.DescriptorImpl) Jenkins.getInstance().getDescriptor(PipelineBuildCreatorBuilder.class);
         return descriptor.getScriptDir();
     }
 
@@ -168,11 +168,11 @@ public class ProjectBuildResult extends Recorder {
     }
 
     /**
-     * Descriptor for {@link ProjectBuildResult}. Used as a singleton.
+     * Descriptor for {@link ProjectBuildResultPublisher}. Used as a singleton.
      * The class is marked as public so that it can be accessed from views.
      *
      * <p>
-     * See <tt>src/main/resources/hudson/plugins/hello_world/ProjectBuildResult/*.jelly</tt>
+     * See <tt>src/main/resources/hudson/plugins/hello_world/ProjectBuildResultPublisher/*.jelly</tt>
      * for the actual HTML fragment for the configuration screen.
      */
     @Extension
