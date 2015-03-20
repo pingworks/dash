@@ -13,6 +13,7 @@ BUILDNR=$3
 BRANCHNAME=$4
 REV=$5
 SRCDIR=$6
+REPOLINK=$7
 
 BRANCH=${BRANCHNAME/\//__}
 
@@ -57,6 +58,9 @@ setMetadata $BUNDLE buildnr $BUILDNR
 if [ ! -z "$SRCDIR" ]; then
   setMetadata $BUNDLE changes "$(getLog $SRCDIR $REV)"
   setMetadata $BUNDLE committer "$(getCommitter $SRCDIR $REV)"
+fi
+if [ ! -z "$REPOLINK" ]; then
+  setMetadata $BUNDLE repository $REPOLINK
 fi
 setStageStatus $BUNDLE first in_progress
 echo "done."

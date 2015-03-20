@@ -5,6 +5,7 @@ branch;
 branch_name;
 status;
 revision;
+repository;
 version;
 buildnr;
 deployed;

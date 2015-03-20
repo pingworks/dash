@@ -19,6 +19,9 @@
   <f:entry title="Source directory" field="srcDir">
     <f:textbox default="$WORKSPACE" />
   </f:entry>
+  <f:entry title="Web Link to source code repo" field="repoLink">
+    <f:textbox default="https://github.com/user/project/commit/$GIT_COMMIT" />
+  </f:entry>
   </f:advanced>
   <f:entry title="Ignore failures on creating the new pipeline run?" field="ignoreFailures">
     <f:checkbox default="true" />

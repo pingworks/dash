@@ -147,7 +147,7 @@ public class ProjectBuildResultPublisher extends Publisher {
         return StringUtils.join(
                 new String[]{
                         build.getProject().getName(),
-                        build.getUrl(),
+                        Jenkins.getInstance().getRootUrl() + build.getUrl(),
                         build.getResult().toString(),
                         testsTotal.toString(),
                         testsSkipped.toString(),

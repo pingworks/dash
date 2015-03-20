@@ -44,6 +44,8 @@ public class PipelineBuildCreatorBuilder extends Builder {
 
     private final String srcDir;
 
+    private final String repoLink;
+
     private final boolean ignoreFailures;
 
     // Fields in config.jelly must match the parameter names in the "DataBoundConstructor"
@@ -51,13 +53,15 @@ public class PipelineBuildCreatorBuilder extends Builder {
     public PipelineBuildCreatorBuilder(String pipelineBuildId, String pipelineName, String pipelineBuildNr,
                                        String pipelineBuildBranch,
                                        String pipelineBuildCommitId,
-                                       String srcDir, boolean ignoreFailures) {
+                                       String srcDir,
+                                       String repoLink, boolean ignoreFailures) {
         this.pipelineBuildId = pipelineBuildId;
         this.pipelineName = pipelineName;
         this.pipelineBuildNr = pipelineBuildNr;
         this.pipelineBuildBranch = pipelineBuildBranch;
         this.pipelineBuildCommitId = pipelineBuildCommitId;
         this.srcDir = srcDir;
+        this.repoLink = repoLink;
         this.ignoreFailures = ignoreFailures;
     }
 
@@ -83,6 +87,10 @@ public class PipelineBuildCreatorBuilder extends Builder {
 
     public String getSrcDir() {
         return srcDir;
+    }
+
+    public String getRepoLink() {
+        return repoLink;
     }
 
     public boolean isIgnoreFailures() {
@@ -137,7 +145,8 @@ public class PipelineBuildCreatorBuilder extends Builder {
                 getPipelineBuildNr(),
                 getPipelineBuildBranch(),
                 getPipelineBuildCommitId(),
-                getSrcDir()
+                getSrcDir(),
+                getRepoLink()
         };
 
         Launcher.ProcStarter ps = launcher.new ProcStarter();
