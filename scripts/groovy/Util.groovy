@@ -46,6 +46,11 @@ class Util {
         return bundle
     }
 
+    static boolean startPipelineBuild(pid, pname, bnum, branch, rev, src_dir, repolink, script_dir, out) {
+        def cmd = "bash ${script_dir}/repo/start_pipeline_build.sh ${pid} ${pname} ${bnum} ${branch} ${rev} ${src_dir} ${repolink}"
+        exec(cmd, out)
+    }
+
     static String createBuildResultData(build, out) {
         def jobName = build.project.name
         def jobUrl = build.getUrl()
@@ -62,7 +67,7 @@ class Util {
     }
 
     static boolean writeBuildResults(bundle, stage, builds, workspace, out) {
-    def success = true
+        def success = true
         for ( build in builds ) {
             def dataString = createBuildResultData(build, out)
             // write test results to metadata
