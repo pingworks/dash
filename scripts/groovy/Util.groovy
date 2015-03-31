@@ -46,9 +46,26 @@ class Util {
         return bundle
     }
 
-    static boolean startPipelineBuild(pid, pname, bnum, branch, rev, src_dir, repolink, script_dir, out) {
+    static boolean startPipelineBuild(pid, pname, bnum, branch, rev, src_dir, repolink, propertyFileDir, script_dir, out) {
         def cmd = "bash ${script_dir}/repo/start_pipeline_build.sh ${pid} ${pname} ${bnum} ${branch} ${rev} ${src_dir} ${repolink}"
         exec(cmd, out)
+
+        if (propertyFileDir != '') {
+          writePropertiesFile(propertyFileDir, pid, pname, bnum, branch, rev, src_dir, repolink)
+        }
+    }
+
+    static boolean writePropertiesFile(directory, pid, pname, bnum, branch, rev, src_dir, repolink) {
+        new File("${directory}/${pbi}.properties").withWriter { out ->
+          out.println """PBI=${pbi}
+PNAME=${pname}
+BNUM=${bnum}
+BRANCH=${branch}
+REV=${rev}
+VERSION=${bnum}+git${rev}
+REPOLINK=${repolink}
+"""
+        }
     }
 
     static String createBuildResultData(build, out) {
