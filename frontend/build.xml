@@ -75,6 +75,12 @@
                 <fail>Please supply a version number using -Dversion=1.2.3.4</fail>
             </then>
         </if>
+        <exec executable="sed">
+          <arg value="-i" />
+          <arg value="-e" />
+          <arg value="s;__VERSION__;${version};" />
+          <arg value="${build.dir}/config.js" />
+        </exec>
         <copy todir="${build.dir}/debian">
             <fileset dir="debian"/>
             <filterset begintoken="[[" endtoken="]]">

@@ -17,7 +17,11 @@ Ext.define("Dash.view.BottomToolbar", {
     extend: 'Ext.toolbar.Toolbar',
     alias: 'widget.bottomtoolbar',
 
-    items: ['->', {
+    items: [{
+        id: 'Version',
+        xtype: 'component',
+        html: 'Version: ' + Dash.config.version
+    }, '->', {
         id: 'Copyright',
         xtype: 'component',
         html: '&copy; 2015 <a style="color: black" target="_blank" href="http://www.pingworks.de">pingworks</a> - Alexander Birk, Christoph Lukas'

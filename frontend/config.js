@@ -17,6 +17,7 @@
 var Dash = {};
 
 Dash.config = {
+    version: '__VERSION__',
     toolbar: {
         left: [
             {
