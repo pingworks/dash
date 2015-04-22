@@ -18,4 +18,9 @@
   <f:entry title="Ignore failures on saving dashboard data?" field="ignoreFailures">
     <f:checkbox default="true" />
   </f:entry>
+  <f:advanced>
+      <f:entry title="Overwrite buildname for dashboard" field="buildName">
+        <f:textbox />
+      </f:entry>
+  </f:advanced>
 </j:jelly>

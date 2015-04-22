@@ -41,15 +41,19 @@ public class ProjectBuildResultPublisher extends Publisher {
 
     private final boolean ignoreFailures;
 
+    private final String buildName;
+
     // Fields in config.jelly must match the parameter names in the "DataBoundConstructor"
     @DataBoundConstructor
     public ProjectBuildResultPublisher(String pipelineBuildId, String pipelineStage,
-                                       boolean buildSetsStageToFailure, boolean buildSetsStageToSuccess, boolean ignoreFailures) {
+                                       boolean buildSetsStageToFailure, boolean buildSetsStageToSuccess,
+                                       boolean ignoreFailures, String buildName) {
         this.pipelineBuildId = pipelineBuildId;
         this.pipelineStage = pipelineStage;
         this.buildSetsStageToFailure = buildSetsStageToFailure;
         this.buildSetsStageToSuccess = buildSetsStageToSuccess;
         this.ignoreFailures = ignoreFailures;
+        this.buildName = buildName;
     }
 
     public String getPipelineBuildId() {
@@ -77,7 +81,8 @@ public class ProjectBuildResultPublisher extends Publisher {
 
         try {
             Result originalResult = build.getResult();
-            boolean exitCode = recordBuildResults(build, launcher, listener);
+
+            boolean exitCode = recordBuildResults(build, launcher, listener, buildName);
 
             if (isBuildSetsStageToFailure() && originalResult != Result.SUCCESS) {
                 String stageStatus = "failed";
@@ -105,13 +110,13 @@ public class ProjectBuildResultPublisher extends Publisher {
         }
     }
 
-    private boolean recordBuildResults(AbstractBuild build, Launcher launcher, BuildListener listener) throws IOException, InterruptedException {
+    private boolean recordBuildResults(AbstractBuild build, Launcher launcher, BuildListener listener, String buildName) throws IOException, InterruptedException {
         String[] cmdStrings = new String[]{
                 "/bin/bash",
                 getScriptDir() + "/repo/add_metadata.sh",
                 getPipelineBuildId(),
                 getPipelineStage() +"_stage_results",
-                getBuildResultString(build)
+                getBuildResultString(build, buildName)
         };
 
         Launcher.ProcStarter ps = launcher.new ProcStarter();
@@ -139,14 +144,17 @@ public class ProjectBuildResultPublisher extends Publisher {
         return (proc.join() == 0);
     }
 
-    private String getBuildResultString(AbstractBuild build) {
+    private String getBuildResultString(AbstractBuild build, String buildName) {
         AbstractTestResultAction buildResultAction = build.getAction(AbstractTestResultAction.class);
         Integer testsTotal = (buildResultAction != null) ? buildResultAction.getTotalCount() : 0;
         Integer testsSkipped = (buildResultAction != null) ? buildResultAction.getSkipCount() : 0;
         Integer testsFailed = (buildResultAction != null) ? buildResultAction.getFailCount() : 0;
+        if (buildName == null) {
+            buildName = build.getProject().getName();
+        }
         return StringUtils.join(
                 new String[]{
-                        build.getProject().getName(),
+                        buildName,
                         Jenkins.getInstance().getRootUrl() + build.getUrl(),
                         build.getResult().toString(),
                         testsTotal.toString(),
