@@ -149,7 +149,7 @@ public class ProjectBuildResultPublisher extends Publisher {
         Integer testsTotal = (buildResultAction != null) ? buildResultAction.getTotalCount() : 0;
         Integer testsSkipped = (buildResultAction != null) ? buildResultAction.getSkipCount() : 0;
         Integer testsFailed = (buildResultAction != null) ? buildResultAction.getFailCount() : 0;
-        if (buildName == null) {
+        if (buildName == null || buildName.equals("")) {
             buildName = build.getProject().getName();
         }
         return StringUtils.join(
