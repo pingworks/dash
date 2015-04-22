@@ -102,6 +102,17 @@ REPOLINK=${repolink}
       exec(cmd, out)
     }
 
+    static boolean writeStageStatusFromBuilds(bundle, stage, builds, workspace, out) {
+        def success = true
+        for ( build in builds ) {
+            // merge overall success
+            success = (success == true && build.result.toString() == "SUCCESS")
+        }
+        out.println "    Overall Success: " + success
+        def status = (success) ? 'passed' : 'failed';
+        return writeStageStatus(bundle, stage, status, workspace, out)
+    }
+
     static boolean writeBuildResultsAndStageStatus(bundle, stage, builds, workspace, out, failureOnly=false) {
       def success = writeBuildResults(bundle, stage, builds, workspace, out)
       def successString = (success) ? "passed" : "failed"
