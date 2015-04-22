@@ -76,6 +76,10 @@ public class ProjectBuildResultPublisher extends Publisher {
         return ignoreFailures;
     }
 
+    public String getBuildName() {
+        return buildName;
+    }
+
     @Override
     public boolean perform(AbstractBuild build, Launcher launcher, BuildListener listener) {
 
