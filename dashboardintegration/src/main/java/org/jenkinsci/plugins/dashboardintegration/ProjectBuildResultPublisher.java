@@ -117,9 +117,9 @@ public class ProjectBuildResultPublisher extends Publisher {
     private boolean recordBuildResults(AbstractBuild build, Launcher launcher, BuildListener listener, String buildName) throws IOException, InterruptedException {
         String[] cmdStrings = new String[]{
                 "/bin/bash",
-                getScriptDir() + "/repo/add_metadata.sh",
+                getScriptDir() + "/repo/add_build_result.sh",
                 getPipelineBuildId(),
-                getPipelineStage() +"_stage_results",
+                getPipelineStage(),
                 getBuildResultString(build, buildName)
         };
 
