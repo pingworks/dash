@@ -46,7 +46,7 @@ function addMetadata() {
 
   getBundleFolder $BUNDLE
   $SSHCMD "flock -w $LOCK_TIMEOUT $BUNDLE_FOLDER/metadata/$KEY \
-        -c 'echo "$VALUE" >> $BUNDLE_FOLDER/metadata/$KEY'"
+        -c 'echo $VALUE >> $BUNDLE_FOLDER/metadata/$KEY'"
   if [ $(id -u) = 0 ] ; then
     $SSHCMD chown $REPOUSER $BUNDLE_FOLDER/metadata/$KEY
   fi
@@ -61,7 +61,7 @@ function removeMetadata() {
 
   getBundleFolder $BUNDLE
   $SSHCMD "flock -w $LOCK_TIMEOUT $BUNDLE_FOLDER/metadata/$KEY \
-        -c 'sed -i -e '/^${VALUE}/d' $BUNDLE_FOLDER/metadata/$KEY'"
+        -c 'sed -i -e \'/^${VALUE}/d\' $BUNDLE_FOLDER/metadata/$KEY'"
   if [ $(id -u) = 0 ] ; then
     $SSHCMD chown $REPOUSER $BUNDLE_FOLDER/metadata/$KEY
   fi
