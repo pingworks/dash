@@ -21,3 +21,48 @@ function copyArtifact() {
     $SCPCMD ${SRC} ${SSHLOGIN}:${BUNDLE_FOLDER}/artifacts/${DST}
   fi
 }
+
+function setMetadata() {
+  local BUNDLE=$1
+  local KEY=$2
+  local VALUE=$3
+  validateBundle $BUNDLE
+  validateMetakey $KEY
+
+  getBundleFolder $BUNDLE
+  $SSHCMD "flock -w $LOCK_TIMEOUT $BUNDLE_FOLDER/metadata/$KEY \
+        -c 'echo $VALUE > $BUNDLE_FOLDER/metadata/$KEY'"
+  if [ $(id -u) = 0 ] ; then
+    $SSHCMD chown $REPOUSER $BUNDLE_FOLDER/metadata/$KEY
+  fi
+}
+
+function addMetadata() {
+  local BUNDLE=$1
+  local KEY=$2
+  local VALUE=$3
+  validateBundle $BUNDLE
+  validateMetakey $KEY
+
+  getBundleFolder $BUNDLE
+  $SSHCMD "flock -w $LOCK_TIMEOUT $BUNDLE_FOLDER/metadata/$KEY \
+        -c 'echo "$VALUE" >> $BUNDLE_FOLDER/metadata/$KEY'"
+  if [ $(id -u) = 0 ] ; then
+    $SSHCMD chown $REPOUSER $BUNDLE_FOLDER/metadata/$KEY
+  fi
+}
+
+function removeMetadata() {
+  local BUNDLE=$1
+  local KEY=$2
+  local VALUE=$3
+  validateBundle $BUNDLE
+  validateMetakey $KEY
+
+  getBundleFolder $BUNDLE
+  $SSHCMD "flock -w $LOCK_TIMEOUT $BUNDLE_FOLDER/metadata/$KEY \
+        -c 'sed -i -e '/^${VALUE}/d' $BUNDLE_FOLDER/metadata/$KEY'"
+  if [ $(id -u) = 0 ] ; then
+    $SSHCMD chown $REPOUSER $BUNDLE_FOLDER/metadata/$KEY
+  fi
+}
