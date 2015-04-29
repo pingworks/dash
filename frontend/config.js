@@ -236,6 +236,12 @@ Dash.config = {
                 'icon': 'red.png'
             },
             {
+                'id': 'IN_PROGRESS',
+                'name': 'inprogress',
+                'cls': 'inprogress',
+                'icon': 'green-ani.gif'
+            },
+            {
                 'id': 'SUCCESS',
                 'name': 'success',
                 'cls': 'success',

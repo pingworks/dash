@@ -16,7 +16,6 @@ import hudson.model.AbstractProject;
 import hudson.model.BuildListener;
 import hudson.tasks.BuildStepDescriptor;
 import hudson.tasks.BuildStepMonitor;
-import hudson.tasks.Publisher;
 import hudson.util.ListBoxModel;
 
 /**
@@ -119,11 +118,11 @@ public class PipelineStageStatusBuilder extends Builder {
         }
 
         public ListBoxModel doFillPipelineStageItems() {
-            return PipelineStageStatusSetterDescriptor.doFillPipelineStageItems();
+            return PipelineStageStatusHelper.doFillPipelineStageItems();
         }
 
         public ListBoxModel doFillPipelineStageStatusItems() {
-            return PipelineStageStatusSetterDescriptor.doFillPipelineStageStatusItems();
+            return PipelineStageStatusHelper.doFillPipelineStageStatusItems();
         }
     }
 }

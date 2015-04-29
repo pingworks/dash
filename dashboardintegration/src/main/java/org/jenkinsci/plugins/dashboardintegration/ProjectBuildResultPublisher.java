@@ -86,16 +86,19 @@ public class ProjectBuildResultPublisher extends Publisher {
         try {
             Result originalResult = build.getResult();
 
-            boolean exitCode = recordBuildResults(build, launcher, listener, buildName);
+            PipelineBuildResultSetter resultSetter = new PipelineBuildResultSetter(build, launcher, listener);
+            PipelineStageStatusSetter stageStatusSetter = new PipelineStageStatusSetter(build, launcher, listener);
+
+            boolean exitCode = resultSetter.recordBuildResults(getPipelineBuildId(), getPipelineStage(), getScriptDir(), buildName);
 
             if (isBuildSetsStageToFailure() && originalResult != Result.SUCCESS) {
                 String stageStatus = "failed";
-                exitCode &= setPipelineStageStatus(build, launcher, listener, stageStatus);
+                exitCode &= stageStatusSetter.setStageStatus(getPipelineBuildId(), getPipelineStage(), stageStatus, getScriptDir(), isIgnoreFailures());
             }
 
             if (isBuildSetsStageToSuccess() && originalResult == Result.SUCCESS) {
                 String stageStatus = "passed";
-                exitCode &= setPipelineStageStatus(build, launcher, listener, stageStatus);
+                exitCode &= stageStatusSetter.setStageStatus(getPipelineBuildId(), getPipelineStage(), stageStatus, getScriptDir(), isIgnoreFailures());
             }
             if (isIgnoreFailures()) {
                 build.setResult(originalResult);
@@ -112,61 +115,6 @@ public class ProjectBuildResultPublisher extends Publisher {
             listener.getLogger().println("InterruptedException!");
             return false;
         }
-    }
-
-    private boolean recordBuildResults(AbstractBuild build, Launcher launcher, BuildListener listener, String buildName) throws IOException, InterruptedException {
-        String[] cmdStrings = new String[]{
-                "/bin/bash",
-                getScriptDir() + "/repo/add_build_result.sh",
-                getPipelineBuildId(),
-                getPipelineStage(),
-                getBuildResultString(build, buildName)
-        };
-
-        Launcher.ProcStarter ps = launcher.new ProcStarter();
-        ps = ps.cmds(cmdStrings).stdout(listener);
-        ps = ps.pwd(build.getWorkspace()).envs(build.getEnvironment(listener));
-
-        Proc proc = launcher.launch(ps);
-        return (proc.join() == 0);
-    }
-
-    private boolean setPipelineStageStatus(AbstractBuild build, Launcher launcher, BuildListener listener, String stageStatus) throws IOException, InterruptedException {
-        String[] cmdStrings = new String[]{
-                "/bin/bash",
-                getScriptDir() + "/repo/set_stage_status.sh",
-                getPipelineBuildId(),
-                getPipelineStage(),
-                stageStatus
-        };
-
-        Launcher.ProcStarter ps = launcher.new ProcStarter();
-        ps = ps.cmds(cmdStrings).stdout(listener);
-        ps = ps.pwd(build.getWorkspace()).envs(build.getEnvironment(listener));
-
-        Proc proc = launcher.launch(ps);
-        return (proc.join() == 0);
-    }
-
-    private String getBuildResultString(AbstractBuild build, String buildName) {
-        AbstractTestResultAction buildResultAction = build.getAction(AbstractTestResultAction.class);
-        Integer testsTotal = (buildResultAction != null) ? buildResultAction.getTotalCount() : 0;
-        Integer testsSkipped = (buildResultAction != null) ? buildResultAction.getSkipCount() : 0;
-        Integer testsFailed = (buildResultAction != null) ? buildResultAction.getFailCount() : 0;
-        if (buildName == null || buildName.equals("")) {
-            buildName = build.getProject().getName();
-        }
-        return StringUtils.join(
-                new String[]{
-                        buildName,
-                        Jenkins.getInstance().getRootUrl() + build.getUrl(),
-                        build.getResult().toString(),
-                        testsTotal.toString(),
-                        testsSkipped.toString(),
-                        testsFailed.toString()
-                },
-                ";"
-        );
     }
 
     private String getScriptDir() throws IOException{
@@ -216,11 +164,7 @@ public class ProjectBuildResultPublisher extends Publisher {
         }
 
         public ListBoxModel doFillPipelineStageItems() {
-            ListBoxModel items = new ListBoxModel();
-            items.add("First Stage", "first");
-            items.add("Second Stage", "second");
-            items.add("Third Stage", "third");
-            return items;
+            return PipelineStageStatusHelper.doFillPipelineStageItems();
         }
     }
 }

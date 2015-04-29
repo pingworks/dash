@@ -2,6 +2,7 @@ package org.jenkinsci.plugins.dashboardintegration;
 
 import java.io.IOException;
 
+import hudson.tasks.Builder;
 import jenkins.model.Jenkins;
 import net.sf.json.JSONObject;
 
@@ -13,6 +14,7 @@ import hudson.Launcher;
 import hudson.model.AbstractBuild;
 import hudson.model.AbstractProject;
 import hudson.model.BuildListener;
+import hudson.model.Result;
 import hudson.tasks.BuildStepDescriptor;
 import hudson.tasks.BuildStepMonitor;
 import hudson.tasks.Publisher;
@@ -28,24 +30,24 @@ import hudson.util.ListBoxModel;
  *
  * @author Kohsuke Kawaguchi
  */
-public class PipelineStageStatusPublisher extends Publisher {
+public class ProjectBuildResultBuilder extends Builder {
 
     private final String pipelineBuildId;
 
     private final String pipelineStage;
 
-    private final String pipelineStageStatus;
-
     private final boolean ignoreFailures;
+
+    private final String buildName;
 
     // Fields in config.jelly must match the parameter names in the "DataBoundConstructor"
     @DataBoundConstructor
-    public PipelineStageStatusPublisher(String pipelineBuildId, String pipelineStage, String pipelineStageStatus,
-                                        boolean ignoreFailures) {
+    public ProjectBuildResultBuilder(String pipelineBuildId, String pipelineStage,
+                                     boolean ignoreFailures, String buildName) {
         this.pipelineBuildId = pipelineBuildId;
         this.pipelineStage = pipelineStage;
-        this.pipelineStageStatus = pipelineStageStatus;
         this.ignoreFailures = ignoreFailures;
+        this.buildName = buildName;
     }
 
     public String getPipelineBuildId() {
@@ -56,19 +58,39 @@ public class PipelineStageStatusPublisher extends Publisher {
         return pipelineStage;
     }
 
-    public String getPipelineStageStatus() {
-        return pipelineStageStatus;
-    }
-
     public boolean isIgnoreFailures() {
         return ignoreFailures;
     }
 
-    @Override
-    public boolean perform(AbstractBuild build, Launcher launcher, BuildListener listener) throws IOException {
+    public String getBuildName() {
+        return buildName;
+    }
 
-        PipelineStageStatusSetter setter = new PipelineStageStatusSetter(build, launcher, listener);
-        return setter.setStageStatus(getPipelineBuildId(), getPipelineStage(), getPipelineStageStatus(), getScriptDir(), isIgnoreFailures());
+    @Override
+    public boolean perform(AbstractBuild build, Launcher launcher, BuildListener listener) {
+
+        try {
+            Result originalResult = build.getResult();
+
+            PipelineBuildResultSetter resultSetter = new PipelineBuildResultSetter(build, launcher, listener);
+
+            boolean exitCode = resultSetter.recordBuildResults(getPipelineBuildId(), getPipelineStage(), getScriptDir(), buildName);
+
+            if (isIgnoreFailures()) {
+                build.setResult(originalResult);
+                exitCode = true;
+            }
+            return exitCode;
+        } catch (IOException e) {
+            e.printStackTrace();
+            e.printStackTrace(listener.getLogger());
+            listener.getLogger().println("IOException !");
+            return false;
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+            listener.getLogger().println("InterruptedException!");
+            return false;
+        }
     }
 
     private String getScriptDir() throws IOException{
@@ -77,12 +99,8 @@ public class PipelineStageStatusPublisher extends Publisher {
         return descriptor.getScriptDir();
     }
 
-    public BuildStepMonitor getRequiredMonitorService() {
-        return BuildStepMonitor.NONE;
-    }
-
     /**
-     * Descriptor for {@link PipelineStageStatusPublisher}. Used as a singleton.
+     * Descriptor for {@link org.jenkinsci.plugins.dashboardintegration.ProjectBuildResultBuilder}. Used as a singleton.
      * The class is marked as public so that it can be accessed from views.
      *
      * <p>
@@ -90,7 +108,7 @@ public class PipelineStageStatusPublisher extends Publisher {
      * for the actual HTML fragment for the configuration screen.
      */
     @Extension
-    public static final class DescriptorImpl extends BuildStepDescriptor<Publisher> {
+    public static final class DescriptorImpl extends BuildStepDescriptor<Builder> {
         /**
          * In order to load the persisted global configuration, you have to
          * call load() in the constructor.
@@ -108,7 +126,7 @@ public class PipelineStageStatusPublisher extends Publisher {
          * This human readable name is used in the configuration screen.
          */
         public String getDisplayName() {
-            return "Dashboard: Set pipeline stage status";
+            return "Dashboard: Add project build to pipeline stage as in progress";
         }
 
         @Override
@@ -119,10 +137,6 @@ public class PipelineStageStatusPublisher extends Publisher {
 
         public ListBoxModel doFillPipelineStageItems() {
             return PipelineStageStatusHelper.doFillPipelineStageItems();
-        }
-
-        public ListBoxModel doFillPipelineStageStatusItems() {
-            return PipelineStageStatusHelper.doFillPipelineStageStatusItems();
         }
     }
 }

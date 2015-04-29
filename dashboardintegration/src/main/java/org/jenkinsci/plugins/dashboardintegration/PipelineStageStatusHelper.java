@@ -12,9 +12,9 @@ import org.kohsuke.stapler.StaplerRequest;
 
 /**
  */
-public final class PipelineStageStatusSetterDescriptor {
+public final class PipelineStageStatusHelper {
 
-    private PipelineStageStatusSetterDescriptor() {
+    private PipelineStageStatusHelper() {
 
     }
 
@@ -31,6 +31,7 @@ public final class PipelineStageStatusSetterDescriptor {
         items.add("Success", "passed");
         items.add("Failed", "failed");
         items.add("In progress", "in_progress");
+        items.add("Result from this build", "this_build");
         return items;
     }
 }
