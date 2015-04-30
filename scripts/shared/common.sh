@@ -227,5 +227,6 @@ function setStageStatus() {
   validateStage $STAGE
   validateStatus $STATUS
 
+  removeMetadata "$BUNDLE" "status" "${STAGE}_stage_"
   addMetadata "$BUNDLE" "status" "${STAGE}_stage_${STATUS}"
 }
