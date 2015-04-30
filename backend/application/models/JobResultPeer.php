@@ -34,6 +34,7 @@ class Application_Model_JobResultPeer
     {
         $jobResultFileContent = Application_Model_BundlePeer::getJobResults($branch, $bundleId, $stage);
         $jobResultStrings = explode("\n", $jobResultFileContent);
+        sort($jobResultStrings,SORT_REGULAR);
         $jobResults = array();
         foreach ($jobResultStrings as $string) {
             $jobResult = self::getJobResultFromString($string);
