@@ -16,5 +16,5 @@ fi
 
 REMOVEVALUE=$(echo $VALUE | cut -d';' -f1)
 
-removeMetadata $BUNDLE ${STAGE}_stage_results $REMOVEVALUE
+removeMetadata $BUNDLE ${STAGE}_stage_results "${REMOVEVALUE};"
 addMetadata $BUNDLE ${STAGE}_stage_results $VALUE
