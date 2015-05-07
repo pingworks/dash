@@ -19,7 +19,7 @@ var Dash = {};
 Dash.config = {
     version: '__VERSION__',
     // please remember to change the corresponding value in application.ini
-    pipelineStages: 3,
+    pipelineStages: 4,
     toolbar: {
         left: [
             {
@@ -263,7 +263,8 @@ Dash.config = {
         stageMap: {
             1: 'First',
             2: 'Second',
-            3: 'Third'
+            3: 'Third',
+            4: 'Fourth'
         }
     },
 
