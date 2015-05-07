@@ -258,7 +258,7 @@ Dash.config = {
     jobresult: {
         endpoint: '/jobresult',
         text: '<div style="white-space: nowrap;"><img src="{6}" alt="{2}" class="{7}">&nbsp;'
-            + '<a href="/jenkins/{1}" target="_blank">{0}</a>: Tests: {3}, skipped: {4}, failed: {5}</div>',
+            + '<a href="/jenkins/{1}" target="_blank">{0}</a>: Tests: {3}, skipped: {4}, failed: {5}&nbsp;&nbsp;&nbsp;&nbsp;</div>',
         title: '{1} stage Jobs for Bundle {2}',
         stageMap: {
             1: 'First',

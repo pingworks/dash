@@ -19,7 +19,9 @@ Ext.define("Dash.view.ToolTip", {
     autoHide: false,
     anchor: 'left',
     maxWidth: 1000,
+    maxHeight: 600,
     dismissDelay: 1000,
+    autoScroll: true,
 
     onLoad: function(records, operation, success) {
         if (records && records.length > 0 && success) {
