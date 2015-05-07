@@ -34,3 +34,4 @@ $bootstrap = new Zend_Application(APPLICATION_ENV, APPLICATION_PATH . '/configs/
 Zend_Registry::set("repodir", $bootstrap->getOption('repodir'));
 Zend_Registry::set("datadir", $bootstrap->getOption('datadir'));
 Zend_Registry::set("defaultbranch", $bootstrap->getOption('defaultbranch'));
+Zend_Registry::set("pipelinestages", $this->getOption('pipelinestages'));
