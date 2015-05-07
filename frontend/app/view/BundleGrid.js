@@ -23,23 +23,33 @@ Ext.define("Dash.view.BundleGrid", {
 
     id: 'BundleGrid',
 
-    stageStatusIconRenderer: function(value, metadata, record, rowIndex, colIndex, store, view) {
+    stageColumnOffset: 6,
+
+    visibleColumnIndex: function (colIndex) {
         // work around extjs bug: colIndex is wrong when some cols are hidden
-        var baseOffset = 6;
         var hiddenCols = 0;
         for (var i = 0; i < colIndex; i++) {
             if (!this.columns[i].isVisible())
                 hiddenCols++;
         }
-        var stageStatus = Dash.app.getController('Bundle').getStageStatus(record, colIndex - baseOffset + hiddenCols);
+        return colIndex + hiddenCols;
+    },
+
+    getStageNrFromColIndex: function(colIndex) {
+        return this.visibleColumnIndex(colIndex) - this.stageColumnOffset;
+    },
+
+    stageStatusIconRenderer: function(value, metadata, record, rowIndex, colIndex, store, view) {
+
+        var stageStatus = Dash.app.getController('Bundle').getStageStatus(record, this.getStageNrFromColIndex(colIndex));
         var iconUrl = Ext.BLANK_IMAGE_URL;
         var iconCls = '';
         if (stageStatus) {
             iconUrl = Ext.String.format(Dash.config.stagestatus.iconpath, stageStatus.get('icon'));
             iconCls = stageStatus.get('cls');
         }
-        this.columns[colIndex + hiddenCols].items[0].icon = iconUrl;
-        this.columns[colIndex + hiddenCols].items[0].iconCls = iconCls;
+        this.columns[this.visibleColumnIndex(colIndex)].items[0].icon = iconUrl;
+        this.columns[this.visibleColumnIndex(colIndex)].items[0].iconCls = iconCls;
     },
 
     deploymentActionRenderer: function(value, metadata, record, rowIndex, colIndex, store, view) {
@@ -142,12 +152,13 @@ Ext.define("Dash.view.BundleGrid", {
                 items: [
                     {
                         handler: function(gridview, rowIndex, colIndex, item, event, record) {
+                            var stage = this.getStageNrFromColIndex(colIndex);
                             that.fireEvent('hideAllTooltips');
                             that.fireEvent(
                                 'loadJobResult',
                                 record,
-                                1,
-                                that.createJobResultTooltip(event.target, record, 1)
+                                stage,
+                                that.createJobResultTooltip(event.target, record, stage)
                             );
                         }
                     }
