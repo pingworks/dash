@@ -5,5 +5,9 @@
       description="Path to the directory containing the scripts">
       <f:textbox />
     </f:entry>
+    <f:entry title="Pipeline stages" field="pipelineStages"
+      description="Number of pipeline stages">
+      <f:select />
+    </f:entry>
   </f:section>
 </j:jelly>

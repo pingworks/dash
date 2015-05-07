@@ -9,6 +9,7 @@ import javax.servlet.ServletException;
 import hudson.EnvVars;
 import hudson.model.*;
 import hudson.tasks.*;
+import hudson.util.ListBoxModel;
 import net.sf.json.JSONObject;
 
 import org.kohsuke.stapler.DataBoundConstructor;
@@ -180,6 +181,8 @@ public class PipelineBuildCreatorBuilder extends Builder {
          */
         private String scriptDir;
 
+        private Integer pipelineStages;
+
         /**
          * In order to load the persisted global configuration, you have to 
          * call load() in the constructor.
@@ -238,6 +241,7 @@ public class PipelineBuildCreatorBuilder extends Builder {
         @Override
         public boolean configure(StaplerRequest req, JSONObject formData) throws FormException {
             scriptDir = formData.getString("scriptDir");
+            pipelineStages = formData.getInt("pipelineStages");
             save();
             return super.configure(req,formData);
         }
@@ -249,6 +253,27 @@ public class PipelineBuildCreatorBuilder extends Builder {
             return scriptDir;
         }
 
+        public Integer getPipelineStages() throws IOException {
+            if (pipelineStages == null) {
+                throw new IOException("Missing pipelineStages from global configuration!");
+            }
+            return pipelineStages;
+        }
+
+        public ListBoxModel doFillPipelineStagesItems() {
+            ListBoxModel items = new ListBoxModel();
+            items.add("one", "1");
+            items.add("two", "2");
+            items.add("three", "3");
+            items.add("four", "4");
+            items.add("five", "5");
+            items.add("six", "6");
+            items.add("seven", "7");
+            items.add("eight", "8");
+            items.add("nine", "9");
+            items.add("ten", "10");
+            return items;
+        }
     }
 }
 

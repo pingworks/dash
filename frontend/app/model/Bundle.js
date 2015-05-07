@@ -14,27 +14,30 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
+var bundleFields = [
+    { name: 'id', type: 'string' },
+    { name: 'branch', type: 'string' },
+    { name: 'branch_name', type: 'string' },
+    { name: 'pname', type: 'string' },
+    { name: 'revision', type: 'string' },
+    { name: 'repository', type: 'string' }
+];
+for (var i = 1; i <= Dash.config.pipelineStages; i++) {
+    bundleFields.push({ name: 'stage' + i, type: 'int' });
+}
+bundleFields.push({ name: 'timestamp', type: 'date', convert: function(value, record) {
+    return Ext.Date.parse(value, Dash.config.bundle.dateformat)
+}});
+bundleFields.push({ name: 'buildUrls', type: 'auto' });
+bundleFields.push({ name: 'committer', type: 'string' });
+bundleFields.push({ name: 'payload', type: 'array' });
+bundleFields.push({ name: 'comment', type: 'string' });
+
 Ext.define('Dash.model.Bundle', {
     extend: 'Ext.data.Model',
 
-    fields: [
-        { name: 'id', type: 'string' },
-        { name: 'branch', type: 'string' },
-        { name: 'branch_name', type: 'string' },
-        { name: 'pname', type: 'string' },
-        { name: 'revision', type: 'string' },
-        { name: 'repository', type: 'string' },
-        { name: 'stage1', type: 'int' },
-        { name: 'stage2', type: 'int' },
-        { name: 'stage3', type: 'int' },
-        { name: 'timestamp', type: 'date', convert: function(value, record) {
-            return Ext.Date.parse(value, Dash.config.bundle.dateformat)
-        }},
-        { name: 'buildUrls', type: 'auto' },
-        { name: 'committer', type: 'string' },
-        { name: 'payload', type: 'array' },
-        { name: 'comment', type: 'string' }
-    ],
+    fields: bundleFields,
     proxy: {
         type: 'rest',
         url: Dash.config.bundle.endpoint,

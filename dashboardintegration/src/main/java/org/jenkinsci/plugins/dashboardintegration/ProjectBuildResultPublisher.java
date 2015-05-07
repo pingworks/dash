@@ -163,8 +163,14 @@ public class ProjectBuildResultPublisher extends Publisher {
             return super.configure(req,formData);
         }
 
-        public ListBoxModel doFillPipelineStageItems() {
-            return PipelineStageStatusHelper.doFillPipelineStageItems();
+        private Integer getPipelineStages() throws IOException{
+            PipelineBuildCreatorBuilder.DescriptorImpl descriptor =
+                    (PipelineBuildCreatorBuilder.DescriptorImpl) Jenkins.getInstance().getDescriptor(PipelineBuildCreatorBuilder.class);
+            return descriptor.getPipelineStages();
+        }
+
+        public ListBoxModel doFillPipelineStageItems() throws IOException {
+            return PipelineStageStatusHelper.doFillPipelineStageItems(getPipelineStages());
         }
     }
 }

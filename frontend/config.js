@@ -18,6 +18,8 @@ var Dash = {};
 
 Dash.config = {
     version: '__VERSION__',
+    // please remember to change the corresponding value in application.ini
+    pipelineStages: 3,
     toolbar: {
         left: [
             {
@@ -107,6 +109,7 @@ Dash.config = {
             stage1: 40,
             stage2: 40,
             stage3: 40,
+            stage4: 40,
             build: 120,
             changes: 120,
             deployment: 60,
@@ -125,6 +128,7 @@ Dash.config = {
             stage1: '1st',
             stage2: '2nd',
             stage3: '3rd',
+            stage4: '4th',
             build: 'Build',
             changes: 'Changes',
             deployment: 'Deploy Test',
@@ -143,6 +147,7 @@ Dash.config = {
             stage1: false,
             stage2: false,
             stage3: false,
+            stage4: false,
             build: true,
             changes: false,
             deployment: false,

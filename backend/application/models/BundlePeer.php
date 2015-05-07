@@ -18,7 +18,43 @@
 
 class Application_Model_BundlePeer
 {
-    private static $stageNameMap = array('1' => 'first', '2' => 'second', '3' => 'third');
+    private static $stageNameMap = array(
+        '1' => 'first',
+        '2' => 'second',
+        '3' => 'third',
+        '4' => 'fourth',
+        '5' => 'fifth',
+        '6' => 'sixth',
+        '7' => 'seventh',
+        '8' => 'eighth',
+        '9' => 'ninth',
+        '10' => 'tenth'
+    );
+
+    private static $baseMetaKeys = array(
+        'branch',
+        'branch_name',
+        'pname',
+        'revision',
+        'repository',
+        'timestamp',
+        'committer',
+        'comment',
+        'changes',
+        'status',
+        'buildnr',
+        'bundle',
+    );
+
+    private static function getDynamicMetaKeys()
+    {
+        $keys = array();
+        $maxStages = Zend_Registry::get("pipelinestages");
+        for($i=1; $i<=$maxStages; $i++) {
+            array_push($keys, self::$stageNameMap[$i]);
+        }
+        return $keys;
+    }
 
     private static function getAllMetaKeys($branch, $id)
     {
@@ -26,23 +62,8 @@ class Application_Model_BundlePeer
         foreach (new DirectoryIterator(Zend_Registry::get("repodir") . '/' . $branch . '/' . $id . '/metadata/') as $keyFile) {
             if (!$keyFile->isDot() && $keyFile->isFile()) {
                 $basename = $keyFile->getBasename();
-                if (!in_array($basename, array(
-                    'branch',
-                    'branch_name',
-                    'pname',
-                    'revision',
-                    'repository',
-                    'timestamp',
-                    'committer',
-                    'comment',
-                    'changes',
-                    'status',
-                    'buildnr',
-                    'bundle',
-                    'first_stage_results',
-                    'second_stage_results',
-                    'third_stage_results'))
-                ) {
+                if (!in_array($basename, array_merge(self::$baseMetaKeys, self::getDynamicMetaKeys())))
+                {
                     $metaKeys[] = $basename;
                 }
             }
@@ -137,9 +158,15 @@ class Application_Model_BundlePeer
         $bundle->timestamp = self::getMetadata($branch, $id, 'timestamp');
         $bundle->committer = self::getMetadata($branch, $id, 'committer');
         $bundle->comment = self::getMetadata($branch, $id, 'comment', '');
-        $bundle->stage1 = self::getStageStatus($branch, $id, 1);
-        $bundle->stage2 = self::getStageStatus($branch, $id, 2);
-        $bundle->stage3 = self::getStageStatus($branch, $id, 3);
+        $maxStages = Zend_Registry::get("pipelinestages");
+        for($i=1; $i<=$maxStages; $i++) {
+            $sname = 'stage' . $i;
+            $svalue = self::getStageStatus($branch, $id, $i);
+            if ($svalue != null)
+            {
+                $bundle->$sname = $svalue;
+            }
+        }
         $bundle->setChanges(self::getMetadata($branch, $id, 'changes'));
         $buildUrls = self::getMetadata($branch, $id, 'buildurl', '');
         $bundle->buildUrls = ($buildUrls) ? explode("\n", $buildUrls) : array();

@@ -130,11 +130,13 @@ Ext.define("Dash.view.BundleGrid", {
                 },
                 width: Dash.config.bundlegrid.colwidth.bundle,
                 hidden: Dash.config.bundlegrid.hidden.bundle
-            },
-            {
-                text: Dash.config.bundlegrid.label.stage1,
-                menuText: '1st',
-                dataIndex: 'stage1',
+            }
+        ];
+        for (var i = 1; i <= Dash.config.pipelineStages; i++) {
+            this.columns.push({
+                text: Dash.config.bundlegrid.label['stage' + i],
+                menuText: i,
+                dataIndex: 'stage' + i,
                 align: 'center',
                 xtype: 'actioncolumn',
                 items: [
@@ -152,57 +154,11 @@ Ext.define("Dash.view.BundleGrid", {
                 ],
                 renderer: this.stageStatusIconRenderer,
                 scope: this,
-                width: Dash.config.bundlegrid.colwidth.stage1,
-                hidden: Dash.config.bundlegrid.hidden.stage1
-            },
-            {
-                text: Dash.config.bundlegrid.label.stage2,
-                menuText: '2nd',
-                dataIndex: 'stage2',
-                align: 'center',
-                xtype: 'actioncolumn',
-                items: [
-                    {
-                        handler: function(gridview, rowIndex, colIndex, item, event, record) {
-                            that.fireEvent('hideAllTooltips');
-                            that.fireEvent(
-                                'loadJobResult',
-                                record,
-                                2,
-                                that.createJobResultTooltip(event.target, record, 2)
-                            );
-                        }
-                    }
-                ],
-                renderer: this.stageStatusIconRenderer,
-                scope: this,
-                width: Dash.config.bundlegrid.colwidth.stage2,
-                hidden: Dash.config.bundlegrid.hidden.stage2
-            },
-            {
-                text: Dash.config.bundlegrid.label.stage3,
-                menuText: '3rd',
-                dataIndex: 'stage3',
-                align: 'center',
-                xtype: 'actioncolumn',
-                items: [
-                    {
-                        handler: function(gridview, rowIndex, colIndex, item, event, record) {
-                            that.fireEvent('hideAllTooltips');
-                            that.fireEvent(
-                                'loadJobResult',
-                                record,
-                                3,
-                                that.createJobResultTooltip(event.target, record, 3)
-                            );
-                        }
-                    }
-                ],
-                renderer: this.stageStatusIconRenderer,
-                scope: this,
-                width: Dash.config.bundlegrid.colwidth.stage3,
-                hidden: Dash.config.bundlegrid.hidden.stage3
-            },
+                width: Dash.config.bundlegrid.colwidth['stage' + i],
+                hidden: Dash.config.bundlegrid.hidden['stage' + i]
+            });
+        }
+        var cols = [
             {
                 text: Dash.config.bundlegrid.label.build,
                 menuText: 'Build',
@@ -356,6 +312,9 @@ Ext.define("Dash.view.BundleGrid", {
                 }
             }
         ];
+        Ext.Array.each(cols, function (el) {
+            that.columns.push(el);
+        });
 
         Ext.Array.forEach(this.columns, function(column, index) {
             if (column.id == 'ColumnDeployment')

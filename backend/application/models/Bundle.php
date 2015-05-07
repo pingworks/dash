@@ -29,6 +29,13 @@ class Application_Model_Bundle
     public $stage1;
     public $stage2;
     public $stage3;
+    public $stage4;
+    public $stage5;
+    public $stage6;
+    public $stage7;
+    public $stage8;
+    public $stage9;
+    public $stage10;
     public $timestamp;
     public $committer;
     public $comment;

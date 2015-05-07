@@ -23,6 +23,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         Zend_Registry::set("repodir", $this->getOption('repodir'));
         Zend_Registry::set("datadir", $this->getOption('datadir'));
         Zend_Registry::set("defaultbranch", $this->getOption('defaultbranch'));
+        Zend_Registry::set("pipelinestages", $this->getOption('pipelinestages'));
         parent::run();
     }
 }
