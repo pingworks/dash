@@ -190,7 +190,7 @@ Dash.config = {
             cancel: 'Cancel',
             save: 'Save'
         },
-        text: 'Comment',
+        text: 'Comment'
     },
 
     change: {
