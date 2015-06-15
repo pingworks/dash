@@ -46,7 +46,7 @@ class Application_Model_BundlePeer
         'bundle',
     );
 
-    private static $ignoreMetaKeys = array(
+    private static $ignoreMetaKeysForPayload = array(
       'first_stage_results',
       'second_stage_results',
       'third_stage_results',
@@ -75,7 +75,7 @@ class Application_Model_BundlePeer
         foreach (new DirectoryIterator(Zend_Registry::get("repodir") . '/' . $branch . '/' . $id . '/metadata/') as $keyFile) {
             if (!$keyFile->isDot() && $keyFile->isFile()) {
                 $basename = $keyFile->getBasename();
-                if (!in_array($basename, array_merge(self::$baseMetaKeys, self::getDynamicMetaKeys(), self::$ignoreMetaKeys)))
+                if (!in_array($basename, array_merge(self::$baseMetaKeys, self::getDynamicMetaKeys(), self::$ignoreMetaKeysForPayload)))
                 {
                     $metaKeys[] = $basename;
                 }
