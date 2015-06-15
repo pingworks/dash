@@ -47,7 +47,7 @@ Ext.define('Dash.controller.Deployment', {
     },
     deploymentAllowed: function(bundle) {
         if (bundle) {
-          if (Dash.config.bundlegrid.triggerJenkinsJob.required) {
+          if (Dash.config.bundlegrid.deployment.required) {
               var requiredFieldValue = bundle.get(Dash.config.bundlegrid.deployment.required.field);
               return ( Dash.config.bundlegrid.deployment.enabled
                   && Dash.config.bundlegrid.deployment.required.value == requiredFieldValue);
