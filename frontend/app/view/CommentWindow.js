@@ -19,7 +19,7 @@ Ext.define("Dash.view.CommentWindow", {
     requires: ['Ext.form.Panel','Ext.form.field.Text'],
 
     id: 'CommentWindow',
-    title: 'Kommentar bearbeiten',
+    title:  Dash.config.comment.title,
     width: 600,
     items: [{
         xtype: 'form',
@@ -33,19 +33,19 @@ Ext.define("Dash.view.CommentWindow", {
 			xtype: 'textfield',
 			id: 'Comment',
 			name: 'comment',
-			fieldLabel: 'Kommentar'
+			fieldLabel: Dash.config.comment.text,
 		}],
         bbar: ['->', {
             xtype: 'button',
             id: 'Cancel',
-            text: 'Abbrechen',
+            text: Dash.config.comment.label.cancel,
             handler: function(button, event){
                 button.findParentByType('window').destroy();
             }
         }, {
             xtype: 'button',
             id: 'SaveComment',
-            text: 'Speichern',
+            text: Dash.config.comment.label.save,
             handler: function(button, event){
                 var form = button.findParentByType('form');
                 var window = button.findParentByType('window');
@@ -58,7 +58,7 @@ Ext.define("Dash.view.CommentWindow", {
 	listeners: {
 		show: function (window) {
             var bundle = window.bundle;
-            window.setTitle(Ext.String.format("Kommentar für Bundle '{0}' bearbeiten", bundle.get('id')));
+            window.setTitle(Ext.String.format(Dash.config.comment.title, bundle.get('id')));
 			var data = bundle.getData();
 			window.down('form').getForm().setValues(data);
 		}

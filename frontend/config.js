@@ -184,7 +184,13 @@ Dash.config = {
     },
 
     comment: {
-        endpoint: '/comment'
+        endpoint: '/comment',
+        title: 'Edit comment for \'{0}\'',
+        label: {
+            cancel: 'Cancel',
+            save: 'Save'
+        },
+        text: 'Comment',
     },
 
     change: {
