@@ -1,12 +1,12 @@
 /*
  * Copyright 2013 pingworks - Alexander Birk und Christoph Lukas
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -47,9 +47,22 @@ Ext.define('Dash.controller.Deployment', {
     },
     deploymentAllowed: function(bundle) {
         if (bundle) {
-            var requiredFieldValue = bundle.get(Dash.config.bundlegrid.deployment.required.field);
-            return ( Dash.config.bundlegrid.deployment.enabled
-                && Dash.config.bundlegrid.deployment.required.value == requiredFieldValue);
+          if (Dash.config.bundlegrid.triggerJenkinsJob.required) {
+              var requiredFieldValue = bundle.get(Dash.config.bundlegrid.deployment.required.field);
+              return ( Dash.config.bundlegrid.deployment.enabled
+                  && Dash.config.bundlegrid.deployment.required.value == requiredFieldValue);
+          }
+          if (Dash.config.bundlegrid.deployment.conditions) {
+              var conditionTrue = true;
+              Ext.each(Dash.config.bundlegrid.deployment.conditions, function(condition) {
+                  var field = condition.field;
+                  var regex = condition.regex;
+                  var fieldValue = '' + bundle.get(field);
+                  conditionTrue &= ( Dash.config.bundlegrid.deployment.enabled
+                      && fieldValue.match(regex) != null)
+              });
+              return conditionTrue;
+          }
         }
         return false;
     },
