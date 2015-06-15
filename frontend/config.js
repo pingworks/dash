@@ -93,6 +93,13 @@ Dash.config = {
         },
         triggerJenkinsJob: {
             enabled: true,
+            /*conditions: [{
+              field: 'stage1',
+              regex: /^3$/
+            }, {
+              field: 'id',
+              regex: /^88\.9/
+            }]*/
             required: {
                 field: 'stage1',
                 value: 3
