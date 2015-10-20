@@ -40,8 +40,8 @@ setMetadata $BUNDLE branch_name $BRANCHNAME
 setMetadata $BUNDLE revision $REV
 setMetadata $BUNDLE buildnr $BUILDNR
 if [ ! -z "$SRCDIR" ]; then
-  setMetadata $BUNDLE changes "$(getLog $SRCDIR $REV)"
-  setMetadata $BUNDLE committer "$(getCommitter $SRCDIR $REV)"
+  setMetadata $BUNDLE changes "$(getLog $SRCDIR $REV | tr \" \')"
+  setMetadata $BUNDLE committer "$(getCommitter $SRCDIR $REV| tr \" \')"
 fi
 echo "done."
 
