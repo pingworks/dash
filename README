@@ -22,6 +22,7 @@ caused with their commit.
 
 This application is build of three different components:
 
+
 dash-scripts
 ------------
 This is a set of scripts used to bundle the binary artifacts which
