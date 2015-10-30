@@ -13,6 +13,9 @@ function getBundleFolder() {
   if [ -z "${BUNDLE_FOLDER}" ]; then
     echo "Bundle not found: $BUNDLE"
     exit 1
+  elif [ $(echo "${BUNDLE_FOLDER}" | wc -l) -ne 1 ]; then
+    echo "Expected 1 Bundle, but got: $BUNDLE_FOLDER"
+    exit 1
   fi
 }
 
