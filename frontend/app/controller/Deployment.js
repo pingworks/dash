@@ -110,6 +110,7 @@ Ext.define('Dash.controller.Deployment', {
                 content: environment.get('content'),
                 dbreset: environment.get('dbreset'),
                 bundle: environment.get('bundle'),
+                environment_bundle: environment.get('id') + ':' +  environment.get('bundle'),
                 user: environment.get('by')
             },
             success: this.onDeploymentTriggered,
