@@ -57,6 +57,10 @@ Ext.define('Dash.controller.LockExtension', {
             return false;
         }
         environment.set('locked', true);
+        console.log('values.lock=' + values.lock);
+        if (!values.lock) {
+          values.lock = 87600;
+        }
         var now = new Date();
         var lockUntil = new Date(now.getTime() + (values.lock * 3600 * 1000));
         var dateFormat = Dash.config.environment.dateformat;
