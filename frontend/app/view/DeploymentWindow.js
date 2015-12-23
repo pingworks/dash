@@ -96,7 +96,7 @@ Ext.define("Dash.view.DeploymentWindow", {
                     maxLength: 10,
                     fieldLabel: 'Name',
                     allowBlank: false,
-                    emptyText: 'anonymous'
+                    value: 'anonymous'
                 },
                 {
                     xtype: 'combobox',
@@ -110,7 +110,7 @@ Ext.define("Dash.view.DeploymentWindow", {
                     border: false,
                     forceSelection: true,
                     allowBlank: false,
-                    autoSelect: true,
+                    setValue: 87600,
                     listConfig: {
                         id: 'LockList'
                     }

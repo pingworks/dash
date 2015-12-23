@@ -369,6 +369,10 @@ Dash.config = {
             {
                 'id': '120',
                 'name': '5 days'
+            },
+            {
+                'id': '87600',
+                'name': 'infinite'
             }
         ]
     },
