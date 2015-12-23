@@ -110,6 +110,7 @@ Ext.define("Dash.view.DeploymentWindow", {
                     border: false,
                     forceSelection: false,
                     allowBlank: true,
+                    emptyText: 'infinite',
                     listConfig: {
                         id: 'LockList'
                     }
