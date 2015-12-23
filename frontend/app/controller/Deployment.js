@@ -88,7 +88,6 @@ Ext.define('Dash.controller.Deployment', {
         }
         var environment = this.getEnvironmentsStore().findRecord('id', values.environment);
         environment.set('locked', true);
-        console.log('values.lock=' + values.lock);
         if (!values.lock) {
           values.lock = 87600;
         }
