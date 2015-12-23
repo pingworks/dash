@@ -1,12 +1,12 @@
 /*
  * Copyright 2013 pingworks - Alexander Birk und Christoph Lukas
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *     http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -58,6 +58,7 @@ Ext.define("Dash.view.DeploymentWindow", {
                     name: 'overwrite',
                     fieldLabel: 'Lock überschreiben',
                     inputValue: 'overwrite',
+                    checked: true,
                     listeners: {
                         'change': function() {
                             var environmentField = this.findParentByType('form').getForm().findField('environment');
@@ -94,7 +95,8 @@ Ext.define("Dash.view.DeploymentWindow", {
                     name: 'name',
                     maxLength: 10,
                     fieldLabel: 'Name',
-                    allowBlank: false
+                    allowBlank: false,
+                    emptyText: 'anonymous'
                 },
                 {
                     xtype: 'combobox',
@@ -108,6 +110,7 @@ Ext.define("Dash.view.DeploymentWindow", {
                     border: false,
                     forceSelection: true,
                     allowBlank: false,
+                    autoSelect: true,
                     listConfig: {
                         id: 'LockList'
                     }
