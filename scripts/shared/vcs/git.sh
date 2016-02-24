@@ -47,7 +47,7 @@ function getLog() {
     REVRANGE="${REV1}..${REV2}"
   fi
   cd $SRCDIR
-  git log ${REVRANGE}
+  git log ${REVRANGE} | sed "s;';;g" | sed 's;";;g'
 }
 
 function exportURL() {
