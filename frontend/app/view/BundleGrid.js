@@ -112,7 +112,7 @@ Ext.define("Dash.view.BundleGrid", {
                 dataIndex: 'revision',
                 renderer: function(value, metadata, record, rowIndex, colIndex, store, view) {
                     return ( Dash.config.bundlegrid.vcslink && Dash.config.bundlegrid.vcslink != '' && record.get('revision') != 'Unavailable')
-                        ? Ext.String.format(Dash.config.bundlegrid.vcslink, record.get('repository'), record.get('revision'))
+                        ? Ext.String.format(Dash.config.bundlegrid.vcslink, record.get('repository'), record.get('revision'), record.get('branch'))
                         : record.get('revision');
                 },
                 width: Dash.config.bundlegrid.colwidth.revision,
