@@ -96,16 +96,16 @@ public class ProjectBuildResultPublisher extends Publisher {
             PipelineBuildResultSetter resultSetter = new PipelineBuildResultSetter(build, launcher, listener);
             PipelineStageStatusSetter stageStatusSetter = new PipelineStageStatusSetter(build, launcher, listener);
 
-            boolean exitCode = resultSetter.recordBuildResults(getPipelineBuildId(), getPipelineStage(), getScriptDir(), buildName);
+            boolean exitCode = resultSetter.recordBuildResults(getPipelineBuildId(), getPipelineStage(), getScriptDir(build), buildName);
 
             if (isBuildSetsStageToFailure() && originalResult != Result.SUCCESS) {
                 String stageStatus = "failed";
-                exitCode &= stageStatusSetter.setStageStatus(getPipelineBuildId(), getPipelineStage(), stageStatus, getScriptDir(), isIgnoreFailures());
+                exitCode &= stageStatusSetter.setStageStatus(getPipelineBuildId(), getPipelineStage(), stageStatus, getScriptDir(build), isIgnoreFailures());
             }
 
             if (isBuildSetsStageToSuccess() && originalResult == Result.SUCCESS) {
                 String stageStatus = "passed";
-                exitCode &= stageStatusSetter.setStageStatus(getPipelineBuildId(), getPipelineStage(), stageStatus, getScriptDir(), isIgnoreFailures());
+                exitCode &= stageStatusSetter.setStageStatus(getPipelineBuildId(), getPipelineStage(), stageStatus, getScriptDir(build), isIgnoreFailures());
             }
             if (isIgnoreFailures()) {
                 build.setResult(originalResult);
@@ -124,12 +124,12 @@ public class ProjectBuildResultPublisher extends Publisher {
         }
     }
 
-    private String getScriptDir() throws IOException{
+    private String getScriptDir(AbstractBuild build) throws IOException{
         PipelineBuildCreatorBuilder.DescriptorImpl descriptor =
                 (PipelineBuildCreatorBuilder.DescriptorImpl) Jenkins.getInstance().getDescriptor(PipelineBuildCreatorBuilder.class);
         String scriptDir = descriptor.getScriptDir();
         if (isLocalScripts() == true) {
-          scriptDir = "/var/lib/jenkins/local_scripts";
+          scriptDir = build.getWorkspace().readToString() + "/scripts";
         }
         return scriptDir;
     }
