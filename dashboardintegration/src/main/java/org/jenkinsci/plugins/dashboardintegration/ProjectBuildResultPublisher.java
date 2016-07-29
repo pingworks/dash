@@ -25,7 +25,7 @@ import hudson.tasks.Publisher;
  *
  * <p>
  * When a build is performed, the {@link #perform(AbstractBuild, Launcher, BuildListener)}
- * method will be invoked. 
+ * method will be invoked.
  *
  * @author Kohsuke Kawaguchi
  */
@@ -43,17 +43,20 @@ public class ProjectBuildResultPublisher extends Publisher {
 
     private final String buildName;
 
+    private final String localScripts;
+
     // Fields in config.jelly must match the parameter names in the "DataBoundConstructor"
     @DataBoundConstructor
     public ProjectBuildResultPublisher(String pipelineBuildId, String pipelineStage,
                                        boolean buildSetsStageToFailure, boolean buildSetsStageToSuccess,
-                                       boolean ignoreFailures, String buildName) {
+                                       boolean ignoreFailures, String buildName, boolean localScripts) {
         this.pipelineBuildId = pipelineBuildId;
         this.pipelineStage = pipelineStage;
         this.buildSetsStageToFailure = buildSetsStageToFailure;
         this.buildSetsStageToSuccess = buildSetsStageToSuccess;
         this.ignoreFailures = ignoreFailures;
         this.buildName = buildName;
+        this.localScripts = localScripts;
     }
 
     public String getPipelineBuildId() {
@@ -78,6 +81,10 @@ public class ProjectBuildResultPublisher extends Publisher {
 
     public String getBuildName() {
         return buildName;
+    }
+
+    public boolean isLocalScripts() {
+        return localScripts;
     }
 
     @Override
@@ -120,7 +127,11 @@ public class ProjectBuildResultPublisher extends Publisher {
     private String getScriptDir() throws IOException{
         PipelineBuildCreatorBuilder.DescriptorImpl descriptor =
                 (PipelineBuildCreatorBuilder.DescriptorImpl) Jenkins.getInstance().getDescriptor(PipelineBuildCreatorBuilder.class);
-        return descriptor.getScriptDir();
+        String scriptDir = descriptor.getScriptDir();
+        if (isLocalScripts() == true) {
+          scriptDir = '/var/lib/jenkins/local_scripts'
+        }
+        return scriptDir;
     }
 
     public BuildStepMonitor getRequiredMonitorService() {
@@ -174,4 +185,3 @@ public class ProjectBuildResultPublisher extends Publisher {
         }
     }
 }
-

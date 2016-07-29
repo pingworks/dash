@@ -19,8 +19,11 @@
     <f:checkbox default="true" />
   </f:entry>
   <f:advanced>
-      <f:entry title="Overwrite buildname for dashboard" field="buildName">
-        <f:textbox />
-      </f:entry>
+    <f:entry title="Overwrite buildname for dashboard" field="buildName">
+      <f:textbox />
+    </f:entry>
+    <f:entry title="Use local dash scripts ($WORKSPACE/scripts)?" field="localScripts">
+      <f:checkbox default="false" />
+    </f:entry>
   </f:advanced>
 </j:jelly>
