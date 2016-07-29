@@ -43,7 +43,7 @@ public class ProjectBuildResultPublisher extends Publisher {
 
     private final String buildName;
 
-    private final String localScripts;
+    private final boolean localScripts;
 
     // Fields in config.jelly must match the parameter names in the "DataBoundConstructor"
     @DataBoundConstructor
