@@ -129,7 +129,7 @@ public class ProjectBuildResultPublisher extends Publisher {
                 (PipelineBuildCreatorBuilder.DescriptorImpl) Jenkins.getInstance().getDescriptor(PipelineBuildCreatorBuilder.class);
         String scriptDir = descriptor.getScriptDir();
         if (isLocalScripts() == true) {
-          scriptDir = '/var/lib/jenkins/local_scripts'
+          scriptDir = '/var/lib/jenkins/local_scripts';
         }
         return scriptDir;
     }
