@@ -76,7 +76,7 @@ public class ProjectBuildResultBuilder extends Builder {
 
             String scriptDir = getScriptDir();
             if ( scriptDir == "use_local" ) {
-              scriptDir = build.getWorkspace().readToString() + "/scripts"
+              scriptDir = build.getWorkspace().readToString() + "/scripts";
             }
 
             boolean exitCode = resultSetter.recordBuildResults(getPipelineBuildId(), getPipelineStage(), scriptDir, buildName);

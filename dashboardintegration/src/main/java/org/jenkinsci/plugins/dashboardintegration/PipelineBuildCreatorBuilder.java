@@ -140,7 +140,7 @@ public class PipelineBuildCreatorBuilder extends Builder {
     private boolean startPipelineBuild(AbstractBuild build, Launcher launcher, BuildListener listener) throws IOException, InterruptedException {
       String scriptDir = getDescriptor().getScriptDir();
       if ( scriptDir == "use_local" ) {
-        scriptDir = build.getWorkspace().readToString() + "/scripts"
+        scriptDir = build.getWorkspace().readToString() + "/scripts";
       }
       String[] cmdStrings = new String[]{
                 "/bin/bash",
