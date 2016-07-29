@@ -43,8 +43,6 @@ public class ProjectBuildResultPublisher extends Publisher {
 
     private final String buildName;
 
-    private final boolean localScripts;
-
     // Fields in config.jelly must match the parameter names in the "DataBoundConstructor"
     @DataBoundConstructor
     public ProjectBuildResultPublisher(String pipelineBuildId, String pipelineStage,
@@ -56,7 +54,6 @@ public class ProjectBuildResultPublisher extends Publisher {
         this.buildSetsStageToSuccess = buildSetsStageToSuccess;
         this.ignoreFailures = ignoreFailures;
         this.buildName = buildName;
-        this.localScripts = localScripts;
     }
 
     public String getPipelineBuildId() {
@@ -83,10 +80,6 @@ public class ProjectBuildResultPublisher extends Publisher {
         return buildName;
     }
 
-    public boolean isLocalScripts() {
-        return localScripts;
-    }
-
     @Override
     public boolean perform(AbstractBuild build, Launcher launcher, BuildListener listener) {
 
@@ -96,16 +89,21 @@ public class ProjectBuildResultPublisher extends Publisher {
             PipelineBuildResultSetter resultSetter = new PipelineBuildResultSetter(build, launcher, listener);
             PipelineStageStatusSetter stageStatusSetter = new PipelineStageStatusSetter(build, launcher, listener);
 
-            boolean exitCode = resultSetter.recordBuildResults(getPipelineBuildId(), getPipelineStage(), getScriptDir(build), buildName);
+            String scriptDir = getScriptDir();
+            if (scriptDir == "use_local") {
+              scriptDir = build.getWorkspace().readToString() + "/scripts";
+            }
+
+            boolean exitCode = resultSetter.recordBuildResults(getPipelineBuildId(), getPipelineStage(), scriptDir, buildName);
 
             if (isBuildSetsStageToFailure() && originalResult != Result.SUCCESS) {
                 String stageStatus = "failed";
-                exitCode &= stageStatusSetter.setStageStatus(getPipelineBuildId(), getPipelineStage(), stageStatus, getScriptDir(build), isIgnoreFailures());
+                exitCode &= stageStatusSetter.setStageStatus(getPipelineBuildId(), getPipelineStage(), stageStatus, scriptDir, isIgnoreFailures());
             }
 
             if (isBuildSetsStageToSuccess() && originalResult == Result.SUCCESS) {
                 String stageStatus = "passed";
-                exitCode &= stageStatusSetter.setStageStatus(getPipelineBuildId(), getPipelineStage(), stageStatus, getScriptDir(build), isIgnoreFailures());
+                exitCode &= stageStatusSetter.setStageStatus(getPipelineBuildId(), getPipelineStage(), stageStatus, scriptDir, isIgnoreFailures());
             }
             if (isIgnoreFailures()) {
                 build.setResult(originalResult);
@@ -124,14 +122,10 @@ public class ProjectBuildResultPublisher extends Publisher {
         }
     }
 
-    private String getScriptDir(AbstractBuild build) throws IOException{
+    private String getScriptDir() throws IOException{
         PipelineBuildCreatorBuilder.DescriptorImpl descriptor =
                 (PipelineBuildCreatorBuilder.DescriptorImpl) Jenkins.getInstance().getDescriptor(PipelineBuildCreatorBuilder.class);
-        String scriptDir = descriptor.getScriptDir();
-        if (isLocalScripts() == true) {
-          scriptDir = build.getWorkspace().readToString() + "/scripts";
-        }
-        return scriptDir;
+        return descriptor.getScriptDir();
     }
 
     public BuildStepMonitor getRequiredMonitorService() {

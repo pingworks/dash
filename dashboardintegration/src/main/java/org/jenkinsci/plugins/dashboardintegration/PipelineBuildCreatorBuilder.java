@@ -138,9 +138,13 @@ public class PipelineBuildCreatorBuilder extends Builder {
     }
 
     private boolean startPipelineBuild(AbstractBuild build, Launcher launcher, BuildListener listener) throws IOException, InterruptedException {
-        String[] cmdStrings = new String[]{
+      String scriptDir = getDescriptor().getScriptDir();
+      if ( scriptDir == "use_local" ) {
+        scriptDir = build.getWorkspace().readToString() + "/scripts"
+      }
+      String[] cmdStrings = new String[]{
                 "/bin/bash",
-                getDescriptor().getScriptDir() + "/repo/start_pipeline_build.sh",
+                scriptDir + "/repo/start_pipeline_build.sh",
                 getPipelineBuildId(),
                 getPipelineName(),
                 getPipelineBuildNr(),
@@ -184,7 +188,7 @@ public class PipelineBuildCreatorBuilder extends Builder {
         private Integer pipelineStages;
 
         /**
-         * In order to load the persisted global configuration, you have to 
+         * In order to load the persisted global configuration, you have to
          * call load() in the constructor.
          */
         public DescriptorImpl() {
@@ -227,7 +231,7 @@ public class PipelineBuildCreatorBuilder extends Builder {
         }
 
         public boolean isApplicable(Class<? extends AbstractProject> aClass) {
-            // Indicates that this builder can be used with all kinds of project types 
+            // Indicates that this builder can be used with all kinds of project types
             return true;
         }
 
@@ -276,4 +280,3 @@ public class PipelineBuildCreatorBuilder extends Builder {
         }
     }
 }
-

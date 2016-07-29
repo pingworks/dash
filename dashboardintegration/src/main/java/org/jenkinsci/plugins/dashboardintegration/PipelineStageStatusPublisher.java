@@ -66,9 +66,13 @@ public class PipelineStageStatusPublisher extends Publisher {
 
     @Override
     public boolean perform(AbstractBuild build, Launcher launcher, BuildListener listener) throws IOException {
+      String scriptDir = getScriptDir();
+      if (scriptDir == "use_local") {
+        scriptDir = build.getWorkspace().readToString() + "/scripts";
+      }
 
         PipelineStageStatusSetter setter = new PipelineStageStatusSetter(build, launcher, listener);
-        return setter.setStageStatus(getPipelineBuildId(), getPipelineStage(), getPipelineStageStatus(), getScriptDir(), isIgnoreFailures());
+        return setter.setStageStatus(getPipelineBuildId(), getPipelineStage(), getPipelineStageStatus(), scriptDir, isIgnoreFailures());
     }
 
     private String getScriptDir() throws IOException{
@@ -132,4 +136,3 @@ public class PipelineStageStatusPublisher extends Publisher {
         }
     }
 }
-

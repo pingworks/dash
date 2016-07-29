@@ -74,7 +74,12 @@ public class ProjectBuildResultBuilder extends Builder {
 
             PipelineBuildResultSetter resultSetter = new PipelineBuildResultSetter(build, launcher, listener);
 
-            boolean exitCode = resultSetter.recordBuildResults(getPipelineBuildId(), getPipelineStage(), getScriptDir(), buildName);
+            String scriptDir = getScriptDir();
+            if ( scriptDir == "use_local" ) {
+              scriptDir = build.getWorkspace().readToString() + "/scripts"
+            }
+
+            boolean exitCode = resultSetter.recordBuildResults(getPipelineBuildId(), getPipelineStage(), scriptDir, buildName);
 
             if (isIgnoreFailures()) {
                 build.setResult(originalResult);
@@ -146,4 +151,3 @@ public class ProjectBuildResultBuilder extends Builder {
         }
     }
 }
-
