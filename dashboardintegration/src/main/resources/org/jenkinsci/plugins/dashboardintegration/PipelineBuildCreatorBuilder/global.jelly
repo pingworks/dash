@@ -2,7 +2,7 @@
 <j:jelly xmlns:j="jelly:core" xmlns:st="jelly:stapler" xmlns:d="jelly:define" xmlns:l="/lib/layout" xmlns:t="/lib/hudson" xmlns:f="/lib/form">
   <f:section title="Dashboard data">
     <f:entry title="Script directory" field="scriptDir"
-      description="Path to the directory containing the scripts">
+      description="Path to the directory containing the scripts (use 'use_local' to use workspace local scripts checkout in $WORKSPACE/scripts)">
       <f:textbox />
     </f:entry>
     <f:entry title="Pipeline stages" field="pipelineStages"
