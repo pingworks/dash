@@ -75,7 +75,7 @@ public class ProjectBuildResultBuilder extends Builder {
             PipelineBuildResultSetter resultSetter = new PipelineBuildResultSetter(build, launcher, listener);
 
             String scriptDir = getScriptDir();
-            if ( scriptDir == "use_local" ) {
+            if (scriptDir.equals("use_local")) {
               scriptDir = build.getWorkspace().readToString() + "/scripts";
             }
 

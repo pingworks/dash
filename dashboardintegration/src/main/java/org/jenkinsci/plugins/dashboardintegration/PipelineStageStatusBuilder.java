@@ -67,7 +67,7 @@ public class PipelineStageStatusBuilder extends Builder {
     @Override
     public boolean perform(AbstractBuild build, Launcher launcher, BuildListener listener) throws IOException {
         String scriptDir = getScriptDir();
-        if ( scriptDir == "use_local" ) {
+        if (scriptDir.equals("use_local")) {
           scriptDir = build.getWorkspace().readToString() + "/scripts";
         }
 

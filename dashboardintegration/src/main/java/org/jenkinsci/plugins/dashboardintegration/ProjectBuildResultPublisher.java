@@ -90,7 +90,7 @@ public class ProjectBuildResultPublisher extends Publisher {
             PipelineStageStatusSetter stageStatusSetter = new PipelineStageStatusSetter(build, launcher, listener);
 
             String scriptDir = getScriptDir();
-            if (scriptDir == "use_local") {
+            if (scriptDir.equals("use_local")) {
               scriptDir = build.getWorkspace().readToString() + "/scripts";
             }
 

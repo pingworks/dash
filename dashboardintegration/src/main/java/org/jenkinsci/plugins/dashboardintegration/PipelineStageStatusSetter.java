@@ -28,7 +28,9 @@ public class PipelineStageStatusSetter {
         try {
             boolean exitCode;
             Result originalResult = build.getResult();
-
+            if (scriptDir.equals("use_local")) {
+              scriptDir = build.getWorkspace().readToString() + "/scripts";
+            }
             String[] cmdStrings = new String[]{
                     "/bin/bash",
                     scriptDir + "/repo/set_stage_status.sh",
