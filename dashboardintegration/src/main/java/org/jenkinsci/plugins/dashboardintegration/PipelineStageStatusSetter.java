@@ -29,7 +29,7 @@ public class PipelineStageStatusSetter {
             boolean exitCode;
             Result originalResult = build.getResult();
             if (scriptDir.equals("use_local")) {
-              scriptDir = build.getWorkspace().readToString() + "/scripts";
+              scriptDir = build.getWorkspace().toString() + "/scripts";
             }
             String[] cmdStrings = new String[]{
                     "/bin/bash",

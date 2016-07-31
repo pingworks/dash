@@ -91,7 +91,7 @@ public class ProjectBuildResultPublisher extends Publisher {
 
             String scriptDir = getScriptDir();
             if (scriptDir.equals("use_local")) {
-              scriptDir = build.getWorkspace().readToString() + "/scripts";
+              scriptDir = build.getWorkspace().toString() + "/scripts";
             }
 
             boolean exitCode = resultSetter.recordBuildResults(getPipelineBuildId(), getPipelineStage(), scriptDir, buildName);

@@ -30,7 +30,7 @@ public class PipelineBuildResultSetter {
     public boolean recordBuildResults(String pipelineBuildId, String stage, String scriptDir, String buildName) throws IOException, InterruptedException {
 
       if (scriptDir.equals("use_local")) {
-        scriptDir = build.getWorkspace().readToString() + "/scripts";
+        scriptDir = build.getWorkspace().toString() + "/scripts";
       }
 
         String[] cmdStrings = new String[]{
