@@ -49,13 +49,17 @@ public class PipelineBuildCreatorBuilder extends Builder {
 
     private final boolean ignoreFailures;
 
+    private final String bashInterpreter;
+
     // Fields in config.jelly must match the parameter names in the "DataBoundConstructor"
     @DataBoundConstructor
     public PipelineBuildCreatorBuilder(String pipelineBuildId, String pipelineName, String pipelineBuildNr,
                                        String pipelineBuildBranch,
                                        String pipelineBuildCommitId,
                                        String srcDir,
-                                       String repoLink, boolean ignoreFailures) {
+                                       String repoLink,
+                                       boolean ignoreFailures,
+                                       String bashInterpreter) {
         this.pipelineBuildId = pipelineBuildId;
         this.pipelineName = pipelineName;
         this.pipelineBuildNr = pipelineBuildNr;
@@ -64,6 +68,7 @@ public class PipelineBuildCreatorBuilder extends Builder {
         this.srcDir = srcDir;
         this.repoLink = repoLink;
         this.ignoreFailures = ignoreFailures;
+        this.bashInterpreter = bashInterpreter;
     }
 
     public String getPipelineBuildId() {
@@ -96,6 +101,10 @@ public class PipelineBuildCreatorBuilder extends Builder {
 
     public boolean isIgnoreFailures() {
         return ignoreFailures;
+    }
+
+    public String getBashInterpreter() {
+        return bashInterpreter;
     }
 
     public String getIconFileName() {
@@ -143,7 +152,7 @@ public class PipelineBuildCreatorBuilder extends Builder {
         scriptDir = build.getWorkspace().toString() + "/scripts";
       }
       String[] cmdStrings = new String[]{
-                "/bin/bash",
+                getBashInterpreter(),
                 scriptDir + "/repo/start_pipeline_build.sh",
                 getPipelineBuildId(),
                 getPipelineName(),

@@ -27,14 +27,14 @@ public class PipelineBuildResultSetter {
         this.listener = listener;
     }
 
-    public boolean recordBuildResults(String pipelineBuildId, String stage, String scriptDir, String buildName) throws IOException, InterruptedException {
+    public boolean recordBuildResults(String pipelineBuildId, String stage, String scriptDir, String buildName, String bashInterpreter) throws IOException, InterruptedException {
 
       if (scriptDir.equals("use_local")) {
         scriptDir = build.getWorkspace().toString() + "/scripts";
       }
 
         String[] cmdStrings = new String[]{
-                "/bin/bash",
+                bashInterpreter,
                 scriptDir + "/repo/add_build_result.sh",
                 pipelineBuildId,
                 stage,

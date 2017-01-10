@@ -14,4 +14,7 @@
         <f:textbox />
       </f:entry>
   </f:advanced>
+  <f:entry title="Path to Bash Interpreter" field="bashInterpreter">
+    <f:textbox default="/bin/bash" />
+  </f:entry>
 </j:jelly>

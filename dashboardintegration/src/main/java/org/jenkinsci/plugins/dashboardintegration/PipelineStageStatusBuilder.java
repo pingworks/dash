@@ -38,14 +38,20 @@ public class PipelineStageStatusBuilder extends Builder {
 
     private final boolean ignoreFailures;
 
+    private final String bashInterpreter;
+
     // Fields in config.jelly must match the parameter names in the "DataBoundConstructor"
     @DataBoundConstructor
-    public PipelineStageStatusBuilder(String pipelineBuildId, String pipelineStage, String pipelineStageStatus,
-                                      boolean ignoreFailures) {
+    public PipelineStageStatusBuilder(String pipelineBuildId,
+                                      String pipelineStage,
+                                      String pipelineStageStatus,
+                                      boolean ignoreFailures,
+                                      String bashInterpreter) {
         this.pipelineBuildId = pipelineBuildId;
         this.pipelineStage = pipelineStage;
         this.pipelineStageStatus = pipelineStageStatus;
         this.ignoreFailures = ignoreFailures;
+        this.bashInterpreter = bashInterpreter;
     }
 
     public String getPipelineBuildId() {
@@ -64,6 +70,10 @@ public class PipelineStageStatusBuilder extends Builder {
         return ignoreFailures;
     }
 
+    public String getBashInterpreter() {
+        return bashInterpreter;
+    }
+
     @Override
     public boolean perform(AbstractBuild build, Launcher launcher, BuildListener listener) throws IOException {
         String scriptDir = getScriptDir();
@@ -72,7 +82,7 @@ public class PipelineStageStatusBuilder extends Builder {
         }
 
         PipelineStageStatusSetter setter = new PipelineStageStatusSetter(build, launcher, listener);
-        return setter.setStageStatus(getPipelineBuildId(), getPipelineStage(), getPipelineStageStatus(), scriptDir, isIgnoreFailures());
+        return setter.setStageStatus(getPipelineBuildId(), getPipelineStage(), getPipelineStageStatus(), scriptDir, isIgnoreFailures(), getBashInterpreter());
     }
 
     private String getScriptDir() throws IOException{

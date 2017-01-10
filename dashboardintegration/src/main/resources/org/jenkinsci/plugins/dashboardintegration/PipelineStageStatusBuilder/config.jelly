@@ -12,4 +12,7 @@
   <f:entry title="Ignore failures on saving dashboard data?" field="ignoreFailures">
     <f:checkbox default="true" />
   </f:entry>
+  <f:entry title="Path to Bash Interpreter" field="bashInterpreter">
+    <f:textbox default="/bin/bash" />
+  </f:entry>
 </j:jelly>

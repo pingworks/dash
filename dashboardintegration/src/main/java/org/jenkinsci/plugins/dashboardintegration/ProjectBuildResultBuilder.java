@@ -40,13 +40,19 @@ public class ProjectBuildResultBuilder extends Builder {
 
     private final String buildName;
 
+    private final String bashInterpreter;
+
     // Fields in config.jelly must match the parameter names in the "DataBoundConstructor"
     @DataBoundConstructor
-    public ProjectBuildResultBuilder(String pipelineBuildId, String pipelineStage,
-                                     boolean ignoreFailures, String buildName) {
+    public ProjectBuildResultBuilder(String pipelineBuildId,
+                                     String pipelineStage,
+                                     boolean ignoreFailures,
+                                     String buildName,
+                                     String bashInterpreter) {
         this.pipelineBuildId = pipelineBuildId;
         this.pipelineStage = pipelineStage;
         this.ignoreFailures = ignoreFailures;
+        this.bashInterpreter = bashInterpreter;
         this.buildName = buildName;
     }
 
@@ -66,6 +72,10 @@ public class ProjectBuildResultBuilder extends Builder {
         return buildName;
     }
 
+    public String getBashInterpreter() {
+        return bashInterpreter;
+    }
+
     @Override
     public boolean perform(AbstractBuild build, Launcher launcher, BuildListener listener) {
 
@@ -79,7 +89,7 @@ public class ProjectBuildResultBuilder extends Builder {
               scriptDir = build.getWorkspace().toString() + "/scripts";
             }
 
-            boolean exitCode = resultSetter.recordBuildResults(getPipelineBuildId(), getPipelineStage(), scriptDir, buildName);
+            boolean exitCode = resultSetter.recordBuildResults(getPipelineBuildId(), getPipelineStage(), scriptDir, buildName, getBashInterpreter());
 
             if (isIgnoreFailures()) {
                 build.setResult(originalResult);

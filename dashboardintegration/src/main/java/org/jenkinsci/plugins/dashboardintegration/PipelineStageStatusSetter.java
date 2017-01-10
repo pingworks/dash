@@ -24,7 +24,7 @@ public class PipelineStageStatusSetter {
         this.listener = listener;
     }
 
-    boolean setStageStatus(String pipelineBuildId, String stage, String status, String scriptDir, boolean ignoreFailures) {
+    boolean setStageStatus(String pipelineBuildId, String stage, String status, String scriptDir, boolean ignoreFailures, String bashInterpreter) {
         try {
             boolean exitCode;
             Result originalResult = build.getResult();
@@ -32,7 +32,7 @@ public class PipelineStageStatusSetter {
               scriptDir = build.getWorkspace().toString() + "/scripts";
             }
             String[] cmdStrings = new String[]{
-                    "/bin/bash",
+                    bashInterpreter,
                     scriptDir + "/repo/set_stage_status.sh",
                     pipelineBuildId,
                     stage,

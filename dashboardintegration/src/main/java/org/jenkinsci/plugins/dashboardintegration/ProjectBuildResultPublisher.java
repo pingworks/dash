@@ -43,17 +43,25 @@ public class ProjectBuildResultPublisher extends Publisher {
 
     private final String buildName;
 
+    private final String bashInterpreter;
+
     // Fields in config.jelly must match the parameter names in the "DataBoundConstructor"
     @DataBoundConstructor
-    public ProjectBuildResultPublisher(String pipelineBuildId, String pipelineStage,
-                                       boolean buildSetsStageToFailure, boolean buildSetsStageToSuccess,
-                                       boolean ignoreFailures, String buildName, boolean localScripts) {
+    public ProjectBuildResultPublisher(String pipelineBuildId,
+                                       String pipelineStage,
+                                       boolean buildSetsStageToFailure,
+                                       boolean buildSetsStageToSuccess,
+                                       boolean ignoreFailures,
+                                       String buildName,
+                                       boolean localScripts,
+                                       String bashInterpreter) {
         this.pipelineBuildId = pipelineBuildId;
         this.pipelineStage = pipelineStage;
         this.buildSetsStageToFailure = buildSetsStageToFailure;
         this.buildSetsStageToSuccess = buildSetsStageToSuccess;
         this.ignoreFailures = ignoreFailures;
         this.buildName = buildName;
+        this.bashInterpreter = bashInterpreter;
     }
 
     public String getPipelineBuildId() {
@@ -80,6 +88,10 @@ public class ProjectBuildResultPublisher extends Publisher {
         return buildName;
     }
 
+    public String getBashInterpreter() {
+        return bashInterpreter;
+    }
+
     @Override
     public boolean perform(AbstractBuild build, Launcher launcher, BuildListener listener) {
 
@@ -94,16 +106,16 @@ public class ProjectBuildResultPublisher extends Publisher {
               scriptDir = build.getWorkspace().toString() + "/scripts";
             }
 
-            boolean exitCode = resultSetter.recordBuildResults(getPipelineBuildId(), getPipelineStage(), scriptDir, buildName);
+            boolean exitCode = resultSetter.recordBuildResults(getPipelineBuildId(), getPipelineStage(), scriptDir, buildName, getBashInterpreter());
 
             if (isBuildSetsStageToFailure() && originalResult != Result.SUCCESS) {
                 String stageStatus = "failed";
-                exitCode &= stageStatusSetter.setStageStatus(getPipelineBuildId(), getPipelineStage(), stageStatus, scriptDir, isIgnoreFailures());
+                exitCode &= stageStatusSetter.setStageStatus(getPipelineBuildId(), getPipelineStage(), stageStatus, scriptDir, isIgnoreFailures(), getBashInterpreter());
             }
 
             if (isBuildSetsStageToSuccess() && originalResult == Result.SUCCESS) {
                 String stageStatus = "passed";
-                exitCode &= stageStatusSetter.setStageStatus(getPipelineBuildId(), getPipelineStage(), stageStatus, scriptDir, isIgnoreFailures());
+                exitCode &= stageStatusSetter.setStageStatus(getPipelineBuildId(), getPipelineStage(), stageStatus, scriptDir, isIgnoreFailures(), getBashInterpreter());
             }
             if (isIgnoreFailures()) {
                 build.setResult(originalResult);
